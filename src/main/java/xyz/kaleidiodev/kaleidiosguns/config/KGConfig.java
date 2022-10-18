@@ -823,7 +823,7 @@ public class KGConfig {
                 .defineInRange("luckyShotChance", 0.1D, 0.01D, 5D);
         criticalDamage = builder
                 .comment("Multiplier of a critical hit's damage")
-                .defineInRange("criticalDamage", 1.5D, 0.1D, 20D);
+                .defineInRange("criticalDamage", 2.0D, 0.1D, 20D);
         builder.pop();
 
         builder.push("frost shard enchantment");
