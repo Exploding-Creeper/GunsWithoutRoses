@@ -96,7 +96,7 @@ public class GunItem extends Item {
 	@Override
 	public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
 		ItemStack gun = player.getItemInHand(hand);
-		ItemStack ammo = ItemStack.EMPTY;
+		ItemStack ammo;
 		//"Oh yeah I will use the vanilla method so that quivers can do their thing"
 		//guess what the quivers suck
 		ammo = mergeStacks(player, gun);

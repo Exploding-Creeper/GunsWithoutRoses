@@ -53,7 +53,7 @@ public class GatlingItem extends GunItem {
 		else {
 			player.startUsingItem(hand);
 			if (this.isFirstShot && !world.isClientSide()){
-				onUseTick(world, player, gun, 1);
+				fireGatling(world, player, gun, 1, mergeStacks(player, gun));
 			}
 			return ActionResult.consume(gun);
 		}
@@ -71,23 +71,25 @@ public class GatlingItem extends GunItem {
 
 	@Override
 	public void onUseTick(World world, LivingEntity user, ItemStack gun, int ticks) {
-
-		//stop using immediately if out of range.
-		if ((this.isRedstone) && (checkRedstoneLevel(world, (PlayerEntity)user, gun) == -1)) user.stopUsingItem();
 		if (user instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity) user;
-			ItemStack ammo = ItemStack.EMPTY;
+			ItemStack ammo = mergeStacks(player, gun);
+			fireGatling(world, user, gun, ticks, ammo);
+		}
+	}
 
-			if (!world.isClientSide()) {
-				ammo = mergeStacks(player, gun);
-			}
+	public void fireGatling(World world, LivingEntity user, ItemStack gun, int ticks, ItemStack ammo) {
+		if (user instanceof PlayerEntity) {
+			PlayerEntity player = (PlayerEntity) user;
+			//stop using immediately if out of range.
+			if ((this.isRedstone) && (checkRedstoneLevel(world, player, gun) == -1)) player.stopUsingItem();
 
 			//give player speed effect if maneuvering is instated.
 			if ((EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.maneuvering, gun) != 0) && player.isOnGround()) player.setDeltaMovement(player.getDeltaMovement().multiply(0.7, 0, 0.7).add(player.getDeltaMovement())); //apply speed for every tick so that the slow speed is nullified
 
 			int used = getUseDuration(gun) - ticks;
 			int rateChange = (getFireDelay(gun, player) - ((isDefender && checkTileEntities(world, player)) ? KGConfig.defenderRifleDelayDelta.get() : 0));
-			if ((used > 0 && used % rateChange == 0) || (this.isFirstShot && !world.isClientSide())) {
+			if (((used > 0 && used % rateChange == 0) || this.isFirstShot) && !world.isClientSide()) {
 				//"Oh yeah I will use the vanilla method so that quivers can do their thing"
 				//guess what the quivers suck
 				this.isFirstShot = false;
