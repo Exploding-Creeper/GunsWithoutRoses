@@ -138,6 +138,9 @@ public interface IBullet {
 			newDamage *= ((maximumBlocks - projectile.redstoneLevel) * (multiplierPerBlock)) + KGConfig.ironVoltgunMinimumDamage.get();
 		}
 
+		//deal no damage at all if it's for marking
+		if (projectile.isGlowing()) newDamage = 0;
+
 		return newDamage;
 	}
 

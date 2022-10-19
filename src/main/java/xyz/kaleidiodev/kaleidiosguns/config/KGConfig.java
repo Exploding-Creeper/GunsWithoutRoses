@@ -847,10 +847,10 @@ public class KGConfig {
         builder.push("marker enchantment");
         glowTime = builder
                 .comment("Ticks glowing lasts for on the hit target")
-                .defineInRange("glowTime", 120, 5, 72000);
+                .defineInRange("glowTime", 600, 5, 72000);
         shooterGlowTime = builder
                 .comment("Ticks glowing lasts for on the shooter")
-                .defineInRange("shooterGlowTime", 60, 5, 72000);
+                .defineInRange("shooterGlowTime", 300, 5, 72000);
         builder.pop();
 
         spec = builder.build();
