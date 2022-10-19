@@ -60,7 +60,7 @@ public interface IBullet {
 			//heal the shooter by a fraction of what damage the enemy recieved.
 			LivingEntity shooterEntity = (LivingEntity)shooter;
 			//cast to primitive first before casting to float.  thanks forge.
-			shooterEntity.setHealth(shooterEntity.getHealth() + (damageDelta * (float)(double) KGConfig.passionForBloodHealIncrease.get()));
+			if (shooterEntity != null) if (shooterEntity.isAlive()) shooterEntity.setHealth(shooterEntity.getHealth() + (damageDelta * (float)(double) KGConfig.passionForBloodHealIncrease.get()));
 		}
 	}
 
