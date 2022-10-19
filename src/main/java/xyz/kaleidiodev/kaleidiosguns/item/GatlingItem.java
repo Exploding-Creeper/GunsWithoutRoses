@@ -74,6 +74,8 @@ public class GatlingItem extends GunItem {
 		if (user instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity) user;
 			ItemStack ammo = mergeStacks(player, gun);
+			//stop immediately if player is dead.
+			if (player.isDeadOrDying()) player.stopUsingItem();
 			fireGatling(world, user, gun, ticks, ammo);
 		}
 	}
