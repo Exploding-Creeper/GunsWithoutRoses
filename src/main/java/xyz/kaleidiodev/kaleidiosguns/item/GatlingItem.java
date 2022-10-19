@@ -16,6 +16,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -87,7 +88,15 @@ public class GatlingItem extends GunItem {
 			if ((this.isRedstone) && (checkRedstoneLevel(world, player, gun) == -1)) player.stopUsingItem();
 
 			//give player speed effect if maneuvering is instated.
-			if ((EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.maneuvering, gun) != 0) && player.isOnGround()) player.setDeltaMovement(player.getDeltaMovement().multiply(0.7, 0, 0.7).add(player.getDeltaMovement())); //apply speed for every tick so that the slow speed is nullified
+			if ((EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.maneuvering, gun) != 0) && player.isOnGround() && world.isClientSide) {
+				Vector3d newSpeed = player.getDeltaMovement().multiply(1.67, 1, 1.67);
+				if (newSpeed.x > 1) newSpeed = new Vector3d(1, newSpeed.y, newSpeed.z);
+				if (newSpeed.x < -1) newSpeed = new Vector3d(-1, newSpeed.y, newSpeed.z);
+				if (newSpeed.z > 1) newSpeed = new Vector3d(newSpeed.x, newSpeed.y, 1);
+				if (newSpeed.z < -1) newSpeed = new Vector3d(newSpeed.x, newSpeed.y, -1);
+				System.out.println(newSpeed);
+				player.setDeltaMovement(newSpeed); //apply speed for every tick so that the slow speed is nullified
+			}
 
 			int used = getUseDuration(gun) - ticks;
 			int rateChange = (getFireDelay(gun, player) - ((isDefender && checkTileEntities(world, player)) ? KGConfig.defenderRifleDelayDelta.get() : 0));
