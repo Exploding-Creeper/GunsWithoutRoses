@@ -94,7 +94,6 @@ public class GatlingItem extends GunItem {
 				if (newSpeed.x < -1) newSpeed = new Vector3d(-1, newSpeed.y, newSpeed.z);
 				if (newSpeed.z > 1) newSpeed = new Vector3d(newSpeed.x, newSpeed.y, 1);
 				if (newSpeed.z < -1) newSpeed = new Vector3d(newSpeed.x, newSpeed.y, -1);
-				System.out.println(newSpeed);
 				player.setDeltaMovement(newSpeed); //apply speed for every tick so that the slow speed is nullified
 			}
 
