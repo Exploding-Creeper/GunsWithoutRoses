@@ -288,7 +288,7 @@ public class KGConfig {
                 .defineInRange("gatlingCost", 1, 0, 64);
         shotgunCost = builder
                 .comment("Configure the ammo cost to fire a shotgun")
-                .defineInRange("shotgunCost", 2, 0, 64);
+                .defineInRange("shotgunCost", 3, 0, 64);
         sniperCost = builder
                 .comment("Configure the ammo cost to fire a sniper")
                 .defineInRange("sniperCost", 2, 0, 64);
@@ -925,7 +925,7 @@ public class KGConfig {
         builder.push("impact enchantment");
         impactDamageIncrease = builder
                 .comment("How much damage increase per impact level")
-                .defineInRange("impactDamageIncrease", 1D, 0.1D, 20D);
+                .defineInRange("impactDamageIncrease", 2D, 0.1D, 20D);
         builder.pop();
 
         builder.push("bullseye enchantment");
