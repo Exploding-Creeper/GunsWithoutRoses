@@ -16,7 +16,6 @@ public class ClientGunUseEvent {
     public static void onClickEvent(InputEvent.ClickInputEvent event) {
         PlayerEntity player = Minecraft.getInstance().player;
         if (event.isUseItem() && (player != null)) {
-            System.out.println("Got this far");
             ItemStack gun = player.getItemInHand(event.getHand());
             if (gun != ItemStack.EMPTY) {
                 if (gun.getItem() instanceof GunItem) {
