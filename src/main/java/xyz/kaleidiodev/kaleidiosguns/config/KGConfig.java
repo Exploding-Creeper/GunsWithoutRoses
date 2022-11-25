@@ -318,7 +318,7 @@ public class KGConfig {
                 .defineInRange("ironPistolProjectileSpeed", 8D, 0D, 64D);
         ironPistolSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Pistols")
-                .defineInRange("ironPistolSwitchSpeed", 3.0D, 0D, 5D);
+                .defineInRange("ironPistolSwitchSpeed", 3.5D, 0D, 5D);
         ironPistolMeleeDamage = builder
                 .comment("Configure the Melee Damage for Pistols")
                 .defineInRange("ironPistolMeleeDamage", 2D, 0D, 40D);
@@ -354,7 +354,7 @@ public class KGConfig {
                 .defineInRange("diamondRevolverStabilityTime", 20, 1, 72000);
         diamondRevolverSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Revolvers")
-                .defineInRange("diamondRevolverSwitchSpeed", 2.6D, 0D, 5D);
+                .defineInRange("diamondRevolverSwitchSpeed", 3.1D, 0D, 5D);
         diamondRevolverMeleeDamage = builder
                 .comment("Configure the Melee Damage for Revolvers")
                 .defineInRange("diamondRevolverMeleeDamage", 2D, 0D, 40D);
@@ -396,7 +396,7 @@ public class KGConfig {
                 .defineInRange("shadowRevolverLightLevelRequired", 3, 0, 15);
         shadowRevolverSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Shadow Magnums")
-                .defineInRange("shadowRevolverSwitchSpeed", 2.8D, 0D, 5D);
+                .defineInRange("shadowRevolverSwitchSpeed", 2.9D, 0D, 5D);
         shadowRevolverMeleeDamage = builder
                 .comment("Configure the Melee Damage for Shadow Magnums")
                 .defineInRange("shadowRevolverMeleeDamage", 2D, 0D, 40D);
@@ -429,7 +429,7 @@ public class KGConfig {
                 .defineInRange("goldSkillshotComboMultplierPer", 0.2D, 0D, 20D);
         goldSkillshotSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Skillshot Pistols")
-                .defineInRange("goldSkillshotSwitchSpeed", 3.2D, 0D, 5D);
+                .defineInRange("goldSkillshotSwitchSpeed", 3.7D, 0D, 5D);
         goldSkillshotMeleeDamage = builder
                 .comment("Configure the Melee Damage for Skillshot Pistols")
                 .defineInRange("goldSkillshotMeleeDamage", 2D, 0D, 40D);
@@ -462,7 +462,7 @@ public class KGConfig {
                 .defineInRange("emeraldBlessedBlessingMultiplier", 1.5D, 0D, 20D);
         emeraldBlessedSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Blessed Pistols")
-                .defineInRange("emeraldBlessedSwitchSpeed", 2.4D, 0D, 5D);
+                .defineInRange("emeraldBlessedSwitchSpeed", 3.3D, 0D, 5D);
         emeraldBlessedMeleeDamage = builder
                 .comment("Configure the Melee Damage for Blessed Pistols")
                 .defineInRange("emeraldBlessedMeleeDamage", 2D, 0D, 40D);
@@ -492,7 +492,7 @@ public class KGConfig {
                 .defineInRange("diamondShotgunProjectileSpeed", 8D, 0D, 64D);
         diamondShotgunSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Shotguns")
-                .defineInRange("diamondShotgunSwitchSpeed", 1.6D, 0D, 5D);
+                .defineInRange("diamondShotgunSwitchSpeed", 2.1D, 0D, 5D);
         diamondShotgunMeleeDamage = builder
                 .comment("Configure the Melee Damage for Shotguns")
                 .defineInRange("diamondShotgunMeleeDamage", 4D, 0D, 40D);
@@ -528,7 +528,7 @@ public class KGConfig {
                 .defineInRange("goldDoubleShotgunKnockback", 1.2D, 0.01D, 5D);
         goldDoubleShotgunSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Double Barrel Shotguns")
-                .defineInRange("goldDoubleShotgunSwitchSpeed", 1.2D, 0D, 5D);
+                .defineInRange("goldDoubleShotgunSwitchSpeed", 1.7D, 0D, 5D);
         goldDoubleShotgunMeleeDamage = builder
                 .comment("Configure the Melee Damage for Double Barrel Shotguns")
                 .defineInRange("goldDoubleShotgunMeleeDamage", 4D, 0D, 40D);
@@ -570,7 +570,7 @@ public class KGConfig {
                 .defineInRange("netheriteShotgunEntityRadius", 8D, 1D, 8D);
         netheriteShotgunSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Vampire Shotguns")
-                .defineInRange("netheriteShotgunSwitchSpeed", 1.4D, 0D, 5D);
+                .defineInRange("netheriteShotgunSwitchSpeed", 1.9D, 0D, 5D);
         netheriteShotgunMeleeDamage = builder
                 .comment("Configure the Melee Damage for Vampire Shotguns")
                 .defineInRange("netheriteShotgunMeleeDamage", 4D, 0D, 40D);
@@ -597,7 +597,7 @@ public class KGConfig {
                 .defineInRange("diamondSniperProjectileSpeed", 16D, 0D, 64D);
         diamondSniperSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Snipers")
-                .defineInRange("diamondSniperSwitchSpeed", 1.1D, 0D, 5D);
+                .defineInRange("diamondSniperSwitchSpeed", 1.6D, 0D, 5D);
         diamondSniperMeleeDamage = builder
                 .comment("Configure the Melee Damage for Snipers")
                 .defineInRange("diamondSniperMeleeDamage", 3D, 0D, 40D);
@@ -624,7 +624,7 @@ public class KGConfig {
                 .defineInRange("ironCarbineProjectileSpeed", 12D, 0D, 64D);
         ironCarbineSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Carbines")
-                .defineInRange("ironCarbineSwitchSpeed", 1.3D, 0D, 5D);
+                .defineInRange("ironCarbineSwitchSpeed", 1.8D, 0D, 5D);
         ironCarbineMeleeDamage = builder
                 .comment("Configure the Melee Damage for Carbines (additive)")
                 .defineInRange("ironCarbineMeleeDamage", 3D, 0D, 40D);
@@ -654,7 +654,7 @@ public class KGConfig {
                 .defineInRange("diamondMinegunMineChance", 0.5D, 0D, 1D);
         diamondMinegunSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Mineguns")
-                .defineInRange("diamondMinegunSwitchSpeed", 2.1D, 0D, 5D);
+                .defineInRange("diamondMinegunSwitchSpeed", 2.6D, 0D, 5D);
         diamondMinegunMeleeDamage = builder
                 .comment("Configure the Melee Damage for Mineguns")
                 .defineInRange("diamondMinegunMeleeDamage", 2D, 0D, 40D);
@@ -687,7 +687,7 @@ public class KGConfig {
                 .defineInRange("netheriteMinegunIgnitionChance", 0.25D, 0D, 1D);
         netheriteMinegunSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Corruption Gun")
-                .defineInRange("netheriteMinegunSwitchSpeed", 1.9D, 0D, 5D);
+                .defineInRange("netheriteMinegunSwitchSpeed", 2.4D, 0D, 5D);
         netheriteMinegunMeleeDamage = builder
                 .comment("Configure the Melee Damage for Corruption Gun")
                 .defineInRange("netheriteMinegunMeleeDamage", 2D, 0D, 40D);
@@ -720,7 +720,7 @@ public class KGConfig {
                 .defineInRange("ironVoltgunMaximumDamage", 1.5D, 0D, 5D);
         ironVoltgunSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Voltguns")
-                .defineInRange("ironVoltgunSwitchSpeed", 2.5D, 0D, 5D);
+                .defineInRange("ironVoltgunSwitchSpeed", 3.0D, 0D, 5D);
         ironVoltgunMeleeDamage = builder
                 .comment("Configure the Melee Damage for Voltguns")
                 .defineInRange("ironVoltgunMeleeDamage", 2D, 0D, 40D);
@@ -750,7 +750,7 @@ public class KGConfig {
                 .defineInRange("ironAssaultMidairMultiplier", 2.0D, 0D, 5D);
         ironAssaultSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Assault Rifles")
-                .defineInRange("ironAssaultSwitchSpeed", 2.0D, 0D, 5D);
+                .defineInRange("ironAssaultSwitchSpeed", 2.5D, 0D, 5D);
         ironAssaultMeleeDamage = builder
                 .comment("Configure the Melee Damage for Assault Rifles")
                 .defineInRange("ironAssaultMeleeDamage", 2D, 0D, 40D);
@@ -786,7 +786,7 @@ public class KGConfig {
                 .defineInRange("goldPlasmaSlowTicks", 60, 10, 72000);
         goldPlasmaSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Plasma Rifles")
-                .defineInRange("goldPlasmaSwitchSpeed", 1.5D, 0D, 5D);
+                .defineInRange("goldPlasmaSwitchSpeed", 2.0D, 0D, 5D);
         goldPlasmaMeleeDamage = builder
                 .comment("Configure the Melee Damage for Plasma Rifles")
                 .defineInRange("goldPlasmaMeleeDamage", 2D, 0D, 40D);
@@ -819,7 +819,7 @@ public class KGConfig {
                 .defineInRange("defenderRifleDelayDelta", 1, 0, 72000);
         defenderRifleSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Defender Rifles")
-                .defineInRange("defenderRifleSwitchSpeed", 1.8D, 0D, 5D);
+                .defineInRange("defenderRifleSwitchSpeed", 2.3D, 0D, 5D);
         defenderRifleMeleeDamage = builder
                 .comment("Configure the Melee Damage for Defender Rifles")
                 .defineInRange("defenderRifleMeleeDamage", 2D, 0D, 40D);
@@ -846,7 +846,7 @@ public class KGConfig {
                 .defineInRange("diamondLauncherProjectileSpeed", 2D, 0D, 64D);
         diamondLauncherSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Rocket Launchers")
-                .defineInRange("diamondLauncherSwitchSpeed", 0.9D, 0D, 5D);
+                .defineInRange("diamondLauncherSwitchSpeed", 1.4D, 0D, 5D);
         diamondLauncherMeleeDamage = builder
                 .comment("Configure the Melee Damage for Rocket Launchers")
                 .defineInRange("diamondLauncherMeleeDamage", 6D, 0D, 40D);
@@ -876,7 +876,7 @@ public class KGConfig {
                 .defineInRange("witherLauncherEffectRadiusMultiplier", 2D, 0D, 64D);
         witherLauncherSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Wither Launchers")
-                .defineInRange("witherLauncherSwitchSpeed", 0.8D, 0D, 5D);
+                .defineInRange("witherLauncherSwitchSpeed", 1.3D, 0D, 5D);
         witherLauncherMeleeDamage = builder
                 .comment("Configure the Melee Damage for Wither Launchers")
                 .defineInRange("witherLauncherMeleeDamage", 6D, 0D, 40D);
