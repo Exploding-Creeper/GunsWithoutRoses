@@ -28,8 +28,8 @@ public class ShotgunItem extends GunItem {
 	protected boolean isVampire;
 	private int vampireCount;
 
-	public ShotgunItem(Properties properties, int bonusDamage, double damageMultiplier, int fireDelay, double inaccuracy, int enchantability, int bulletCount) {
-		super(properties, bonusDamage, damageMultiplier, fireDelay, inaccuracy, enchantability);
+	public ShotgunItem(Properties properties, int bonusDamage, double damageMultiplier, int fireDelay, double inaccuracy, int enchantability, int bulletCount, double attackSpeed, double attackDamage) {
+		super(properties, bonusDamage, damageMultiplier, fireDelay, inaccuracy, enchantability, attackSpeed, attackDamage);
 		this.bulletCount = bulletCount;
 	}
 

@@ -22,27 +22,27 @@ public class ModEnchantments {
 	public static void registerEnchantments(final RegistryEvent.Register<Enchantment> event) {
 		IForgeRegistry<Enchantment> reg = event.getRegistry();
 
-		//flat upgrade (unbreaking counts as an all)
+		//flat upgrade (unbreaking counts as drb)
 		impact = initEnchant(reg, new GunDamageEnchantment(Enchantment.Rarity.COMMON, 5, 4, 8, 20, TYPE_GUN), "impact"); //dmg
 		bullseye = initEnchant(reg, new GunAccuracyEnchantment(Enchantment.Rarity.COMMON, 3, 4, 8, 20, TYPE_GUN), "bullseye"); //acc
 		sleightOfHand = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.UNCOMMON, 2, 6, 12, 30, TYPE_GUN), "sleight_of_hand"); //rt
 		accelerator = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.COMMON, 3, 3, 6, 20, TYPE_GUN), "accelerator"); //spd
 
-		//class specialized enhancement
-		silenced = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.UNCOMMON, 1, 3, 6, 20, TYPE_GUN), "silenced"); //all
+		//class specialized enhancement (compounds but only for certain gun types.
 		division = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.COMMON, 4, 4, 8, 20, TYPE_GUN), "division"); //shotgun
 		marker = initEnchant(reg, new GunDamageEnchantment(Enchantment.Rarity.VERY_RARE, 1, 7, 14, 25, TYPE_GUN), "marker"); //pistol
 		maneuvering = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.RARE, 1, 10, 20, 30, TYPE_GUN), "maneuvering"); //gatling
 		cleanShot = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.UNCOMMON, 1, 6, 12, 25, TYPE_GUN), "clean_shot"); //sniper
 		signalBoost = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.COMMON, 3, 6, 12, 25, TYPE_GUN), "signal_boost"); //redstone
 
-		//enhancement (these get two for each category because there is no "alls")
+		//enhancement (compounds onto base, mending counts as drb)
 		passionForBlood = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.RARE, 2, 8, 16, 25, TYPE_GUN), "passion_for_blood"); //dmg
 		cowboy = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.UNCOMMON, 1, 8, 16, 25, TYPE_GUN), "cowboy"); //acc
 		preserving = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.RARE, 3, 5, 10, 30, TYPE_GUN), "preserving"); //rt
 		torpedo = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.UNCOMMON, 1, 6, 12, 25, TYPE_GUN), "torpedo"); //spd
+		silenced = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.UNCOMMON, 1, 3, 6, 20, TYPE_GUN), "silenced"); //hnd
 
-		//alternate upgrade (these get two for each category because there is no "alls")
+		//alternate upgrade (replaces base)
 		luckyShot = initEnchant(reg, new GunDamageEnchantment(Enchantment.Rarity.UNCOMMON, 3, 6, 12, 30, TYPE_GUN), "lucky_shot"); //dmg
 		frostShot = initEnchant(reg, new GunDamageEnchantment(Enchantment.Rarity.RARE, 3, 5, 10, 30, TYPE_GUN), "frost_shard"); //dmg 2
 		counterStrike = initEnchant(reg, new GunAccuracyEnchantment(Enchantment.Rarity.RARE, 1, 10, 20, 30, TYPE_GUN), "counter_strike"); //acc

@@ -29,6 +29,8 @@ public class KGConfig {
     public static ForgeConfigSpec.IntValue ironPistolDurability;
     public static ForgeConfigSpec.DoubleValue ironPistolInaccuracy;
     public static ForgeConfigSpec.DoubleValue ironPistolProjectileSpeed;
+    public static ForgeConfigSpec.DoubleValue ironPistolSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue ironPistolMeleeDamage;
 
     public static ForgeConfigSpec.DoubleValue diamondRevolverDamageMultiplier;
     public static ForgeConfigSpec.IntValue diamondRevolverFireDelay;
@@ -39,6 +41,8 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue diamondRevolverSpreadoutStrength;
     public static ForgeConfigSpec.IntValue diamondRevolverChamberSwitchSpeed;
     public static ForgeConfigSpec.IntValue diamondRevolverStabilityTime;
+    public static ForgeConfigSpec.DoubleValue diamondRevolverSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue diamondRevolverMeleeDamage;
 
     public static ForgeConfigSpec.DoubleValue shadowRevolverDamageMultiplier;
     public static ForgeConfigSpec.IntValue shadowRevolverFireDelay;
@@ -51,6 +55,8 @@ public class KGConfig {
     public static ForgeConfigSpec.IntValue shadowRevolverStabilityTime;
     public static ForgeConfigSpec.DoubleValue shadowRevolverShadowAdditionalMultiplier;
     public static ForgeConfigSpec.IntValue shadowRevolverLightLevelRequired;
+    public static ForgeConfigSpec.DoubleValue shadowRevolverSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue shadowRevolverMeleeDamage;
 
     public static ForgeConfigSpec.DoubleValue goldSkillshotDamageMultiplier;
     public static ForgeConfigSpec.IntValue goldSkillshotFireDelay;
@@ -60,6 +66,8 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue goldSkillshotProjectileSpeed;
     public static ForgeConfigSpec.IntValue goldSkillshotMaxCombo;
     public static ForgeConfigSpec.DoubleValue goldSkillshotComboMultiplierPer;
+    public static ForgeConfigSpec.DoubleValue goldSkillshotSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue goldSkillshotMeleeDamage;
 
     public static ForgeConfigSpec.DoubleValue emeraldBlessedDamageMultiplier;
     public static ForgeConfigSpec.IntValue emeraldBlessedFireDelay;
@@ -69,6 +77,8 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue emeraldBlessedProjectileSpeed;
     public static ForgeConfigSpec.DoubleValue emeraldBlessedHealthMinimumRatio;
     public static ForgeConfigSpec.DoubleValue emeraldBlessedBlessingMultiplier;
+    public static ForgeConfigSpec.DoubleValue emeraldBlessedSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue emeraldBlessedMeleeDamage;
 
     public static ForgeConfigSpec.DoubleValue diamondShotgunDamageMultiplier;
     public static ForgeConfigSpec.IntValue diamondShotgunFireDelay;
@@ -77,6 +87,8 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue diamondShotgunInaccuracy;
     public static ForgeConfigSpec.IntValue diamondShotgunBulletCount;
     public static ForgeConfigSpec.DoubleValue diamondShotgunProjectileSpeed;
+    public static ForgeConfigSpec.DoubleValue diamondShotgunSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue diamondShotgunMeleeDamage;
 
     public static ForgeConfigSpec.DoubleValue goldDoubleShotgunDamageMultiplier;
     public static ForgeConfigSpec.IntValue goldDoubleShotgunFireDelay;
@@ -87,6 +99,8 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue goldDoubleShotgunProjectileSpeed;
     public static ForgeConfigSpec.IntValue goldDoubleShotgunChamberSwitchSpeed;
     public static ForgeConfigSpec.DoubleValue goldDoubleShotgunKnockback;
+    public static ForgeConfigSpec.DoubleValue goldDoubleShotgunSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue goldDoubleShotgunMeleeDamage;
 
     public static ForgeConfigSpec.DoubleValue netheriteShotgunDamageMultiplier;
     public static ForgeConfigSpec.IntValue netheriteShotgunFireDelay;
@@ -99,6 +113,8 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue netheriteShotgunEntityHurt;
     public static ForgeConfigSpec.IntValue netheriteShotgunBulletsPerEntity;
     public static ForgeConfigSpec.DoubleValue netheriteShotgunEntityRadius;
+    public static ForgeConfigSpec.DoubleValue netheriteShotgunSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue netheriteShotgunMeleeDamage;
 
     public static ForgeConfigSpec.DoubleValue diamondSniperDamageMultiplier;
     public static ForgeConfigSpec.IntValue diamondSniperFireDelay;
@@ -106,6 +122,8 @@ public class KGConfig {
     public static ForgeConfigSpec.IntValue diamondSniperDurability;
     public static ForgeConfigSpec.DoubleValue diamondSniperInaccuracy;
     public static ForgeConfigSpec.DoubleValue diamondSniperProjectileSpeed;
+    public static ForgeConfigSpec.DoubleValue diamondSniperSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue diamondSniperMeleeDamage;
 
     public static ForgeConfigSpec.DoubleValue ironCarbineDamageMultiplier;
     public static ForgeConfigSpec.IntValue ironCarbineFireDelay;
@@ -113,6 +131,8 @@ public class KGConfig {
     public static ForgeConfigSpec.IntValue ironCarbineDurability;
     public static ForgeConfigSpec.DoubleValue ironCarbineInaccuracy;
     public static ForgeConfigSpec.DoubleValue ironCarbineProjectileSpeed;
+    public static ForgeConfigSpec.DoubleValue ironCarbineSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue ironCarbineMeleeDamage;
 
     public static ForgeConfigSpec.DoubleValue diamondLauncherDamageMultiplier;
     public static ForgeConfigSpec.IntValue diamondLauncherFireDelay;
@@ -120,6 +140,8 @@ public class KGConfig {
     public static ForgeConfigSpec.IntValue diamondLauncherDurability;
     public static ForgeConfigSpec.DoubleValue diamondLauncherInaccuracy;
     public static ForgeConfigSpec.DoubleValue diamondLauncherProjectileSpeed;
+    public static ForgeConfigSpec.DoubleValue diamondLauncherSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue diamondLauncherMeleeDamage;
 
     public static ForgeConfigSpec.DoubleValue witherLauncherDamageMultiplier;
     public static ForgeConfigSpec.IntValue witherLauncherFireDelay;
@@ -128,6 +150,8 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue witherLauncherInaccuracy;
     public static ForgeConfigSpec.DoubleValue witherLauncherProjectileSpeed;
     public static ForgeConfigSpec.DoubleValue witherLauncherEffectRadiusMultiplier;
+    public static ForgeConfigSpec.DoubleValue witherLauncherSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue witherLauncherMeleeDamage;
 
     public static ForgeConfigSpec.DoubleValue diamondMinegunDamageMultiplier;
     public static ForgeConfigSpec.IntValue diamondMinegunFireDelay;
@@ -136,6 +160,8 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue diamondMinegunInaccuracy;
     public static ForgeConfigSpec.DoubleValue diamondMinegunProjectileSpeed;
     public static ForgeConfigSpec.DoubleValue diamondMinegunMineChance;
+    public static ForgeConfigSpec.DoubleValue diamondMinegunSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue diamondMinegunMeleeDamage;
 
     public static ForgeConfigSpec.DoubleValue netheriteMinegunDamageMultiplier;
     public static ForgeConfigSpec.IntValue netheriteMinegunFireDelay;
@@ -145,6 +171,8 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue netheriteMinegunProjectileSpeed;
     public static ForgeConfigSpec.DoubleValue netheriteMinegunMineChance;
     public static ForgeConfigSpec.DoubleValue netheriteMinegunIgnitionChance;
+    public static ForgeConfigSpec.DoubleValue netheriteMinegunSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue netheriteMinegunMeleeDamage;
 
     public static ForgeConfigSpec.DoubleValue ironVoltgunDamageMultiplier;
     public static ForgeConfigSpec.IntValue ironVoltgunFireDelay;
@@ -154,6 +182,8 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue ironVoltgunProjectileSpeed;
     public static ForgeConfigSpec.DoubleValue ironVoltgunMinimumDamage;
     public static ForgeConfigSpec.DoubleValue ironVoltgunMaximumDamage;
+    public static ForgeConfigSpec.DoubleValue ironVoltgunSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue ironVoltgunMeleeDamage;
 
     public static ForgeConfigSpec.DoubleValue ironAssaultDamageMultiplier;
     public static ForgeConfigSpec.IntValue ironAssaultFireDelay;
@@ -162,6 +192,8 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue ironAssaultInaccuracy;
     public static ForgeConfigSpec.DoubleValue ironAssaultProjectileSpeed;
     public static ForgeConfigSpec.DoubleValue ironAssaultMidairMultiplier;
+    public static ForgeConfigSpec.DoubleValue ironAssaultSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue ironAssaultMeleeDamage;
 
     public static ForgeConfigSpec.DoubleValue defenderRifleDamageMultiplier;
     public static ForgeConfigSpec.IntValue defenderRifleFireDelay;
@@ -171,6 +203,8 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue defenderRifleProjectileSpeed;
     public static ForgeConfigSpec.IntValue defenderRifleRange;
     public static ForgeConfigSpec.IntValue defenderRifleDelayDelta;
+    public static ForgeConfigSpec.DoubleValue defenderRifleSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue defenderRifleMeleeDamage;
 
     public static ForgeConfigSpec.DoubleValue goldPlasmaDamageMultiplier;
     public static ForgeConfigSpec.IntValue goldPlasmaFireDelay;
@@ -181,6 +215,8 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue goldPlasmaShieldAdditional;
     public static ForgeConfigSpec.DoubleValue goldPlasmaSlowChance;
     public static ForgeConfigSpec.IntValue goldPlasmaSlowTicks;
+    public static ForgeConfigSpec.DoubleValue goldPlasmaSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue goldPlasmaMeleeDamage;
 
     //Bullets
     public static ForgeConfigSpec.DoubleValue flintBulletDamage;
@@ -258,7 +294,7 @@ public class KGConfig {
                 .defineInRange("sniperCost", 2, 0, 64);
         launcherCost = builder
                 .comment("Configure the ammo cost to fire a launcher")
-                .defineInRange("launcherCost", 6, 0, 64);
+                .defineInRange("launcherCost", 4, 0, 64);
         builder.pop();
 
         builder.push("pistol");
@@ -280,6 +316,12 @@ public class KGConfig {
         ironPistolProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for Pistols")
                 .defineInRange("ironPistolProjectileSpeed", 8D, 0D, 64D);
+        ironPistolSwitchSpeed = builder
+                .comment("Configure the Weapon Switch Speed for Pistols")
+                .defineInRange("ironPistolSwitchSpeed", 2.4D, 0D, 5D);
+        ironPistolMeleeDamage = builder
+                .comment("Configure the Melee Damage for Pistols")
+                .defineInRange("ironPistolMeleeDamage", 2D, 0D, 40D);
         builder.pop();
 
         builder.push("revolver");
@@ -310,6 +352,12 @@ public class KGConfig {
         diamondRevolverStabilityTime = builder
                 .comment("Configure how long the gun must not be fired for spread cone to stabilize on Revolvers")
                 .defineInRange("diamondRevolverStabilityTime", 20, 1, 72000);
+        diamondRevolverSwitchSpeed = builder
+                .comment("Configure the Weapon Switch Speed for Revolvers")
+                .defineInRange("diamondRevolverSwitchSpeed", 2.4D, 0D, 5D);
+        diamondRevolverMeleeDamage = builder
+                .comment("Configure the Melee Damage for Revolvers")
+                .defineInRange("diamondRevolverMeleeDamage", 2D, 0D, 40D);
         builder.pop();
 
         builder.push("revolver");
@@ -346,6 +394,12 @@ public class KGConfig {
         shadowRevolverLightLevelRequired = builder
                 .comment("Configure what light level the block the player is standing in has to be or less to multiply damage on Shadow Magnums.")
                 .defineInRange("shadowRevolverLightLevelRequired", 3, 0, 15);
+        shadowRevolverSwitchSpeed = builder
+                .comment("Configure the Weapon Switch Speed for Shadow Magnums")
+                .defineInRange("shadowRevolverSwitchSpeed", 2.4D, 0D, 5D);
+        shadowRevolverMeleeDamage = builder
+                .comment("Configure the Melee Damage for Shadow Magnums")
+                .defineInRange("shadowRevolverMeleeDamage", 2D, 0D, 40D);
         builder.pop();
 
         builder.push("skillshot pistol");
@@ -373,6 +427,12 @@ public class KGConfig {
         goldSkillshotComboMultiplierPer = builder
                 .comment("Configure the addition to damage multiplier per combo for Skillshot Pistols")
                 .defineInRange("goldSkillshotComboMultplierPer", 0.2D, 0D, 20D);
+        goldSkillshotSwitchSpeed = builder
+                .comment("Configure the Weapon Switch Speed for Skillshot Pistols")
+                .defineInRange("goldSkillshotSwitchSpeed", 2.4D, 0D, 5D);
+        goldSkillshotMeleeDamage = builder
+                .comment("Configure the Melee Damage for Skillshot Pistols")
+                .defineInRange("goldSkillshotMeleeDamage", 2D, 0D, 40D);
         builder.pop();
 
         builder.push("blessed pistol");
@@ -400,6 +460,12 @@ public class KGConfig {
         emeraldBlessedBlessingMultiplier = builder
                 .comment("Configure the blessing's damage multiplier for Blessed Pistols")
                 .defineInRange("emeraldBlessedBlessingMultiplier", 1.5D, 0D, 20D);
+        emeraldBlessedSwitchSpeed = builder
+                .comment("Configure the Weapon Switch Speed for Blessed Pistols")
+                .defineInRange("emeraldBlessedSwitchSpeed", 2.4D, 0D, 5D);
+        emeraldBlessedMeleeDamage = builder
+                .comment("Configure the Melee Damage for Blessed Pistols")
+                .defineInRange("emeraldBlessedMeleeDamage", 2D, 0D, 40D);
         builder.pop();
 
         builder.push("shotgun");
@@ -424,6 +490,12 @@ public class KGConfig {
         diamondShotgunProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for Shotguns")
                 .defineInRange("diamondShotgunProjectileSpeed", 8D, 0D, 64D);
+        diamondShotgunSwitchSpeed = builder
+                .comment("Configure the Weapon Switch Speed for Shotguns")
+                .defineInRange("diamondShotgunSwitchSpeed", 1.2D, 0D, 5D);
+        diamondShotgunMeleeDamage = builder
+                .comment("Configure the Melee Damage for Shotguns")
+                .defineInRange("diamondShotgunMeleeDamage", 4D, 0D, 40D);
         builder.pop();
 
         builder.push("double barrel shotgun");
@@ -454,6 +526,12 @@ public class KGConfig {
         goldDoubleShotgunKnockback = builder
                 .comment("Configure how strong knockback is at closest range on Double Barrel Shotguns")
                 .defineInRange("goldDoubleShotgunKnockback", 1.2D, 0.01D, 5D);
+        goldDoubleShotgunSwitchSpeed = builder
+                .comment("Configure the Weapon Switch Speed for Double Barrel Shotguns")
+                .defineInRange("goldDoubleShotgunSwitchSpeed", 1.2D, 0D, 5D);
+        goldDoubleShotgunMeleeDamage = builder
+                .comment("Configure the Melee Damage for Double Barrel Shotguns")
+                .defineInRange("goldDoubleShotgunMeleeDamage", 4D, 0D, 40D);
         builder.pop();
 
         builder.push("vampire shotgun");
@@ -490,6 +568,12 @@ public class KGConfig {
         netheriteShotgunEntityRadius = builder
                 .comment("Configure the radius for entities to steal hearts from for Vampire Shotguns")
                 .defineInRange("netheriteShotgunEntityRadius", 8D, 1D, 8D);
+        netheriteShotgunSwitchSpeed = builder
+                .comment("Configure the Weapon Switch Speed for Vampire Shotguns")
+                .defineInRange("netheriteShotgunSwitchSpeed", 1.2D, 0D, 5D);
+        netheriteShotgunMeleeDamage = builder
+                .comment("Configure the Melee Damage for Vampire Shotguns")
+                .defineInRange("netheriteShotgunMeleeDamage", 4D, 0D, 40D);
         builder.pop();
 
         builder.push("sniper rifle");
@@ -511,6 +595,12 @@ public class KGConfig {
         diamondSniperProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for Snipers")
                 .defineInRange("diamondSniperProjectileSpeed", 16D, 0D, 64D);
+        diamondSniperSwitchSpeed = builder
+                .comment("Configure the Weapon Switch Speed for Snipers")
+                .defineInRange("diamondSniperSwitchSpeed", 1.2D, 0D, 5D);
+        diamondSniperMeleeDamage = builder
+                .comment("Configure the Melee Damage for Snipers")
+                .defineInRange("diamondSniperMeleeDamage", 3D, 0D, 40D);
         builder.pop();
 
         builder.push("carbine");
@@ -532,6 +622,12 @@ public class KGConfig {
         ironCarbineProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for Carbines")
                 .defineInRange("ironCarbineProjectileSpeed", 12D, 0D, 64D);
+        ironCarbineSwitchSpeed = builder
+                .comment("Configure the Weapon Switch Speed for Carbines")
+                .defineInRange("ironCarbineSwitchSpeed", 1.2D, 0D, 5D);
+        ironCarbineMeleeDamage = builder
+                .comment("Configure the Melee Damage for Carbines (additive)")
+                .defineInRange("ironCarbineMeleeDamage", 3D, 0D, 40D);
         builder.pop();
 
         builder.push("minegun");
@@ -556,6 +652,12 @@ public class KGConfig {
         diamondMinegunMineChance = builder
                 .comment("Configure the Break Block Chance for Mineguns")
                 .defineInRange("diamondMinegunMineChance", 0.5D, 0D, 1D);
+        diamondMinegunSwitchSpeed = builder
+                .comment("Configure the Weapon Switch Speed for Mineguns")
+                .defineInRange("diamondMinegunSwitchSpeed", 2.0D, 0D, 5D);
+        diamondMinegunMeleeDamage = builder
+                .comment("Configure the Melee Damage for Mineguns")
+                .defineInRange("diamondMinegunMeleeDamage", 2D, 0D, 40D);
         builder.pop();
 
         builder.push("corruption gun");
@@ -583,6 +685,12 @@ public class KGConfig {
         netheriteMinegunIgnitionChance = builder
                 .comment("Configure the Fire Set Chance for Corruption Guns when it is a blaze bullet in use")
                 .defineInRange("netheriteMinegunIgnitionChance", 0.25D, 0D, 1D);
+        netheriteMinegunSwitchSpeed = builder
+                .comment("Configure the Weapon Switch Speed for Corruption Gun")
+                .defineInRange("netheriteMinegunSwitchSpeed", 2.0D, 0D, 5D);
+        netheriteMinegunMeleeDamage = builder
+                .comment("Configure the Melee Damage for Corruption Gun")
+                .defineInRange("netheriteMinegunMeleeDamage", 2D, 0D, 40D);
         builder.pop();
 
         builder.push("voltgun");
@@ -610,6 +718,12 @@ public class KGConfig {
         ironVoltgunMaximumDamage = builder
                 .comment("Configure the Maximum damage increase for Voltguns")
                 .defineInRange("ironVoltgunMaximumDamage", 1.5D, 0D, 5D);
+        ironVoltgunSwitchSpeed = builder
+                .comment("Configure the Weapon Switch Speed for Voltguns")
+                .defineInRange("ironVoltgunSwitchSpeed", 2.0D, 0D, 5D);
+        ironVoltgunMeleeDamage = builder
+                .comment("Configure the Melee Damage for Voltguns")
+                .defineInRange("ironVoltgunMeleeDamage", 2D, 0D, 40D);
         builder.pop();
 
         builder.push("assault rifle");
@@ -634,6 +748,12 @@ public class KGConfig {
         ironAssaultMidairMultiplier = builder
                 .comment("Configure the midair inaccuracy multiplier for Assault Rifles")
                 .defineInRange("ironAssaultMidairMultiplier", 2.0D, 0D, 5D);
+        ironAssaultSwitchSpeed = builder
+                .comment("Configure the Weapon Switch Speed for Assault Rifles")
+                .defineInRange("ironAssaultSwitchSpeed", 1.6D, 0D, 5D);
+        ironAssaultMeleeDamage = builder
+                .comment("Configure the Melee Damage for Assault Rifles")
+                .defineInRange("ironAssaultMeleeDamage", 2D, 0D, 40D);
         builder.pop();
 
         builder.push("plasma rifle");
@@ -664,6 +784,12 @@ public class KGConfig {
         goldPlasmaSlowTicks = builder
                 .comment("Configure the length slowness effect lasts for from Plasma Rifles")
                 .defineInRange("goldPlasmaSlowTicks", 60, 10, 72000);
+        goldPlasmaSwitchSpeed = builder
+                .comment("Configure the Weapon Switch Speed for Plasma Rifles")
+                .defineInRange("goldPlasmaSwitchSpeed", 1.6D, 0D, 5D);
+        goldPlasmaMeleeDamage = builder
+                .comment("Configure the Melee Damage for Plasma Rifles")
+                .defineInRange("goldPlasmaMeleeDamage", 2D, 0D, 40D);
         builder.pop();
 
         builder.push("defenders carbine");
@@ -691,6 +817,12 @@ public class KGConfig {
         defenderRifleDelayDelta = builder
                 .comment("Configure the subtractor for Fire Rate when next to a Tile Entity for Defender Rifles")
                 .defineInRange("defenderRifleDelayDelta", 1, 0, 72000);
+        defenderRifleSwitchSpeed = builder
+                .comment("Configure the Weapon Switch Speed for Defender Rifles")
+                .defineInRange("defenderRifleSwitchSpeed", 1.6D, 0D, 5D);
+        defenderRifleMeleeDamage = builder
+                .comment("Configure the Melee Damage for Defender Rifles")
+                .defineInRange("defenderRifleMeleeDamage", 2D, 0D, 40D);
         builder.pop();
 
         builder.push("rocket launcher");
@@ -712,6 +844,12 @@ public class KGConfig {
         diamondLauncherProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for Rocket Launchers")
                 .defineInRange("diamondLauncherProjectileSpeed", 2D, 0D, 64D);
+        diamondLauncherSwitchSpeed = builder
+                .comment("Configure the Weapon Switch Speed for Rocket Launchers")
+                .defineInRange("diamondLauncherSwitchSpeed", 0.8D, 0D, 5D);
+        diamondLauncherMeleeDamage = builder
+                .comment("Configure the Melee Damage for Rocket Launchers")
+                .defineInRange("diamondLauncherMeleeDamage", 6D, 0D, 40D);
         builder.pop();
 
         builder.push("wither cannon");
@@ -736,6 +874,12 @@ public class KGConfig {
         witherLauncherEffectRadiusMultiplier = builder
                 .comment("Multiplier of how much larger than the explosion radius does the wither effect apply")
                 .defineInRange("witherLauncherEffectRadiusMultiplier", 2D, 0D, 64D);
+        witherLauncherSwitchSpeed = builder
+                .comment("Configure the Weapon Switch Speed for Wither Launchers")
+                .defineInRange("witherLauncherSwitchSpeed", 0.8D, 0D, 5D);
+        witherLauncherMeleeDamage = builder
+                .comment("Configure the Melee Damage for Wither Launchers")
+                .defineInRange("witherLauncherMeleeDamage", 6D, 0D, 40D);
         builder.pop();
 
         builder.push("bullet_config");
