@@ -112,9 +112,6 @@
 	"enchantment.kaleidiosguns.torpedo.desc": "Bullets don't decrease speed underwater",
 	"enchantment.kaleidiosguns.trick_shot": "Trick Shot",
 	"enchantment.kaleidiosguns.trick_shot.desc": "Shots fired whilst off the ground have perfect accuracy",
-	"enchantment.kaleidiosguns.quick_draw": "Quick Draw",
-	"enchantment.kaleidiosguns.quick_draw.desc": "Shoot whilst switching/melee, more leeway per level",
-
 
 	"entity.kaleidiosguns.bullet": "Bullet",
 

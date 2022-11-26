@@ -22,9 +22,7 @@ public class ClientGunUseEvent {
             ItemStack gun = player.getItemInHand(event.getHand());
             if (gun != ItemStack.EMPTY) {
                 if (gun.getItem() instanceof GunItem) {
-                    int quickness = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.quickDraw, gun);
-
-                    if (Math.max(1 - (quickness * KGConfig.quickDrawPercent.get()), 0) > player.getAttackStrengthScale(0)) event.setCanceled(true);
+                    if (1 > player.getAttackStrengthScale(0)) event.setCanceled(true);
                 }
             }
         }
