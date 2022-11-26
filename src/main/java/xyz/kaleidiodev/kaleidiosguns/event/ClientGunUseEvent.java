@@ -1,13 +1,16 @@
 package xyz.kaleidiodev.kaleidiosguns.event;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.kaleidiodev.kaleidiosguns.KaleidiosGuns;
+import xyz.kaleidiodev.kaleidiosguns.config.KGConfig;
 import xyz.kaleidiodev.kaleidiosguns.item.GunItem;
+import xyz.kaleidiodev.kaleidiosguns.registry.ModEnchantments;
 
 @Mod.EventBusSubscriber(modid = KaleidiosGuns.MODID)
 public class ClientGunUseEvent {
@@ -19,10 +22,9 @@ public class ClientGunUseEvent {
             ItemStack gun = player.getItemInHand(event.getHand());
             if (gun != ItemStack.EMPTY) {
                 if (gun.getItem() instanceof GunItem) {
+                    int quickness = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.quickDraw, gun);
 
-                    if (player.getAttackStrengthScale(0) < 1) {
-                        event.setCanceled(true);
-                    }
+                    if (Math.max(1 - (quickness * KGConfig.quickDrawPercent.get()), 0) > player.getAttackStrengthScale(0)) event.setCanceled(true);
                 }
             }
         }

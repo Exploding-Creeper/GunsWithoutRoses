@@ -248,6 +248,7 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue signalMultiplier;
     public static ForgeConfigSpec.IntValue glowTime;
     public static ForgeConfigSpec.IntValue shooterGlowTime;
+    public static ForgeConfigSpec.DoubleValue quickDrawPercent;
 
 
     static {
@@ -995,6 +996,12 @@ public class KGConfig {
         shooterGlowTime = builder
                 .comment("Ticks glowing lasts for on the shooter")
                 .defineInRange("shooterGlowTime", 300, 5, 72000);
+        builder.pop();
+
+        builder.push("quick draw enchantment");
+        quickDrawPercent = builder
+                .comment("Ticks glowing lasts for on the hit target")
+                .defineInRange("quickDrawPercent", 0.25D, 0.01D, 1D);
         builder.pop();
 
         spec = builder.build();
