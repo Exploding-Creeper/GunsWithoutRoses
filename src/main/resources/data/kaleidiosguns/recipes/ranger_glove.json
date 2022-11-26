@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"DDD",
+		"DSD",
+		"FPF"
+	],
+	"key": {
+		"D": { "tag": "forge:gems/diamond" },
+		"S": { "tag": "minecraft:string" },
+		"P": { "item": "minecraft:leather" },
+		"F": { "item": "minecraft:feather"}
+	},
+	"result": { "item": "kaleidiosguns:ranger_glove" }
+}
