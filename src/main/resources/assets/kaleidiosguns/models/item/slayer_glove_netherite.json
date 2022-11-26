@@ -1,6 +1,0 @@
-{
-    "parent": "kaleidiosguns:item/base_gun",
-    "textures": {
-        "layer0": "kaleidiosguns:item/slayer_glove_netherite"
-    }
-}

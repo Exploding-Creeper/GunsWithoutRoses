@@ -365,8 +365,8 @@ public class GunItem extends Item {
 		//apply glove switch speed perk if it's in the offhand
 		if (pLevel.isClientSide && (Minecraft.getInstance().player != null)) {
 			ItemStack offHandItem = Minecraft.getInstance().player.getOffhandItem();
-			if (offHandItem.getItem() instanceof SlayerGloveItem) {
-				SlayerGloveItem gloveItem = (SlayerGloveItem)offHandItem.getItem();
+			if (offHandItem.getItem() instanceof GloveItem) {
+				GloveItem gloveItem = (GloveItem)offHandItem.getItem();
 				double newSpeed = baseSpeed + (baseSpeed * gloveItem.percentSpeedUp);
 				if (newSpeed != currentSpeed) setAttributes(baseDamage, newSpeed);
 			}

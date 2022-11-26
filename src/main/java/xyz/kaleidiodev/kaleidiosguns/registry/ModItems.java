@@ -36,7 +36,7 @@ public class ModItems {
 
 	public static BulletItem flintBullet, ironBullet, blazeBullet, hungerBullet, xpBullet;
 
-	public static SlayerGloveItem goldGlove, ironGlove, diamondGlove, netheriteGlove;
+	public static GloveItem diamondGlove;
 
 	@SubscribeEvent
 	public static void registerItems(final RegistryEvent.Register<Item> event) {
@@ -80,10 +80,7 @@ public class ModItems {
 		xpBullet = initItem(reg, new XPBulletItem(defP().stacksTo(1), KGConfig.xpBulletDamage.get()), "xp_bullet");
 
 		// Gloves
-		goldGlove = initItem(reg, new SlayerGloveItem(defP().durability(KGConfig.goldGloveDurability.get()), KGConfig.goldSwitchSpeedPercent.get()), "slayer_glove_gold");
-		ironGlove = initItem(reg, new SlayerGloveItem(defP().durability(KGConfig.ironGloveDurability.get()), KGConfig.ironSwitchSpeedPercent.get()), "slayer_glove_iron");
-		diamondGlove = initItem(reg, new SlayerGloveItem(defP().durability(KGConfig.diamondGloveDurability.get()), KGConfig.diamondSwitchSpeedPercent.get()), "slayer_glove_diamond");
-		netheriteGlove = initItem(reg, new SlayerGloveItem(defP().durability(KGConfig.netheriteGloveDurability.get()), KGConfig.netheriteSwitchSpeedPercent.get()), "slayer_glove_netherite");
+		diamondGlove = initItem(reg, new GloveItem(defP().durability(KGConfig.gloveDurability.get()), KGConfig.gloveSwitchSpeedPercent.get()), "ranger_glove");
 	}
 
 	public static Item.Properties defP() {

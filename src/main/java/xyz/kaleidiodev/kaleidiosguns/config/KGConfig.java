@@ -22,17 +22,9 @@ public class KGConfig {
     public static ForgeConfigSpec.IntValue sniperCost;
     public static ForgeConfigSpec.IntValue launcherCost;
 
-    //slayer glove
-    public static ForgeConfigSpec.DoubleValue goldSwitchSpeedPercent;
-    public static ForgeConfigSpec.DoubleValue ironSwitchSpeedPercent;
-    public static ForgeConfigSpec.DoubleValue diamondSwitchSpeedPercent;
-    public static ForgeConfigSpec.DoubleValue netheriteSwitchSpeedPercent;
-
-    //slayer glove durabilities.
-    public static ForgeConfigSpec.IntValue goldGloveDurability;
-    public static ForgeConfigSpec.IntValue ironGloveDurability;
-    public static ForgeConfigSpec.IntValue diamondGloveDurability;
-    public static ForgeConfigSpec.IntValue netheriteGloveDurability;
+    //ranger glove
+    public static ForgeConfigSpec.DoubleValue gloveSwitchSpeedPercent;
+    public static ForgeConfigSpec.IntValue gloveDurability;
 
     //Guns
     public static ForgeConfigSpec.DoubleValue ironPistolDamageMultiplier;
@@ -292,34 +284,13 @@ public class KGConfig {
                 .defineInRange("redstoneRadius", 10, 0, 31);
         builder.pop();
 
-        builder.push("slayer gloves");
-        goldSwitchSpeedPercent = builder
-                .comment("How much faster is weapon switch with Golden Slayer Gloves")
-                .defineInRange("goldSwitchSpeedPercent", 0.5D, 0D, 1D);
-        ironSwitchSpeedPercent = builder
-                .comment("How much faster is weapon switch with Iron Slayer Gloves")
-                .defineInRange("ironSwitchSpeedPercent", 0.25D, 0D, 1D);
-        diamondSwitchSpeedPercent = builder
-                .comment("How much faster is weapon switch with Diamond Slayer Gloves")
-                .defineInRange("diamondSwitchSpeedPercent", 0.75D, 0D, 1D);
-        netheriteSwitchSpeedPercent = builder
-                .comment("How much faster is weapon switch with Netherite Slayer Gloves")
-                .defineInRange("netheriteSwitchSpeedPercent", 1D, 0D, 1D);
-        builder.pop();
-
-        builder.push("slayer glove durabilities");
-        goldGloveDurability = builder
-                .comment("Change the durability of Gold Slayer Gloves")
-                .defineInRange("goldGloveDurability", 16, 1, 32767);
-        ironGloveDurability = builder
-                .comment("Change the durability of Iron Slayer Gloves")
-                .defineInRange("ironGloveDurability", 48, 1, 32767);
-        diamondGloveDurability = builder
-                .comment("Change the durability of Diamond Slayer Gloves")
-                .defineInRange("diamondGloveDurability", 128, 1, 32767);
-        netheriteGloveDurability = builder
-                .comment("Change the durability of Netherite Slayer Gloves")
-                .defineInRange("netheriteGloveDurability", 160, 1, 32767);
+        builder.push("ranger gloves");
+        gloveSwitchSpeedPercent = builder
+                .comment("How much faster is weapon switch with Ranger Gloves")
+                .defineInRange("gloveSwitchSpeedPercent", 1D, 0D, 5D);
+        gloveDurability = builder
+                .comment("Change the durability of the Ranger Gloves")
+                .defineInRange("gloveDurability", 200, 1, 32767);
         builder.pop();
 
         builder.push("cost mechanic");

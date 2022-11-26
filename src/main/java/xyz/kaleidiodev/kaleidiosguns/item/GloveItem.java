@@ -14,10 +14,10 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class SlayerGloveItem extends Item {
+public class GloveItem extends Item {
     public double percentSpeedUp;
 
-    public SlayerGloveItem(Properties pProperties, double newPercentSpeedUp) {
+    public GloveItem(Properties pProperties, double newPercentSpeedUp) {
         super(pProperties);
 
         percentSpeedUp = newPercentSpeedUp;

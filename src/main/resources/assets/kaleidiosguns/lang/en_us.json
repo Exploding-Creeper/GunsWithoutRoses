@@ -24,10 +24,7 @@
 	"item.kaleidiosguns.hunger_bullet": "Maws of Gluttony",
 	"item.kaleidiosguns.xp_bullet": "Cleric Cartridge",
 
-	"item.kaleidiosguns.slayer_glove_gold": "Gold Slayer Glove",
-	"item.kaleidiosguns.slayer_glove_iron": "Iron Slayer Glove",
-	"item.kaleidiosguns.slayer_glove_diamond": "Diamond Slayer Glove",
-	"item.kaleidiosguns.slayer_glove_netherite": "Netherite Slayer Glove",
+	"item.kaleidiosguns.ranger_glove": "Ranger Glove",
 
 	"tooltip.kaleidiosguns.shift": "§7Hold §fSHIFT§7 for stats§r",
 	"tooltip.kaleidiosguns.bullet.damage": "%d damage",
