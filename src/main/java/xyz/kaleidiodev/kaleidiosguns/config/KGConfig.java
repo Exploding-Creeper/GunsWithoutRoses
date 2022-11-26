@@ -730,16 +730,16 @@ public class KGConfig {
         builder.push("assault rifle");
         ironAssaultDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Assault Rifles")
-                .defineInRange("ironAssaultDamageMultiplier", 0.8D, 0.1D, 5D);
+                .defineInRange("ironAssaultDamageMultiplier", 0.65D, 0.1D, 5D);
         ironAssaultFireDelay = builder
                 .comment("Configure the Fire delay for Assault Rifles")
-                .defineInRange("ironAssaultFireDelay", 5, 0, 72000);
+                .defineInRange("ironAssaultFireDelay", 4, 0, 72000);
         ironAssaultEnchantability = builder
                 .comment("Configure the Enchantability for Assault Rifles")
                 .defineInRange("ironAssaultEnchantability", 14, 0, 30);
         ironAssaultDurability = builder
                 .comment("Configure the Durability for Assault Rifles")
-                .defineInRange("ironAssaultDurability", 3200, 0, 32767);
+                .defineInRange("ironAssaultDurability", 4615, 0, 32767);
         ironAssaultInaccuracy = builder
                 .comment("Configure the Inaccuracy for Assault Rifles")
                 .defineInRange("ironAssaultInaccuracy", 3.0D, 0D, 90D);
@@ -796,16 +796,16 @@ public class KGConfig {
         builder.push("defenders carbine");
         defenderRifleDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Defender Rifles")
-                .defineInRange("defenderRifleDamageMultiplier", 0.9D, 0.1D, 5D);
+                .defineInRange("defenderRifleDamageMultiplier", 0.75D, 0.1D, 5D);
         defenderRifleFireDelay = builder
                 .comment("Configure the Fire delay for Defender Rifles")
-                .defineInRange("defenderRifleFireDelay", 6, 0, 72000);
+                .defineInRange("defenderRifleFireDelay", 5, 0, 72000);
         defenderRifleEnchantability = builder
                 .comment("Configure the Enchantability for Defender Rifles")
                 .defineInRange("defenderRifleEnchantability", 18, 0, 30);
         defenderRifleDurability = builder
                 .comment("Configure the Durability for Defender Rifles")
-                .defineInRange("defenderRifleDurability", 2500, 0, 32767);
+                .defineInRange("defenderRifleDurability", 3200, 0, 32767);
         defenderRifleInaccuracy = builder
                 .comment("Configure the Inaccuracy for Defender Rifles")
                 .defineInRange("defenderRifleInaccuracy", 2.0D, 0D, 90D);
