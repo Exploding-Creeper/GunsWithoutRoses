@@ -368,11 +368,16 @@ public class GunItem extends Item {
 			if (offHandItem.getItem() instanceof GloveItem) {
 				GloveItem gloveItem = (GloveItem)offHandItem.getItem();
 				double newSpeed = baseSpeed + (baseSpeed * gloveItem.percentSpeedUp);
-				if (newSpeed != currentSpeed) setAttributes(baseDamage, newSpeed);
+				if (newSpeed != currentSpeed) setAttributes(currentDamage, newSpeed);
+			}
+			else if (!offHandItem.isEmpty() && !isOneHanded) {
+				//punish switch time for having another weapon in the offhand
+				double newSpeed = baseSpeed / 2;
+				if (newSpeed != currentSpeed) setAttributes(currentDamage, newSpeed);
 			}
 			else
 			{
-				if (baseSpeed != currentSpeed) setAttributes(baseDamage, baseSpeed);
+				if (baseSpeed != currentSpeed) setAttributes(currentDamage, baseSpeed);
 			}
 		}
 
