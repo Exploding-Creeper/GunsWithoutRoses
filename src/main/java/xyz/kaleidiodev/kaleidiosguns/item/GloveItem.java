@@ -30,5 +30,7 @@ public class GloveItem extends Item {
             tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.glove.speed_change", ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(percentSpeedUp * 100.0f)));
         }
         else tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.shift"));
+
+        tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.glove"));
     }
 }

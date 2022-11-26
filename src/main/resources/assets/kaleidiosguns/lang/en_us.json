@@ -71,6 +71,7 @@
 	"tooltip.kaleidiosguns.glass": "Can break glass, wool and lights without drops",
 	"tooltip.kaleidiosguns.doors": "Can break metal doors at close range",
 	"tooltip.kaleidiosguns.quiet": "Its simplicity makes it quieter",
+	"tooltip.kaleidiosguns.glove": "Acts as an empty hand",
 
 	"tooltip.kaleidiosguns.blaze_bullet": "Sets entities on fire",
 	"tooltip.kaleidiosguns.hunger_bullet": "Uses hunger as ammo",
