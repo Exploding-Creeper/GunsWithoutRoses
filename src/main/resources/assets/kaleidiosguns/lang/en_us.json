@@ -24,6 +24,11 @@
 	"item.kaleidiosguns.hunger_bullet": "Maws of Gluttony",
 	"item.kaleidiosguns.xp_bullet": "Cleric Cartridge",
 
+	"item.kaleidiosguns.slayer_glove_gold": "Gold Slayer Glove",
+	"item.kaleidiosguns.slayer_glove_iron": "Iron Slayer Glove",
+	"item.kaleidiosguns.slayer_glove_diamond": "Diamond Slayer Glove",
+	"item.kaleidiosguns.slayer_glove_netherite": "Netherite Slayer Glove",
+
 	"tooltip.kaleidiosguns.shift": "§7Hold §fSHIFT§7 for stats§r",
 	"tooltip.kaleidiosguns.bullet.damage": "%d damage",
 	"tooltip.kaleidiosguns.gun.damage.flat": "§2Damage: §f+%s§r",
@@ -73,6 +78,7 @@
 	"tooltip.kaleidiosguns.blaze_bullet": "Sets entities on fire",
 	"tooltip.kaleidiosguns.hunger_bullet": "Uses hunger as ammo",
 	"tooltip.kaleidiosguns.xp_bullet": "Uses xp levels as ammo",
+	"tooltip.kaleidiosguns.glove.speed_change": "§2When in offhand, switch time increase: §f%s%%§r",
 
 	"itemGroup.kaleidiosguns": "Kaleidio's Guns",
 
