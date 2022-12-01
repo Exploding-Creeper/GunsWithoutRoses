@@ -863,7 +863,7 @@ public class KGConfig {
                 .defineInRange("diamondLauncherSwitchSpeed", 1.4D, 0D, 5D);
         diamondLauncherMeleeDamage = builder
                 .comment("Configure the Melee Damage for Rocket Launchers")
-                .defineInRange("diamondLauncherMeleeDamage", 6D, 0D, 40D);
+                .defineInRange("diamondLauncherMeleeDamage", 4D, 0D, 40D);
         builder.pop();
 
         builder.push("wither cannon");
@@ -893,7 +893,7 @@ public class KGConfig {
                 .defineInRange("witherLauncherSwitchSpeed", 1.3D, 0D, 5D);
         witherLauncherMeleeDamage = builder
                 .comment("Configure the Melee Damage for Wither Launchers")
-                .defineInRange("witherLauncherMeleeDamage", 6D, 0D, 40D);
+                .defineInRange("witherLauncherMeleeDamage", 4D, 0D, 40D);
         builder.pop();
 
         builder.push("bullet_config");
