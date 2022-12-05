@@ -7,7 +7,7 @@
 	],
 	"key": {
 		"D": { "tag": "forge:gems/diamond" },
-		"S": { "tag": "minecraft:string" },
+		"S": { "item": "minecraft:string" },
 		"P": { "item": "minecraft:leather" },
 		"F": { "item": "minecraft:feather"}
 	},
