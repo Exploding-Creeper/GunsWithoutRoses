@@ -23,8 +23,7 @@ public class KGConfig {
     public static ForgeConfigSpec.IntValue launcherCost;
 
     //ranger glove
-    public static ForgeConfigSpec.DoubleValue gloveSwitchSpeedPercent;
-    public static ForgeConfigSpec.IntValue gloveDurability;
+    public static ForgeConfigSpec.DoubleValue gloveRangerSpeedUp;
 
     //Guns
     public static ForgeConfigSpec.DoubleValue ironPistolDamageMultiplier;
@@ -285,12 +284,9 @@ public class KGConfig {
         builder.pop();
 
         builder.push("ranger gloves");
-        gloveSwitchSpeedPercent = builder
+        gloveRangerSpeedUp = builder
                 .comment("How much faster is weapon switch with Ranger Gloves")
-                .defineInRange("gloveSwitchSpeedPercent", 1D, 0D, 5D);
-        gloveDurability = builder
-                .comment("Change the durability of the Ranger Gloves")
-                .defineInRange("gloveDurability", 200, 1, 32767);
+                .defineInRange("gloveRangerSpeedUp", 1D, 0.1D, 5D);
         builder.pop();
 
         builder.push("cost mechanic");

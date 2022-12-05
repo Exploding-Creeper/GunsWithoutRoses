@@ -85,6 +85,10 @@ public class GunItem extends Item {
 	protected boolean canBreakGlass;
 	protected boolean canBreakDoors;
 	protected boolean isQuiet;
+	protected double baseSpeed;
+	protected double baseDamage;
+	protected double currentSpeed;
+	protected double currentDamage;
 
 	protected SoundEvent fireSound = ModSounds.gun;
 	protected SoundEvent reloadSound = ModSounds.double_shotgunReload;
@@ -99,13 +103,21 @@ public class GunItem extends Item {
 		this.enchantability = enchantability;
 		this.fireDelay = fireDelay;
 		this.inaccuracy = inaccuracy;
+		this.baseSpeed = attackSpeed;
+		this.baseDamage = attackDamage;
 
-		ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Tool modifier", attackDamage - 1, AttributeModifier.Operation.ADDITION));
-		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Tool modifier", attackSpeed - 4, AttributeModifier.Operation.ADDITION));
-		this.defaultModifiers = builder.build();
+		setAttributes(attackDamage, attackSpeed);
 	}
 
+	public void setAttributes(double newDamage, double newSpeed) {
+		this.currentDamage = newDamage;
+		this.currentSpeed = newSpeed;
+
+		ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Tool modifier", newDamage - 1, AttributeModifier.Operation.ADDITION));
+		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Tool modifier", newSpeed - 4, AttributeModifier.Operation.ADDITION));
+		this.defaultModifiers = builder.build();
+	}
 	@Override
 	public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlotType pEquipmentSlot) {
 		return pEquipmentSlot == EquipmentSlotType.MAINHAND ? this.defaultModifiers : super.getDefaultAttributeModifiers(pEquipmentSlot);
@@ -347,6 +359,20 @@ public class GunItem extends Item {
 		if (currentTime > this.ticksPassed) {
 			this.ticksPassed = currentTime;
 			this.onActualInventoryTick();
+		}
+
+		//apply glove switch speed perk if it's in the offhand
+		if (pLevel.isClientSide && (Minecraft.getInstance().player != null)) {
+			ItemStack offHandItem = Minecraft.getInstance().player.getOffhandItem();
+			if (offHandItem.getItem() instanceof GloveItem) {
+				GloveItem gloveItem = (GloveItem)offHandItem.getItem();
+				double newSpeed = baseSpeed + (baseSpeed * gloveItem.percentSpeedUp);
+				if (newSpeed != currentSpeed) setAttributes(baseDamage, newSpeed);
+			}
+			else
+			{
+				if (baseSpeed != currentSpeed) setAttributes(baseDamage, baseSpeed);
+			}
 		}
 
 		super.inventoryTick(pStack, pLevel, pEntity, pItemSlot, pIsSelected);

@@ -76,7 +76,7 @@
 	"tooltip.kaleidiosguns.blaze_bullet": "Sets entities on fire",
 	"tooltip.kaleidiosguns.hunger_bullet": "Uses hunger as ammo",
 	"tooltip.kaleidiosguns.xp_bullet": "Uses xp levels as ammo",
-	"tooltip.kaleidiosguns.glove.speed_change": "§2When in offhand, grants Haste",
+	"tooltip.kaleidiosguns.glove.speed_change": "§2When in offhand, switch time increase: §f%s%%§r",
 
 	"itemGroup.kaleidiosguns": "Kaleidio's Guns",
 
