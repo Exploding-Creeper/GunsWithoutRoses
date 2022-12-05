@@ -83,9 +83,6 @@ public interface IBullet {
 			newDamage += newMultiplier;
 		}
 
-		//apply chance based critical
-		if (projectile.isCritical()) newDamage *= KGConfig.criticalDamage.get();
-
 		//multiply all this by combo
 		if (projectile.shouldCombo) {
 			if ((target instanceof LivingEntity) && (shooter instanceof PlayerEntity)) {

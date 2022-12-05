@@ -49,7 +49,6 @@ public class BulletEntity extends AbstractFireballEntity {
 	protected double bulletSpeed;
 	public boolean isTorpedo;
 	protected boolean shouldGlow;
-	public boolean isCritical;
 	protected GunItem shootingGun;
 	protected Vector3d origin;
 	public boolean shouldCombo;
@@ -86,7 +85,6 @@ public class BulletEntity extends AbstractFireballEntity {
 	@Override
 	protected IParticleData getTrailParticle() {
 		//seems that this method fires once on server and once on client.  something needs to be done in order to support multiple particle types
-		if (isCritical) return ParticleTypes.ENCHANTED_HIT;
 		if (isExplosive) return ParticleTypes.POOF;
 		if (isPlasma) return ParticleTypes.INSTANT_EFFECT;
 		if (wasRevenge) return ParticleTypes.HAPPY_VILLAGER;
@@ -451,14 +449,6 @@ public class BulletEntity extends AbstractFireballEntity {
 
 	public void setShouldGlow(boolean glow) {
 		this.shouldGlow = glow;
-	}
-
-	public void setIsCritical(boolean critical) {
-		this.isCritical = critical;
-	}
-
-	public boolean isCritical() {
-		return this.isCritical;
 	}
 
 	public void setShootingGun(GunItem gun) {

@@ -36,7 +36,6 @@ public class NetworkUtils {
             BulletEntity bullet = (BulletEntity) entity;
             buffer.writeBoolean(bullet.isExplosive);
             buffer.writeBoolean(bullet.isPlasma);
-            buffer.writeBoolean(bullet.isCritical);
             buffer.writeBoolean(bullet.wasRevenge);
             buffer.writeBoolean(bullet.wasDark);
             buffer.writeBoolean(bullet.isTorpedo);

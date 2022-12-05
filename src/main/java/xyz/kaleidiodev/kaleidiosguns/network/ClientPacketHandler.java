@@ -71,7 +71,6 @@ public class ClientPacketHandler {
         BulletEntity bullet = (BulletEntity) entity;
         bullet.isExplosive = packet.readBoolean();
         bullet.isPlasma = packet.readBoolean();
-        bullet.isCritical = packet.readBoolean();
         bullet.wasRevenge = packet.readBoolean();
         bullet.wasDark = packet.readBoolean();
         bullet.isTorpedo = packet.readBoolean();

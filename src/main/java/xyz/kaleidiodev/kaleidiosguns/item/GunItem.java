@@ -72,7 +72,6 @@ public class GunItem extends Item {
 	protected int comboCount;
 	protected UUID comboVictim;
 	protected boolean isExplosive;
-	protected boolean lucky;
 	protected boolean isWither;
 	protected boolean shouldRevenge;
 	protected boolean isShadow;
@@ -299,10 +298,6 @@ public class GunItem extends Item {
 		Vector3d projectileMotion = player.getDeltaMovement();
 		shot.setDeltaMovement(shot.getDeltaMovement().subtract(projectileMotion.x, player.isOnGround() ? 0.0D : projectileMotion.y, projectileMotion.z));
 
-		//lucky shot should enable all lucky modifications simultaneously
-		double luckyChance = KGConfig.luckyShotChance.get() * EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.luckyShot, gun);
-		this.lucky = random.nextDouble() < luckyChance;
-
 		shot.setShootingGun(this);
 		shot.setInaccuracy(nextInaccuracy);
 		shot.setIgnoreInvulnerability(ignoreInvulnerability);
@@ -325,7 +320,6 @@ public class GunItem extends Item {
 		//use sky light or block light unless it's night, then use purely blocklight
 		shot.wasDark = this.isShadow && (((!world.isNight() ? Math.max(world.getBrightness(LightType.SKY, player.blockPosition().above(1)), world.getBrightness(LightType.BLOCK, player.blockPosition().above(1))) : world.getBrightness(LightType.BLOCK, player.blockPosition().above(1))) <= KGConfig.shadowRevolverLightLevelRequired.get())); //.above(1) so that it's getting an actual blocklight value.
 
-		shot.setIsCritical(this.lucky);
 		if (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.marker, gun) == 1) shot.setShouldGlow(true);
 
 		if (hasVoltage) shot.redstoneLevel = checkRedstoneLevel(world, player, gun);
