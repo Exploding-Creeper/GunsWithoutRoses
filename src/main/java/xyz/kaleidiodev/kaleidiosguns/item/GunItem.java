@@ -819,6 +819,7 @@ public class GunItem extends Item {
 			if (canBreakDoors) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.doors"));
 			if (canBreakGlass) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.glass"));
 			if (isQuiet) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.quiet"));
+			if (hasVoltage) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.voltage"));
 
 			if (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.frostShot, stack) > 0) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.frost_distance", EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.frostShot, stack) * KGConfig.frostyDistancePerLevel.get()));
 
