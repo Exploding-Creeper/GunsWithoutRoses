@@ -44,7 +44,7 @@ public class GloveItem extends Item {
         if ((pEntity instanceof LivingEntity) && (hastey)) {
             LivingEntity entity = (LivingEntity)pEntity;
             if (entity.getOffhandItem().getItem() == this)
-            entity.addEffect(new EffectInstance(Effects.DIG_SPEED, 1, 2));
+            entity.addEffect(new EffectInstance(Effects.DIG_SPEED, 1, 1));
         }
     }
 
