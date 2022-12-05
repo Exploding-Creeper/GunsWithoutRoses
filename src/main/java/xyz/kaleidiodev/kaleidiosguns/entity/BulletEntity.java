@@ -174,8 +174,10 @@ public class BulletEntity extends AbstractFireballEntity {
 				for (Entity entity : nextEntities) {
 					//that entity doesn't exist in the array, so add it
 					if (!entities.contains(entity)) {
-						entities.add(entity);
+						//also don't add if it's the same entity.
+						if (raytrace.getEntity() != entity) entities.add(entity);
 					}
+
 				}
 
 				//kill trace early if we hit a tile doing this, so it doesn't trace through walls.
