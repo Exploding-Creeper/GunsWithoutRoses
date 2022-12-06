@@ -33,6 +33,7 @@ import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.common.Mod;
 import xyz.kaleidiodev.kaleidiosguns.config.KGConfig;
 import xyz.kaleidiodev.kaleidiosguns.enchantment.GunAccuracyEnchantment;
 import xyz.kaleidiodev.kaleidiosguns.enchantment.GunDamageEnchantment;
@@ -42,7 +43,9 @@ import xyz.kaleidiodev.kaleidiosguns.registry.ModItems;
 import xyz.kaleidiodev.kaleidiosguns.registry.ModSounds;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.function.Supplier;
 
@@ -71,7 +74,7 @@ public class GunItem extends Item {
 	protected boolean shouldCombo;
 	protected int comboCount;
 	protected UUID comboVictim;
-	protected boolean isExplosive;
+	public boolean isExplosive;
 	protected boolean isWither;
 	protected boolean shouldRevenge;
 	protected boolean isShadow;
@@ -88,6 +91,7 @@ public class GunItem extends Item {
 	protected double baseDamage;
 	protected double currentSpeed;
 	protected double currentDamage;
+	public int remoteDetonate;
 
 	protected SoundEvent fireSound = ModSounds.gun;
 	protected SoundEvent reloadSound = ModSounds.double_shotgunReload;
@@ -129,6 +133,8 @@ public class GunItem extends Item {
 		//"Oh yeah I will use the vanilla method so that quivers can do their thing"
 		//guess what the quivers suck
 		ammo = mergeStacks(player, gun);
+
+		if (remoteDetonate == 1) ActionResult.consume(gun);
 
 		//don't fire if redstone block is not nearby
 		if (this.isRedstone) {
@@ -380,6 +386,9 @@ public class GunItem extends Item {
 		if (this.stabilizerTimer == 0) {
 			this.shotsBeforeStability = 0;
 		}
+
+		if (this.remoteDetonate == 2) this.remoteDetonate = 0;
+		if (this.remoteDetonate == 1) this.remoteDetonate++;
 	}
 
 	protected int getChambers(ItemStack stack) {
@@ -762,6 +771,7 @@ public class GunItem extends Item {
 		if ((enchantment == ModEnchantments.maneuvering) && !(me instanceof GatlingItem)) return false; //gatling only
 		if ((enchantment == ModEnchantments.cleanShot) && ((me instanceof ShotgunItem) || (me instanceof GatlingItem) || (me.isExplosive) || (me.getInaccuracy(stack, null) != 0))) return false; //sniper only
 		if ((enchantment == ModEnchantments.signalBoost) && !isRedstone) return false; //redstone only
+		if ((enchantment == ModEnchantments.remoteDetonate) && !isExplosive) return false; //launcher only
 
 		return super.canApplyAtEnchantingTable(stack, enchantment);
 	}

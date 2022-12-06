@@ -97,7 +97,7 @@ public class BulletEntity extends AbstractFireballEntity {
 		//Using a thing I save so that bullets don't get clogged up on chunk borders
 		ticksSinceFired++;
 		if (ticksSinceFired > 100) {
-			remove();
+			this.remove();
 		}
 
 		if (shouldGlow) {
@@ -142,6 +142,11 @@ public class BulletEntity extends AbstractFireballEntity {
 			if (!this.isInWater() && ticksSinceFired > 1 && this.level.isClientSide())
 				this.level.addParticle(this.getTrailParticle(), this.getBoundingBox().getCenter().x, this.getBoundingBox().getCenter().y, this.getBoundingBox().getCenter().z, 0.0D, 0.0D, 0.0D);
 			this.setPos(this.getX() + vector3d.x, this.getY() + vector3d.y, this.getZ() + vector3d.z);
+
+			//now explode if the launcher remote is on.
+			if (this.shootingGun != null) {
+				if (!this.level.isClientSide && (this.shootingGun.remoteDetonate > 0) && (this.isExplosive)) explode(this.position());
+			}
 		} else {
 			this.remove();
 		}
@@ -317,12 +322,14 @@ public class BulletEntity extends AbstractFireballEntity {
 			LivingEntity livingTarget = (LivingEntity) entity;
 
 			double actualKnockback;
-			if (this.shootingGun.getItem() == ModItems.doubleBarrelShotgun) {
-				actualKnockback = knockbackStrength / ticksSinceFired;
+			if (this.shootingGun != null) {
+				if (this.shootingGun.getItem() == ModItems.doubleBarrelShotgun) {
+					actualKnockback = knockbackStrength / ticksSinceFired;
 
-				Vector3d vec;
-				vec = getDeltaMovement().multiply(1, 0.25, 1).normalize().scale(actualKnockback);
-				livingTarget.push(vec.x, vec.y, vec.z);
+					Vector3d vec;
+					vec = getDeltaMovement().multiply(1, 0.25, 1).normalize().scale(actualKnockback);
+					livingTarget.push(vec.x, vec.y, vec.z);
+				}
 			}
 
 			bullet.onLivingEntityHit(this, livingTarget, shooter, level);
@@ -333,22 +340,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	protected void onHit(RayTraceResult result) {
 		//explode or damage?
 		if (isExplosive && !level.isClientSide) {
-			EntityRayTraceResult victim = (EntityRayTraceResult) result.hitInfo;
-			float newRadius = (float) (double) KGConfig.diamondLauncherDamageMultiplier.get();
-
-			//if projectile is stronger than flint damage assume a stronger material type
-			if (getDamage() > KGConfig.flintBulletDamage.get() * KGConfig.diamondLauncherDamageMultiplier.get()) newRadius += KGConfig.explosionIncreaseOnStrongerTier.get();
-
-			level.explode(this, result.getLocation().x, result.getLocation().y, result.getLocation().z, newRadius, isOnFire(), KGConfig.explosionsEnabled.get() ? Explosion.Mode.DESTROY : Explosion.Mode.NONE);
-			if (isWither) {
-				newRadius *= KGConfig.witherLauncherEffectRadiusMultiplier.get();
-				AxisAlignedBB witherTrace = new AxisAlignedBB(result.getLocation().x - newRadius, result.getLocation().y - newRadius, result.getLocation().z - newRadius, result.getLocation().x + newRadius, result.getLocation().y + newRadius, result.getLocation().z + newRadius);
-				List<LivingEntity> entities = this.level.getEntitiesOfClass(LivingEntity.class, witherTrace);
-
-				for (LivingEntity mob : entities) {
-					mob.addEffect(new EffectInstance(Effects.WITHER, 200, 1));
-				}
-			}
+			explode(result.getLocation());
 		}
 		//damage should try to hurt tiles and entities without using an explosion, so it will need to fire this super.
 		else super.onHit(result);
@@ -357,6 +349,26 @@ public class BulletEntity extends AbstractFireballEntity {
 		if (!level.isClientSide && !shouldCollateral) {
 			remove();
 		}
+	}
+
+	public void explode(Vector3d position) {
+		float newRadius = (float) (double) KGConfig.diamondLauncherDamageMultiplier.get();
+
+		//if projectile is stronger than flint damage assume a stronger material type
+		if (getDamage() > KGConfig.flintBulletDamage.get() * KGConfig.diamondLauncherDamageMultiplier.get()) newRadius += KGConfig.explosionIncreaseOnStrongerTier.get();
+
+		level.explode(this, position.x, position.y, position.z, newRadius, isOnFire(), KGConfig.explosionsEnabled.get() ? Explosion.Mode.DESTROY : Explosion.Mode.NONE);
+		if (isWither) {
+			newRadius *= KGConfig.witherLauncherEffectRadiusMultiplier.get();
+			AxisAlignedBB witherTrace = new AxisAlignedBB(position.x - newRadius, position.y - newRadius, position.z - newRadius, position.x + newRadius, position.y + newRadius, position.z + newRadius);
+			List<LivingEntity> entities = this.level.getEntitiesOfClass(LivingEntity.class, witherTrace);
+
+			for (LivingEntity mob : entities) {
+				mob.addEffect(new EffectInstance(Effects.WITHER, 200, 1));
+			}
+		}
+
+		remove();
 	}
 
 	protected void tryBreakBlock(BlockPos blockPosToTest, ItemStack stack) {

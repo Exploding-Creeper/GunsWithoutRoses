@@ -15,7 +15,7 @@ import xyz.kaleidiodev.kaleidiosguns.item.GunItem;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = KaleidiosGuns.MODID)
 public class ModEnchantments {
 
-	public static Enchantment impact, bullseye, sleightOfHand, preserving, accelerator, division, passionForBlood, marker, cowboy, maneuvering, frostShot, counterStrike, silenced, cleanShot, signalBoost, torpedo, trickShot;
+	public static Enchantment impact, bullseye, sleightOfHand, preserving, accelerator, division, passionForBlood, marker, cowboy, maneuvering, frostShot, counterStrike, silenced, cleanShot, signalBoost, torpedo, trickShot, remoteDetonate;
 	public static final EnchantmentType TYPE_GUN = EnchantmentType.create("GWR_GUN", (item) -> item instanceof GunItem);
 
 	@SubscribeEvent
@@ -34,6 +34,7 @@ public class ModEnchantments {
 		maneuvering = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.RARE, 1, 10, 20, 30, TYPE_GUN), "maneuvering"); //gatling
 		cleanShot = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.UNCOMMON, 1, 6, 12, 25, TYPE_GUN), "clean_shot"); //sniper
 		signalBoost = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.COMMON, 3, 6, 12, 25, TYPE_GUN), "signal_boost"); //redstone
+		remoteDetonate = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.RARE, 1, 8, 16, 30, TYPE_GUN), "remote_detonate"); //launcher
 
 		//enhancement (compounds onto base, mending counts as drbl)
 		passionForBlood = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.RARE, 2, 8, 16, 25, TYPE_GUN), "passion_for_blood"); //dmg

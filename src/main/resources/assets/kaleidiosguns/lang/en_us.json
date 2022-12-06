@@ -114,6 +114,8 @@
 	"enchantment.kaleidiosguns.torpedo.desc": "Bullets don't decrease speed underwater",
 	"enchantment.kaleidiosguns.trick_shot": "Trick Shot",
 	"enchantment.kaleidiosguns.trick_shot.desc": "Shots fired whilst off the ground have perfect accuracy",
+	"enchantment.kaleidiosguns.remote_detonate": "Remote Detonate",
+	"enchantment.kaleidiosguns.remote_detonate.desc": "Shift-click to detonate flying rockets",
 
 	"entity.kaleidiosguns.bullet": "Bullet",
 
