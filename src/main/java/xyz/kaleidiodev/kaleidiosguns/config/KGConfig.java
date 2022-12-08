@@ -820,7 +820,7 @@ public class KGConfig {
                 .defineInRange("defenderRifleInaccuracy", 2.0D, 0D, 90D);
         defenderRifleProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for Defender Rifles")
-                .defineInRange("defenderRifleProjectileSpeed", 8D, 0D, 64D);
+                .defineInRange("defenderRifleProjectileSpeed", 4D, 0D, 64D);
         defenderRifleRange = builder
                 .comment("Configure the range for a Tile Entity for Defender Rifles.  WARNING, PERFORMANCE BOTTLENECKS CAN OCCUR")
                 .defineInRange("defenderRifleRange", 7, 0, 32);
