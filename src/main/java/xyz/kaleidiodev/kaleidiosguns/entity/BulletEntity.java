@@ -2,8 +2,10 @@ package xyz.kaleidiodev.kaleidiosguns.entity;
 
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractFireballEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
@@ -14,6 +16,7 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import net.minecraft.util.math.vector.Vector3d;
@@ -62,6 +65,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	public boolean isCorrupted;
 	public boolean shouldBreakDoors;
 	public boolean shouldBreakGlass;
+	public boolean healsFriendlies;
 	public int redstoneLevel;
 
 	public BulletEntity(EntityType<? extends BulletEntity> entityType, World worldIn) {
@@ -102,7 +106,6 @@ public class BulletEntity extends AbstractFireballEntity {
 
 		if (shouldGlow) {
 			this.setGlowing(true);
-			((PlayerEntity)getOwner()).addEffect(new EffectInstance(Effects.GLOWING, KGConfig.shooterGlowTime.get()));
 		}
 
 		//completely rewrite the entity code here
@@ -131,7 +134,7 @@ public class BulletEntity extends AbstractFireballEntity {
 			Vector3d vector3d = this.getDeltaMovement();
 
 			if (this.isInWater()) {
-				this.level.addParticle(ParticleTypes.BUBBLE, this.getBoundingBox().getCenter().x, this.getBoundingBox().getCenter().y, this.getBoundingBox().getCenter().z, vector3d.x, vector3d.y, vector3d.z);
+				this.level.addParticle(ParticleTypes.BUBBLE, true, this.getBoundingBox().getCenter().x, this.getBoundingBox().getCenter().y, this.getBoundingBox().getCenter().z, 0, 0, 0);
 				//don't decrease inertia if the torpedo enchantment was on the gun
 				if (!this.isTorpedo) f = 0.5f;
 			}
@@ -140,7 +143,7 @@ public class BulletEntity extends AbstractFireballEntity {
 			//summon the particles in the center of the projectile instead of above it.
 			//disable emitters when underwater, as otherwise it looks messy to have two emitters (bubble emitter happens elsewhere)
 			if (!this.isInWater() && ticksSinceFired > 1 && this.level.isClientSide())
-				this.level.addParticle(this.getTrailParticle(), this.getBoundingBox().getCenter().x, this.getBoundingBox().getCenter().y, this.getBoundingBox().getCenter().z, 0.0D, 0.0D, 0.0D);
+				this.level.addParticle(this.getTrailParticle(), true, this.getBoundingBox().getCenter().x, this.getBoundingBox().getCenter().y, this.getBoundingBox().getCenter().z, 0.0D, 0.0D, 0.0D);
 			this.setPos(this.getX() + vector3d.x, this.getY() + vector3d.y, this.getZ() + vector3d.z);
 
 			//now explode if the launcher remote is on.
@@ -284,8 +287,6 @@ public class BulletEntity extends AbstractFireballEntity {
 			}
 		}
 
-
-
 		if (!level.isClientSide && this.shouldCollateral) remove();
 	}
 
@@ -310,16 +311,36 @@ public class BulletEntity extends AbstractFireballEntity {
 			healthOfVictim = victim.getHealth();
 		} else healthOfVictim = 0.0f;
 
-		if (isOnFire()) entity.setSecondsOnFire(5);
-		int lastHurtResistant = entity.invulnerableTime;
-		if (ignoreInvulnerability) entity.invulnerableTime = 0;
+		if (shooter != null) {
+			if (healsFriendlies && (entity instanceof LivingEntity)) {
+				if ((entity.getClassification(true) == EntityClassification.CREATURE) ||
+						(entity.getClassification(true) == EntityClassification.WATER_CREATURE) ||
+						checkIsSameTeam(shooter, entity)) {
+					//heal by how much the bullet would end up as damage
+					LivingEntity target = (LivingEntity) entity;
+					target.setHealth(target.getHealth() + (float)bullet.modifyDamage(this.damage, this, target, shooter, this.level));
+					//add some particle and sound effect here.
+				}
+				else giveDamage(shooter, entity, bullet);
+			}
+			else if (!checkIsSameTeam(shooter, entity)) giveDamage(shooter, entity, bullet);
+		}
+		else {
+			giveDamage(null, entity, bullet);
+		}
+	}
 
-		Vector3d previousDelta = entity.getDeltaMovement();
-		boolean damaged = entity.hurt((new IndirectEntityDamageSource("arrow", this, shooter)).setProjectile(), (float) bullet.modifyDamage(damage, this, entity, shooter, level));
-		if (isClean) entity.setDeltaMovement(previousDelta);
+	protected void giveDamage(Entity shooter, Entity victim, IBullet bullet) {
+		if (isOnFire()) victim.setSecondsOnFire(5);
+		int lastHurtResistant = victim.invulnerableTime;
+		if (ignoreInvulnerability) victim.invulnerableTime = 0;
 
-		if (damaged && entity instanceof LivingEntity) {
-			LivingEntity livingTarget = (LivingEntity) entity;
+		Vector3d previousDelta = victim.getDeltaMovement();
+		boolean damaged = victim.hurt((new IndirectEntityDamageSource("arrow", this, shooter)).setProjectile(), (float) bullet.modifyDamage(damage, this, victim, shooter, level));
+		if (isClean) victim.setDeltaMovement(previousDelta);
+
+		if (damaged && victim instanceof LivingEntity) {
+			LivingEntity livingTarget = (LivingEntity) victim;
 
 			double actualKnockback;
 			if (this.shootingGun != null) {
@@ -333,7 +354,7 @@ public class BulletEntity extends AbstractFireballEntity {
 			}
 
 			bullet.onLivingEntityHit(this, livingTarget, shooter, level);
-		} else if (!damaged && ignoreInvulnerability) entity.invulnerableTime = lastHurtResistant;
+		} else if (!damaged && ignoreInvulnerability) victim.invulnerableTime = lastHurtResistant;
 	}
 
 	@Override
@@ -351,6 +372,15 @@ public class BulletEntity extends AbstractFireballEntity {
 		}
 	}
 
+	protected boolean checkIsSameTeam(Entity player, Entity victim) {
+		//check pet role first before team, as null team means they don't belong to any team in the first place
+		if (victim instanceof TameableEntity) {
+			return ((TameableEntity) victim).getOwner() == player;
+		}
+		if ((player.getTeam() == null) && (victim.getTeam() == null)) return false;
+		return player.getTeam() == victim.getTeam();
+	}
+
 	public void explode(Vector3d position) {
 		float newRadius = (float) (double) KGConfig.diamondLauncherDamageMultiplier.get();
 
@@ -364,7 +394,7 @@ public class BulletEntity extends AbstractFireballEntity {
 			List<LivingEntity> entities = this.level.getEntitiesOfClass(LivingEntity.class, witherTrace);
 
 			for (LivingEntity mob : entities) {
-				mob.addEffect(new EffectInstance(Effects.WITHER, 200, 1));
+				if (getOwner() != null) if (checkIsSameTeam(getOwner(), mob)) mob.addEffect(new EffectInstance(Effects.WITHER, 200, 1));
 			}
 		}
 

@@ -6,6 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -65,13 +66,24 @@ public class ShotgunItem extends GunItem {
 					//every creature in this 10 block box gets a heart sacrificed for a new bullet in the shotgun
 					//cap at a certain amount of entities
 					if ((creature.getUUID() != player.getUUID()) && (entityCount < KGConfig.netheriteShotgunEntityCap.get())) {
-						creature.hurt((new EntityDamageSource("magic", (Entity) player)), (float)(double)KGConfig.netheriteShotgunEntityHurt.get()); //set value for vampire via config later
-						vampireCount += KGConfig.netheriteShotgunBulletsPerEntity.get();
-						entityCount++;
+						if (!checkIsSameTeam(player, mob)) {
+							creature.hurt((new EntityDamageSource("magic", (Entity) player)), (float) (double) KGConfig.netheriteShotgunEntityHurt.get()); //set value for vampire via config later
+							vampireCount += KGConfig.netheriteShotgunBulletsPerEntity.get();
+							entityCount++;
+						}
 					}
 				}
 			}
 		}
+	}
+
+	protected boolean checkIsSameTeam(Entity player, Entity victim) {
+		//check pet role first before team, as null team means they don't belong to any team in the first place
+		if (victim instanceof TameableEntity) {
+			return ((TameableEntity) victim).getOwner() == player;
+		}
+		if ((player.getTeam() == null) && (victim.getTeam() == null)) return false;
+		return player.getTeam() == victim.getTeam();
 	}
 
 	protected boolean isProjectileCountModified(ItemStack stack) {
