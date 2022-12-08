@@ -214,76 +214,78 @@ public class BulletEntity extends AbstractFireballEntity {
 		double d2 = raytrace.getLocation().z();
 		this.level.addParticle(ParticleTypes.POOF, d0, d1, d2, 0.0D, 0.0D, 0.0D);
 
-		if (shouldBreakBlock) {
-			//test if the block is of the right tool type to mine with.
-			//we could not guarantee the projectile ended up inside the block on this tick, so let's add some mathematics to work around that
+		if (KGConfig.griefEnabled.get()) {
+			if (shouldBreakBlock) {
+				//test if the block is of the right tool type to mine with.
+				//we could not guarantee the projectile ended up inside the block on this tick, so let's add some mathematics to work around that
 
-			BlockPos blockPositionToMine = raytrace.getBlockPos();
-			ItemStack newTool;
+				BlockPos blockPositionToMine = raytrace.getBlockPos();
+				ItemStack newTool;
 
-			if (this.getDamage() > KGConfig.mineGunFifthLevel.get()) {
-				newTool = new ItemStack(Items.DIAMOND_PICKAXE);
-				tryBreakBlock(blockPositionToMine, newTool);
-				newTool = new ItemStack(Items.DIAMOND_AXE);
-				tryBreakBlock(blockPositionToMine, newTool);
-				newTool = new ItemStack(Items.DIAMOND_SHOVEL);
-				tryBreakBlock(blockPositionToMine, newTool);
-				newTool = new ItemStack(Items.SHEARS);
-				tryBreakBlock(blockPositionToMine, newTool);
-				breakWeakBlocks(blockPositionToMine);
-			} else if (this.getDamage() > KGConfig.mineGunFourthLevel.get()) {
-				newTool = new ItemStack(Items.IRON_PICKAXE);
-				tryBreakBlock(blockPositionToMine, newTool);
-				newTool = new ItemStack(Items.IRON_AXE);
-				tryBreakBlock(blockPositionToMine, newTool);
-				newTool = new ItemStack(Items.IRON_SHOVEL);
-				tryBreakBlock(blockPositionToMine, newTool);
-				newTool = new ItemStack(Items.SHEARS);
-				tryBreakBlock(blockPositionToMine, newTool);
-				breakWeakBlocks(blockPositionToMine);
-			} else if (this.getDamage() > KGConfig.mineGunThirdLevel.get()) {
-				newTool = new ItemStack(Items.STONE_PICKAXE);
-				tryBreakBlock(blockPositionToMine, newTool);
-				newTool = new ItemStack(Items.STONE_AXE);
-				tryBreakBlock(blockPositionToMine, newTool);
-				newTool = new ItemStack(Items.STONE_SHOVEL);
-				tryBreakBlock(blockPositionToMine, newTool);
-				breakWeakBlocks(blockPositionToMine);
-			} else if (this.getDamage() > KGConfig.mineGunSecondLevel.get()) {
-				newTool = new ItemStack(Items.WOODEN_PICKAXE);
-				tryBreakBlock(blockPositionToMine, newTool);
-				newTool = new ItemStack(Items.WOODEN_AXE);
-				tryBreakBlock(blockPositionToMine, newTool);
-				newTool = new ItemStack(Items.WOODEN_SHOVEL);
-				tryBreakBlock(blockPositionToMine, newTool);
-				breakWeakBlocks(blockPositionToMine);
-			} else {
-				breakWeakBlocks(blockPositionToMine);
-			}
+				if (this.getDamage() > KGConfig.mineGunFifthLevel.get()) {
+					newTool = new ItemStack(Items.DIAMOND_PICKAXE);
+					tryBreakBlock(blockPositionToMine, newTool);
+					newTool = new ItemStack(Items.DIAMOND_AXE);
+					tryBreakBlock(blockPositionToMine, newTool);
+					newTool = new ItemStack(Items.DIAMOND_SHOVEL);
+					tryBreakBlock(blockPositionToMine, newTool);
+					newTool = new ItemStack(Items.SHEARS);
+					tryBreakBlock(blockPositionToMine, newTool);
+					breakWeakBlocks(blockPositionToMine);
+				} else if (this.getDamage() > KGConfig.mineGunFourthLevel.get()) {
+					newTool = new ItemStack(Items.IRON_PICKAXE);
+					tryBreakBlock(blockPositionToMine, newTool);
+					newTool = new ItemStack(Items.IRON_AXE);
+					tryBreakBlock(blockPositionToMine, newTool);
+					newTool = new ItemStack(Items.IRON_SHOVEL);
+					tryBreakBlock(blockPositionToMine, newTool);
+					newTool = new ItemStack(Items.SHEARS);
+					tryBreakBlock(blockPositionToMine, newTool);
+					breakWeakBlocks(blockPositionToMine);
+				} else if (this.getDamage() > KGConfig.mineGunThirdLevel.get()) {
+					newTool = new ItemStack(Items.STONE_PICKAXE);
+					tryBreakBlock(blockPositionToMine, newTool);
+					newTool = new ItemStack(Items.STONE_AXE);
+					tryBreakBlock(blockPositionToMine, newTool);
+					newTool = new ItemStack(Items.STONE_SHOVEL);
+					tryBreakBlock(blockPositionToMine, newTool);
+					breakWeakBlocks(blockPositionToMine);
+				} else if (this.getDamage() > KGConfig.mineGunSecondLevel.get()) {
+					newTool = new ItemStack(Items.WOODEN_PICKAXE);
+					tryBreakBlock(blockPositionToMine, newTool);
+					newTool = new ItemStack(Items.WOODEN_AXE);
+					tryBreakBlock(blockPositionToMine, newTool);
+					newTool = new ItemStack(Items.WOODEN_SHOVEL);
+					tryBreakBlock(blockPositionToMine, newTool);
+					breakWeakBlocks(blockPositionToMine);
+				} else {
+					breakWeakBlocks(blockPositionToMine);
+				}
 
-			//don't do corruption stuff if the block wasn't successfully mined
-			if ((isCorrupted) && (level.getBlockState(blockPositionToMine).getBlock() == Blocks.AIR)) {
-				level.setBlock(blockPositionToMine, Blocks.NETHERRACK.defaultBlockState(), 1);
-				//don't place fire if something is above current block
-				if (isOnFire() &&
-						(random.nextDouble() < KGConfig.netheriteMinegunIgnitionChance.get()) &&
-						(level.getBlockState(blockPositionToMine.above(1)).getBlock() == Blocks.AIR)) {
-					level.setBlock(blockPositionToMine.above(1), Blocks.FIRE.defaultBlockState(), 3);
+				//don't do corruption stuff if the block wasn't successfully mined
+				if ((isCorrupted) && (level.getBlockState(blockPositionToMine).getBlock() == Blocks.AIR)) {
+					level.setBlock(blockPositionToMine, Blocks.NETHERRACK.defaultBlockState(), 1);
+					//don't place fire if something is above current block
+					if (isOnFire() &&
+							(random.nextDouble() < KGConfig.netheriteMinegunIgnitionChance.get()) &&
+							(level.getBlockState(blockPositionToMine.above(1)).getBlock() == Blocks.AIR)) {
+						level.setBlock(blockPositionToMine.above(1), Blocks.FIRE.defaultBlockState(), 3);
+					}
 				}
 			}
-		}
 
-		if (shouldBreakGlass) {
-			Block blockToBreak = level.getBlockState(raytrace.getBlockPos()).getBlock();
-			if ((blockToBreak instanceof StainedGlassBlock) ||
-					(blockToBreak instanceof GlassBlock) ||
-					(blockToBreak instanceof PaneBlock) ||
-					(blockToBreak == Blocks.GLOWSTONE) ||
-					(blockToBreak instanceof RedstoneLampBlock) ||
-					(blockToBreak instanceof LanternBlock) ||
-					(blockToBreak instanceof CarvedPumpkinBlock) ||
-					(BlockTags.WOOL.getValues().contains(blockToBreak))) {
-				level.destroyBlock(raytrace.getBlockPos(), false);
+			if (shouldBreakGlass) {
+				Block blockToBreak = level.getBlockState(raytrace.getBlockPos()).getBlock();
+				if ((blockToBreak instanceof StainedGlassBlock) ||
+						(blockToBreak instanceof GlassBlock) ||
+						(blockToBreak instanceof PaneBlock) ||
+						(blockToBreak == Blocks.GLOWSTONE) ||
+						(blockToBreak instanceof RedstoneLampBlock) ||
+						(blockToBreak instanceof LanternBlock) ||
+						(blockToBreak instanceof CarvedPumpkinBlock) ||
+						(BlockTags.WOOL.getValues().contains(blockToBreak))) {
+					level.destroyBlock(raytrace.getBlockPos(), false);
+				}
 			}
 		}
 

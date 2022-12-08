@@ -8,6 +8,7 @@ public class KGConfig {
 
     //mechanics
     public static ForgeConfigSpec.BooleanValue explosionsEnabled;
+    public static ForgeConfigSpec.BooleanValue griefEnabled;
     public static ForgeConfigSpec.DoubleValue explosionIncreaseOnStrongerTier;
     public static ForgeConfigSpec.DoubleValue oneHandInaccuracyMultiplier;
     public static ForgeConfigSpec.DoubleValue oneHandInaccuracyReplacement;
@@ -261,8 +262,11 @@ public class KGConfig {
 
         builder.push("global");
         explosionsEnabled = builder
-                .comment("Should explosions destroy blocks or just damage entities?  True if they should destroy blocks.")
+                .comment("Should explosions destroy blocks?")
                 .define("explosionsEnabled", true);
+        griefEnabled = builder
+                .comment("Should shots break/interact with blocks on guns that can break them?")
+                .define("griefEnabled", true);
         oneHandInaccuracyMultiplier = builder
                 .comment("Inaccuracy multiplier for when the user has one hand filled")
                 .defineInRange("oneHandInaccuracyMultiplier", 2.0D, 0.1D, 5D);
