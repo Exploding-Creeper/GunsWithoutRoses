@@ -55,8 +55,8 @@ public class GatlingItem extends GunItem {
 
 	@Override
 	public void releaseUsing(ItemStack itemstack, World level, LivingEntity living, int timeLeft) {
-		if (!level.isClientSide()) this.isFirstShot = true;
 		//prevent first shot from being taken again for delay
+		this.isFirstShot = true;
 		if (living instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity) living;
 			player.getCooldowns().addCooldown(this, getFireDelay(itemstack, player));
@@ -65,12 +65,12 @@ public class GatlingItem extends GunItem {
 
 	@Override
 	public void onUseTick(World world, LivingEntity user, ItemStack gun, int ticks) {
-		if (user instanceof PlayerEntity) {
+		if ((user instanceof PlayerEntity) && (!world.isClientSide)) {
 			PlayerEntity player = (PlayerEntity) user;
 			ItemStack ammo = mergeStacks(player, gun);
 			//stop immediately if player is dead.
 			if (player.isDeadOrDying()) player.stopUsingItem();
-			fireGatling(world, user, gun, ticks, ammo);
+			fireGatling(world, user, gun, ticks - (isFirstShot? 1 : 0), ammo);
 		}
 	}
 
