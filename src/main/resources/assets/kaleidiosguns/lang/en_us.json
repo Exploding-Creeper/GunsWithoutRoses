@@ -68,9 +68,9 @@
 	"tooltip.kaleidiosguns.defender": "Increases fire rate if standing near any Tile Entity",
 	"tooltip.kaleidiosguns.sensitive": "Accuracy decreases if shot in midair",
 	"tooltip.kaleidiosguns.explosive": "Explosive projectiles; a bullet tier stronger than flint makes a stronger explosion",
-	"tooltip.kaleidiosguns.glass": "Can break glass, wool and lights without drops",
-	"tooltip.kaleidiosguns.doors": "Can break metal doors at close range",
+	"tooltip.kaleidiosguns.glass": "Can break glass, wool and lights",
 	"tooltip.kaleidiosguns.quiet": "Its simplicity makes it quieter",
+	"tooltip.kaleidiosguns.breach": "Can breach doors",
 	"tooltip.kaleidiosguns.glove": "Acts as an empty hand",
 
 	"tooltip.kaleidiosguns.blaze_bullet": "Sets entities on fire",

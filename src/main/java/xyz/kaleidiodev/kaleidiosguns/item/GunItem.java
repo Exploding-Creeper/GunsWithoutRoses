@@ -86,6 +86,7 @@ public class GunItem extends Item {
 	protected boolean canBreakGlass;
 	protected boolean canBreakDoors;
 	protected boolean isQuiet;
+	public boolean breachDoors;
 	protected double baseSpeed;
 	protected double baseDamage;
 	protected double currentSpeed;
@@ -710,6 +711,11 @@ public class GunItem extends Item {
 		return this;
 	}
 
+	public GunItem setBreachDoors(boolean breach) {
+		this.breachDoors = breach;
+		return this;
+	}
+
 	/**
 	 *
 	 * @param barrelSwitch set the divider that divides the fire rate to denote how many ticks it takes to switch barrels
@@ -853,6 +859,7 @@ public class GunItem extends Item {
 			if (canBreakGlass) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.glass"));
 			if (isQuiet) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.quiet"));
 			if (hasVoltage) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.voltage"));
+			if (breachDoors) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.breach"));
 
 			if (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.frostShot, stack) > 0) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.frost_distance", EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.frostShot, stack) * KGConfig.frostyDistancePerLevel.get()));
 

@@ -287,6 +287,17 @@ public class BulletEntity extends AbstractFireballEntity {
 					level.destroyBlock(raytrace.getBlockPos(), false);
 				}
 			}
+
+			if (!level.isClientSide && shootingGun.breachDoors) {
+				Block blockToChange = level.getBlockState(raytrace.getBlockPos()).getBlock();
+				//break wooden doors
+				if (BlockTags.WOODEN_DOORS.getValues().contains(blockToChange) ||
+					BlockTags.WOODEN_TRAPDOORS.getValues().contains(blockToChange) ||
+					BlockTags.FENCE_GATES.getValues().contains(blockToChange)) {
+					//only allow in fairly close range to player
+					if (ticksSinceFired < 2) level.destroyBlock(raytrace.getBlockPos(), false);
+				}
+			}
 		}
 
 		if (!level.isClientSide && this.shouldCollateral) remove();
