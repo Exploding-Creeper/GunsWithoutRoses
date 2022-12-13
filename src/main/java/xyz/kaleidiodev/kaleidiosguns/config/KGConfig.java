@@ -407,7 +407,7 @@ public class KGConfig {
                 .defineInRange("shadowRevolverShadowAdditionalMultiplier", 0.7D, 0.1D, 5D);
         shadowRevolverLightLevelRequired = builder
                 .comment("Configure what light level the block the player is standing in has to be or less to multiply damage on Shadow Magnums.")
-                .defineInRange("shadowRevolverLightLevelRequired", 3, 0, 15);
+                .defineInRange("shadowRevolverLightLevelRequired", 7, 0, 15);
         shadowRevolverSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Shadow Magnums")
                 .defineInRange("shadowRevolverSwitchSpeed", 2.9D, 0D, 5D);
