@@ -470,7 +470,7 @@ public class KGConfig {
                 .defineInRange("emeraldBlessedProjectileSpeed", 7D, 0D, 64D);
         emeraldBlessedHealthMinimumRatio = builder
                 .comment("Configure the Minimum Ratio before blessing takes effect for Blessed Pistols")
-                .defineInRange("emeraldBlessedHealthMinimumRatio", 0.3D, 0.05D, 1.0D);
+                .defineInRange("emeraldBlessedHealthMinimumRatio", 0.2D, 0.05D, 1.0D);
         emeraldBlessedBlessingMultiplier = builder
                 .comment("Configure the blessing's damage multiplier for Blessed Pistols")
                 .defineInRange("emeraldBlessedBlessingMultiplier", 1.5D, 0D, 20D);
