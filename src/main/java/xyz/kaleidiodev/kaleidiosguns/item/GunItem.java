@@ -35,7 +35,6 @@ import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.common.Mod;
 import xyz.kaleidiodev.kaleidiosguns.config.KGConfig;
 import xyz.kaleidiodev.kaleidiosguns.enchantment.GunAccuracyEnchantment;
 import xyz.kaleidiodev.kaleidiosguns.enchantment.GunDamageEnchantment;
@@ -45,9 +44,7 @@ import xyz.kaleidiodev.kaleidiosguns.registry.ModItems;
 import xyz.kaleidiodev.kaleidiosguns.registry.ModSounds;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 import java.util.function.Supplier;
 
@@ -506,7 +503,7 @@ public class GunItem extends Item {
 		//check assault rifle
 		if (player != null) {
 			if ((this.isSensitive) && !player.isOnGround()) {
-				nextInaccuracy *= KGConfig.ironAssaultMidairMultiplier.get();
+				nextInaccuracy *= KGConfig.diamondAssaultMidairMultiplier.get();
 			}
 		}
 

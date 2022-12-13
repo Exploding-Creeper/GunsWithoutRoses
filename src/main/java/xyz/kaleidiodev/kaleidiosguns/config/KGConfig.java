@@ -189,15 +189,15 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue ironVoltgunSwitchSpeed;
     public static ForgeConfigSpec.DoubleValue ironVoltgunMeleeDamage;
 
-    public static ForgeConfigSpec.DoubleValue ironAssaultDamageMultiplier;
-    public static ForgeConfigSpec.IntValue ironAssaultFireDelay;
-    public static ForgeConfigSpec.IntValue ironAssaultEnchantability;
-    public static ForgeConfigSpec.IntValue ironAssaultDurability;
-    public static ForgeConfigSpec.DoubleValue ironAssaultInaccuracy;
-    public static ForgeConfigSpec.DoubleValue ironAssaultProjectileSpeed;
-    public static ForgeConfigSpec.DoubleValue ironAssaultMidairMultiplier;
-    public static ForgeConfigSpec.DoubleValue ironAssaultSwitchSpeed;
-    public static ForgeConfigSpec.DoubleValue ironAssaultMeleeDamage;
+    public static ForgeConfigSpec.DoubleValue diamondAssaultDamageMultiplier;
+    public static ForgeConfigSpec.IntValue diamondAssaultFireDelay;
+    public static ForgeConfigSpec.IntValue diamondAssaultEnchantability;
+    public static ForgeConfigSpec.IntValue diamondAssaultDurability;
+    public static ForgeConfigSpec.DoubleValue diamondAssaultInaccuracy;
+    public static ForgeConfigSpec.DoubleValue diamondAssaultProjectileSpeed;
+    public static ForgeConfigSpec.DoubleValue diamondAssaultMidairMultiplier;
+    public static ForgeConfigSpec.DoubleValue diamondAssaultSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue diamondAssaultMeleeDamage;
 
     public static ForgeConfigSpec.DoubleValue defenderRifleDamageMultiplier;
     public static ForgeConfigSpec.IntValue defenderRifleFireDelay;
@@ -741,31 +741,31 @@ public class KGConfig {
         builder.pop();
 
         builder.push("assault rifle");
-        ironAssaultDamageMultiplier = builder
+        diamondAssaultDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Assault Rifles")
                 .defineInRange("ironAssaultDamageMultiplier", 0.65D, 0.1D, 5D);
-        ironAssaultFireDelay = builder
+        diamondAssaultFireDelay = builder
                 .comment("Configure the Fire delay for Assault Rifles")
                 .defineInRange("ironAssaultFireDelay", 4, 0, 72000);
-        ironAssaultEnchantability = builder
+        diamondAssaultEnchantability = builder
                 .comment("Configure the Enchantability for Assault Rifles")
                 .defineInRange("ironAssaultEnchantability", 14, 0, 30);
-        ironAssaultDurability = builder
+        diamondAssaultDurability = builder
                 .comment("Configure the Durability for Assault Rifles")
                 .defineInRange("ironAssaultDurability", 4615, 0, 32767);
-        ironAssaultInaccuracy = builder
+        diamondAssaultInaccuracy = builder
                 .comment("Configure the Inaccuracy for Assault Rifles")
                 .defineInRange("ironAssaultInaccuracy", 3.0D, 0D, 90D);
-        ironAssaultProjectileSpeed = builder
+        diamondAssaultProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for Assault Rifles")
                 .defineInRange("ironAssaultProjectileSpeed", 10D, 0D, 64D);
-        ironAssaultMidairMultiplier = builder
+        diamondAssaultMidairMultiplier = builder
                 .comment("Configure the midair inaccuracy multiplier for Assault Rifles")
                 .defineInRange("ironAssaultMidairMultiplier", 2.0D, 0D, 5D);
-        ironAssaultSwitchSpeed = builder
+        diamondAssaultSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Assault Rifles")
                 .defineInRange("ironAssaultSwitchSpeed", 2.5D, 0D, 5D);
-        ironAssaultMeleeDamage = builder
+        diamondAssaultMeleeDamage = builder
                 .comment("Configure the Melee Damage for Assault Rifles")
                 .defineInRange("ironAssaultMeleeDamage", 2D, 0D, 40D);
         builder.pop();
