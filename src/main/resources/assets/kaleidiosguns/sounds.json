@@ -113,6 +113,16 @@
 		"subtitle": "subtitles.kaleidiosguns.item.defender_rifle.shoot",
 		"sounds": [ "kaleidiosguns:defender_rifle" ]
 	},
+	"item.slag_smg.shoot": {
+		"category": "item",
+		"subtitle": "subtitles.kaleidiosguns.item.slag_smg.shoot",
+		"sounds": [ "kaleidiosguns:slag_bound_smg" ]
+	},
+	"item.bayonet.shoot": {
+		"category": "item",
+		"subtitle": "subtitles.kaleidiosguns.item.bayonet.shoot",
+		"sounds": [ "kaleidiosguns:bayonet_sniper" ]
+	},
 	"entity.bullet.impact": {
 		"category": "entity",
 		"subtitle": "subtitles.kaleidiosguns.item.bullet.impact",

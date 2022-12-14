@@ -17,6 +17,8 @@
 	"item.kaleidiosguns.corruption_gun": "Corruption Gun",
 	"item.kaleidiosguns.voltgun": "Voltgun",
 	"item.kaleidiosguns.defender_rifle": "Defender Rifle",
+	"item.kaleidiosguns.bayonet": "Bayonet Sniper",
+	"item.kaleidiosguns.slag_smg": "Slag Bound SMG",
 
 	"item.kaleidiosguns.flint_bullet": "Flint Bullet",
 	"item.kaleidiosguns.iron_bullet": "Iron Bullet",
@@ -139,5 +141,7 @@
 	"subtitles.kaleidiosguns.item.corruption_gun.shoot": "Corruption Gun fired",
 	"subtitles.kaleidiosguns.item.voltgun.shoot": "Voltgun fired",
 	"subtitles.kaleidiosguns.item.defender.shoot": "Defender Rifle fired",
+	"subtitles.kaleidiosguns.item.slag_smg.shoot": "Slag Bound SMG fired",
+	"subtitles.kaleidiosguns.item.bayonet.shoot": "Bayonet Sniper fired",
 	"subtitles.kaleidiosguns.item.bullet.impact": "Bullet landed"
 }

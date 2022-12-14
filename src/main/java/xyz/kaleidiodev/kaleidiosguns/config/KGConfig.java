@@ -129,6 +129,17 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue diamondSniperSwitchSpeed;
     public static ForgeConfigSpec.DoubleValue diamondSniperMeleeDamage;
 
+    public static ForgeConfigSpec.DoubleValue emeraldBayonetDamageMultiplier;
+    public static ForgeConfigSpec.IntValue emeraldBayonetFireDelay;
+    public static ForgeConfigSpec.IntValue emeraldBayonetEnchantability;
+    public static ForgeConfigSpec.IntValue emeraldBayonetDurability;
+    public static ForgeConfigSpec.DoubleValue emeraldBayonetInaccuracy;
+    public static ForgeConfigSpec.DoubleValue emeraldBayonetProjectileSpeed;
+    public static ForgeConfigSpec.DoubleValue emeraldBayonetSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue emeraldBayonetMeleeDamage;
+    public static ForgeConfigSpec.DoubleValue emeraldBayonetPostMeleeMultiplier;
+    public static ForgeConfigSpec.IntValue emeraldBayonetPostMeleeCount;
+
     public static ForgeConfigSpec.DoubleValue ironCarbineDamageMultiplier;
     public static ForgeConfigSpec.IntValue ironCarbineFireDelay;
     public static ForgeConfigSpec.IntValue ironCarbineEnchantability;
@@ -198,6 +209,18 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue diamondAssaultMidairMultiplier;
     public static ForgeConfigSpec.DoubleValue diamondAssaultSwitchSpeed;
     public static ForgeConfigSpec.DoubleValue diamondAssaultMeleeDamage;
+
+    public static ForgeConfigSpec.DoubleValue slagSmgDamageMultiplier;
+    public static ForgeConfigSpec.IntValue slagSmgFireDelay;
+    public static ForgeConfigSpec.IntValue slagSmgEnchantability;
+    public static ForgeConfigSpec.IntValue slagSmgDurability;
+    public static ForgeConfigSpec.DoubleValue slagSmgInaccuracy;
+    public static ForgeConfigSpec.DoubleValue slagSmgProjectileSpeed;
+    public static ForgeConfigSpec.DoubleValue slagSmgMidairMultiplier;
+    public static ForgeConfigSpec.DoubleValue slagSmgSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue slagSmgMeleeDamage;
+    public static ForgeConfigSpec.DoubleValue slagSmgOnFireMultiplier;
+    public static ForgeConfigSpec.DoubleValue slagSmgSelfOnFireMultiplier;
 
     public static ForgeConfigSpec.DoubleValue defenderRifleDamageMultiplier;
     public static ForgeConfigSpec.IntValue defenderRifleFireDelay;
@@ -619,6 +642,39 @@ public class KGConfig {
                 .defineInRange("diamondSniperMeleeDamage", 3D, 0D, 40D);
         builder.pop();
 
+        builder.push("bayonet sniper");
+        emeraldBayonetDamageMultiplier = builder
+                .comment("Define the Damage multiplier for Bayonet Snipers")
+                .defineInRange("emeraldBayonetDamageMultiplier", 3D, 0.1D, 5D);
+        emeraldBayonetFireDelay = builder
+                .comment("Configure the Fire delay for Bayonet Snipers")
+                .defineInRange("emeraldBayonetFireDelay", 26, 0, 72000);
+        emeraldBayonetEnchantability = builder
+                .comment("Configure the Enchantability for Bayonet Snipers")
+                .defineInRange("emeraldBayonetEnchantability", 18, 0, 30);
+        emeraldBayonetDurability = builder
+                .comment("Configure the Durability for Bayonet Snipers")
+                .defineInRange("emeraldBayonetDurability", 153, 0, 32767);
+        emeraldBayonetInaccuracy = builder
+                .comment("Configure the Inaccuracy for Bayonet Snipers")
+                .defineInRange("emeraldBayonetInaccuracy", 0D, 0D, 90D);
+        emeraldBayonetProjectileSpeed = builder
+                .comment("Configure the Projectile Speed for Bayonet Snipers")
+                .defineInRange("emeraldBayonetProjectileSpeed", 14D, 0D, 64D);
+        emeraldBayonetSwitchSpeed = builder
+                .comment("Configure the Weapon Switch Speed for Bayonet Snipers")
+                .defineInRange("emeraldBayonetSwitchSpeed", 1.7D, 0D, 5D);
+        emeraldBayonetMeleeDamage = builder
+                .comment("Configure the Melee Damage for Bayonet Snipers")
+                .defineInRange("emeraldBayonetMeleeDamage", 3D, 0D, 40D);
+        emeraldBayonetPostMeleeMultiplier = builder
+                .comment("Multiplier for a shot's damage for the first shot after a successful melee")
+                .defineInRange("emeraldBayonetPostMeleeMultiplier", 1.5D, 0.1D, 5D);
+        emeraldBayonetPostMeleeCount = builder
+                .comment("How many shots the melee blessing lasts for")
+                .defineInRange("emeraldBayonetPostMeleeCount", 4, 1, 60);
+        builder.pop();
+
         builder.push("carbine");
         ironCarbineDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Carbines")
@@ -772,10 +828,46 @@ public class KGConfig {
                 .defineInRange("ironAssaultMeleeDamage", 2D, 0D, 40D);
         builder.pop();
 
+        builder.push("slag bound smg");
+        slagSmgDamageMultiplier = builder
+                .comment("Define the Damage multiplier for Slag Bound SMGs")
+                .defineInRange("slagSmgDamageMultiplier", 0.5D, 0.1D, 5D);
+        slagSmgFireDelay = builder
+                .comment("Configure the Fire delay for Slag Bound SMGs")
+                .defineInRange("slagSmgFireDelay", 4, 0, 72000);
+        slagSmgEnchantability = builder
+                .comment("Configure the Enchantability for Slag Bound SMGs")
+                .defineInRange("slagSmgEnchantability", 10, 0, 30);
+        slagSmgDurability = builder
+                .comment("Configure the Durability for Slag Bound SMGs")
+                .defineInRange("slagSmgDurability", 6000, 0, 32767);
+        slagSmgInaccuracy = builder
+                .comment("Configure the Inaccuracy for Slag Bound SMGs")
+                .defineInRange("slagSmgInaccuracy", 4.0D, 0D, 90D);
+        slagSmgProjectileSpeed = builder
+                .comment("Configure the Projectile Speed for Slag Bound SMGs")
+                .defineInRange("slagSmgProjectileSpeed", 9D, 0D, 64D);
+        slagSmgMidairMultiplier = builder
+                .comment("Configure the midair inaccuracy multiplier for Slag Bound SMGs")
+                .defineInRange("slagSmgMidairMultiplier", 1.25D, 0D, 5D);
+        slagSmgSwitchSpeed = builder
+                .comment("Configure the Weapon Switch Speed for Slag Bound SMGs")
+                .defineInRange("slagSmgSwitchSpeed", 2.1D, 0D, 5D);
+        slagSmgMeleeDamage = builder
+                .comment("Configure the Melee Damage for Slag Bound SMGs")
+                .defineInRange("slagSmgMeleeDamage", 2D, 0D, 40D);
+        slagSmgOnFireMultiplier = builder
+                .comment("Set the damage multiplier if the target is on fire")
+                .defineInRange("slagSmgOnFireMultiplier", 1.25D, 0D, 40D);
+        slagSmgSelfOnFireMultiplier = builder
+                .comment("Set the damage multiplier if the shooter is on fire")
+                .defineInRange("slagSmgSelfOnFireMultiplier", 1.25D, 0D, 40D);
+        builder.pop();
+
         builder.push("plasma rifle");
         goldPlasmaDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Plasma Rifles")
-                .defineInRange("goldPlasmaDamageMultiplier", 1D, 0.1D, 5D);
+                .defineInRange("goldPlasmaDamageMultiplier", 0.8D, 0.1D, 5D);
         goldPlasmaFireDelay = builder
                 .comment("Configure the Fire delay for Plasma Rifles")
                 .defineInRange("goldPlasmaFireDelay", 5, 0, 72000);
@@ -784,7 +876,7 @@ public class KGConfig {
                 .defineInRange("goldPlasmaEnchantability", 23, 0, 30);
         goldPlasmaDurability = builder
                 .comment("Configure the Durability for Plasma Rifles")
-                .defineInRange("goldPlasmaDurability", 1904, 0, 32767);
+                .defineInRange("goldPlasmaDurability", 3000, 0, 32767);
         goldPlasmaInaccuracy = builder
                 .comment("Configure the Inaccuracy for Plasma Rifles")
                 .defineInRange("goldPlasmaInaccuracy", 0D, 0D, 90D);
