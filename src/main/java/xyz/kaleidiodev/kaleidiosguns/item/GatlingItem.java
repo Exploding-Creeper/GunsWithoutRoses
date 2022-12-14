@@ -56,10 +56,12 @@ public class GatlingItem extends GunItem {
 	@Override
 	public void releaseUsing(ItemStack itemstack, World level, LivingEntity living, int timeLeft) {
 		//prevent first shot from being taken again for delay
-		this.isFirstShot = true;
-		if (living instanceof PlayerEntity) {
-			PlayerEntity player = (PlayerEntity) living;
-			player.getCooldowns().addCooldown(this, getFireDelay(itemstack, player));
+		if (!level.isClientSide) {
+			this.isFirstShot = true;
+			if (living instanceof PlayerEntity) {
+				PlayerEntity player = (PlayerEntity) living;
+				player.getCooldowns().addCooldown(this, getFireDelay(itemstack, player));
+			}
 		}
 	}
 
