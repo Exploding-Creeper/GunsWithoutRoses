@@ -76,8 +76,8 @@ public class ModItems {
 		flintBullet = initItem(reg, new BulletItem(defP(), KGConfig.flintBulletDamage.get()), "flint_bullet");
 		ironBullet = initItem(reg, new BulletItem(defP(), KGConfig.ironBulletDamage.get()), "iron_bullet");
 		blazeBullet = initItem(reg, new BlazeBulletItem(defP(), KGConfig.blazeBulletDamage.get()), "blaze_bullet");
-		hungerBullet = initItem(reg, new HungerBulletItem(defP().stacksTo(1), KGConfig.hungerBulletDamage.get()), "hunger_bullet");
-		xpBullet = initItem(reg, new XPBulletItem(defP().stacksTo(1), KGConfig.xpBulletDamage.get()), "xp_bullet");
+		hungerBullet = initItem(reg, new HungerBulletItem(defP().stacksTo(1).durability(KGConfig.hungerBulletDurability.get()), KGConfig.hungerBulletDamage.get()), "hunger_bullet");
+		xpBullet = initItem(reg, new XPBulletItem(defP().stacksTo(1).durability(KGConfig.xpBulletDurability.get()), KGConfig.xpBulletDamage.get()), "xp_bullet");
 
 		// Gloves
 		diamondGlove = initItem(reg, new GloveItem(defP()).setSpeedUp(KGConfig.gloveRangerSpeedUp.get()), "ranger_glove");

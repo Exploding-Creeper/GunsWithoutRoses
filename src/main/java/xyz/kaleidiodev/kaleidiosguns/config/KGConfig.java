@@ -228,6 +228,8 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue blazeBulletDamage;
     public static ForgeConfigSpec.DoubleValue hungerBulletDamage;
     public static ForgeConfigSpec.DoubleValue xpBulletDamage;
+    public static ForgeConfigSpec.IntValue hungerBulletDurability;
+    public static ForgeConfigSpec.IntValue xpBulletDurability;
 
     //Minegun balance curve
     public static ForgeConfigSpec.DoubleValue mineGunSecondLevel;
@@ -912,6 +914,12 @@ public class KGConfig {
         xpBulletDamage = builder
                 .comment("Configure the damage of XP Bullets.  This tier should always be the highest tier of damage.")
                 .defineInRange("xpBulletDamage", 15D, 1D, 20D);
+        hungerBulletDurability = builder
+                .comment("Configure the durability of Hunger Bullets.")
+                .defineInRange("hungerBulletDurability", 272, 1, 32767);
+        xpBulletDurability = builder
+                .comment("Configure the durability of XP Bullets")
+                .defineInRange("xpBulletDurability", 200, 1, 32767);
         builder.pop();
 
         builder.push("minegun_config");
