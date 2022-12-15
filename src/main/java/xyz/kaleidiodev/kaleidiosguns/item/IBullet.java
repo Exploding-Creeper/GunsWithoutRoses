@@ -122,6 +122,14 @@ public interface IBullet {
 			newDamage *= (projectile.getShootingGun().getDamageMultiplier(new ItemStack(projectile.getShootingGun().getItem())) + KGConfig.shadowRevolverShadowAdditionalMultiplier.get());
 		}
 
+		//slag should give multipliers both if shooter or victim are on fire
+		if ((projectile.slagMode & 0x04) != 0) {
+			if ((projectile.slagMode & 0x02) != 0) newDamage *= KGConfig.slagSmgOnFireMultiplier.get();
+			if ((projectile.slagMode & 0x01) != 0) newDamage *= KGConfig.slagSmgSelfOnFireMultiplier.get();
+		}
+
+		if (projectile.isMeleeBonus) newDamage *= KGConfig.emeraldBayonetPostMeleeMultiplier.get();
+
 		//redstone distance multiplies damage.
 		if (projectile.redstoneLevel > 0) {
 			double multiplierDelta = KGConfig.ironVoltgunMaximumDamage.get() - KGConfig.ironVoltgunMinimumDamage.get();

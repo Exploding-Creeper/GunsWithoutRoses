@@ -10,6 +10,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -86,12 +87,15 @@ public class GunItem extends Item {
 	protected boolean canBreakGlass;
 	protected boolean canBreakDoors;
 	protected boolean isQuiet;
+	protected boolean isSlag;
+	protected boolean isMeleeBonus;
 	public boolean breachDoors;
 	protected double baseSpeed;
 	protected double baseDamage;
 	protected double currentSpeed;
 	protected double currentDamage;
 	public int remoteDetonate;
+	protected int meleeBonusCounter;
 
 	protected SoundEvent fireSound = ModSounds.gun;
 	protected SoundEvent reloadSound = ModSounds.double_shotgunReload;
@@ -344,6 +348,13 @@ public class GunItem extends Item {
 		shot.shouldBreakDoors = this.canBreakDoors;
 		shot.shouldBreakGlass = this.canBreakGlass;
 		shot.healsFriendlies = this.isDefender;
+		shot.isMeleeBonus = this.meleeBonusCounter > 0;
+		if (this.isSlag) {
+			shot.slagMode = 0x04;
+			if (player.isOnFire()) shot.slagMode += 0x01;
+		}
+
+		if (this.meleeBonusCounter > 0) this.meleeBonusCounter--;
 
 		changeBullet(world, player, gun, shot, bulletFree);
 
@@ -380,6 +391,12 @@ public class GunItem extends Item {
 		}
 
 		super.inventoryTick(pStack, pLevel, pEntity, pItemSlot, pIsSelected);
+	}
+
+	@Override
+	public boolean hurtEnemy(ItemStack pStack, LivingEntity pTarget, LivingEntity pAttacker) {
+		this.meleeBonusCounter = KGConfig.emeraldBayonetPostMeleeCount.get();
+		return super.hurtEnemy(pStack, pTarget, pAttacker);
 	}
 
 	protected void onActualInventoryTick() {
@@ -716,6 +733,16 @@ public class GunItem extends Item {
 		return this;
 	}
 
+	public GunItem setIsSlag(boolean slag) {
+		this.isSlag = slag;
+		return this;
+	}
+
+	public GunItem setMeleeBonus(boolean meleeBonus) {
+		this.isMeleeBonus = meleeBonus;
+		return this;
+	}
+
 	/**
 	 *
 	 * @param barrelSwitch set the divider that divides the fire rate to denote how many ticks it takes to switch barrels
@@ -860,6 +887,8 @@ public class GunItem extends Item {
 			if (isQuiet) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.quiet"));
 			if (hasVoltage) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.voltage"));
 			if (breachDoors) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.breach"));
+			if (isMeleeBonus) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.melee"));
+			if (isSlag) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.slag"));
 
 			if (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.frostShot, stack) > 0) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.frost_distance", EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.frostShot, stack) * KGConfig.frostyDistancePerLevel.get()));
 

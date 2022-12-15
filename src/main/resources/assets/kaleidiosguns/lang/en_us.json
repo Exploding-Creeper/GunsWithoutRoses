@@ -73,6 +73,8 @@
 	"tooltip.kaleidiosguns.glass": "Can break glass, wool and lights",
 	"tooltip.kaleidiosguns.quiet": "Its simplicity makes it quieter",
 	"tooltip.kaleidiosguns.breach": "Can breach doors",
+	"tooltip.kaleidiosguns.slag": "Entities on fire cause more damage",
+	"tooltip.kaleidiosguns.melee": "Get bonus damage a set amount of shots after melee",
 	"tooltip.kaleidiosguns.glove": "Acts as an empty hand",
 
 	"tooltip.kaleidiosguns.blaze_bullet": "Sets entities on fire",

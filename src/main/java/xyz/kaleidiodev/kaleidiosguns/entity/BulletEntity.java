@@ -66,6 +66,8 @@ public class BulletEntity extends AbstractFireballEntity {
 	public boolean shouldBreakDoors;
 	public boolean shouldBreakGlass;
 	public boolean healsFriendlies;
+	public byte slagMode; //bit 0 is player is on fire, bit 1 is enemy is on fire, bit 2 is is active
+	public boolean isMeleeBonus;
 	public int redstoneLevel;
 
 	public BulletEntity(EntityType<? extends BulletEntity> entityType, World worldIn) {
@@ -91,8 +93,9 @@ public class BulletEntity extends AbstractFireballEntity {
 		//seems that this method fires once on server and once on client.  something needs to be done in order to support multiple particle types
 		if (isExplosive) return ParticleTypes.POOF;
 		if (isPlasma) return ParticleTypes.INSTANT_EFFECT;
-		if (wasRevenge) return ParticleTypes.HAPPY_VILLAGER;
+		if (wasRevenge || isMeleeBonus) return ParticleTypes.HAPPY_VILLAGER;
 		if (wasDark) return ParticleTypes.SMOKE;
+		if ((slagMode & 0x04) != 0) return ParticleTypes.LAVA; //if was a slag bullet
 		return ParticleTypes.CRIT;
 	}
 
@@ -346,6 +349,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	}
 
 	protected void giveDamage(Entity shooter, Entity victim, IBullet bullet) {
+		if (victim.isOnFire()) slagMode += 0x02;
 		if (isOnFire()) victim.setSecondsOnFire(5);
 		int lastHurtResistant = victim.invulnerableTime;
 		if (ignoreInvulnerability) victim.invulnerableTime = 0;

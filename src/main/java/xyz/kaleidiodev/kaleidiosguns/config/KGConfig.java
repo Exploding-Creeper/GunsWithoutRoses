@@ -645,16 +645,16 @@ public class KGConfig {
         builder.push("bayonet sniper");
         emeraldBayonetDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Bayonet Snipers")
-                .defineInRange("emeraldBayonetDamageMultiplier", 3D, 0.1D, 5D);
+                .defineInRange("emeraldBayonetDamageMultiplier", 2.5D, 0.1D, 5D);
         emeraldBayonetFireDelay = builder
                 .comment("Configure the Fire delay for Bayonet Snipers")
-                .defineInRange("emeraldBayonetFireDelay", 26, 0, 72000);
+                .defineInRange("emeraldBayonetFireDelay", 25, 0, 72000);
         emeraldBayonetEnchantability = builder
                 .comment("Configure the Enchantability for Bayonet Snipers")
                 .defineInRange("emeraldBayonetEnchantability", 18, 0, 30);
         emeraldBayonetDurability = builder
                 .comment("Configure the Durability for Bayonet Snipers")
-                .defineInRange("emeraldBayonetDurability", 153, 0, 32767);
+                .defineInRange("emeraldBayonetDurability", 192, 0, 32767);
         emeraldBayonetInaccuracy = builder
                 .comment("Configure the Inaccuracy for Bayonet Snipers")
                 .defineInRange("emeraldBayonetInaccuracy", 0D, 0D, 90D);
@@ -666,10 +666,10 @@ public class KGConfig {
                 .defineInRange("emeraldBayonetSwitchSpeed", 1.7D, 0D, 5D);
         emeraldBayonetMeleeDamage = builder
                 .comment("Configure the Melee Damage for Bayonet Snipers")
-                .defineInRange("emeraldBayonetMeleeDamage", 3D, 0D, 40D);
+                .defineInRange("emeraldBayonetMeleeDamage", 8D, 0D, 40D);
         emeraldBayonetPostMeleeMultiplier = builder
                 .comment("Multiplier for a shot's damage for the first shot after a successful melee")
-                .defineInRange("emeraldBayonetPostMeleeMultiplier", 1.5D, 0.1D, 5D);
+                .defineInRange("emeraldBayonetPostMeleeMultiplier", 1.25D, 0.1D, 5D);
         emeraldBayonetPostMeleeCount = builder
                 .comment("How many shots the melee blessing lasts for")
                 .defineInRange("emeraldBayonetPostMeleeCount", 4, 1, 60);
