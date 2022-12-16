@@ -395,7 +395,7 @@ public class GunItem extends Item {
 
 	@Override
 	public boolean hurtEnemy(ItemStack pStack, LivingEntity pTarget, LivingEntity pAttacker) {
-		this.meleeBonusCounter = KGConfig.emeraldBayonetPostMeleeCount.get();
+		if (this.isMeleeBonus) this.meleeBonusCounter = KGConfig.emeraldBayonetPostMeleeCount.get();
 		return super.hurtEnemy(pStack, pTarget, pAttacker);
 	}
 
