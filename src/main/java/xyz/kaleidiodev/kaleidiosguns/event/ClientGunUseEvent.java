@@ -24,13 +24,9 @@ public class ClientGunUseEvent {
             ItemStack gun = player.getItemInHand(event.getHand());
             if (gun != ItemStack.EMPTY) {
                 if (gun.getItem() instanceof GunItem) {
-                    //remote detonate whilst shift clicking.  do not fire.
                     GunItem gunItem = (GunItem)gun.getItem();
-                    if (gunItem.isExplosive && player.isCrouching() && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.remoteDetonate, gun) > 0)) {
-                        gunItem.remoteDetonate = 1;
-                    }
 
-                    if ((1 > player.getAttackStrengthScale(0)) && (gunItem.remoteDetonate == 0)) event.setCanceled(true);
+                    if (1 > player.getAttackStrengthScale(0)) event.setCanceled(true);
                 }
             }
         }

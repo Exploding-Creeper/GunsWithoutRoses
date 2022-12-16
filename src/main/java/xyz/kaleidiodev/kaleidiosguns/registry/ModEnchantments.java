@@ -34,7 +34,6 @@ public class ModEnchantments {
 		maneuvering = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.RARE, 1, 10, 20, 30, TYPE_GUN), "maneuvering"); //gatling
 		cleanShot = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.UNCOMMON, 1, 6, 12, 25, TYPE_GUN), "clean_shot"); //sniper
 		signalBoost = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.COMMON, 3, 6, 12, 25, TYPE_GUN), "signal_boost"); //redstone
-		remoteDetonate = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.RARE, 1, 8, 16, 30, TYPE_GUN), "remote_detonate"); //launcher
 
 		//enhancement (compounds onto base, mending counts as drbl)
 		passionForBlood = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.RARE, 2, 8, 16, 25, TYPE_GUN), "passion_for_blood"); //dmg

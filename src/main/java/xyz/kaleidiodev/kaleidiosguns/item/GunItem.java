@@ -94,7 +94,6 @@ public class GunItem extends Item {
 	protected double baseDamage;
 	protected double currentSpeed;
 	protected double currentDamage;
-	public int remoteDetonate;
 	protected int meleeBonusCounter;
 
 	protected SoundEvent fireSound = ModSounds.gun;
@@ -407,9 +406,6 @@ public class GunItem extends Item {
 		if (this.stabilizerTimer == 0) {
 			this.shotsBeforeStability = 0;
 		}
-
-		if (this.remoteDetonate == 2) this.remoteDetonate = 0;
-		if (this.remoteDetonate == 1) this.remoteDetonate++;
 	}
 
 	protected int getChambers(ItemStack stack) {
