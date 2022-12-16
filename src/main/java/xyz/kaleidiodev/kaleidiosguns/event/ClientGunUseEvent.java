@@ -10,14 +10,13 @@ import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.kaleidiodev.kaleidiosguns.KaleidiosGuns;
-import xyz.kaleidiodev.kaleidiosguns.config.KGConfig;
 import xyz.kaleidiodev.kaleidiosguns.item.GunItem;
 import xyz.kaleidiodev.kaleidiosguns.registry.ModEnchantments;
 
 @Mod.EventBusSubscriber(modid = KaleidiosGuns.MODID)
-@OnlyIn(Dist.CLIENT)
 public class ClientGunUseEvent {
     //don't allow the weapon to fire if the gun is still in attack cooldown.
+    @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void onClickEvent(InputEvent.ClickInputEvent event) {
         PlayerEntity player = Minecraft.getInstance().player;
