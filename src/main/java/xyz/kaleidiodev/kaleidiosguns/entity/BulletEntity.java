@@ -76,10 +76,7 @@ public class BulletEntity extends AbstractFireballEntity {
 
 	public BulletEntity(World worldIn, LivingEntity shooter) {
 		this(worldIn, shooter, 0, 0, 0);
-		//follow VR crosshair, rather than player's eyes
-		if (KaleidiosGuns.VivecraftForgeExtensionPresent) setPos(shooter.getX(), shooter.getY(), shooter.getZ());
-		else setPos(shooter.getX(), shooter.getEyeY() - 0.1, shooter.getZ());
-
+		setPos(shooter.getX(), shooter.getEyeY() - 0.1, shooter.getZ());
 	}
 
 	public BulletEntity(World worldIn, LivingEntity shooter, double accelX, double accelY, double accelZ) {
