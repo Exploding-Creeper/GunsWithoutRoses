@@ -4,6 +4,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -13,6 +15,7 @@ import xyz.kaleidiodev.kaleidiosguns.item.GunItem;
 import xyz.kaleidiodev.kaleidiosguns.registry.ModEnchantments;
 
 @Mod.EventBusSubscriber(modid = KaleidiosGuns.MODID)
+@OnlyIn(Dist.CLIENT)
 public class ClientGunUseEvent {
     //don't allow the weapon to fire if the gun is still in attack cooldown.
     @SubscribeEvent
