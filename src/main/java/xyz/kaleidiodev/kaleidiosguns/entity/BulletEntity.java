@@ -145,11 +145,6 @@ public class BulletEntity extends AbstractFireballEntity {
 			if (!this.isInWater() && ticksSinceFired > 1 && this.level.isClientSide())
 				this.level.addParticle(this.getTrailParticle(), true, this.getBoundingBox().getCenter().x, this.getBoundingBox().getCenter().y, this.getBoundingBox().getCenter().z, 0.0D, 0.0D, 0.0D);
 			this.setPos(this.getX() + vector3d.x, this.getY() + vector3d.y, this.getZ() + vector3d.z);
-
-			//now explode if the launcher remote is on.
-			if (this.shootingGun != null) {
-				if (!this.level.isClientSide && (this.shootingGun.remoteDetonate > 0) && (this.isExplosive)) explode(this.position());
-			}
 		} else {
 			this.remove();
 		}

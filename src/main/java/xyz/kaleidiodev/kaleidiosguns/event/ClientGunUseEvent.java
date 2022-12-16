@@ -1,7 +1,6 @@
 package xyz.kaleidiodev.kaleidiosguns.event;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
@@ -11,7 +10,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.kaleidiodev.kaleidiosguns.KaleidiosGuns;
 import xyz.kaleidiodev.kaleidiosguns.item.GunItem;
-import xyz.kaleidiodev.kaleidiosguns.registry.ModEnchantments;
 
 @Mod.EventBusSubscriber(modid = KaleidiosGuns.MODID)
 public class ClientGunUseEvent {

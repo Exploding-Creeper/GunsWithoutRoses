@@ -137,8 +137,6 @@ public class GunItem extends Item {
 		//guess what the quivers suck
 		ammo = mergeStacks(player, gun);
 
-		if (remoteDetonate == 1) ActionResult.consume(gun);
-
 		//don't fire if redstone block is not nearby
 		if (this.isRedstone) {
 			if (checkRedstoneLevel(world, player, gun) != -1) return handleWeapon(world, player, gun, hand, ammo);
