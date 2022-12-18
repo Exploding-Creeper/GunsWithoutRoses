@@ -329,7 +329,7 @@ public class BulletEntity extends AbstractFireballEntity {
 						checkIsSameTeam(shooter, entity)) {
 					//heal by how much the bullet would end up as damage
 					LivingEntity target = (LivingEntity) entity;
-					target.heal((float)bullet.modifyDamage(this.damage, this, target, shooter, this.level));
+					target.heal((float)(bullet.modifyDamage(this.damage, this, target, shooter, this.level) * KGConfig.defenderRifleHealRatio.get()));
 					//add some particle and sound effect here.
 				}
 				else giveDamage(shooter, entity, bullet);

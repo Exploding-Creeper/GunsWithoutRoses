@@ -232,6 +232,7 @@ public class KGConfig {
     public static ForgeConfigSpec.IntValue defenderRifleDelayDelta;
     public static ForgeConfigSpec.DoubleValue defenderRifleSwitchSpeed;
     public static ForgeConfigSpec.DoubleValue defenderRifleMeleeDamage;
+    public static ForgeConfigSpec.DoubleValue defenderRifleHealRatio;
 
     public static ForgeConfigSpec.DoubleValue goldPlasmaDamageMultiplier;
     public static ForgeConfigSpec.IntValue goldPlasmaFireDelay;
@@ -927,6 +928,9 @@ public class KGConfig {
         defenderRifleMeleeDamage = builder
                 .comment("Configure the Melee Damage for Defender Rifles")
                 .defineInRange("defenderRifleMeleeDamage", 2D, 0D, 40D);
+        defenderRifleHealRatio = builder
+                .comment("Configure the Heal Ratio for Defender Rifles shooting friendlies versus the damage they would have caused")
+                .defineInRange("defenderRifleHealRatio", 1D, 0D, 10D);
         builder.pop();
 
         builder.push("rocket launcher");
