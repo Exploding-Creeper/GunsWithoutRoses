@@ -269,16 +269,12 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue passionForBloodRateIncrease;
     public static ForgeConfigSpec.DoubleValue passionForBloodHealIncrease;
     public static ForgeConfigSpec.IntValue divisionCountIncrease;
-    public static ForgeConfigSpec.DoubleValue luckyShotChance;
-    public static ForgeConfigSpec.DoubleValue criticalDamage;
     public static ForgeConfigSpec.DoubleValue frostyDistancePerLevel;
     public static ForgeConfigSpec.DoubleValue frostyMaxAddition;
     public static ForgeConfigSpec.DoubleValue frostyMinAddition;
     public static ForgeConfigSpec.DoubleValue signalMultiplier;
     public static ForgeConfigSpec.IntValue glowTime;
     public static ForgeConfigSpec.IntValue shooterGlowTime;
-    public static ForgeConfigSpec.DoubleValue quickDrawPercent;
-
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -1075,15 +1071,6 @@ public class KGConfig {
                 .defineInRange("divisionCountIncrease", 1, 1, 5);
         builder.pop();
 
-        builder.push("lucky shot enchantment");
-        luckyShotChance = builder
-                .comment("Chance for critical hit per lucky shot level")
-                .defineInRange("luckyShotChance", 0.1D, 0.01D, 5D);
-        criticalDamage = builder
-                .comment("Multiplier of a critical hit's damage")
-                .defineInRange("criticalDamage", 3.0D, 0.1D, 20D);
-        builder.pop();
-
         builder.push("frost shard enchantment");
         frostyMaxAddition = builder
                 .comment("Maximum damage of a frosty bullet")
@@ -1109,12 +1096,6 @@ public class KGConfig {
         shooterGlowTime = builder
                 .comment("Ticks glowing lasts for on the shooter")
                 .defineInRange("shooterGlowTime", 300, 5, 72000);
-        builder.pop();
-
-        builder.push("quick draw enchantment");
-        quickDrawPercent = builder
-                .comment("Ticks glowing lasts for on the hit target")
-                .defineInRange("quickDrawPercent", 0.25D, 0.01D, 1D);
         builder.pop();
 
         spec = builder.build();
