@@ -82,16 +82,6 @@ public class GatlingItem extends GunItem {
 			//stop using immediately if out of range.
 			if ((this.isRedstone) && (checkRedstoneLevel(world, player, gun) == -1)) player.stopUsingItem();
 
-			//give player speed effect if maneuvering is instated.
-			if ((EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.maneuvering, gun) != 0) && player.isOnGround() && world.isClientSide) {
-				Vector3d newSpeed = player.getDeltaMovement().multiply(1.67, 1, 1.67);
-				if (newSpeed.x > 1) newSpeed = new Vector3d(1, newSpeed.y, newSpeed.z);
-				if (newSpeed.x < -1) newSpeed = new Vector3d(-1, newSpeed.y, newSpeed.z);
-				if (newSpeed.z > 1) newSpeed = new Vector3d(newSpeed.x, newSpeed.y, 1);
-				if (newSpeed.z < -1) newSpeed = new Vector3d(newSpeed.x, newSpeed.y, -1);
-				player.setDeltaMovement(newSpeed); //apply speed for every tick so that the slow speed is nullified
-			}
-
 			int used = getUseDuration(gun) - ticks;
 			int rateChange = (getFireDelay(gun, player) - ((isDefender && checkTileEntities(world, player)) ? KGConfig.defenderRifleDelayDelta.get() : 0));
 			if (((used > 0 && used % rateChange == 0) || this.isFirstShot) && !world.isClientSide()) {
