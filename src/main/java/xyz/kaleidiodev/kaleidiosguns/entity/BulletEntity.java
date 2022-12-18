@@ -111,10 +111,8 @@ public class BulletEntity extends AbstractFireballEntity {
 
 		//completely rewrite the entity code here
 		Entity entity = this.getOwner();
-		if (this.level.isClientSide || (entity == null || !entity.removed) && this.level.hasChunkAt(this.blockPosition())) {
-			if (!this.level.isClientSide) {
-				this.setSharedFlag(6, this.isGlowing());
-			}
+		if (this.level.isClientSide || (entity == null || !entity.removed)) {
+			this.setSharedFlag(6, this.isGlowing());
 			//note that "is away from owner" is absolutely useless anyway, so it was not included
 			this.baseTick();
 
