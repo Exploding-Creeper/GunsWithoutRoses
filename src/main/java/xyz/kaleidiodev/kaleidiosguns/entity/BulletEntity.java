@@ -35,6 +35,7 @@ import xyz.kaleidiodev.kaleidiosguns.registry.ModEntities;
 import xyz.kaleidiodev.kaleidiosguns.registry.ModItems;
 import xyz.kaleidiodev.kaleidiosguns.registry.ModSounds;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -178,7 +179,6 @@ public class BulletEntity extends AbstractFireballEntity {
 						//also don't add if it's the same entity.
 						if (raytrace.getEntity() != entity) entities.add(entity);
 					}
-
 				}
 
 				//kill trace early if we hit a tile doing this, so it doesn't trace through walls.
@@ -192,7 +192,10 @@ public class BulletEntity extends AbstractFireballEntity {
 			for (Entity entity : entities) {
 				if (!(entity instanceof PlayerEntity) && (entity instanceof LivingEntity)) entityHitProcess(entity);
 			}
-
+		}
+		else
+		{
+			this.remove();
 		}
 	}
 
@@ -297,7 +300,7 @@ public class BulletEntity extends AbstractFireballEntity {
 			}
 		}
 
-		if (!level.isClientSide && this.shouldCollateral) remove();
+		this.remove();
 	}
 
 	protected void breakWeakBlocks(BlockPos blockPosToTest) {
