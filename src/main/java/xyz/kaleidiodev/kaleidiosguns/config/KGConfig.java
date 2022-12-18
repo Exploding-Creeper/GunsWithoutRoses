@@ -1001,7 +1001,7 @@ public class KGConfig {
                 .defineInRange("hungerBulletDamage", 8D, 1D, 20D);
         xpBulletDamage = builder
                 .comment("Configure the damage of XP Bullets.  This tier should always be the highest tier of damage.")
-                .defineInRange("xpBulletDamage", 9D, 1D, 20D);
+                .defineInRange("xpBulletDamage", 10D, 1D, 20D);
         hungerBulletDurability = builder
                 .comment("Configure the durability of Hunger Bullets.")
                 .defineInRange("hungerBulletDurability", 272, 1, 32767);
@@ -1035,7 +1035,7 @@ public class KGConfig {
         builder.push("impact enchantment");
         impactDamageIncrease = builder
                 .comment("How much damage increase per impact level")
-                .defineInRange("impactDamageIncrease", 1D, 0.1D, 20D);
+                .defineInRange("impactDamageIncrease", 0.5D, 0.1D, 20D);
         builder.pop();
 
         builder.push("bullseye enchantment");
