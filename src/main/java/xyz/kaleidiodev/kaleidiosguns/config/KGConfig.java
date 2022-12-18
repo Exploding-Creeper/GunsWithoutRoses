@@ -705,7 +705,7 @@ public class KGConfig {
         builder.push("minegun");
         diamondMinegunDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Mineguns")
-                .defineInRange("diamondMinegunDamageMultiplier", 0.5D, 0.1D, 5D);
+                .defineInRange("diamondMinegunDamageMultiplier", 1D, 0.1D, 5D);
         diamondMinegunFireDelay = builder
                 .comment("Configure the Fire delay for Mineguns")
                 .defineInRange("diamondMinegunFireDelay", 10, 0, 72000);
@@ -735,10 +735,10 @@ public class KGConfig {
         builder.push("corruption gun");
         netheriteMinegunDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Corruption Gun")
-                .defineInRange("netheriteMinegunDamageMultiplier", 0.75D, 0.1D, 5D);
+                .defineInRange("netheriteMinegunDamageMultiplier", 1D, 0.1D, 5D);
         netheriteMinegunFireDelay = builder
                 .comment("Configure the Fire delay for Corruption Gun")
-                .defineInRange("netheriteMinegunFireDelay", 7, 0, 72000);
+                .defineInRange("netheriteMinegunFireDelay", 9, 0, 72000);
         netheriteMinegunEnchantability = builder
                 .comment("Configure the Enchantability for Corruption Gun")
                 .defineInRange("netheriteMinegunEnchantability", 10, 0, 30);
@@ -996,16 +996,16 @@ public class KGConfig {
                 .defineInRange("flintBulletDamage", 5D, 1D, 20D);
         ironBulletDamage = builder
                 .comment("Configure the damage of Iron Bullets")
-                .defineInRange("ironBulletDamage", 7D, 1D, 20D);
+                .defineInRange("ironBulletDamage", 6D, 1D, 20D);
         blazeBulletDamage = builder
                 .comment("Configure the damage of Blaze Bullets.  This tier should always be the middle ground in damage total including flames.")
-                .defineInRange("blazeBulletDamage", 9D, 1D, 20D);
+                .defineInRange("blazeBulletDamage", 7D, 1D, 20D);
         hungerBulletDamage = builder
                 .comment("Configure the damage of Hunger Bullets")
-                .defineInRange("hungerBulletDamage", 11D, 1D, 20D);
+                .defineInRange("hungerBulletDamage", 8D, 1D, 20D);
         xpBulletDamage = builder
                 .comment("Configure the damage of XP Bullets.  This tier should always be the highest tier of damage.")
-                .defineInRange("xpBulletDamage", 15D, 1D, 20D);
+                .defineInRange("xpBulletDamage", 9D, 1D, 20D);
         hungerBulletDurability = builder
                 .comment("Configure the durability of Hunger Bullets.")
                 .defineInRange("hungerBulletDurability", 272, 1, 32767);
@@ -1018,16 +1018,16 @@ public class KGConfig {
         builder.comment("Also note that the first level, which mines like a hand, is of any value not listed here.");
         mineGunSecondLevel = builder
                 .comment("Damage required to mine like a wooden tool")
-                .defineInRange("mineGunSecondLevel", 3D, 0.5D, 40D);
+                .defineInRange("mineGunSecondLevel", 5D, 0.5D, 40D);
         mineGunThirdLevel = builder
                 .comment("Damage required to mine like a stone tool")
-                .defineInRange("mineGunThirdLevel", 5D, 0.5D, 40D);
+                .defineInRange("mineGunThirdLevel", 7D, 0.5D, 40D);
         mineGunFourthLevel = builder
                 .comment("Damage required to mine like an iron tool")
-                .defineInRange("mineGunFourthLevel", 7D, 0.5D, 40D);
+                .defineInRange("mineGunFourthLevel", 9D, 0.5D, 40D);
         mineGunFifthLevel = builder
                 .comment("Damage required to mine like a diamond tool")
-                .defineInRange("mineGunFifthLevel", 9D, 0.5D, 40D);
+                .defineInRange("mineGunFifthLevel", 11D, 0.5D, 40D);
         builder.pop();
 
         builder.push("preserving enchantment");
@@ -1039,13 +1039,13 @@ public class KGConfig {
         builder.push("impact enchantment");
         impactDamageIncrease = builder
                 .comment("How much damage increase per impact level")
-                .defineInRange("impactDamageIncrease", 2D, 0.1D, 20D);
+                .defineInRange("impactDamageIncrease", 1D, 0.1D, 20D);
         builder.pop();
 
         builder.push("bullseye enchantment");
         bullseyeAccuracyIncrease = builder
                 .comment("How much accuracy increase per bullseye level, represented as a division + 1 of base inaccuracy")
-                .defineInRange("bullseyeAccuracyIncrease", 0.5D, 0.1D, 5D);
+                .defineInRange("bullseyeAccuracyIncrease", 1D, 0.1D, 5D);
         builder.pop();
 
         builder.push("sleight of hand enchantment");
