@@ -191,7 +191,7 @@ public class BulletEntity extends AbstractFireballEntity {
 				if (!(entity instanceof PlayerEntity) && (entity instanceof LivingEntity)) entityHitProcess(entity);
 			}
 		}
-		else
+		else if ((raytrace.getEntity() != this.getOwner()) && (this.getOwner() != null))
 		{
 			this.remove();
 		}
