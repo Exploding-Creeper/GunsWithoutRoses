@@ -47,7 +47,7 @@ public class GatlingItem extends GunItem {
 		else {
 			player.startUsingItem(hand);
 			if (this.isFirstShot && !world.isClientSide()){
-				fireGatling(world, player, gun, 1, mergeStacks(player, gun));
+				fireGatling(world, player, gun, 0, mergeStacks(player, gun));
 			}
 			return ActionResult.consume(gun);
 		}
@@ -72,7 +72,7 @@ public class GatlingItem extends GunItem {
 			ItemStack ammo = mergeStacks(player, gun);
 			//stop immediately if player is dead.
 			if (player.isDeadOrDying()) player.stopUsingItem();
-			fireGatling(world, user, gun, ticks - (isFirstShot? 1 : 0), ammo);
+			fireGatling(world, user, gun, ticks, ammo);
 		}
 	}
 
@@ -82,9 +82,9 @@ public class GatlingItem extends GunItem {
 			//stop using immediately if out of range.
 			if ((this.isRedstone) && (checkRedstoneLevel(world, player, gun) == -1)) player.stopUsingItem();
 
-			int used = getUseDuration(gun) - ticks;
+			int used = getUseDuration(gun) - (ticks - 1);
 			int rateChange = (getFireDelay(gun, player) - ((isDefender && checkTileEntities(world, player)) ? KGConfig.defenderRifleDelayDelta.get() : 0));
-			if (((used > 0 && used % rateChange == 0) || this.isFirstShot) && !world.isClientSide()) {
+			if (((used > 0 && (used % rateChange == 0)) || this.isFirstShot) && !world.isClientSide()) {
 				//"Oh yeah I will use the vanilla method so that quivers can do their thing"
 				//guess what the quivers suck
 				this.isFirstShot = false;
