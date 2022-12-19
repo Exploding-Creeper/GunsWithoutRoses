@@ -444,13 +444,13 @@ public class KGConfig {
                 .defineInRange("goldSkillshotDamageModifier", 1.0D, 0.1D, 5D);
         goldSkillshotFireDelay = builder
                 .comment("Configure the Fire delay for Skillshot Pistols")
-                .defineInRange("goldSkillshotFireDelay", 15, 0, 72000);
+                .defineInRange("goldSkillshotFireDelay", 8, 0, 72000);
         goldSkillshotEnchantability = builder
                 .comment("Configure the Enchantability for Skillshot Pistols")
                 .defineInRange("goldSkillshotEnchantability", 23, 0, 30);
         goldSkillshotDurability = builder
                 .comment("Configure the Durability for Skillshot Pistols")
-                .defineInRange("goldSkillshotDurability", 476, 0, 32767);
+                .defineInRange("goldSkillshotDurability", 1071, 0, 32767);
         goldSkillshotInaccuracy = builder
                 .comment("Configure the Inaccuracy for Skillshot Pistols")
                 .defineInRange("goldSkillshotInaccuracy", 1.5D, 0D, 90D);
@@ -483,7 +483,7 @@ public class KGConfig {
                 .defineInRange("emeraldBlessedEnchantability", 18, 0, 30);
         emeraldBlessedDurability = builder
                 .comment("Configure the Durability for Blessed Pistols")
-                .defineInRange("emeraldBlessedDurability", 800, 0, 32767);
+                .defineInRange("emeraldBlessedDurability", 667, 0, 32767);
         emeraldBlessedInaccuracy = builder
                 .comment("Configure the Inaccuracy for Blessed Pistols")
                 .defineInRange("emeraldBlessedInaccuracy", 2.0D, 0D, 90D);
