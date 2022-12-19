@@ -374,8 +374,10 @@ public class GunItem extends Item {
 		}
 
 		//apply glove switch speed perk if it's in the offhand
-		if (pLevel.isClientSide && (Minecraft.getInstance().player != null)) {
-			ItemStack offHandItem = Minecraft.getInstance().player.getOffhandItem();
+		if (pEntity instanceof PlayerEntity) {
+			PlayerEntity player = (PlayerEntity)pEntity;
+			ItemStack offHandItem = player.getOffhandItem();
+
 			if (offHandItem.getItem() instanceof GloveItem) {
 				GloveItem gloveItem = (GloveItem)offHandItem.getItem();
 				double newSpeed = baseSpeed + (baseSpeed * gloveItem.percentSpeedUp);
@@ -800,7 +802,6 @@ public class GunItem extends Item {
 		if ((enchantment == ModEnchantments.marker) && ((me instanceof ShotgunItem) || (me instanceof GatlingItem) || (me.isExplosive) || (me.getInaccuracy(stack, null) == 0))) return false; //pistol only
 		if ((enchantment == ModEnchantments.cleanShot) && ((me instanceof ShotgunItem) || (me instanceof GatlingItem) || (me.isExplosive) || (me.getInaccuracy(stack, null) != 0))) return false; //sniper only
 		if ((enchantment == ModEnchantments.signalBoost) && !isRedstone) return false; //redstone only
-		if ((enchantment == ModEnchantments.remoteDetonate) && !isExplosive) return false; //launcher only
 
 		return super.canApplyAtEnchantingTable(stack, enchantment);
 	}
