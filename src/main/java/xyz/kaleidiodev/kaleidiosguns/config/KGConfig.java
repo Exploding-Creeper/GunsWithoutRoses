@@ -546,7 +546,7 @@ public class KGConfig {
                 .defineInRange("goldDoubleShotgunEnchantability", 23, 0, 30);
         goldDoubleShotgunDurability = builder
                 .comment("Configure the Durability for Double Barrel Shotguns")
-                .defineInRange("goldDoubleShotgunDurability", 95, 0, 32767);
+                .defineInRange("goldDoubleShotgunDurability", 66, 0, 32767);
         goldDoubleShotgunInaccuracy = builder
                 .comment("Configure the Inaccuracy for Double Barrel Shotguns")
                 .defineInRange("goldDoubleShotgunInaccuracy", 6D, 0D, 90D);
@@ -711,7 +711,7 @@ public class KGConfig {
                 .defineInRange("diamondMinegunEnchantability", 10, 0, 30);
         diamondMinegunDurability = builder
                 .comment("Configure the Durability for Mineguns")
-                .defineInRange("diamondMinegunDurability", 2000, 0, 32767);
+                .defineInRange("diamondMinegunDurability", 4800, 0, 32767);
         diamondMinegunInaccuracy = builder
                 .comment("Configure the Inaccuracy for Mineguns")
                 .defineInRange("diamondMinegunInaccuracy", 3D, 0D, 90D);
@@ -741,7 +741,7 @@ public class KGConfig {
                 .defineInRange("netheriteMinegunEnchantability", 10, 0, 30);
         netheriteMinegunDurability = builder
                 .comment("Configure the Durability for Corruption Gun")
-                .defineInRange("netheriteMinegunDurability",  2286, 0, 32767);
+                .defineInRange("netheriteMinegunDurability",  6000, 0, 32767);
         netheriteMinegunInaccuracy = builder
                 .comment("Configure the Inaccuracy for Corruption Gun")
                 .defineInRange("netheriteMinegunInaccuracy", 2D, 0D, 90D);
@@ -882,10 +882,10 @@ public class KGConfig {
                 .defineInRange("goldPlasmaProjectileSpeed", 2D, 0D, 64D);
         goldPlasmaShieldAdditional = builder
                 .comment("Configure the chance for shields to be disabled against Plasma Rifles")
-                .defineInRange("goldPlasmaShieldAdditional", 0.25D, 0.05D, 1D);
+                .defineInRange("goldPlasmaShieldAdditional", 0.5D, 0.05D, 1D);
         goldPlasmaSlowChance = builder
                 .comment("Configure the chance for slowness effect against a target of Plasma Rifles")
-                .defineInRange("goldPlasmaSlowChance", 0.10D, 0.05D, 1D);
+                .defineInRange("goldPlasmaSlowChance", 0.25D, 0.05D, 1D);
         goldPlasmaSlowTicks = builder
                 .comment("Configure the length slowness effect lasts for from Plasma Rifles")
                 .defineInRange("goldPlasmaSlowTicks", 60, 10, 72000);
