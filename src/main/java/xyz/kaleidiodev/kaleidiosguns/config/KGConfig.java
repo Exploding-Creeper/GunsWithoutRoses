@@ -702,10 +702,10 @@ public class KGConfig {
         builder.push("minegun");
         diamondMinegunDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Mineguns")
-                .defineInRange("diamondMinegunDamageMultiplier", 1D, 0.1D, 5D);
+                .defineInRange("diamondMinegunDamageMultiplier", 0.5D, 0.1D, 5D);
         diamondMinegunFireDelay = builder
                 .comment("Configure the Fire delay for Mineguns")
-                .defineInRange("diamondMinegunFireDelay", 10, 0, 72000);
+                .defineInRange("diamondMinegunFireDelay", 5, 0, 72000);
         diamondMinegunEnchantability = builder
                 .comment("Configure the Enchantability for Mineguns")
                 .defineInRange("diamondMinegunEnchantability", 10, 0, 30);
@@ -720,7 +720,7 @@ public class KGConfig {
                 .defineInRange("diamondMinegunProjectileSpeed", 2.5D, 0D, 64D);
         diamondMinegunMineChance = builder
                 .comment("Configure the Break Block Chance for Mineguns")
-                .defineInRange("diamondMinegunMineChance", 0.5D, 0D, 1D);
+                .defineInRange("diamondMinegunMineChance", 0.25D, 0D, 1D);
         diamondMinegunSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Mineguns")
                 .defineInRange("diamondMinegunSwitchSpeed", 2.6D, 0D, 5D);
@@ -732,10 +732,10 @@ public class KGConfig {
         builder.push("corruption gun");
         netheriteMinegunDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Corruption Gun")
-                .defineInRange("netheriteMinegunDamageMultiplier", 1D, 0.1D, 5D);
+                .defineInRange("netheriteMinegunDamageMultiplier", 0.5D, 0.1D, 5D);
         netheriteMinegunFireDelay = builder
                 .comment("Configure the Fire delay for Corruption Gun")
-                .defineInRange("netheriteMinegunFireDelay", 9, 0, 72000);
+                .defineInRange("netheriteMinegunFireDelay", 4, 0, 72000);
         netheriteMinegunEnchantability = builder
                 .comment("Configure the Enchantability for Corruption Gun")
                 .defineInRange("netheriteMinegunEnchantability", 10, 0, 30);
@@ -750,7 +750,7 @@ public class KGConfig {
                 .defineInRange("netheriteMinegunProjectileSpeed", 3D, 0D, 64D);
         netheriteMinegunMineChance = builder
                 .comment("Configure the Break Block Chance for Corruption Gun")
-                .defineInRange("netheriteMinegunMineChance", 0.75D, 0D, 1D);
+                .defineInRange("netheriteMinegunMineChance", 0.33D, 0D, 1D);
         netheriteMinegunIgnitionChance = builder
                 .comment("Configure the Fire Set Chance for Corruption Guns when it is a blaze bullet in use")
                 .defineInRange("netheriteMinegunIgnitionChance", 0.25D, 0D, 1D);
