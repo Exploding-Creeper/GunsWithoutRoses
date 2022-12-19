@@ -33,7 +33,7 @@ public class GatlingItem extends GunItem {
 		ItemStack itemstack = player.getItemInHand(hand);
 
 		//don't fire if redstone block is not nearby
-		if (this.isRedstone) {
+		if (this.isRedstone && !world.isClientSide) {
 			if (checkRedstoneLevel(world, player, itemstack) != -1) return handleGatling(world, player, itemstack, hand);
 			else return ActionResult.fail(itemstack);
 		}
