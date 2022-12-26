@@ -810,7 +810,7 @@ public class KGConfig {
                 .defineInRange("ironAssaultDurability", 4615, 0, 32767);
         diamondAssaultInaccuracy = builder
                 .comment("Configure the Inaccuracy for Assault Rifles")
-                .defineInRange("ironAssaultInaccuracy", 3.0D, 0D, 90D);
+                .defineInRange("ironAssaultInaccuracy", 2.0D, 0D, 90D);
         diamondAssaultProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for Assault Rifles")
                 .defineInRange("ironAssaultProjectileSpeed", 10D, 0D, 64D);
@@ -840,7 +840,7 @@ public class KGConfig {
                 .defineInRange("slagSmgDurability", 6000, 0, 32767);
         slagSmgInaccuracy = builder
                 .comment("Configure the Inaccuracy for Slag Bound SMGs")
-                .defineInRange("slagSmgInaccuracy", 4.0D, 0D, 90D);
+                .defineInRange("slagSmgInaccuracy", 1.5D, 0D, 90D);
         slagSmgProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for Slag Bound SMGs")
                 .defineInRange("slagSmgProjectileSpeed", 9D, 0D, 64D);
