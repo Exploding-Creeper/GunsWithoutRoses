@@ -67,7 +67,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	public boolean shouldBreakDoors;
 	public boolean shouldBreakGlass;
 	public boolean healsFriendlies;
-	public byte slagMode; //bit 0 is player is on fire, bit 1 is enemy is on fire, bit 2 is is active
+	public byte slagMode; //bit 0 is player is on fire, bit 1 is enemy is on fire, bit 2 is is active, bit 3 is lava was absorbed
 	public boolean isMeleeBonus;
 	public int redstoneLevel;
 
@@ -93,7 +93,7 @@ public class BulletEntity extends AbstractFireballEntity {
 		if (isPlasma) return ParticleTypes.INSTANT_EFFECT;
 		if (wasRevenge || isMeleeBonus) return ParticleTypes.HAPPY_VILLAGER;
 		if (wasDark) return ParticleTypes.SMOKE;
-		if ((slagMode & 0x04) != 0) return ParticleTypes.DRIPPING_LAVA; //if was a slag bullet
+		if ((slagMode - 0x04) != 0) return ParticleTypes.DRIPPING_LAVA; //if was a slag bullet in any mode
 		return ParticleTypes.CRIT;
 	}
 
@@ -107,6 +107,25 @@ public class BulletEntity extends AbstractFireballEntity {
 
 		if (shouldGlow) {
 			this.setGlowing(true);
+		}
+
+		if (KGConfig.griefEnabled.get()) {
+			if ((slagMode & 0x04) != 0) {
+				if (this.isInWater()) {
+					this.level.setBlock(this.blockPosition(), Blocks.STONE.defaultBlockState(), 0x3);
+					this.remove();
+				}
+
+				if (this.isInLava()) {
+					this.level.setBlock(this.blockPosition(), Blocks.AIR.defaultBlockState(), 0x3);
+
+					if (this.getShootingGun() != null) {
+						this.getShootingGun().absorbedLava();
+					}
+
+					this.remove();
+				}
+			}
 		}
 
 		//completely rewrite the entity code here
@@ -280,6 +299,14 @@ public class BulletEntity extends AbstractFireballEntity {
 						(blockToBreak instanceof LanternBlock) ||
 						(blockToBreak instanceof CarvedPumpkinBlock) ||
 						(BlockTags.WOOL.getValues().contains(blockToBreak))) {
+					level.destroyBlock(raytrace.getBlockPos(), false);
+				}
+			}
+
+			if ((slagMode & 0x04) != 0) {
+				Block blockToBreak = level.getBlockState(raytrace.getBlockPos()).getBlock();
+
+				if (BlockTags.ICE.getValues().contains(blockToBreak)) {
 					level.destroyBlock(raytrace.getBlockPos(), false);
 				}
 			}
