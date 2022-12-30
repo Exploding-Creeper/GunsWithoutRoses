@@ -207,7 +207,7 @@ public class BulletEntity extends AbstractFireballEntity {
 		double d2 = raytrace.getLocation().z();
 		this.level.addParticle(ParticleTypes.POOF, d0, d1, d2, 0.0D, 0.0D, 0.0D);
 
-		if (KGConfig.griefEnabled.get()) {
+		if (KGConfig.griefEnabled.get() && !level.isClientSide) {
 			if (shouldBreakBlock) {
 				//test if the block is of the right tool type to mine with.
 				//we could not guarantee the projectile ended up inside the block on this tick, so let's add some mathematics to work around that
@@ -272,16 +272,13 @@ public class BulletEntity extends AbstractFireballEntity {
 				if ((blockToBreak instanceof StainedGlassBlock) ||
 						(blockToBreak instanceof GlassBlock) ||
 						(blockToBreak instanceof PaneBlock) ||
-						(blockToBreak == Blocks.GLOWSTONE) ||
-						(blockToBreak instanceof RedstoneLampBlock) ||
-						(blockToBreak instanceof LanternBlock) ||
-						(blockToBreak instanceof CarvedPumpkinBlock) ||
+						(level.getBlockState(raytrace.getBlockPos()).getLightValue(level, raytrace.getBlockPos()) > 0) ||
 						(BlockTags.WOOL.getValues().contains(blockToBreak))) {
 					level.destroyBlock(raytrace.getBlockPos(), false);
 				}
 			}
 
-			if (!level.isClientSide && shootingGun != null) {
+			if (shootingGun != null) {
 				if (shootingGun.breachDoors) {
 					Block blockToChange = level.getBlockState(raytrace.getBlockPos()).getBlock();
 					//break wooden doors
