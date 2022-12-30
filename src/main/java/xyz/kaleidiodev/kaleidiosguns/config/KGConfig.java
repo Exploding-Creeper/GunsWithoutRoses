@@ -485,7 +485,7 @@ public class KGConfig {
                 .defineInRange("emeraldBlessedEnchantability", 18, 0, 30);
         emeraldBlessedDurability = builder
                 .comment("Configure the Durability for Blessed Pistols")
-                .defineInRange("emeraldBlessedDurability", 800, 0, 32767);
+                .defineInRange("emeraldBlessedDurability", 400, 0, 32767);
         emeraldBlessedInaccuracy = builder
                 .comment("Configure the Inaccuracy for Blessed Pistols")
                 .defineInRange("emeraldBlessedInaccuracy", 2.0D, 0D, 90D);
@@ -653,7 +653,7 @@ public class KGConfig {
                 .defineInRange("emeraldBayonetEnchantability", 18, 0, 30);
         emeraldBayonetDurability = builder
                 .comment("Configure the Durability for Bayonet Snipers")
-                .defineInRange("emeraldBayonetDurability", 160, 0, 32767);
+                .defineInRange("emeraldBayonetDurability", 80, 0, 32767);
         emeraldBayonetInaccuracy = builder
                 .comment("Configure the Inaccuracy for Bayonet Snipers")
                 .defineInRange("emeraldBayonetInaccuracy", 0D, 0D, 90D);
@@ -911,7 +911,7 @@ public class KGConfig {
                 .defineInRange("defenderRifleEnchantability", 18, 0, 30);
         defenderRifleDurability = builder
                 .comment("Configure the Durability for Defender Rifles")
-                .defineInRange("defenderRifleDurability", 3200, 0, 32767);
+                .defineInRange("defenderRifleDurability", 1600, 0, 32767);
         defenderRifleInaccuracy = builder
                 .comment("Configure the Inaccuracy for Defender Rifles")
                 .defineInRange("defenderRifleInaccuracy", 2.0D, 0D, 90D);
