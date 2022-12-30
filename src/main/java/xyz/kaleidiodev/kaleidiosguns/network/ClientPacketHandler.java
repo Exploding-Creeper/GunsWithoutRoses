@@ -75,7 +75,7 @@ public class ClientPacketHandler {
         bullet.wasDark = packet.readBoolean();
         bullet.isTorpedo = packet.readBoolean();
         bullet.isMeleeBonus = packet.readBoolean();
-        bullet.slagMode = packet.readByte();
+        bullet.lavaMode = packet.readByte();
 
         mc.level.putNonPlayerEntity(entityID, bullet);
         entity.lerpMotion(velocity.x, velocity.y, velocity.z);

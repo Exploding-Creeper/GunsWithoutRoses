@@ -16,7 +16,6 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import net.minecraft.util.math.vector.Vector3d;
@@ -25,8 +24,6 @@ import net.minecraft.world.World;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.data.ForgeBlockTagsProvider;
-import xyz.kaleidiodev.kaleidiosguns.KaleidiosGuns;
 import xyz.kaleidiodev.kaleidiosguns.config.KGConfig;
 import xyz.kaleidiodev.kaleidiosguns.item.GunItem;
 import xyz.kaleidiodev.kaleidiosguns.item.IBullet;
@@ -35,7 +32,6 @@ import xyz.kaleidiodev.kaleidiosguns.registry.ModEntities;
 import xyz.kaleidiodev.kaleidiosguns.registry.ModItems;
 import xyz.kaleidiodev.kaleidiosguns.registry.ModSounds;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -67,7 +63,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	public boolean shouldBreakDoors;
 	public boolean shouldBreakGlass;
 	public boolean healsFriendlies;
-	public byte slagMode; //bit 0 is player is on fire, bit 1 is enemy is on fire, bit 2 is is active
+	public byte lavaMode; //bit 0 is player is on fire, bit 1 is enemy is on fire, bit 2 is is active
 	public boolean isMeleeBonus;
 	public int redstoneLevel;
 	public double mineChance;
@@ -94,7 +90,7 @@ public class BulletEntity extends AbstractFireballEntity {
 		if (isPlasma) return ParticleTypes.INSTANT_EFFECT;
 		if (wasRevenge || isMeleeBonus) return ParticleTypes.HAPPY_VILLAGER;
 		if (wasDark) return ParticleTypes.SMOKE;
-		if ((slagMode & 0x04) != 0) return ParticleTypes.LANDING_LAVA; //if was a slag bullet in any mode
+		if ((lavaMode & 0x04) != 0) return ParticleTypes.LANDING_LAVA; //if was a slag bullet in any mode
 		return ParticleTypes.CRIT;
 	}
 
@@ -338,7 +334,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	}
 
 	protected void giveDamage(Entity shooter, Entity victim, IBullet bullet) {
-		if (victim.isOnFire()) slagMode += 0x02;
+		if (victim.isOnFire()) lavaMode += 0x02;
 		if (isOnFire()) victim.setSecondsOnFire(5);
 		int lastHurtResistant = victim.invulnerableTime;
 		if (ignoreInvulnerability) victim.invulnerableTime = 0;

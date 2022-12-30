@@ -113,10 +113,10 @@
 		"subtitle": "subtitles.kaleidiosguns.item.defender_rifle.shoot",
 		"sounds": [ "kaleidiosguns:defender_rifle" ]
 	},
-	"item.slag_smg.shoot": {
+	"item.lava_smg.shoot": {
 		"category": "item",
-		"subtitle": "subtitles.kaleidiosguns.item.slag_smg.shoot",
-		"sounds": [ "kaleidiosguns:slag_bound_smg" ]
+		"subtitle": "subtitles.kaleidiosguns.item.lava_smg.shoot",
+		"sounds": [ "kaleidiosguns:lava_smg" ]
 	},
 	"item.bayonet.shoot": {
 		"category": "item",

@@ -18,7 +18,7 @@
 	"item.kaleidiosguns.voltgun": "Voltgun",
 	"item.kaleidiosguns.defender_rifle": "Defender Rifle",
 	"item.kaleidiosguns.bayonet": "Bayonet Sniper",
-	"item.kaleidiosguns.slag_smg": "Slag Bound SMG",
+	"item.kaleidiosguns.slag_smg": "Lava Bound SMG",
 
 	"item.kaleidiosguns.flint_bullet": "Flint Bullet",
 	"item.kaleidiosguns.iron_bullet": "Iron Bullet",
@@ -73,7 +73,7 @@
 	"tooltip.kaleidiosguns.glass": "Can break glass, wool and lights",
 	"tooltip.kaleidiosguns.quiet": "Its simplicity makes it quieter",
 	"tooltip.kaleidiosguns.breach": "Can breach doors",
-	"tooltip.kaleidiosguns.slag": "Entities on fire cause more damage",
+	"tooltip.kaleidiosguns.lava": "Entities on fire cause more damage",
 	"tooltip.kaleidiosguns.melee": "Get bonus damage a set amount of shots after melee",
 	"tooltip.kaleidiosguns.glove": "Acts as an empty hand",
 
@@ -139,7 +139,7 @@
 	"subtitles.kaleidiosguns.item.corruption_gun.shoot": "Corruption Gun fired",
 	"subtitles.kaleidiosguns.item.voltgun.shoot": "Voltgun fired",
 	"subtitles.kaleidiosguns.item.defender.shoot": "Defender Rifle fired",
-	"subtitles.kaleidiosguns.item.slag_smg.shoot": "Slag Bound SMG fired",
+	"subtitles.kaleidiosguns.item.lava_smg.shoot": "Lava Bound SMG fired",
 	"subtitles.kaleidiosguns.item.bayonet.shoot": "Bayonet Sniper fired",
 	"subtitles.kaleidiosguns.item.bullet.impact": "Bullet landed"
 }

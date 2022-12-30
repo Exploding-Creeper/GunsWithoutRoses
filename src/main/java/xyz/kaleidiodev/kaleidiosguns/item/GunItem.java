@@ -19,7 +19,6 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.*;
@@ -83,7 +82,7 @@ public class GunItem extends Item {
 	protected boolean canBreakGlass;
 	protected boolean canBreakDoors;
 	protected boolean isQuiet;
-	protected boolean isSlag;
+	protected boolean isLava;
 	protected boolean isMeleeBonus;
 	public boolean breachDoors;
 	protected double baseSpeed;
@@ -340,9 +339,9 @@ public class GunItem extends Item {
 		if (player.getEffect(Effects.DIG_SPEED) != null) {
 			shot.mineChance = KGConfig.diamondMinegunMineChance.get() + (KGConfig.hasteBonusMineChance.get() * player.getEffect(Effects.DIG_SPEED).getAmplifier());
 		}
-		if (this.isSlag) {
-			shot.slagMode = 0x04;
-			if (player.isOnFire()) shot.slagMode += 0x01;
+		if (this.isLava) {
+			shot.lavaMode = 0x04;
+			if (player.isOnFire()) shot.lavaMode += 0x01;
 		}
 
 		if (this.meleeBonusCounter > 0) this.meleeBonusCounter--;
@@ -723,8 +722,8 @@ public class GunItem extends Item {
 		return this;
 	}
 
-	public GunItem setIsSlag(boolean slag) {
-		this.isSlag = slag;
+	public GunItem setIsLava(boolean slag) {
+		this.isLava = slag;
 		return this;
 	}
 
@@ -875,7 +874,7 @@ public class GunItem extends Item {
 			if (hasVoltage) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.voltage"));
 			if (breachDoors) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.breach"));
 			if (isMeleeBonus) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.melee"));
-			if (isSlag) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.slag"));
+			if (isLava) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.lava"));
 
 			if (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.frostShot, stack) > 0) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.frost_distance", EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.frostShot, stack) * KGConfig.frostyDistancePerLevel.get()));
 
