@@ -343,9 +343,6 @@ public class BulletEntity extends AbstractFireballEntity {
 		//get health of the victim before they get hit.
 		if (entity instanceof LivingEntity) {
 			LivingEntity victim = (LivingEntity) entity;
-			if (shouldGlow) {
-				victim.addEffect(new EffectInstance(Effects.GLOWING, KGConfig.glowTime.get()));
-			}
 			healthOfVictim = victim.getHealth();
 		} else healthOfVictim = 0.0f;
 

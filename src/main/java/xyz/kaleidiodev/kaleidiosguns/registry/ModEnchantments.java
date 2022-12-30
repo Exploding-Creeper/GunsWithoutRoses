@@ -15,7 +15,7 @@ import xyz.kaleidiodev.kaleidiosguns.item.GunItem;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = KaleidiosGuns.MODID)
 public class ModEnchantments {
 
-	public static Enchantment impact, bullseye, sleightOfHand, preserving, accelerator, division, passionForBlood, marker, cowboy, frostShot, counterStrike, silenced, cleanShot, signalBoost, torpedo, trickShot;
+	public static Enchantment impact, bullseye, sleightOfHand, preserving, accelerator, division, passionForBlood, cowboy, frostShot, counterStrike, silenced, cleanShot, signalBoost, torpedo, trickShot;
 	public static final EnchantmentType TYPE_GUN = EnchantmentType.create("GWR_GUN", (item) -> item instanceof GunItem);
 
 	@SubscribeEvent
@@ -30,7 +30,6 @@ public class ModEnchantments {
 
 		//class specialized enhancement (compounds but only for certain gun types.
 		division = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.COMMON, 4, 4, 8, 20, TYPE_GUN), "division"); //shotgun
-		marker = initEnchant(reg, new GunDamageEnchantment(Enchantment.Rarity.VERY_RARE, 1, 7, 14, 25, TYPE_GUN), "marker"); //pistol
 		cleanShot = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.UNCOMMON, 1, 6, 12, 25, TYPE_GUN), "clean_shot"); //sniper
 		signalBoost = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.COMMON, 3, 6, 12, 25, TYPE_GUN), "signal_boost"); //redstone
 

@@ -324,11 +324,6 @@ public class GunItem extends Item {
 		//use sky light or block light unless it's night, then use purely blocklight
 		shot.wasDark = this.isShadow && (((!world.isNight() ? Math.max(world.getBrightness(LightType.SKY, player.blockPosition().above(1)), world.getBrightness(LightType.BLOCK, player.blockPosition().above(1))) : world.getBrightness(LightType.BLOCK, player.blockPosition().above(1))) <= KGConfig.shadowRevolverLightLevelRequired.get())); //.above(1) so that it's getting an actual blocklight value.
 
-		if (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.marker, gun) == 1) {
-			shot.setShouldGlow(true);
-			player.addEffect(new EffectInstance(Effects.GLOWING, KGConfig.shooterGlowTime.get()));
-		}
-
 		if (hasVoltage) shot.redstoneLevel = checkRedstoneLevel(world, player, gun);
 
 		shot.noPhysics = this.shouldCollateral;
@@ -804,7 +799,6 @@ public class GunItem extends Item {
 
 		//only let these apply to certain gun types
 		if ((enchantment == ModEnchantments.division) && !(me instanceof ShotgunItem)) return false; //shotgun only
-		if ((enchantment == ModEnchantments.marker) && ((me instanceof ShotgunItem) || (me instanceof GatlingItem) || (me.isExplosive) || (me.getInaccuracy(stack, null) == 0))) return false; //pistol only
 		if ((enchantment == ModEnchantments.cleanShot) && ((me instanceof ShotgunItem) || (me instanceof GatlingItem) || (me.isExplosive) || (me.getInaccuracy(stack, null) != 0))) return false; //sniper only
 		if ((enchantment == ModEnchantments.signalBoost) && !isRedstone) return false; //redstone only
 
