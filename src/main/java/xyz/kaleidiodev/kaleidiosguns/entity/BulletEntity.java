@@ -94,7 +94,7 @@ public class BulletEntity extends AbstractFireballEntity {
 		if (isPlasma) return ParticleTypes.INSTANT_EFFECT;
 		if (wasRevenge || isMeleeBonus) return ParticleTypes.HAPPY_VILLAGER;
 		if (wasDark) return ParticleTypes.SMOKE;
-		if ((slagMode - 0x04) != 0) return ParticleTypes.DRIPPING_LAVA; //if was a slag bullet in any mode
+		if ((slagMode & 0x04) != 0) return ParticleTypes.LANDING_LAVA; //if was a slag bullet in any mode
 		return ParticleTypes.CRIT;
 	}
 
