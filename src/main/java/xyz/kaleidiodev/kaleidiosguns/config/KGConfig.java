@@ -14,6 +14,7 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue oneHandInaccuracyReplacement;
     public static ForgeConfigSpec.DoubleValue oneHandShotgunRateMultiplier;
     public static ForgeConfigSpec.DoubleValue crouchAccuracyDivider;
+    public static ForgeConfigSpec.DoubleValue hasteBonusMineChance;
     public static ForgeConfigSpec.IntValue redstoneRadius;
 
     //cost mechanic
@@ -303,7 +304,10 @@ public class KGConfig {
                 .defineInRange("explosionIncreaseOnStrongerTier", 1.5D, 0D, 90D);
         crouchAccuracyDivider = builder
                 .comment("Accuracy multiplier for when the user is crouching")
-                .defineInRange("crouchAccuracyMultiplier", 5.0D, 0.1D, 5D);
+                .defineInRange("crouchAccuracyMultiplier", 5.0D, 0.1D, 90D);
+        hasteBonusMineChance = builder
+                .comment("Bonus mine chance percent per level of haste the player has")
+                .defineInRange("hasteBonusMineChance", 0.3D, 0.01D, 10D);
         redstoneRadius = builder
                 .comment("Configure the radius for a redstone block to activate redstone class gun.  WARNING, PERFORMANCE BOTTLENECKS CAN OCCUR")
                 .defineInRange("redstoneRadius", 10, 0, 31);

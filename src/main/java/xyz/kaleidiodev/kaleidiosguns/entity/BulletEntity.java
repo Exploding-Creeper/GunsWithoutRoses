@@ -70,6 +70,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	public byte slagMode; //bit 0 is player is on fire, bit 1 is enemy is on fire, bit 2 is is active, bit 3 is lava was absorbed
 	public boolean isMeleeBonus;
 	public int redstoneLevel;
+	public double mineChance;
 
 	public BulletEntity(EntityType<? extends BulletEntity> entityType, World worldIn) {
 		super(entityType, worldIn);
@@ -330,9 +331,7 @@ public class BulletEntity extends AbstractFireballEntity {
 
 	protected void breakWeakBlocks(BlockPos blockPosToTest) {
 		if (!level.getBlockState(blockPosToTest).requiresCorrectToolForDrops()) {
-			Random random = new Random();
-			if (KGConfig.diamondMinegunMineChance.get() - random.nextDouble() > 0)
-				this.level.destroyBlock(blockPosToTest, true);
+			breakBlock(blockPosToTest);
 		}
 	}
 
@@ -439,13 +438,16 @@ public class BulletEntity extends AbstractFireballEntity {
 
 	protected void tryBreakBlock(BlockPos blockPosToTest, ItemStack stack) {
 		//test if the tool tier found works
-
 		if (ForgeHooks.isToolEffective(this.level, blockPosToTest, stack)) {
-			//drop the block in a fixed chance
-			Random random = new Random();
-			if (KGConfig.diamondMinegunMineChance.get() - random.nextDouble() > 0)
-				this.level.destroyBlock(blockPosToTest, true);
+			breakBlock(blockPosToTest);
 		}
+	}
+
+	protected void breakBlock(BlockPos blockToBreak) {
+		//drop the block in a fixed chance
+		Random random = new Random();
+		if (mineChance - random.nextDouble() > 0)
+			this.level.destroyBlock(blockToBreak, true);
 	}
 
 	@Override

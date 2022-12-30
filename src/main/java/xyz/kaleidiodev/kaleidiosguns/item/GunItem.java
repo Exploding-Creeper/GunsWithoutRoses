@@ -338,6 +338,9 @@ public class GunItem extends Item {
 		shot.shouldBreakGlass = this.canBreakGlass;
 		shot.healsFriendlies = this.isDefender;
 		shot.isMeleeBonus = this.meleeBonusCounter > 0;
+		if (player.getEffect(Effects.DIG_SPEED) != null) {
+			shot.mineChance = KGConfig.diamondMinegunMineChance.get() + (KGConfig.hasteBonusMineChance.get() * player.getEffect(Effects.DIG_SPEED).getAmplifier());
+		}
 		if (this.isSlag) {
 			shot.slagMode = 0x04;
 			if (player.isOnFire()) shot.slagMode += 0x01;
