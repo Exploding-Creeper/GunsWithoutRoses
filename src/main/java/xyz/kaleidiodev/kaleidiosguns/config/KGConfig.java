@@ -668,10 +668,10 @@ public class KGConfig {
                 .defineInRange("emeraldBayonetMeleeDamage", 8D, 0D, 40D);
         emeraldBayonetPostMeleeMultiplier = builder
                 .comment("Multiplier for a shot's damage for the first shot after a successful melee")
-                .defineInRange("emeraldBayonetPostMeleeMultiplier", 1.25D, 0.1D, 5D);
+                .defineInRange("emeraldBayonetPostMeleeMultiplier", 1.5D, 0.1D, 5D);
         emeraldBayonetPostMeleeCount = builder
                 .comment("How many shots the melee blessing lasts for")
-                .defineInRange("emeraldBayonetPostMeleeCount", 4, 1, 60);
+                .defineInRange("emeraldBayonetPostMeleeCount", 3, 1, 60);
         builder.pop();
 
         builder.push("carbine");
