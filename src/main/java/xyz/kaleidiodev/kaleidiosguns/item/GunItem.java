@@ -91,7 +91,6 @@ public class GunItem extends Item {
 	protected double currentSpeed;
 	protected double currentDamage;
 	protected int meleeBonusCounter;
-	protected int absorbedLavaCounter;
 
 	protected SoundEvent fireSound = ModSounds.gun;
 	protected SoundEvent reloadSound = ModSounds.double_shotgunReload;
@@ -344,7 +343,6 @@ public class GunItem extends Item {
 		if (this.isSlag) {
 			shot.slagMode = 0x04;
 			if (player.isOnFire()) shot.slagMode += 0x01;
-			if (absorbedLavaCounter > 0) shot.slagMode += 0x08;
 		}
 
 		if (this.meleeBonusCounter > 0) this.meleeBonusCounter--;
@@ -355,9 +353,6 @@ public class GunItem extends Item {
 		int base = Math.max(1, stabilityTime - (int)(stabilityTime * EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.sleightOfHand, gun) * KGConfig.sleightOfHandFireRateDecrease.get()));
 		stabilizerTimer = base;
 		shotsBeforeStability++;
-
-		//tick clip for lava mode
-		if (absorbedLavaCounter > 0) absorbedLavaCounter --;
 
 		world.addFreshEntity(shot);
 	}
@@ -420,10 +415,6 @@ public class GunItem extends Item {
 
 		//generate a tag if it didn't exist before
 		nbt.putInt("chambers", newValue);
-	}
-
-	public void absorbedLava() {
-		absorbedLavaCounter = KGConfig.slagSmgLavaModeCount.get();
 	}
 
 	/**

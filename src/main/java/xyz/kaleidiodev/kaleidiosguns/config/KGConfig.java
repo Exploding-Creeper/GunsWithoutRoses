@@ -222,8 +222,6 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue slagSmgMeleeDamage;
     public static ForgeConfigSpec.DoubleValue slagSmgOnFireMultiplier;
     public static ForgeConfigSpec.DoubleValue slagSmgSelfOnFireMultiplier;
-    public static ForgeConfigSpec.IntValue slagSmgLavaModeCount;
-    public static ForgeConfigSpec.DoubleValue slagSmgLavaModeMultiplier;
 
     public static ForgeConfigSpec.DoubleValue defenderRifleDamageMultiplier;
     public static ForgeConfigSpec.IntValue defenderRifleFireDelay;
@@ -847,7 +845,7 @@ public class KGConfig {
                 .defineInRange("slagSmgInaccuracy", 1.5D, 0D, 90D);
         slagSmgProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for Slag Bound SMGs")
-                .defineInRange("slagSmgProjectileSpeed", 8D, 0D, 64D);
+                .defineInRange("slagSmgProjectileSpeed", 9D, 0D, 64D);
         slagSmgMidairMultiplier = builder
                 .comment("Configure the midair inaccuracy multiplier for Slag Bound SMGs")
                 .defineInRange("slagSmgMidairMultiplier", 1.25D, 0D, 5D);
@@ -863,12 +861,6 @@ public class KGConfig {
         slagSmgSelfOnFireMultiplier = builder
                 .comment("Set the damage multiplier if the shooter is on fire")
                 .defineInRange("slagSmgSelfOnFireMultiplier", 1.25D, 0D, 40D);
-        slagSmgLavaModeCount = builder
-                .comment("Set how many shots lava mode (after absorbing lava) counts for")
-                .defineInRange("slagSmgLavaModeCount", 30, 0, 32767);
-        slagSmgLavaModeMultiplier = builder
-                .comment("Set the damage multiplier if in lava mode")
-                .defineInRange("slagSmgLavaModeMultiplier", 1.25D, 0D, 40D);
         builder.pop();
 
         builder.push("plasma rifle");

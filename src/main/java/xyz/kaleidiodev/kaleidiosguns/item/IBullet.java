@@ -126,7 +126,6 @@ public interface IBullet {
 		if ((projectile.slagMode & 0x04) != 0) {
 			if ((projectile.slagMode & 0x02) != 0) newDamage *= KGConfig.slagSmgOnFireMultiplier.get();
 			if ((projectile.slagMode & 0x01) != 0) newDamage *= KGConfig.slagSmgSelfOnFireMultiplier.get();
-			if ((projectile.slagMode & 0x08) != 0) newDamage *= KGConfig.slagSmgLavaModeMultiplier.get();
 		}
 
 		if (projectile.isMeleeBonus) newDamage *= KGConfig.emeraldBayonetPostMeleeMultiplier.get();
