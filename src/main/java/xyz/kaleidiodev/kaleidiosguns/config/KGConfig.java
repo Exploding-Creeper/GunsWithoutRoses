@@ -211,17 +211,17 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue diamondAssaultSwitchSpeed;
     public static ForgeConfigSpec.DoubleValue diamondAssaultMeleeDamage;
 
-    public static ForgeConfigSpec.DoubleValue slagSmgDamageMultiplier;
-    public static ForgeConfigSpec.IntValue slagSmgFireDelay;
-    public static ForgeConfigSpec.IntValue slagSmgEnchantability;
-    public static ForgeConfigSpec.IntValue slagSmgDurability;
-    public static ForgeConfigSpec.DoubleValue slagSmgInaccuracy;
-    public static ForgeConfigSpec.DoubleValue slagSmgProjectileSpeed;
-    public static ForgeConfigSpec.DoubleValue slagSmgMidairMultiplier;
-    public static ForgeConfigSpec.DoubleValue slagSmgSwitchSpeed;
-    public static ForgeConfigSpec.DoubleValue slagSmgMeleeDamage;
-    public static ForgeConfigSpec.DoubleValue slagSmgOnFireMultiplier;
-    public static ForgeConfigSpec.DoubleValue slagSmgSelfOnFireMultiplier;
+    public static ForgeConfigSpec.DoubleValue lavaSmgDamageMultiplier;
+    public static ForgeConfigSpec.IntValue lavaSmgFireDelay;
+    public static ForgeConfigSpec.IntValue lavaSmgEnchantability;
+    public static ForgeConfigSpec.IntValue lavaSmgDurability;
+    public static ForgeConfigSpec.DoubleValue lavaSmgInaccuracy;
+    public static ForgeConfigSpec.DoubleValue lavaSmgProjectileSpeed;
+    public static ForgeConfigSpec.DoubleValue lavaSmgMidairMultiplier;
+    public static ForgeConfigSpec.DoubleValue lavaSmgSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue lavaSmgMeleeDamage;
+    public static ForgeConfigSpec.DoubleValue lavaSmgOnFireMultiplier;
+    public static ForgeConfigSpec.DoubleValue lavaSmgSelfOnFireMultiplier;
 
     public static ForgeConfigSpec.DoubleValue defenderRifleDamageMultiplier;
     public static ForgeConfigSpec.IntValue defenderRifleFireDelay;
@@ -828,37 +828,37 @@ public class KGConfig {
         builder.pop();
 
         builder.push("slag bound smg");
-        slagSmgDamageMultiplier = builder
+        lavaSmgDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Slag Bound SMGs")
                 .defineInRange("slagSmgDamageMultiplier", 0.7D, 0.1D, 5D);
-        slagSmgFireDelay = builder
+        lavaSmgFireDelay = builder
                 .comment("Configure the Fire delay for Slag Bound SMGs")
                 .defineInRange("slagSmgFireDelay", 4, 0, 72000);
-        slagSmgEnchantability = builder
+        lavaSmgEnchantability = builder
                 .comment("Configure the Enchantability for Slag Bound SMGs")
                 .defineInRange("slagSmgEnchantability", 10, 0, 30);
-        slagSmgDurability = builder
+        lavaSmgDurability = builder
                 .comment("Configure the Durability for Slag Bound SMGs")
                 .defineInRange("slagSmgDurability", 6000, 0, 32767);
-        slagSmgInaccuracy = builder
+        lavaSmgInaccuracy = builder
                 .comment("Configure the Inaccuracy for Slag Bound SMGs")
                 .defineInRange("slagSmgInaccuracy", 1.5D, 0D, 90D);
-        slagSmgProjectileSpeed = builder
+        lavaSmgProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for Slag Bound SMGs")
                 .defineInRange("slagSmgProjectileSpeed", 9D, 0D, 64D);
-        slagSmgMidairMultiplier = builder
+        lavaSmgMidairMultiplier = builder
                 .comment("Configure the midair inaccuracy multiplier for Slag Bound SMGs")
                 .defineInRange("slagSmgMidairMultiplier", 1.25D, 0D, 5D);
-        slagSmgSwitchSpeed = builder
+        lavaSmgSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Slag Bound SMGs")
                 .defineInRange("slagSmgSwitchSpeed", 2.1D, 0D, 5D);
-        slagSmgMeleeDamage = builder
+        lavaSmgMeleeDamage = builder
                 .comment("Configure the Melee Damage for Slag Bound SMGs")
                 .defineInRange("slagSmgMeleeDamage", 2D, 0D, 40D);
-        slagSmgOnFireMultiplier = builder
+        lavaSmgOnFireMultiplier = builder
                 .comment("Set the damage multiplier if the target is on fire")
                 .defineInRange("slagSmgOnFireMultiplier", 1.25D, 0D, 40D);
-        slagSmgSelfOnFireMultiplier = builder
+        lavaSmgSelfOnFireMultiplier = builder
                 .comment("Set the damage multiplier if the shooter is on fire")
                 .defineInRange("slagSmgSelfOnFireMultiplier", 1.25D, 0D, 40D);
         builder.pop();
