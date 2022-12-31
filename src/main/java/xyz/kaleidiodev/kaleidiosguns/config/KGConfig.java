@@ -995,19 +995,19 @@ public class KGConfig {
         builder.push("bullet_config");
         flintBulletDamage = builder
                 .comment("Configure the damage of Flint Bullets.  This tier should always be minimal damage")
-                .defineInRange("flintBulletDamage", 5D, 1D, 20D);
+                .defineInRange("flintBulletDamage", 2.5D, 1D, 20D);
         ironBulletDamage = builder
                 .comment("Configure the damage of Iron Bullets")
-                .defineInRange("ironBulletDamage", 6D, 1D, 20D);
+                .defineInRange("ironBulletDamage", 3D, 1D, 20D);
         blazeBulletDamage = builder
                 .comment("Configure the damage of Blaze Bullets.  This tier should always be the middle ground in damage total including flames.")
-                .defineInRange("blazeBulletDamage", 7D, 1D, 20D);
+                .defineInRange("blazeBulletDamage", 3.5D, 1D, 20D);
         hungerBulletDamage = builder
                 .comment("Configure the damage of Hunger Bullets")
-                .defineInRange("hungerBulletDamage", 8D, 1D, 20D);
+                .defineInRange("hungerBulletDamage", 4D, 1D, 20D);
         xpBulletDamage = builder
                 .comment("Configure the damage of XP Bullets.  This tier should always be the highest tier of damage.")
-                .defineInRange("xpBulletDamage", 10D, 1D, 20D);
+                .defineInRange("xpBulletDamage", 5D, 1D, 20D);
         hungerBulletDurability = builder
                 .comment("Configure the durability of Hunger Bullets.")
                 .defineInRange("hungerBulletDurability", 300, 1, 32767);
@@ -1041,7 +1041,7 @@ public class KGConfig {
         builder.push("impact enchantment");
         impactDamageIncrease = builder
                 .comment("How much damage increase per impact level")
-                .defineInRange("impactDamageIncrease", 1D, 0.1D, 20D);
+                .defineInRange("impactDamageIncrease", 0.5D, 0.1D, 20D);
         builder.pop();
 
         builder.push("bullseye enchantment");
