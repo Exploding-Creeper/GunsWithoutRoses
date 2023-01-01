@@ -90,6 +90,7 @@ public class GunItem extends Item {
 	protected double currentSpeed;
 	protected double currentDamage;
 	protected int meleeBonusCounter;
+	protected double mineChance;
 
 	protected SoundEvent fireSound = ModSounds.gun;
 	protected SoundEvent reloadSound = ModSounds.double_shotgunReload;
@@ -339,8 +340,9 @@ public class GunItem extends Item {
 		shot.healsFriendlies = this.isDefender;
 		shot.isMeleeBonus = this.meleeBonusCounter > 0;
 		if (player.getEffect(Effects.DIG_SPEED) != null) {
-			shot.mineChance = KGConfig.diamondMinegunMineChance.get() + (KGConfig.hasteBonusMineChance.get() * player.getEffect(Effects.DIG_SPEED).getAmplifier());
+			shot.mineChance = this.mineChance + (KGConfig.hasteBonusMineChance.get() * player.getEffect(Effects.DIG_SPEED).getAmplifier());
 		}
+		else shot.mineChance = this.mineChance;
 		if (this.isLava) {
 			shot.lavaMode = 0x04;
 			if (player.isOnFire()) shot.lavaMode += 0x01;
@@ -731,6 +733,11 @@ public class GunItem extends Item {
 
 	public GunItem setMeleeBonus(boolean meleeBonus) {
 		this.isMeleeBonus = meleeBonus;
+		return this;
+	}
+
+	public GunItem setMineChance(double newMineChance) {
+		this.mineChance = newMineChance;
 		return this;
 	}
 

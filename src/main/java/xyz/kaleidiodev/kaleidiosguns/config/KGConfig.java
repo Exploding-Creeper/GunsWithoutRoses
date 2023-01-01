@@ -188,6 +188,7 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue netheriteMinegunIgnitionChance;
     public static ForgeConfigSpec.DoubleValue netheriteMinegunSwitchSpeed;
     public static ForgeConfigSpec.DoubleValue netheriteMinegunMeleeDamage;
+    public static ForgeConfigSpec.BooleanValue netheriteMinegunCorruptBlock;
 
     public static ForgeConfigSpec.DoubleValue ironVoltgunDamageMultiplier;
     public static ForgeConfigSpec.IntValue ironVoltgunFireDelay;
@@ -758,6 +759,9 @@ public class KGConfig {
         netheriteMinegunMeleeDamage = builder
                 .comment("Configure the Melee Damage for Corruption Gun")
                 .defineInRange("netheriteMinegunMeleeDamage", 2D, 0D, 40D);
+        netheriteMinegunCorruptBlock = builder
+                .comment("Change if the Corruption Gun actually corrupts blocks")
+                .define("netheriteMinegunCorruptBlock", true);
         builder.pop();
 
         builder.push("voltgun");
