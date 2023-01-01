@@ -384,10 +384,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	}
 
 	public void explode(Vector3d position) {
-		float newRadius = (float) (double) KGConfig.diamondLauncherDamageMultiplier.get();
-
-		//if projectile is stronger than flint damage assume a stronger material type
-		if (getDamage() > KGConfig.flintBulletDamage.get() * KGConfig.diamondLauncherDamageMultiplier.get()) newRadius += KGConfig.explosionIncreaseOnStrongerTier.get();
+		float newRadius = (float)this.getShootingGun().damageMultiplier;
 
 		level.explode(this, position.x, position.y, position.z, newRadius, isOnFire(), KGConfig.explosionsEnabled.get() ? Explosion.Mode.DESTROY : Explosion.Mode.NONE);
 		if (isWither) {

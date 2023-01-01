@@ -131,6 +131,8 @@ public class GunItem extends Item {
 		//"Oh yeah I will use the vanilla method so that quivers can do their thing"
 		//guess what the quivers suck
 		ammo = mergeStacks(player, gun);
+		//don't use if trying to use flint bullets on launcher
+		if (this.isExplosive && (ammo.getItem() == ModItems.flintBullet)) return ActionResult.fail(gun);
 
 		//don't fire if redstone block is not nearby
 		if (this.isRedstone) {

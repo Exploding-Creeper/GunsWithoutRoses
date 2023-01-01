@@ -9,7 +9,6 @@ public class KGConfig {
     //mechanics
     public static ForgeConfigSpec.BooleanValue explosionsEnabled;
     public static ForgeConfigSpec.BooleanValue griefEnabled;
-    public static ForgeConfigSpec.DoubleValue explosionIncreaseOnStrongerTier;
     public static ForgeConfigSpec.DoubleValue oneHandInaccuracyMultiplier;
     public static ForgeConfigSpec.DoubleValue oneHandInaccuracyReplacement;
     public static ForgeConfigSpec.DoubleValue oneHandShotgunRateMultiplier;
@@ -297,9 +296,6 @@ public class KGConfig {
         oneHandShotgunRateMultiplier = builder
                 .comment("Fire rate multiplier for shotguns for when the user has one hand filled")
                 .defineInRange("oneHandShotgunRateMultiplier", 2.0D, 0.1D, 5D);
-        explosionIncreaseOnStrongerTier = builder
-                .comment("How much larger the explosion radius would be assuming damage is stronger than a hunger bullet")
-                .defineInRange("explosionIncreaseOnStrongerTier", 1.5D, 0D, 90D);
         crouchAccuracyDivider = builder
                 .comment("Accuracy multiplier for when the user is crouching")
                 .defineInRange("crouchAccuracyMultiplier", 5.0D, 0.1D, 90D);
@@ -938,7 +934,7 @@ public class KGConfig {
         builder.push("rocket launcher");
         diamondLauncherDamageMultiplier = builder
                 .comment("Define the base damage to multiply against for Rocket Launchers")
-                .defineInRange("diamondLauncherDamageMultiplier", 1.5D, 0.1D, 5D);
+                .defineInRange("diamondLauncherDamageMultiplier", 2.5D, 0.1D, 5D);
         diamondLauncherFireDelay = builder
                 .comment("Configure the Fire delay for Rocket Launchers")
                 .defineInRange("diamondLauncherFireDelay", 56, 0, 72000);
@@ -965,7 +961,7 @@ public class KGConfig {
         builder.push("wither cannon");
         witherLauncherDamageMultiplier = builder
                 .comment("Define the base damage to multiply against for Wither Launchers")
-                .defineInRange("witherLauncherDamageMultiplier", 1.5D, 0.1D, 5D);
+                .defineInRange("witherLauncherDamageMultiplier", 2.5D, 0.1D, 5D);
         witherLauncherFireDelay = builder
                 .comment("Configure the Fire delay for Wither Launchers")
                 .defineInRange("witherLauncherFireDelay", 65, 0, 72000);
