@@ -33,7 +33,7 @@ public class ModSounds {
 			voltgun = initSound("item.voltgun.shoot"),
 			defender_rifle = initSound("item.defender_rifle.shoot"),
 			bayonet = initSound("item.bayonet.shoot"),
-			lava_smg = initSound("item.slag_smg.shoot"),
+			lava_smg = initSound("item.lava_smg.shoot"),
 			impact = initSound("entity.bullet.impact");
 
 
