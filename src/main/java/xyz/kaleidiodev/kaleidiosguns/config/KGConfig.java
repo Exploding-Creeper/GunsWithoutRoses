@@ -884,10 +884,10 @@ public class KGConfig {
                 .defineInRange("goldPlasmaProjectileSpeed", 2D, 0D, 64D);
         goldPlasmaShieldAdditional = builder
                 .comment("Configure the chance for shields to be disabled against Plasma Rifles")
-                .defineInRange("goldPlasmaShieldAdditional", 0.5D, 0.05D, 1D);
+                .defineInRange("goldPlasmaShieldAdditional", 0.33D, 0.01D, 1D);
         goldPlasmaSlowChance = builder
                 .comment("Configure the chance for slowness effect against a target of Plasma Rifles")
-                .defineInRange("goldPlasmaSlowChance", 0.25D, 0.05D, 1D);
+                .defineInRange("goldPlasmaSlowChance", 0.33D, 0.05D, 1D);
         goldPlasmaSlowTicks = builder
                 .comment("Configure the length slowness effect lasts for from Plasma Rifles")
                 .defineInRange("goldPlasmaSlowTicks", 60, 10, 72000);
