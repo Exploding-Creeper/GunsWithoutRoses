@@ -299,7 +299,7 @@ public class KGConfig {
                 .defineInRange("oneHandShotgunRateMultiplier", 2.0D, 0.1D, 5D);
         crouchAccuracyDivider = builder
                 .comment("Accuracy multiplier for when the user is crouching")
-                .defineInRange("crouchAccuracyMultiplier", 5.0D, 0.1D, 90D);
+                .defineInRange("crouchAccuracyMultiplier", 4.0D, 0.1D, 90D);
         hasteBonusMineChance = builder
                 .comment("Bonus mine chance percent per level of haste the player has")
                 .defineInRange("hasteBonusMineChance", 0.3D, 0.01D, 10D);
@@ -1047,7 +1047,7 @@ public class KGConfig {
         builder.push("bullseye enchantment");
         bullseyeAccuracyIncrease = builder
                 .comment("How much accuracy increase per bullseye level, represented as a division + 1 of base inaccuracy")
-                .defineInRange("bullseyeAccuracyIncrease", 0.25D, 0.1D, 5D);
+                .defineInRange("bullseyeAccuracyIncrease", 0.5D, 0.1D, 5D);
         builder.pop();
 
         builder.push("sleight of hand enchantment");
