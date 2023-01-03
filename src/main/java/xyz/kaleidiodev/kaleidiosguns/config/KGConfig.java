@@ -842,10 +842,10 @@ public class KGConfig {
                 .defineInRange("lavaSmgDurability", 2115, 0, 32767);
         lavaSmgInaccuracy = builder
                 .comment("Configure the Inaccuracy for Lava Bound SMGs")
-                .defineInRange("lavaSmgInaccuracy", 1.3D, 0D, 90D);
+                .defineInRange("lavaSmgInaccuracy", 1.4D, 0D, 90D);
         lavaSmgProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for Lava Bound SMGs")
-                .defineInRange("lavaSmgProjectileSpeed", 13D, 0D, 64D);
+                .defineInRange("lavaSmgProjectileSpeed", 13.5D, 0D, 64D);
         lavaSmgMidairMultiplier = builder
                 .comment("Configure the midair inaccuracy multiplier for Lava Bound SMGs")
                 .defineInRange("lavaSmgMidairMultiplier", 1.25D, 0D, 5D);
@@ -914,10 +914,10 @@ public class KGConfig {
                 .defineInRange("defenderRifleDurability", 883, 0, 32767);
         defenderRifleInaccuracy = builder
                 .comment("Configure the Inaccuracy for Defender Rifles")
-                .defineInRange("defenderRifleInaccuracy", 1D, 0D, 90D);
+                .defineInRange("defenderRifleInaccuracy", 1.3D, 0D, 90D);
         defenderRifleProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for Defender Rifles")
-                .defineInRange("defenderRifleProjectileSpeed", 12D, 0D, 64D);
+                .defineInRange("defenderRifleProjectileSpeed", 13D, 0D, 64D);
         defenderRifleRange = builder
                 .comment("Configure the range for a Tile Entity for Defender Rifles.  WARNING, PERFORMANCE BOTTLENECKS CAN OCCUR")
                 .defineInRange("defenderRifleRange", 7, 0, 32);

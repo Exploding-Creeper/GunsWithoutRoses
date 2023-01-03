@@ -270,7 +270,7 @@ public class GunItem extends Item {
 					int chambers = getChambers(gun); //note, happens first, so the tag will get created, even if tooltip wasn't inspected first.
 					chambers--;
 					if (chambers <= 0) {
-						world.playSound(null, player.getX(), player.getY(), player.getZ(), reloadSound, SoundCategory.PLAYERS, 1.0F, 1.0F);
+						world.playSound(null, player.getX(), player.getY(), player.getZ(), reloadSound, SoundCategory.HOSTILE, 1.0F, 1.0F);
 						chambers = this.revolutions;
 					}
 					setChambers(gun, chambers);
