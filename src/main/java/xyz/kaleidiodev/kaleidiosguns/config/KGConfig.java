@@ -1047,7 +1047,7 @@ public class KGConfig {
         builder.push("bullseye enchantment");
         bullseyeAccuracyIncrease = builder
                 .comment("How much accuracy increase per bullseye level, represented as a division + 1 of base inaccuracy")
-                .defineInRange("bullseyeAccuracyIncrease", 1D, 0.1D, 5D);
+                .defineInRange("bullseyeAccuracyIncrease", 0.25D, 0.1D, 5D);
         builder.pop();
 
         builder.push("sleight of hand enchantment");
