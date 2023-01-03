@@ -295,7 +295,7 @@ public class GunItem extends Item {
 	 */
 	protected void fireWeapon(World world, PlayerEntity player, ItemStack gun, ItemStack ammo, IBullet bulletItem, boolean bulletFree) {
 		boolean isPlasma = gun.getItem() == ModItems.plasmaGatling;
-		double nextInaccuracy = ((EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.trickShot, gun) == 1) && (!player.isOnGround())) ? 0 : getInaccuracy(gun, player);
+		double nextInaccuracy = getInaccuracy(gun, player);
 		BulletEntity shot = bulletItem.createProjectile(world, ammo, player, isPlasma);
 		shot.shootFromRotation(player, player.xRot, player.yRot, 0, (float)getProjectileSpeed(gun, player), VivecraftForgeExtensionPresent ? 0.0F : (float)nextInaccuracy);
 
@@ -797,7 +797,7 @@ public class GunItem extends Item {
 		if ((enchantment instanceof GunAccuracyEnchantment) && hasPerfectAccuracy()) return false; //not for sniper
 		if ((enchantment instanceof GunDamageEnchantment) && isExplosive) return false; //not for launcher
 		if ((enchantment == ModEnchantments.cowboy) && isOneHanded) return false; //not for pistol
-		if (((enchantment == ModEnchantments.counterStrike) || (enchantment == ModEnchantments.trickShot)) && (me instanceof ShotgunItem)) return false; //not for shotgun
+		if (((enchantment == ModEnchantments.counterStrike)) && (me instanceof ShotgunItem)) return false; //not for shotgun
 
 		//only let these apply to certain gun types
 		if ((enchantment == ModEnchantments.division) && !(me instanceof ShotgunItem)) return false; //shotgun only
