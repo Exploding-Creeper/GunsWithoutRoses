@@ -998,16 +998,16 @@ public class KGConfig {
                 .defineInRange("flintBulletDamage", 5D, 1D, 20D);
         ironBulletDamage = builder
                 .comment("Configure the damage of Iron Bullets")
-                .defineInRange("ironBulletDamage", 6D, 1D, 20D);
+                .defineInRange("ironBulletDamage", 5.5D, 1D, 20D);
         blazeBulletDamage = builder
                 .comment("Configure the damage of Blaze Bullets.  This tier should always be the middle ground in damage total including flames.")
-                .defineInRange("blazeBulletDamage", 7D, 1D, 20D);
+                .defineInRange("blazeBulletDamage", 6D, 1D, 20D);
         hungerBulletDamage = builder
                 .comment("Configure the damage of Hunger Bullets")
-                .defineInRange("hungerBulletDamage", 8D, 1D, 20D);
+                .defineInRange("hungerBulletDamage", 6.5D, 1D, 20D);
         xpBulletDamage = builder
                 .comment("Configure the damage of XP Bullets.  This tier should always be the highest tier of damage.")
-                .defineInRange("xpBulletDamage", 10D, 1D, 20D);
+                .defineInRange("xpBulletDamage", 7.5D, 1D, 20D);
         hungerBulletDurability = builder
                 .comment("Configure the durability of Hunger Bullets.")
                 .defineInRange("hungerBulletDurability", 300, 1, 32767);
@@ -1023,13 +1023,13 @@ public class KGConfig {
                 .defineInRange("mineGunSecondLevel", 3D, 0.5D, 40D);
         mineGunThirdLevel = builder
                 .comment("Damage required to mine like a stone tool")
-                .defineInRange("mineGunThirdLevel", 5D, 0.5D, 40D);
+                .defineInRange("mineGunThirdLevel", 4D, 0.5D, 40D);
         mineGunFourthLevel = builder
                 .comment("Damage required to mine like an iron tool")
-                .defineInRange("mineGunFourthLevel", 7D, 0.5D, 40D);
+                .defineInRange("mineGunFourthLevel", 5D, 0.5D, 40D);
         mineGunFifthLevel = builder
                 .comment("Damage required to mine like a diamond tool")
-                .defineInRange("mineGunFifthLevel", 9D, 0.5D, 40D);
+                .defineInRange("mineGunFifthLevel", 6D, 0.5D, 40D);
         builder.pop();
 
         builder.push("preserving enchantment");
@@ -1041,7 +1041,7 @@ public class KGConfig {
         builder.push("impact enchantment");
         impactDamageIncrease = builder
                 .comment("How much damage increase per impact level")
-                .defineInRange("impactDamageIncrease", 1D, 0.1D, 20D);
+                .defineInRange("impactDamageIncrease", 0.5D, 0.1D, 20D);
         builder.pop();
 
         builder.push("bullseye enchantment");
@@ -1080,13 +1080,13 @@ public class KGConfig {
         builder.push("frost shard enchantment");
         frostyMaxAddition = builder
                 .comment("Maximum damage of a frosty bullet")
-                .defineInRange("frostyMaxAddition", 8D, -20D, 20D);
+                .defineInRange("frostyMaxAddition", 4D, -20D, 20D);
         frostyMinAddition = builder
                 .comment("Minimum damage of a frosty bullet")
-                .defineInRange("frostyMinAddition", -2D, -20D, 20D);
+                .defineInRange("frostyMinAddition", -1D, -20D, 20D);
         frostyDistancePerLevel = builder
                 .comment("Block distance from origin until a frosty bullet is at minimum multiplier")
-                .defineInRange("frostyDistancePerLevel", 20D, 0D, 128D);
+                .defineInRange("frostyDistancePerLevel", 16D, 0D, 128D);
         builder.pop();
 
         builder.push("signal boost enchantment");
