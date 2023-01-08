@@ -26,7 +26,7 @@ public class HungerBulletItem extends BulletItem {
 	@Override
 	public void consume(ItemStack stack, PlayerEntity player, ItemStack gunItem) {
 		player.causeFoodExhaustion(costToUse(gunItem) * 3);
-		stack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(player.getUsedItemHand()));
+		stack.hurtAndBreak(costToUse(gunItem), player, (p) -> p.broadcastBreakEvent(player.getUsedItemHand()));
 	}
 
 	//this bullet type allows for suicide kills

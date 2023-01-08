@@ -236,7 +236,6 @@ public class GunItem extends Item {
 
 			IBullet bulletItem = (IBullet) (ammo.getItem() instanceof IBullet ? ammo.getItem() : ModItems.flintBullet);
 
-			if ((bulletItem instanceof XPBulletItem) && (player.experienceLevel == 0)) return ActionResult.fail(gun);
 			player.startUsingItem(hand);
 			if (!world.isClientSide) {
 				boolean bulletFree = player.abilities.instabuild || !shouldConsumeAmmo(gun, player);

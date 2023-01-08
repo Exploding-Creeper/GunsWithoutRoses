@@ -26,7 +26,7 @@ public class XPBulletItem extends BulletItem {
 	@Override
 	public void consume(ItemStack stack, PlayerEntity player, ItemStack gunItem) {
 		player.giveExperienceLevels(-costToUse(gunItem));
-		stack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(player.getUsedItemHand()));
+		stack.hurtAndBreak(costToUse(gunItem), player, (p) -> p.broadcastBreakEvent(player.getUsedItemHand()));
 	}
 
 	@Override
