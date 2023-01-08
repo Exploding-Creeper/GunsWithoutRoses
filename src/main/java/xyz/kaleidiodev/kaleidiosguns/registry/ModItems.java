@@ -84,7 +84,7 @@ public class ModItems {
 		xpBullet = initItem(reg, new XPBulletItem(defP().stacksTo(1).durability(KGConfig.xpBulletDurability.get()), KGConfig.xpBulletDamage.get()), "xp_bullet");
 
 		// Gloves
-		diamondGlove = initItem(reg, new GloveItem(defP()).setSpeedUp(KGConfig.gloveRangerSpeedUp.get()), "ranger_glove");
+		diamondGlove = initItem(reg, new GloveItem(defP().stacksTo(1).durability(KGConfig.gloveRangerDurability.get())).setSpeedUp(KGConfig.gloveRangerSpeedUp.get()), "ranger_glove");
 	}
 
 	public static Item.Properties defP() {

@@ -2,6 +2,7 @@ package xyz.kaleidiodev.kaleidiosguns.item;
 
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
@@ -34,5 +35,9 @@ public class GloveItem extends Item {
     public GloveItem setSpeedUp(double speedUp) {
         this.percentSpeedUp = speedUp;
         return this;
+    }
+
+    public void consume(ItemStack stack, PlayerEntity player) {
+        stack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(player.getUsedItemHand()));
     }
 }
