@@ -208,7 +208,7 @@ public class KGConfig {
     public static ForgeConfigSpec.IntValue diamondAssaultDurability;
     public static ForgeConfigSpec.DoubleValue diamondAssaultInaccuracy;
     public static ForgeConfigSpec.DoubleValue diamondAssaultProjectileSpeed;
-    public static ForgeConfigSpec.DoubleValue diamondAssaultMidairMultiplier;
+    public static ForgeConfigSpec.DoubleValue automaticMidairMultiplier;
     public static ForgeConfigSpec.DoubleValue diamondAssaultSwitchSpeed;
     public static ForgeConfigSpec.DoubleValue diamondAssaultMeleeDamage;
 
@@ -218,7 +218,6 @@ public class KGConfig {
     public static ForgeConfigSpec.IntValue lavaSmgDurability;
     public static ForgeConfigSpec.DoubleValue lavaSmgInaccuracy;
     public static ForgeConfigSpec.DoubleValue lavaSmgProjectileSpeed;
-    public static ForgeConfigSpec.DoubleValue lavaSmgMidairMultiplier;
     public static ForgeConfigSpec.DoubleValue lavaSmgSwitchSpeed;
     public static ForgeConfigSpec.DoubleValue lavaSmgMeleeDamage;
     public static ForgeConfigSpec.DoubleValue lavaSmgOnFireMultiplier;
@@ -307,6 +306,9 @@ public class KGConfig {
         redstoneRadius = builder
                 .comment("Configure the radius for a redstone block to activate redstone class gun.  WARNING, PERFORMANCE BOTTLENECKS CAN OCCUR")
                 .defineInRange("redstoneRadius", 10, 0, 31);
+        automaticMidairMultiplier = builder
+                .comment("Configure the midair inaccuracy multiplier for Assault Rifles and Lava SMG")
+                .defineInRange("automaticMidairMultiplier", 2.0D, 0D, 5D);
         builder.pop();
 
         builder.push("ranger gloves");
@@ -820,9 +822,6 @@ public class KGConfig {
         diamondAssaultProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for Assault Rifles")
                 .defineInRange("diamondAssaultProjectileSpeed", 14D, 0D, 64D);
-        diamondAssaultMidairMultiplier = builder
-                .comment("Configure the midair inaccuracy multiplier for Assault Rifles")
-                .defineInRange("diamondAssaultMidairMultiplier", 2.0D, 0D, 5D);
         diamondAssaultSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Assault Rifles")
                 .defineInRange("diamondAssaultSwitchSpeed", 2.5D, 0D, 5D);
@@ -850,9 +849,6 @@ public class KGConfig {
         lavaSmgProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for Lava Bound SMGs")
                 .defineInRange("lavaSmgProjectileSpeed", 13.5D, 0D, 64D);
-        lavaSmgMidairMultiplier = builder
-                .comment("Configure the midair inaccuracy multiplier for Lava Bound SMGs")
-                .defineInRange("lavaSmgMidairMultiplier", 1.25D, 0D, 5D);
         lavaSmgSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Lava Bound SMGs")
                 .defineInRange("lavaSmgSwitchSpeed", 2.1D, 0D, 5D);
