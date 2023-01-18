@@ -1,9 +1,9 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"pattern": [
-		"GGG",
-		"G#G",
-		"GGG"
+		"###",
+		"#G#",
+		"###"
 	],
 	"key": {
 		"#": { "tag": "forge:ingots/iron" },
