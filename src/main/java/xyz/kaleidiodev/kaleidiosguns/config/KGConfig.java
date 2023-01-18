@@ -15,6 +15,7 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue crouchAccuracyDivider;
     public static ForgeConfigSpec.DoubleValue hasteBonusMineChance;
     public static ForgeConfigSpec.IntValue redstoneRadius;
+    public static ForgeConfigSpec.DoubleValue weaknessEffectInaccuracyMultiplier;
 
     //cost mechanic
     public static ForgeConfigSpec.IntValue pistolCost;
@@ -309,6 +310,9 @@ public class KGConfig {
         automaticMidairMultiplier = builder
                 .comment("Configure the midair inaccuracy multiplier for Assault Rifles and Lava SMG")
                 .defineInRange("automaticMidairMultiplier", 2.0D, 0D, 5D);
+        weaknessEffectInaccuracyMultiplier = builder
+                .comment("Configure the inaccuracy multiplier for when the shooter has the weakness effect")
+                .defineInRange("weaknessEffectInaccuracyMultiplier", 2.0D, 0D, 5D);
         builder.pop();
 
         builder.push("ranger gloves");

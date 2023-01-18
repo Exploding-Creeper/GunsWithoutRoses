@@ -491,29 +491,35 @@ public class GunItem extends Item {
 
 		nextInaccuracy += shotsBeforeStability * Math.max(0, instabilitySpreadAdditional / ((EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.bullseye, stack) * KGConfig.bullseyeAccuracyIncrease.get()) + 1.0D));
 
-		//check player hands
-		if ((player != null) && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && !(stack.getItem() instanceof ShotgunItem) && !isOneHanded) {
-			//if both hands are full, because one is the gun and one is something else
-			//ignore glove items for this effect
-			if (!player.getMainHandItem().isEmpty() && (!player.getOffhandItem().isEmpty() && !(player.getOffhandItem().getItem() instanceof GloveItem))) {
-				//if sniper class, give a new inaccuracy
-				if (nextInaccuracy == 0) nextInaccuracy = KGConfig.oneHandInaccuracyReplacement.get();
-				//else multiply
-				else nextInaccuracy *= KGConfig.oneHandInaccuracyMultiplier.get();
-			}
-		}
-
-		//check crouching
-		if ((player != null) && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.counterStrike, stack) != 0)) {
-			if (player.isCrouching() && player.isOnGround()) {
-				nextInaccuracy /= KGConfig.crouchAccuracyDivider.get();
-			}
-		}
-
-		//check assault rifle
 		if (player != null) {
-			if ((this.isSensitive) && !player.isOnGround() && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0)) {
+			//check player hands
+			if ((EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && !(stack.getItem() instanceof ShotgunItem) && !isOneHanded) {
+				//if both hands are full, because one is the gun and one is something else
+				//ignore glove items for this effect
+				if (!player.getMainHandItem().isEmpty() && (!player.getOffhandItem().isEmpty() && !(player.getOffhandItem().getItem() instanceof GloveItem))) {
+					//if sniper class, give a new inaccuracy
+					if (nextInaccuracy == 0) nextInaccuracy = KGConfig.oneHandInaccuracyReplacement.get();
+						//else multiply
+					else nextInaccuracy *= KGConfig.oneHandInaccuracyMultiplier.get();
+				}
+			}
+
+			//check crouching
+			if ((EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.counterStrike, stack) != 0)) {
+				if (player.isCrouching() && player.isOnGround()) {
+					nextInaccuracy /= KGConfig.crouchAccuracyDivider.get();
+				}
+			}
+
+			//check assault rifle
+			if (!player.isOnGround() && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0)) {
 				nextInaccuracy *= KGConfig.automaticMidairMultiplier.get();
+			}
+
+			//check weakness effect
+			if ((player.getEffect(Effects.WEAKNESS) != null) && !(stack.getItem() instanceof ShotgunItem)) {
+				if (nextInaccuracy == 0) nextInaccuracy = KGConfig.oneHandInaccuracyReplacement.get();
+				else nextInaccuracy *= KGConfig.weaknessEffectInaccuracyMultiplier.get();
 			}
 		}
 
