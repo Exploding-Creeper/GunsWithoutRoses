@@ -76,6 +76,7 @@
 	"tooltip.kaleidiosguns.lava": "Entities on fire cause more damage",
 	"tooltip.kaleidiosguns.melee": "Get bonus damage a set amount of shots after melee",
 	"tooltip.kaleidiosguns.glove": "Acts as an empty hand",
+	"tooltip.kaleidiosguns.twohands": "Requires an empty offhand for full accuracy",
 
 	"tooltip.kaleidiosguns.blaze_bullet": "Sets entities on fire",
 	"tooltip.kaleidiosguns.hunger_bullet": "Uses hunger as ammo",
