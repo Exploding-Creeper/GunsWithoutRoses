@@ -1057,7 +1057,7 @@ public class KGConfig {
         builder.push("sleight of hand enchantment");
         sleightOfHandFireRateDecrease = builder
                 .comment("How much percentage fire rate increase per sleight of hand level, represented as floating point only")
-                .defineInRange("sleightOfHandFireRateIncrease", 0.25D, 0.1D, 1D);
+                .defineInRange("sleightOfHandFireRateIncrease", 0.125D, 0.1D, 1D);
         builder.pop();
 
         builder.push("accelerator enchantment");
