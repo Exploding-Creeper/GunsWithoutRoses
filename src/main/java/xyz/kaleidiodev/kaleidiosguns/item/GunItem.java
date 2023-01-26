@@ -801,10 +801,11 @@ public class GunItem extends Item {
 		if ((enchantment instanceof GunDamageEnchantment) && isExplosive) return false; //not for launcher
 		if ((enchantment == ModEnchantments.cowboy) && isOneHanded) return false; //not for pistol
 		if (((enchantment == ModEnchantments.counterStrike)) && (me instanceof ShotgunItem)) return false; //not for shotgun
+		if (((enchantment == ModEnchantments.sleightOfHand)) && (me instanceof GatlingItem)) return false; //not for gatling
 
 		//only let these apply to certain gun types
 		if ((enchantment == ModEnchantments.division) && !(me instanceof ShotgunItem)) return false; //shotgun only
-		if ((enchantment == ModEnchantments.cleanShot) && ((me instanceof ShotgunItem) || (me instanceof GatlingItem) || (me.isExplosive) || (me.getInaccuracy(stack, null) != 0))) return false; //sniper only
+		if ((enchantment == ModEnchantments.cleanShot) && !((me instanceof ShotgunItem) || (me instanceof GatlingItem) || (me.isExplosive) || (me.getInaccuracy(stack, null) != 0))) return false; //sniper only
 		if ((enchantment == ModEnchantments.signalBoost) && !isRedstone) return false; //redstone only
 
 		return super.canApplyAtEnchantingTable(stack, enchantment);
