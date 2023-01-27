@@ -1,6 +1,8 @@
 package xyz.kaleidiodev.kaleidiosguns.item;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -46,7 +48,7 @@ public class GatlingItem extends GunItem {
 		}
 		else {
 			player.startUsingItem(hand);
-			if (this.isFirstShot && !world.isClientSide()){
+			if (this.isFirstShot && !world.isClientSide){
 				fireGatling(world, player, gun, 0, mergeStacks(player, gun));
 			}
 			return ActionResult.consume(gun);
