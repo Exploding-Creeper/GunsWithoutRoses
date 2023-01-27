@@ -254,17 +254,13 @@ public class GunItem extends Item {
 
 				gun.hurtAndBreak(durabilityDamage, player, (p) -> p.broadcastBreakEvent(player.getUsedItemHand()));
 				if (!bulletFree) bulletItem.consume(ammo, player, gun);
-			}
 
-			float volume = (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.silenced, gun) > 0 ? 2.0F : 10.0F);
-			if (this.isQuiet) volume /= 2;
+				float volume = (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.silenced, gun) > 0 ? 2.0F : 10.0F);
+				if (this.isQuiet) volume /= 2;
 
-			world.playSound(null, player.getX(), player.getY(), player.getZ(), fireSound, SoundCategory.PLAYERS, volume, 1.0F);
-			player.awardStat(Stats.ITEM_USED.get(this));
+				world.playSound(null, player.getX(), player.getY(), player.getZ(), fireSound, SoundCategory.PLAYERS, volume, 1.0F);
+				player.awardStat(Stats.ITEM_USED.get(this));
 
-			//change chamber if multiple revolutions
-			//the method gets fired twice, once on server once on client.  let's only do it once
-			if (!world.isClientSide()) {
 				if (this.revolutions > 1) {
 					int chambers = getChambers(gun); //note, happens first, so the tag will get created, even if tooltip wasn't inspected first.
 					chambers--;
@@ -274,12 +270,13 @@ public class GunItem extends Item {
 					}
 					setChambers(gun, chambers);
 				}
+
+				player.getCooldowns().addCooldown(this, getFireDelay(gun, player));
 			}
 
-			player.getCooldowns().addCooldown(this, getFireDelay(gun, player));
 			return ActionResult.consume(gun);
 		}
-		else return ActionResult.fail(gun);
+		return ActionResult.fail(gun);
 	}
 
 	/**
