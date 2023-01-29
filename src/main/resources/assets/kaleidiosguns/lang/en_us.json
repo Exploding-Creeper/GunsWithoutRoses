@@ -69,7 +69,7 @@
 	"tooltip.kaleidiosguns.voltage": "Increases damage the closer you are to a Redstone Block",
 	"tooltip.kaleidiosguns.defender": "Increases fire rate if standing near any Tile Entity",
 	"tooltip.kaleidiosguns.sensitive": "Accuracy decreases if shot in midair",
-	"tooltip.kaleidiosguns.explosive": "Explosive projectiles",
+	"tooltip.kaleidiosguns.explosive": "Explosive projectiles, requires non-flint ammo",
 	"tooltip.kaleidiosguns.glass": "Can break glass, wool and lights",
 	"tooltip.kaleidiosguns.quiet": "Its simplicity makes it quieter",
 	"tooltip.kaleidiosguns.breach": "Can breach doors",
