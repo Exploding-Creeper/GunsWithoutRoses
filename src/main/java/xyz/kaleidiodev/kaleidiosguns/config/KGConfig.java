@@ -624,7 +624,7 @@ public class KGConfig {
         builder.push("sniper rifle");
         diamondSniperDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Snipers")
-                .defineInRange("diamondSniperDamageMultiplier", 2.5D, 0.1D, 5D);
+                .defineInRange("diamondSniperDamageMultiplier", 2.4D, 0.1D, 5D);
         diamondSniperFireDelay = builder
                 .comment("Configure the Fire delay for Snipers")
                 .defineInRange("diamondSniperFireDelay", 17, 0, 72000);
@@ -651,7 +651,7 @@ public class KGConfig {
         builder.push("bayonet sniper");
         emeraldBayonetDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Bayonet Snipers")
-                .defineInRange("emeraldBayonetDamageMultiplier", 3D, 0.1D, 5D);
+                .defineInRange("emeraldBayonetDamageMultiplier", 2.6D, 0.1D, 5D);
         emeraldBayonetFireDelay = builder
                 .comment("Configure the Fire delay for Bayonet Snipers")
                 .defineInRange("emeraldBayonetFireDelay", 18, 0, 72000);
@@ -684,7 +684,7 @@ public class KGConfig {
         builder.push("carbine");
         ironCarbineDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Carbines")
-                .defineInRange("ironCarbineDamageMultiplier", 1.7D, 0.5D, 5D);
+                .defineInRange("ironCarbineDamageMultiplier", 1.45D, 0.5D, 5D);
         ironCarbineFireDelay = builder
                 .comment("Configure the Fire delay for Carbines")
                 .defineInRange("ironCarbineFireDelay", 12, 0, 72000);
