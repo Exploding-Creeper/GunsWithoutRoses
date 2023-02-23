@@ -885,7 +885,8 @@ public class GunItem extends Item {
 			if (breachDoors) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.breach"));
 			if (isMeleeBonus) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.melee"));
 			if (isLava) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.lava"));
-			if (!isOneHanded && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0)) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.twohands"));
+			if (!isOneHanded && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && (this instanceof ShotgunItem)) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.twohands_shotgun"));
+			if (!isOneHanded && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && !(this instanceof ShotgunItem)) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.twohands"));
 
 			if (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.frostShot, stack) > 0) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.frost_distance", EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.frostShot, stack) * KGConfig.frostyDistancePerLevel.get()));
 
