@@ -509,7 +509,7 @@ public class GunItem extends Item {
 			}
 
 			//check assault rifle
-			if (!player.isOnGround() && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0)) {
+			if (!player.isOnGround() && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && this.isSensitive) {
 				nextInaccuracy *= KGConfig.automaticMidairMultiplier.get();
 			}
 
