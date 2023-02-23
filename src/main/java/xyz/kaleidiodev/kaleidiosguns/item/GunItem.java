@@ -272,6 +272,7 @@ public class GunItem extends Item {
 				}
 
 				player.getCooldowns().addCooldown(this, getFireDelay(gun, player));
+				mergeStacks(player, gun);
 			}
 
 			return ActionResult.consume(gun);
