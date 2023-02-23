@@ -285,9 +285,10 @@ public class BulletEntity extends AbstractFireballEntity {
 					if (BlockTags.WOODEN_DOORS.getValues().contains(blockToChange) ||
 							BlockTags.WOODEN_TRAPDOORS.getValues().contains(blockToChange) ||
 							BlockTags.FENCE_GATES.getValues().contains(blockToChange) ||
-							BlockTags.FENCES.getValues().contains(blockToChange)) {
-						//only allow in fairly close range to player
-						if (ticksSinceFired < 2) level.destroyBlock(raytrace.getBlockPos(), false);
+							BlockTags.FENCES.getValues().contains(blockToChange) ||
+							blockToChange == Blocks.IRON_DOOR ||
+					        blockToChange == Blocks.IRON_TRAPDOOR) {
+						level.destroyBlock(raytrace.getBlockPos(), false);
 					}
 				}
 			}
