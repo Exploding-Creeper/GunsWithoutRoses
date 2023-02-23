@@ -151,7 +151,7 @@ public class GunItem extends Item {
 				if (itemstack1.getItem() instanceof BulletItem) {
 					//first, automerge the stack, before judging the count
 					//automerge stacks to prevent a bunch of slots with unusable ammo
-					if (!itemstack1.isEmpty()) {
+					if (!itemstack1.isEmpty() && (itemstack1.getMaxStackSize() == 64)) {
 						for (int j = 0; j < player.inventory.getContainerSize(); j++) {
 							if ((j != i) && (player.inventory.getItem(j).getItem() == itemstack1.getItem())) {
 								while ((player.inventory.getItem(j).getCount() < 64) && (!itemstack1.isEmpty())) {
