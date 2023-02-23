@@ -82,17 +82,6 @@ public interface IBullet {
 			newDamage += newMultiplier;
 		}
 
-		//multiply all this by combo
-		if (projectile.shouldCombo) {
-			if ((target instanceof LivingEntity) && (shooter instanceof PlayerEntity)) {
-				LivingEntity victim = (LivingEntity)target;
-				PlayerEntity assailant = (PlayerEntity) shooter;
-				//first remove the old multiplier, then add the new one.
-				newDamage /= projectile.getShootingGun().getDamageMultiplier(new ItemStack(projectile.getShootingGun().getItem()));
-				newDamage *= projectile.getShootingGun().tryComboCalculate(victim.getUUID(), assailant);
-			}
-		}
-
 		//if the bullet is a plasma type, deal very high damage to a shield if one is in use.
 		//this way we let the vanilla mechanic of a shield taking damage as durability into effect
 		if ((projectile.isPlasma) && (target instanceof LivingEntity)) {

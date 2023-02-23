@@ -41,7 +41,6 @@ import xyz.kaleidiodev.kaleidiosguns.registry.ModSounds;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.UUID;
 import java.util.function.Supplier;
 
 import static xyz.kaleidiodev.kaleidiosguns.KaleidiosGuns.VivecraftForgeExtensionPresent;
@@ -66,9 +65,7 @@ public class GunItem extends Item {
 	protected int stabilizerTimer; //internal timer.  falls to zero when gun is stable.
 	protected long ticksPassed;
 	protected double instabilitySpreadAdditional; //additional spread to add every time a shot recharges stabilizer timer.
-	protected boolean shouldCombo;
-	protected int comboCount;
-	protected UUID comboVictim;
+	protected boolean twoHandBonus;
 	public boolean isExplosive;
 	protected boolean isWither;
 	protected boolean shouldRevenge;
@@ -316,6 +313,8 @@ public class GunItem extends Item {
 			ShotgunItem thisGun = (ShotgunItem)gun.getItem();
 			shot.setDamage(someDamage * ((double)thisGun.getBaseBulletCount() / (double)thisGun.getBulletCount(gun, player)));
 		}
+
+		if (!player.getMainHandItem().isEmpty() && !player.getOffhandItem().isEmpty() && twoHandBonus) shot.setDamage(someDamage * KGConfig.goldSkillshotTwoHandedUse.get());
 		else shot.setDamage(someDamage);
 
 		shot.wasRevenge = (this.shouldRevenge && (player.getHealth() < (player.getMaxHealth() * KGConfig.emeraldBlessedHealthMinimumRatio.get())));
@@ -325,7 +324,6 @@ public class GunItem extends Item {
 		if (hasVoltage) shot.redstoneLevel = checkRedstoneLevel(world, player, gun);
 
 		shot.noPhysics = this.shouldCollateral;
-		shot.shouldCombo = this.shouldCombo;
 		shot.isPlasma = (this.getItem() == ModItems.plasmaGatling);
 		shot.frostyDistance = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.frostShot, gun) * KGConfig.frostyDistancePerLevel.get();
 		shot.isClean = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cleanShot, gun) > 0;
@@ -575,8 +573,6 @@ public class GunItem extends Item {
 		return EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.accelerator, stack) >= 1;
 	}
 
-	public int getComboCount() { return this.comboCount; }
-
 	/**
 	 * Sets whether the bullets ignore invulnerability frame (default no), used when making the item for registering.
 	 */
@@ -659,8 +655,8 @@ public class GunItem extends Item {
 		return this;
 	}
 
-	public GunItem setShouldCombo(boolean combo) {
-		this.shouldCombo = combo;
+	public GunItem setTwoHandBonus(boolean twoHand) {
+		this.twoHandBonus = twoHand;
 		return this;
 	}
 
@@ -754,38 +750,6 @@ public class GunItem extends Item {
 		return this;
 	}
 
-	/**
-	 *
-	 * @param victim the victim entity to see if it has been comboed.  give it the shooter if no entity was hit.
-	 * @return returns a multiplier that should multiply the damage.
-	 */
-	public double tryComboCalculate(UUID victim, PlayerEntity shooter) {
-		if (victim == shooter.getUUID()){
-			comboVictim = null;
-			comboCount = 0;
-		}
-		else if (comboVictim == null) {
-			comboVictim = victim;
-			comboCount = 1;
-		}
-		else if (victim == comboVictim) {
-			comboCount++;
-		}
-		else
-		{
-			comboCount = 0;
-			comboVictim = null;
-		}
-
-		//cap combo
-		if (comboCount > KGConfig.goldSkillshotMaxCombo.get()) comboCount = KGConfig.goldSkillshotMaxCombo.get();
-
-		//calculate what the new multiplier would be.
-		double newDamageMultiplier = this.damageMultiplier + (KGConfig.goldSkillshotComboMultiplierPer.get() * comboCount);
-
-		return newDamageMultiplier;
-	}
-
 	@Override
 	public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
 		return super.isBookEnchantable(stack, book);
@@ -870,7 +834,7 @@ public class GunItem extends Item {
 
 			if (revolutions > 1) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.double_barrel"));
 			if (stack.getItem() == ModItems.revolver) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.revolver"));
-			if (shouldCombo) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.skill_shot"));
+			if (twoHandBonus) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.showman_glock"));
 			if (isWither) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.wither"));
 			if (shouldRevenge) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.blessed"));
 			if (isShadow) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.shadow"));

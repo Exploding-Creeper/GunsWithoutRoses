@@ -70,8 +70,7 @@ public class KGConfig {
     public static ForgeConfigSpec.IntValue goldSkillshotDurability;
     public static ForgeConfigSpec.DoubleValue goldSkillshotInaccuracy;
     public static ForgeConfigSpec.DoubleValue goldSkillshotProjectileSpeed;
-    public static ForgeConfigSpec.IntValue goldSkillshotMaxCombo;
-    public static ForgeConfigSpec.DoubleValue goldSkillshotComboMultiplierPer;
+    public static ForgeConfigSpec.DoubleValue goldSkillshotTwoHandedUse;
     public static ForgeConfigSpec.DoubleValue goldSkillshotSwitchSpeed;
     public static ForgeConfigSpec.DoubleValue goldSkillshotMeleeDamage;
 
@@ -449,34 +448,31 @@ public class KGConfig {
 
         builder.push("skillshot pistol");
         goldSkillshotDamageMultiplier = builder
-                .comment("Define the Damage multiplier for Skillshot Pistols")
+                .comment("Define the Damage multiplier for Showman's Glocks")
                 .defineInRange("goldSkillshotDamageModifier", 1.0D, 0.1D, 5D);
         goldSkillshotFireDelay = builder
-                .comment("Configure the Fire delay for Skillshot Pistols")
+                .comment("Configure the Fire delay for Showman's Glocks")
                 .defineInRange("goldSkillshotFireDelay", 9, 0, 72000);
         goldSkillshotEnchantability = builder
-                .comment("Configure the Enchantability for Skillshot Pistols")
+                .comment("Configure the Enchantability for Showman's Glocks")
                 .defineInRange("goldSkillshotEnchantability", 23, 0, 30);
         goldSkillshotDurability = builder
-                .comment("Configure the Durability for Skillshot Pistols")
+                .comment("Configure the Durability for Showman's Glocks")
                 .defineInRange("goldSkillshotDurability", 375, 0, 32767);
         goldSkillshotInaccuracy = builder
-                .comment("Configure the Inaccuracy for Skillshot Pistols")
+                .comment("Configure the Inaccuracy for Showman's Glocks")
                 .defineInRange("goldSkillshotInaccuracy", 1.65D, 0D, 90D);
         goldSkillshotProjectileSpeed = builder
-                .comment("Configure the Projectile Speed for Skillshot Pistols")
+                .comment("Configure the Projectile Speed for Showman's Glocks")
                 .defineInRange("goldSkillshotProjectileSpeed", 6.5D, 0D, 64D);
-        goldSkillshotMaxCombo = builder
-                .comment("Configure the maximum combo on Skillshot Pistols")
-                .defineInRange("goldSkillshotMaxCombo", 4, 2, 255);
-        goldSkillshotComboMultiplierPer = builder
-                .comment("Configure the addition to damage multiplier per combo for Skillshot Pistols")
-                .defineInRange("goldSkillshotComboMultplierPer", 0.2D, 0D, 20D);
+        goldSkillshotTwoHandedUse = builder
+                .comment("Configure the bonus for two handed use on Showman's Glocks")
+                .defineInRange("goldSkillshotMaxCombo", 1.5D, 0.1D, 10.0D);
         goldSkillshotSwitchSpeed = builder
-                .comment("Configure the Weapon Switch Speed for Skillshot Pistols")
+                .comment("Configure the Weapon Switch Speed for Showman's Glocks")
                 .defineInRange("goldSkillshotSwitchSpeed", 3.7D, 0D, 5D);
         goldSkillshotMeleeDamage = builder
-                .comment("Configure the Melee Damage for Skillshot Pistols")
+                .comment("Configure the Melee Damage for Showman's Glocks")
                 .defineInRange("goldSkillshotMeleeDamage", 2D, 0D, 40D);
         builder.pop();
 

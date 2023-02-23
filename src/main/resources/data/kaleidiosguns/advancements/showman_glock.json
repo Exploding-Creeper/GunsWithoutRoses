@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "kaleidiosguns:skill_shot"
+      "kaleidiosguns:showman_glock"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "kaleidiosguns:skill_shot"
+        "recipe": "kaleidiosguns:showman_glock"
       }
     }
   },
