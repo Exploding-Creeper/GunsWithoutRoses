@@ -281,8 +281,15 @@ public class BulletEntity extends AbstractFireballEntity {
 							BlockTags.WOODEN_TRAPDOORS.getValues().contains(blockToChange) ||
 							BlockTags.FENCE_GATES.getValues().contains(blockToChange) ||
 							BlockTags.FENCES.getValues().contains(blockToChange) ||
+							BlockTags.ICE.getValues().contains(blockToChange) ||
+							blockToChange instanceof GlassBlock ||
+							blockToChange instanceof StainedGlassBlock ||
+							blockToChange instanceof PaneBlock ||
 							blockToChange == Blocks.IRON_DOOR ||
-					        blockToChange == Blocks.IRON_TRAPDOOR) {
+					        blockToChange == Blocks.IRON_TRAPDOOR ||
+							blockToChange == Blocks.HAY_BLOCK ||
+							blockToChange == Blocks.HONEY_BLOCK ||
+							blockToChange == Blocks.SLIME_BLOCK) {
 						level.destroyBlock(raytrace.getBlockPos(), false);
 					}
 				}
