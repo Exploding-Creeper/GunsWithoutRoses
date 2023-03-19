@@ -70,7 +70,7 @@
 	"tooltip.kaleidiosguns.defender": "Increases fire rate if standing near any Tile Entity",
 	"tooltip.kaleidiosguns.sensitive": "Accuracy decreases if shot in midair",
 	"tooltip.kaleidiosguns.explosive": "Explosive projectiles, requires non-flint ammo",
-	"tooltip.kaleidiosguns.shatter": "Can crack or disintegrate stones",
+	"tooltip.kaleidiosguns.shatter": "Deflects off blocks, can crack or disintegrate stones",
 	"tooltip.kaleidiosguns.quiet": "Its simplicity makes it quieter",
 	"tooltip.kaleidiosguns.breach": "Can breach doors, windows and break parkour blocks",
 	"tooltip.kaleidiosguns.lava": "Entities on fire cause more damage",
