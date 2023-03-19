@@ -57,6 +57,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	public boolean isWither;
 	public boolean wasRevenge;
 	public boolean wasDark;
+	public boolean shootsLights;
 	public boolean isClean;
 	public boolean isCorrupted;
 	public boolean shouldBreakDoors;
@@ -262,29 +263,34 @@ public class BulletEntity extends AbstractFireballEntity {
 				}
 			}
 
+			if (shootsLights) {
+				Block blockToChange = level.getBlockState(raytrace.getBlockPos()).getBlock();
+				if (blockToChange.getLightValue(level.getBlockState(raytrace.getBlockPos()), level, raytrace.getBlockPos()) > 0) {
+					level.destroyBlock(raytrace.getBlockPos(), false);
+				}
+			}
+
 			if (shouldShatterBlocks) {
 
 			}
 
-			if (shootingGun != null) {
-				if (shootingGun.breachDoors) {
-					Block blockToChange = level.getBlockState(raytrace.getBlockPos()).getBlock();
-					//break wooden doors
-					if (BlockTags.WOODEN_DOORS.getValues().contains(blockToChange) ||
-							BlockTags.WOODEN_TRAPDOORS.getValues().contains(blockToChange) ||
-							BlockTags.FENCE_GATES.getValues().contains(blockToChange) ||
-							BlockTags.FENCES.getValues().contains(blockToChange) ||
-							BlockTags.ICE.getValues().contains(blockToChange) ||
-							blockToChange instanceof GlassBlock ||
-							blockToChange instanceof StainedGlassBlock ||
-							blockToChange instanceof PaneBlock ||
-							blockToChange == Blocks.IRON_DOOR ||
-					        blockToChange == Blocks.IRON_TRAPDOOR ||
-							blockToChange == Blocks.HAY_BLOCK ||
-							blockToChange == Blocks.HONEY_BLOCK ||
-							blockToChange == Blocks.SLIME_BLOCK) {
-						level.destroyBlock(raytrace.getBlockPos(), false);
-					}
+			if (shouldBreakDoors) {
+				Block blockToChange = level.getBlockState(raytrace.getBlockPos()).getBlock();
+				//break wooden doors
+				if (BlockTags.WOODEN_DOORS.getValues().contains(blockToChange) ||
+						BlockTags.WOODEN_TRAPDOORS.getValues().contains(blockToChange) ||
+						BlockTags.FENCE_GATES.getValues().contains(blockToChange) ||
+						BlockTags.FENCES.getValues().contains(blockToChange) ||
+						BlockTags.ICE.getValues().contains(blockToChange) ||
+						blockToChange instanceof GlassBlock ||
+						blockToChange instanceof StainedGlassBlock ||
+						blockToChange instanceof PaneBlock ||
+						blockToChange == Blocks.IRON_DOOR ||
+						blockToChange == Blocks.IRON_TRAPDOOR ||
+						blockToChange == Blocks.HAY_BLOCK ||
+						blockToChange == Blocks.HONEY_BLOCK ||
+						blockToChange == Blocks.SLIME_BLOCK) {
+					level.destroyBlock(raytrace.getBlockPos(), false);
 				}
 			}
 		}

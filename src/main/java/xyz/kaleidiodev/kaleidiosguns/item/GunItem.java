@@ -334,6 +334,7 @@ public class GunItem extends Item {
 		shot.shouldShatterBlocks = this.canShatterBlocks;
 		shot.healsFriendlies = this.isDefender;
 		shot.isMeleeBonus = this.meleeBonusCounter > 0;
+		shot.shootsLights = this.isShadow;
 		if (player.getEffect(Effects.DIG_SPEED) != null) {
 			shot.mineChance = this.mineChance + (KGConfig.hasteBonusMineChance.get() * player.getEffect(Effects.DIG_SPEED).getAmplifier());
 		}
