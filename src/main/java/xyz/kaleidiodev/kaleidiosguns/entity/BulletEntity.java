@@ -60,7 +60,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	public boolean isClean;
 	public boolean isCorrupted;
 	public boolean shouldBreakDoors;
-	public boolean shouldBreakGlass;
+	public boolean shouldShatterBlocks;
 	public boolean healsFriendlies;
 	public byte lavaMode; //bit 0 is player is on fire, bit 1 is enemy is on fire, bit 2 is is active
 	public boolean isMeleeBonus;
@@ -262,15 +262,8 @@ public class BulletEntity extends AbstractFireballEntity {
 				}
 			}
 
-			if (shouldBreakGlass) {
-				Block blockToBreak = level.getBlockState(raytrace.getBlockPos()).getBlock();
-				if ((blockToBreak instanceof StainedGlassBlock) ||
-						(blockToBreak instanceof GlassBlock) ||
-						(blockToBreak instanceof PaneBlock) ||
-						(level.getBlockState(raytrace.getBlockPos()).getLightValue(level, raytrace.getBlockPos()) > 0) ||
-						(BlockTags.WOOL.getValues().contains(blockToBreak))) {
-					level.destroyBlock(raytrace.getBlockPos(), false);
-				}
+			if (shouldShatterBlocks) {
+
 			}
 
 			if (shootingGun != null) {

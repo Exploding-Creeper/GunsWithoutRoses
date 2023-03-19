@@ -76,7 +76,7 @@ public class GunItem extends Item {
 	protected boolean isDefender;
 	protected boolean isOneHanded;
 	protected boolean isSensitive;
-	protected boolean canBreakGlass;
+	protected boolean canShatterBlocks;
 	protected boolean canBreakDoors;
 	protected boolean isQuiet;
 	protected boolean isLava;
@@ -331,7 +331,7 @@ public class GunItem extends Item {
 		shot.isCorrupted = this.isCorruption;
 		shot.isTorpedo = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.torpedo, gun) == 1;
 		shot.shouldBreakDoors = this.canBreakDoors;
-		shot.shouldBreakGlass = this.canBreakGlass;
+		shot.shouldShatterBlocks = this.canShatterBlocks;
 		shot.healsFriendlies = this.isDefender;
 		shot.isMeleeBonus = this.meleeBonusCounter > 0;
 		if (player.getEffect(Effects.DIG_SPEED) != null) {
@@ -715,8 +715,8 @@ public class GunItem extends Item {
 		return this;
 	}
 
-	public GunItem setCanBreakGlass(boolean glass) {
-		this.canBreakGlass = glass;
+	public GunItem setCanShatterBlocks(boolean glass) {
+		this.canShatterBlocks = glass;
 		return this;
 	}
 
@@ -844,7 +844,7 @@ public class GunItem extends Item {
 			if (this.getItem() == ModItems.plasmaGatling) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.plasma"));
 			if (isExplosive) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.explosive"));
 			if (canBreakDoors) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.doors"));
-			if (canBreakGlass) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.glass"));
+			if (canShatterBlocks) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.shatter"));
 			if (isQuiet) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.quiet"));
 			if (hasVoltage) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.voltage"));
 			if (breachDoors) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.breach"));
