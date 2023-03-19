@@ -63,6 +63,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	public boolean shouldBreakDoors;
 	public boolean shouldShatterBlocks;
 	public boolean healsFriendlies;
+	public boolean juggle;
 	public byte lavaMode; //bit 0 is player is on fire, bit 1 is enemy is on fire, bit 2 is is active
 	public boolean isMeleeBonus;
 	public int redstoneLevel;
@@ -341,9 +342,9 @@ public class BulletEntity extends AbstractFireballEntity {
 
 		Vector3d previousDelta = victim.getDeltaMovement();
 		boolean damaged = victim.hurt((new IndirectEntityDamageSource("arrow", this, shooter)).setProjectile(), (float) bullet.modifyDamage(damage, this, victim, shooter, level));
-		if (isClean) victim.setDeltaMovement(previousDelta);
 
-		if (damaged && victim instanceof LivingEntity) {
+		if (isClean) victim.setDeltaMovement(previousDelta);
+		else if (damaged && victim instanceof LivingEntity) {
 			LivingEntity livingTarget = (LivingEntity) victim;
 
 			double actualKnockback;
@@ -355,6 +356,12 @@ public class BulletEntity extends AbstractFireballEntity {
 					vec = getDeltaMovement().multiply(1, 0.25, 1).normalize().scale(actualKnockback);
 					livingTarget.push(vec.x, vec.y, vec.z);
 				}
+			}
+
+			//force an overwrite of vertical velocity if the gun can juggle
+			if (juggle) {
+				Vector3d vel = livingTarget.getDeltaMovement();
+				livingTarget.setDeltaMovement(new Vector3d(vel.x, 0.4, vel.z));
 			}
 
 			bullet.onLivingEntityHit(this, livingTarget, shooter, level);

@@ -78,7 +78,7 @@ public class GunItem extends Item {
 	protected boolean isSensitive;
 	protected boolean canShatterBlocks;
 	protected boolean canBreakDoors;
-	protected boolean isQuiet;
+	protected boolean isJuggler;
 	protected boolean isLava;
 	protected boolean isMeleeBonus;
 	public boolean breachDoors;
@@ -253,7 +253,6 @@ public class GunItem extends Item {
 				if (!bulletFree) bulletItem.consume(ammo, player, gun);
 
 				float volume = (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.silenced, gun) > 0 ? 2.0F : 10.0F);
-				if (this.isQuiet) volume /= 2;
 
 				world.playSound(null, player.getX(), player.getY(), player.getZ(), fireSound, SoundCategory.PLAYERS, volume, 1.0F);
 				player.awardStat(Stats.ITEM_USED.get(this));
@@ -335,6 +334,7 @@ public class GunItem extends Item {
 		shot.healsFriendlies = this.isDefender;
 		shot.isMeleeBonus = this.meleeBonusCounter > 0;
 		shot.shootsLights = this.isShadow;
+		shot.juggle = this.isJuggler;
 		if (player.getEffect(Effects.DIG_SPEED) != null) {
 			shot.mineChance = this.mineChance + (KGConfig.hasteBonusMineChance.get() * player.getEffect(Effects.DIG_SPEED).getAmplifier());
 		}
@@ -711,8 +711,8 @@ public class GunItem extends Item {
 		return this;
 	}
 
-	public GunItem setIsQuiet(boolean quiet) {
-		this.isQuiet = quiet;
+	public GunItem setIsJuggler(boolean juggle) {
+		this.isJuggler = juggle;
 		return this;
 	}
 
@@ -846,7 +846,7 @@ public class GunItem extends Item {
 			if (isExplosive) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.explosive"));
 			if (canBreakDoors) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.doors"));
 			if (canShatterBlocks) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.shatter"));
-			if (isQuiet) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.quiet"));
+			if (isJuggler) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.juggle"));
 			if (hasVoltage) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.voltage"));
 			if (breachDoors) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.breach"));
 			if (isMeleeBonus) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.melee"));
