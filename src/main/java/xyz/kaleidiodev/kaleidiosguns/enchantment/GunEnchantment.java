@@ -41,5 +41,4 @@ public class GunEnchantment extends Enchantment {
 	public int getDamageProtection(int level, DamageSource source) {
 		return 0;
 	}
-
 }

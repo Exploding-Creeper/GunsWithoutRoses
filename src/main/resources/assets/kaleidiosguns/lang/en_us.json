@@ -116,6 +116,10 @@
 	"enchantment.kaleidiosguns.signal_boost.desc": "Redstone blocks can be further away",
 	"enchantment.kaleidiosguns.torpedo": "Torpedo",
 	"enchantment.kaleidiosguns.torpedo.desc": "Bullets don't decrease speed underwater",
+	"enchantment.kaleidiosguns.sponge_acid": "Curse of Sponge Acid",
+	"enchantment.kaleidiosguns.sponge_acid.desc": "Gives extra damage for how much armor absorbed, however spends lots of durability",
+	"enchantment.kaleidiosguns.tracer_ammo": "Curse of Tracer Ammo",
+	"enchantment.kaleidiosguns.tracer_ammo.desc": "You, the bullet, and hit target glow, but the damage is very little",
 
 	"entity.kaleidiosguns.bullet": "Bullet",
 

@@ -19,6 +19,7 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.*;
@@ -31,6 +32,7 @@ import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.common.Mod;
 import xyz.kaleidiodev.kaleidiosguns.config.KGConfig;
 import xyz.kaleidiodev.kaleidiosguns.enchantment.GunAccuracyEnchantment;
 import xyz.kaleidiodev.kaleidiosguns.enchantment.GunDamageEnchantment;
@@ -249,6 +251,8 @@ public class GunItem extends Item {
 					durabilityDamage += 1;
 				}
 
+				if (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.sponge, gun) > 0) durabilityDamage *= 2;
+
 				gun.hurtAndBreak(durabilityDamage, player, (p) -> p.broadcastBreakEvent(player.getUsedItemHand()));
 				if (!bulletFree) bulletItem.consume(ammo, player, gun);
 
@@ -265,6 +269,10 @@ public class GunItem extends Item {
 						chambers = this.revolutions;
 					}
 					setChambers(gun, chambers);
+				}
+
+				if (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.tracer, gun) > 0) {
+					player.addEffect(new EffectInstance(Effects.GLOWING, KGConfig.playerGlowTicks.get(), 0));
 				}
 
 				player.getCooldowns().addCooldown(this, getFireDelay(gun, player));
@@ -305,6 +313,7 @@ public class GunItem extends Item {
 		shot.setBulletSpeed(getProjectileSpeed(gun, player));
 		shot.setKnockbackStrength(myKnockback);
 		shot.setExplosive(isExplosive);
+		shot.setShouldGlow(EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.tracer, gun) > 0);
 		shot.setOrigin(player.position());
 
 		double someDamage = (shot.getDamage() + getBonusDamage(gun, player)) * getDamageMultiplier(gun);
@@ -335,6 +344,7 @@ public class GunItem extends Item {
 		shot.isMeleeBonus = this.meleeBonusCounter > 0;
 		shot.shootsLights = this.isShadow;
 		shot.juggle = this.isJuggler;
+		shot.penetrative = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.sponge, gun) > 0;
 		if (player.getEffect(Effects.DIG_SPEED) != null) {
 			shot.mineChance = this.mineChance + (KGConfig.hasteBonusMineChance.get() * player.getEffect(Effects.DIG_SPEED).getAmplifier());
 		}

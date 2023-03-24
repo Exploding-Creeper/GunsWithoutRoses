@@ -68,6 +68,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	public boolean isMeleeBonus;
 	public int redstoneLevel;
 	public double mineChance;
+	public boolean penetrative;
 
 	public BulletEntity(EntityType<? extends BulletEntity> entityType, World worldIn) {
 		super(entityType, worldIn);
@@ -313,6 +314,10 @@ public class BulletEntity extends AbstractFireballEntity {
 		if (entity instanceof LivingEntity) {
 			LivingEntity victim = (LivingEntity) entity;
 			healthOfVictim = victim.getHealth();
+
+			if (shouldGlow) {
+				victim.addEffect(new EffectInstance(Effects.GLOWING, KGConfig.enemyGlowTicks.get(), 0));
+			}
 		} else healthOfVictim = 0.0f;
 
 		if (shooter != null) {
@@ -366,6 +371,20 @@ public class BulletEntity extends AbstractFireballEntity {
 
 			bullet.onLivingEntityHit(this, livingTarget, shooter, level);
 		} else if (!damaged && ignoreInvulnerability) victim.invulnerableTime = lastHurtResistant;
+
+		if ((victim instanceof LivingEntity) && penetrative) {
+			LivingEntity livingVictim = (LivingEntity) victim;
+			if ((healthOfVictim > livingVictim.getHealth()) && (livingVictim.getHealth() > 0)) {
+				float healthDifference = healthOfVictim - livingVictim.getHealth();
+				healthDifference = (float)damage - healthDifference;
+
+				if (healthDifference > 0) {
+					//apply the absorbed damage as a second damage event, allowing the armor to absorb some of this too.
+					//turns out applying a new value tricks the event into thinking this was the actual value, not the previous.  weird.
+					victim.hurt((new IndirectEntityDamageSource("arrow", this, shooter)).setProjectile(), (float)damage + healthDifference);
+				}
+			}
+		}
 	}
 
 	@Override

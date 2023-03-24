@@ -124,15 +124,11 @@ public interface IBullet {
 			int maximumBlocks = (int)(((EnchantmentHelper.getItemEnchantmentLevel( ModEnchantments.signalBoost, new ItemStack(projectile.getShootingGun().getItem())) * KGConfig.signalMultiplier.get()) + 1) * KGConfig.redstoneRadius.get());
 			double multiplierPerBlock = multiplierDelta / maximumBlocks;
 
-			System.out.println(multiplierDelta);
-			System.out.println(maximumBlocks);
-			System.out.println(multiplierPerBlock);
-
 			newDamage *= ((maximumBlocks - projectile.redstoneLevel) * (multiplierPerBlock)) + KGConfig.ironVoltgunMinimumDamage.get();
 		}
 
 		//deal no damage at all if it's for marking
-		if (projectile.isGlowing()) newDamage = 0;
+		if (projectile.isGlowing()) newDamage /= KGConfig.glowDamageDivider.get();
 
 		return newDamage;
 	}

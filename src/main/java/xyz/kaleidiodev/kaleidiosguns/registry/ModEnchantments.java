@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
 import xyz.kaleidiodev.kaleidiosguns.KaleidiosGuns;
 import xyz.kaleidiodev.kaleidiosguns.enchantment.GunAccuracyEnchantment;
+import xyz.kaleidiodev.kaleidiosguns.enchantment.GunCurseEnchantment;
 import xyz.kaleidiodev.kaleidiosguns.enchantment.GunDamageEnchantment;
 import xyz.kaleidiodev.kaleidiosguns.enchantment.GunEnchantment;
 import xyz.kaleidiodev.kaleidiosguns.item.GunItem;
@@ -15,7 +16,7 @@ import xyz.kaleidiodev.kaleidiosguns.item.GunItem;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = KaleidiosGuns.MODID)
 public class ModEnchantments {
 
-	public static Enchantment impact, bullseye, sleightOfHand, preserving, accelerator, division, passionForBlood, cowboy, frostShot, counterStrike, silenced, cleanShot, signalBoost, torpedo;
+	public static Enchantment impact, bullseye, sleightOfHand, preserving, accelerator, division, passionForBlood, cowboy, frostShot, counterStrike, silenced, cleanShot, signalBoost, torpedo, sponge, tracer;
 	public static final EnchantmentType TYPE_GUN = EnchantmentType.create("GWR_GUN", (item) -> item instanceof GunItem);
 
 	@SubscribeEvent
@@ -43,6 +44,10 @@ public class ModEnchantments {
 		//alternate upgrade (replaces base)
 		frostShot = initEnchant(reg, new GunDamageEnchantment(Enchantment.Rarity.RARE, 3, 5, 10, 30, TYPE_GUN), "frost_shard"); //dmg
 		counterStrike = initEnchant(reg, new GunAccuracyEnchantment(Enchantment.Rarity.RARE, 1, 10, 20, 30, TYPE_GUN), "counter_strike"); //acc
+
+		//curses
+		sponge = initEnchant(reg, new GunCurseEnchantment(Enchantment.Rarity.VERY_RARE, 1, 9, 18, 30, TYPE_GUN), "sponge_acid");
+		tracer = initEnchant(reg, new GunCurseEnchantment(Enchantment.Rarity.RARE, 1, 7, 14, 30, TYPE_GUN), "tracer_ammo");
 	}
 
 	public static Enchantment initEnchant(IForgeRegistry<Enchantment> reg, Enchantment enchantment, String name) {

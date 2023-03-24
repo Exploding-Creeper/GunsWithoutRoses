@@ -1,5 +1,6 @@
 package xyz.kaleidiodev.kaleidiosguns.config;
 
+import net.minecraftforge.common.ForgeConfig;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public class KGConfig {
@@ -275,6 +276,11 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue frostyMaxAddition;
     public static ForgeConfigSpec.DoubleValue frostyMinAddition;
     public static ForgeConfigSpec.DoubleValue signalMultiplier;
+
+    public static ForgeConfigSpec.IntValue playerGlowTicks;
+    public static ForgeConfigSpec.IntValue enemyGlowTicks;
+    public static ForgeConfigSpec.DoubleValue glowDamageDivider;
+    public static ForgeConfigSpec.DoubleValue spongeAcidDurabilityMultiplier;
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -1093,6 +1099,24 @@ public class KGConfig {
         signalMultiplier = builder
                 .comment("Additive multiplier per level of signal boost")
                 .defineInRange("signalMultiplier", 0.5D, 0.1D, 20D);
+        builder.pop();
+
+        builder.push("tracer ammo curse");
+        playerGlowTicks = builder
+                .comment("Ticks the glow should last for on the player")
+                .defineInRange("playerGlowTicks", 100, 1, 32767);
+        enemyGlowTicks = builder
+                .comment("Ticks the glow should last for on the hit enemy")
+                .defineInRange("enemyGlowTicks", 100, 1, 32767);
+        glowDamageDivider = builder
+                .comment("Damage division for glowing projectiles")
+                .defineInRange("glowDamageDivider", 4D, 0.1D, 100D);
+        builder.pop();
+
+        builder.push("sponge acid curse");
+        spongeAcidDurabilityMultiplier = builder
+                .comment("Durability damage multiplier for using a weapon with Curse of Sponge Acid")
+                .defineInRange("spongeAcidDurabilityMultiplier", 2D, 0.1D, 10D);
         builder.pop();
 
         spec = builder.build();
