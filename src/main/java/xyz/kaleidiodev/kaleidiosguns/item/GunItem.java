@@ -251,8 +251,6 @@ public class GunItem extends Item {
 					durabilityDamage += 1;
 				}
 
-				if (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.sponge, gun) > 0) durabilityDamage *= 2;
-
 				gun.hurtAndBreak(durabilityDamage, player, (p) -> p.broadcastBreakEvent(player.getUsedItemHand()));
 				if (!bulletFree) bulletItem.consume(ammo, player, gun);
 
@@ -344,7 +342,6 @@ public class GunItem extends Item {
 		shot.isMeleeBonus = this.meleeBonusCounter > 0;
 		shot.shootsLights = this.isShadow;
 		shot.juggle = this.isJuggler;
-		shot.penetrative = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.sponge, gun) > 0;
 		if (player.getEffect(Effects.DIG_SPEED) != null) {
 			shot.mineChance = this.mineChance + (KGConfig.hasteBonusMineChance.get() * player.getEffect(Effects.DIG_SPEED).getAmplifier());
 		}
