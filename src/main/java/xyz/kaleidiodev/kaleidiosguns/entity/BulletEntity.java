@@ -25,6 +25,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraftforge.common.ForgeHooks;
 import xyz.kaleidiodev.kaleidiosguns.config.KGConfig;
+import xyz.kaleidiodev.kaleidiosguns.item.GatlingItem;
 import xyz.kaleidiodev.kaleidiosguns.item.GunItem;
 import xyz.kaleidiodev.kaleidiosguns.item.IBullet;
 import xyz.kaleidiodev.kaleidiosguns.network.NetworkUtils;
@@ -357,9 +358,17 @@ public class BulletEntity extends AbstractFireballEntity {
 				if (this.shootingGun.getItem() == ModItems.doubleBarrelShotgun) {
 					actualKnockback = knockbackStrength / ticksSinceFired;
 
-					Vector3d vec;
-					vec = getDeltaMovement().multiply(1, 0.25, 1).normalize().scale(actualKnockback);
+					Vector3d vec = getDeltaMovement().multiply(1, 0.25, 1).normalize().scale(actualKnockback);
 					livingTarget.push(vec.x, vec.y, vec.z);
+				}
+
+				if (this.shootingGun.getItem() instanceof GatlingItem) {
+					Vector3d vec = getDeltaMovement().multiply(1, 0, 1).normalize().scale(0.02);
+					livingTarget.push(vec.x, vec.y, vec.z);
+
+					Vector3d newMovement = livingTarget.getDeltaMovement();
+					//this should cancel the vertical knockback done by vanilla's damage event by default
+					if (livingTarget.isOnGround()) livingTarget.setDeltaMovement(newMovement.x, 0, newMovement.z);
 				}
 			}
 
