@@ -54,12 +54,12 @@ public interface IBullet {
 		//if the chance to heal rolls successfully
 		if (projectile.rollRewardChance()) {
 			//calculate the damage the enemy recieved.
-			float damageDelta = projectile.getHealthOfVictim() - target.getHealth();
+			float damageDelta = projectile.getPreviousHealthOfVictim() - target.getHealth();
 
 			//heal the shooter by a fraction of what damage the enemy recieved.
 			LivingEntity shooterEntity = (LivingEntity)shooter;
 			//cast to primitive first before casting to float.  thanks forge.
-			if (shooterEntity != null) if (shooterEntity.isAlive()) shooterEntity.setHealth(shooterEntity.getHealth() + (damageDelta * (float)(double) KGConfig.passionForBloodHealIncrease.get()));
+			if (shooterEntity != null) if (shooterEntity.isAlive()) shooterEntity.heal(damageDelta * (float)(double) KGConfig.passionForBloodHealIncrease.get());
 		}
 	}
 

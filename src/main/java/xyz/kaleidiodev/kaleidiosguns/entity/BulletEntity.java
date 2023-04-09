@@ -347,6 +347,10 @@ public class BulletEntity extends AbstractFireballEntity {
 		if (ignoreInvulnerability) victim.invulnerableTime = 0;
 
 		Vector3d previousDelta = victim.getDeltaMovement();
+		if (victim instanceof LivingEntity) {
+			healthOfVictim = ((LivingEntity)victim).getHealth();
+		}
+
 		boolean damaged = victim.hurt((new IndirectEntityDamageSource("arrow", this, shooter)).setProjectile(), (float) bullet.modifyDamage(damage, this, victim, shooter, level));
 
 		if (isClean) victim.setDeltaMovement(previousDelta);
@@ -383,7 +387,7 @@ public class BulletEntity extends AbstractFireballEntity {
 
 		if ((victim instanceof LivingEntity) && penetrative) {
 			LivingEntity livingVictim = (LivingEntity) victim;
-			if ((healthOfVictim > livingVictim.getHealth()) && (livingVictim.getHealth() > 0)) {
+			if ((healthOfVictim > livingVictim.getHealth()) && (livingVictim.isAlive())) {
 				float healthDifference = healthOfVictim - livingVictim.getHealth();
 				healthDifference = (float)damage - healthDifference;
 
@@ -491,19 +495,13 @@ public class BulletEntity extends AbstractFireballEntity {
 		this.healthRewardChance = rewardChance;
 	}
 
-	;
-
-	public float getHealthOfVictim() {
+	public float getPreviousHealthOfVictim() {
 		return healthOfVictim;
 	}
-
-	;
 
 	public void setShouldBreakBlock(boolean breakBlock) {
 		this.shouldBreakBlock = breakBlock;
 	}
-
-	;
 
 	public boolean rollRewardChance() {
 		Random random = new Random();
