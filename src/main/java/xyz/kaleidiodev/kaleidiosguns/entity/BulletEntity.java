@@ -393,8 +393,8 @@ public class BulletEntity extends AbstractFireballEntity {
 
 				if (healthDifference > 0) {
 					//apply the absorbed damage as a second damage event, allowing the armor to absorb some of this too.
-					//turns out applying a new value tricks the event into thinking this was the actual value, not the previous.  weird.
-					victim.hurt((new IndirectEntityDamageSource("arrow", this, shooter)).setProjectile(), (float)damage + healthDifference);
+					//this version of this code requires nodami to work!
+					victim.hurt((new IndirectEntityDamageSource("arrow", this, shooter)).setProjectile(), (float)healthDifference);
 				}
 			}
 		}
