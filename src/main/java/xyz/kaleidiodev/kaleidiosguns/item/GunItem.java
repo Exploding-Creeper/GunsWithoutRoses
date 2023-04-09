@@ -32,7 +32,6 @@ import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.common.Mod;
 import xyz.kaleidiodev.kaleidiosguns.config.KGConfig;
 import xyz.kaleidiodev.kaleidiosguns.enchantment.GunAccuracyEnchantment;
 import xyz.kaleidiodev.kaleidiosguns.enchantment.GunDamageEnchantment;
@@ -322,7 +321,7 @@ public class GunItem extends Item {
 			shot.setDamage(someDamage * ((double)thisGun.getBaseBulletCount() / (double)thisGun.getBulletCount(gun, player)));
 		}
 
-		if (!player.getMainHandItem().isEmpty() && !player.getOffhandItem().isEmpty() && twoHandBonus) shot.setDamage(someDamage * KGConfig.goldSkillshotTwoHandedUse.get());
+		if (!player.getMainHandItem().isEmpty() && !player.getOffhandItem().isEmpty() && twoHandBonus) shot.setDamage(someDamage * KGConfig.goldShowmanTwoHandedUse.get());
 		else shot.setDamage(someDamage);
 
 		shot.wasRevenge = (this.shouldRevenge && (player.getHealth() < (player.getMaxHealth() * KGConfig.emeraldBlessedHealthMinimumRatio.get())));

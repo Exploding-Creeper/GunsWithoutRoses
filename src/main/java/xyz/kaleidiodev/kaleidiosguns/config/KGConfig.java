@@ -1,6 +1,5 @@
 package xyz.kaleidiodev.kaleidiosguns.config;
 
-import net.minecraftforge.common.ForgeConfig;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public class KGConfig {
@@ -65,15 +64,15 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue shadowRevolverSwitchSpeed;
     public static ForgeConfigSpec.DoubleValue shadowRevolverMeleeDamage;
 
-    public static ForgeConfigSpec.DoubleValue goldSkillshotDamageMultiplier;
-    public static ForgeConfigSpec.IntValue goldSkillshotFireDelay;
-    public static ForgeConfigSpec.IntValue goldSkillshotEnchantability;
-    public static ForgeConfigSpec.IntValue goldSkillshotDurability;
-    public static ForgeConfigSpec.DoubleValue goldSkillshotInaccuracy;
-    public static ForgeConfigSpec.DoubleValue goldSkillshotProjectileSpeed;
-    public static ForgeConfigSpec.DoubleValue goldSkillshotTwoHandedUse;
-    public static ForgeConfigSpec.DoubleValue goldSkillshotSwitchSpeed;
-    public static ForgeConfigSpec.DoubleValue goldSkillshotMeleeDamage;
+    public static ForgeConfigSpec.DoubleValue goldShowmanDamageMultiplier;
+    public static ForgeConfigSpec.IntValue goldShowmanFireDelay;
+    public static ForgeConfigSpec.IntValue goldShowmanEnchantability;
+    public static ForgeConfigSpec.IntValue goldShowmanDurability;
+    public static ForgeConfigSpec.DoubleValue goldShowmanInaccuracy;
+    public static ForgeConfigSpec.DoubleValue goldShowmanProjectileSpeed;
+    public static ForgeConfigSpec.DoubleValue goldShowmanTwoHandedUse;
+    public static ForgeConfigSpec.DoubleValue goldShowmanSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue goldShowmanMeleeDamage;
 
     public static ForgeConfigSpec.DoubleValue emeraldBlessedDamageMultiplier;
     public static ForgeConfigSpec.IntValue emeraldBlessedFireDelay;
@@ -453,33 +452,33 @@ public class KGConfig {
         builder.pop();
 
         builder.push("skillshot pistol");
-        goldSkillshotDamageMultiplier = builder
+        goldShowmanDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Showman's Glocks")
-                .defineInRange("goldSkillshotDamageModifier", 1.0D, 0.1D, 5D);
-        goldSkillshotFireDelay = builder
+                .defineInRange("goldShowmanDamageModifier", 1.0D, 0.1D, 5D);
+        goldShowmanFireDelay = builder
                 .comment("Configure the Fire delay for Showman's Glocks")
-                .defineInRange("goldSkillshotFireDelay", 9, 0, 72000);
-        goldSkillshotEnchantability = builder
+                .defineInRange("goldShowmanFireDelay", 9, 0, 72000);
+        goldShowmanEnchantability = builder
                 .comment("Configure the Enchantability for Showman's Glocks")
-                .defineInRange("goldSkillshotEnchantability", 23, 0, 30);
-        goldSkillshotDurability = builder
+                .defineInRange("goldShowmanEnchantability", 23, 0, 30);
+        goldShowmanDurability = builder
                 .comment("Configure the Durability for Showman's Glocks")
-                .defineInRange("goldSkillshotDurability", 375, 0, 32767);
-        goldSkillshotInaccuracy = builder
+                .defineInRange("goldShowmanDurability", 375, 0, 32767);
+        goldShowmanInaccuracy = builder
                 .comment("Configure the Inaccuracy for Showman's Glocks")
-                .defineInRange("goldSkillshotInaccuracy", 1.65D, 0D, 90D);
-        goldSkillshotProjectileSpeed = builder
+                .defineInRange("goldShowmanInaccuracy", 1.65D, 0D, 90D);
+        goldShowmanProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for Showman's Glocks")
-                .defineInRange("goldSkillshotProjectileSpeed", 6.5D, 0D, 64D);
-        goldSkillshotTwoHandedUse = builder
+                .defineInRange("goldShowmanProjectileSpeed", 6.5D, 0D, 64D);
+        goldShowmanTwoHandedUse = builder
                 .comment("Configure the bonus for two handed use on Showman's Glocks")
-                .defineInRange("goldSkillshotMaxCombo", 1.5D, 0.1D, 10.0D);
-        goldSkillshotSwitchSpeed = builder
+                .defineInRange("goldShowmanTwoHandedUse", 1.4D, 0.1D, 10.0D);
+        goldShowmanSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Showman's Glocks")
-                .defineInRange("goldSkillshotSwitchSpeed", 3.7D, 0D, 5D);
-        goldSkillshotMeleeDamage = builder
+                .defineInRange("goldShowmanSwitchSpeed", 3.7D, 0D, 5D);
+        goldShowmanMeleeDamage = builder
                 .comment("Configure the Melee Damage for Showman's Glocks")
-                .defineInRange("goldSkillshotMeleeDamage", 2D, 0D, 40D);
+                .defineInRange("goldShowmanMeleeDamage", 2D, 0D, 40D);
         builder.pop();
 
         builder.push("blessed pistol");
