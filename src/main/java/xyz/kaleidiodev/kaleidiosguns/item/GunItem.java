@@ -89,6 +89,7 @@ public class GunItem extends Item {
 	protected double currentDamage;
 	protected int meleeBonusCounter;
 	protected double mineChance;
+	protected int ammoCost = 1;
 
 	protected SoundEvent fireSound = ModSounds.gun;
 	protected SoundEvent reloadSound = ModSounds.double_shotgunReload;
@@ -750,6 +751,13 @@ public class GunItem extends Item {
 		return this;
 	}
 
+	public GunItem setCost(int cost) {
+		this.ammoCost = cost;
+		return this;
+	}
+
+	public int getCost() { return ammoCost; }
+
 	/**
 	 *
 	 * @param barrelSwitch set the divider that divides the fire rate to denote how many ticks it takes to switch barrels
@@ -816,21 +824,7 @@ public class GunItem extends Item {
 			double projectileSpeed = getProjectileSpeed(stack, null);
 			tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.speed" + (isProjectileSpeedModified(stack) ? ".modified" : ""), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(projectileSpeed)));
 
-			//ammo Cost
-			int cost = 1;
-			if (stack.getItem() instanceof GatlingItem) cost = KGConfig.gatlingCost.get();
-			if (stack.getItem() instanceof ShotgunItem) cost = KGConfig.shotgunCost.get();
-			if (stack.getItem() instanceof GunItem) {
-				if (((GunItem)stack.getItem()).isExplosive) cost = KGConfig.launcherCost.get();
-				if (!(((GunItem)stack.getItem()).isExplosive) &&
-						(((GunItem)stack.getItem()).hasPerfectAccuracy()) &&
-						!(stack.getItem() instanceof GatlingItem)) cost = KGConfig.sniperCost.get();
-				if (!(((GunItem)stack.getItem()).isExplosive) &&
-						!(((GunItem)stack.getItem()).hasPerfectAccuracy()) &&
-						!(stack.getItem() instanceof GatlingItem) &&
-						!(stack.getItem() instanceof ShotgunItem)) cost = KGConfig.pistolCost.get();
-			}
-			if (cost != 1) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.cost", cost));
+			if (ammoCost != 1) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.cost", ammoCost));
 
 			//Chance to not consume ammo
 			double inverseChanceFree = getInverseChanceFreeShot(stack, null);

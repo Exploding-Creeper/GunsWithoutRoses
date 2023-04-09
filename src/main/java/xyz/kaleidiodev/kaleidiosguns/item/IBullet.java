@@ -28,22 +28,8 @@ public interface IBullet {
 	void consume(ItemStack stack, PlayerEntity player, ItemStack gunItem);
 
 	default int costToUse(ItemStack stack) {
-		int cost = 1;
-
-		if (stack.getItem() instanceof GatlingItem) cost = KGConfig.gatlingCost.get();
-		if (stack.getItem() instanceof ShotgunItem) cost = KGConfig.shotgunCost.get();
-		if (stack.getItem() instanceof GunItem) {
-			if (((GunItem)stack.getItem()).isExplosive) cost = KGConfig.launcherCost.get();
-			if (!(((GunItem)stack.getItem()).isExplosive) &&
-					(((GunItem)stack.getItem()).hasPerfectAccuracy()) &&
-					!(stack.getItem() instanceof GatlingItem)) cost = KGConfig.sniperCost.get();
-			if (!(((GunItem)stack.getItem()).isExplosive) &&
-					!(((GunItem)stack.getItem()).hasPerfectAccuracy()) &&
-					!(stack.getItem() instanceof GatlingItem) &&
-					!(stack.getItem() instanceof ShotgunItem)) cost = KGConfig.pistolCost.get();
-		}
-
-		return cost;
+		if (stack.getItem() instanceof GunItem) return ((GunItem)stack.getItem()).getCost();
+		else return 1;
 	}
 
 	/**
