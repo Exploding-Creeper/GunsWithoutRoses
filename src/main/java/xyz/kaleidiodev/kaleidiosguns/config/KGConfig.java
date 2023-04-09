@@ -727,7 +727,7 @@ public class KGConfig {
                 .defineInRange("diamondMinegunInaccuracy", 0D, 0D, 90D);
         diamondMinegunProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for Mineguns")
-                .defineInRange("diamondMinegunProjectileSpeed", 2.3D, 0D, 64D);
+                .defineInRange("diamondMinegunProjectileSpeed", 3.5D, 0D, 64D);
         diamondMinegunMineChance = builder
                 .comment("Configure the Break Block Chance for Mineguns")
                 .defineInRange("diamondMinegunMineChance", 0.25D, 0D, 1D);
@@ -742,7 +742,7 @@ public class KGConfig {
         builder.push("corruption gun");
         netheriteMinegunDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Corruption Gun")
-                .defineInRange("netheriteMinegunDamageMultiplier", 0.65D, 0.1D, 5D);
+                .defineInRange("netheriteMinegunDamageMultiplier", 0.8D, 0.1D, 5D);
         netheriteMinegunFireDelay = builder
                 .comment("Configure the Fire delay for Corruption Gun")
                 .defineInRange("netheriteMinegunFireDelay", 3, 0, 72000);
@@ -757,7 +757,7 @@ public class KGConfig {
                 .defineInRange("netheriteMinegunInaccuracy", 0D, 0D, 90D);
         netheriteMinegunProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for Corruption Gun")
-                .defineInRange("netheriteMinegunProjectileSpeed", 1.9D, 0D, 64D);
+                .defineInRange("netheriteMinegunProjectileSpeed", 3D, 0D, 64D);
         netheriteMinegunMineChance = builder
                 .comment("Configure the Break Block Chance for Corruption Gun")
                 .defineInRange("netheriteMinegunMineChance", 0.33D, 0D, 1D);
@@ -793,7 +793,7 @@ public class KGConfig {
                 .defineInRange("ironVoltgunInaccuracy", 0D, 0D, 90D);
         ironVoltgunProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for Voltguns")
-                .defineInRange("ironVoltgunProjectileSpeed", 8.2D, 0D, 64D);
+                .defineInRange("ironVoltgunProjectileSpeed", 7.8D, 0D, 64D);
         ironVoltgunMinimumDamage = builder
                 .comment("Configure the Minimum damage increase for Voltguns")
                 .defineInRange("ironVoltgunMinimumDamage", 1D, 0D, 5D);
