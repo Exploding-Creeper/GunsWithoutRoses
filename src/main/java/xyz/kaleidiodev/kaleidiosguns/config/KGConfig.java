@@ -908,7 +908,7 @@ public class KGConfig {
                 .defineInRange("lavaSmgSelfOnFireMultiplier", 1.25D, 0D, 40D);
         lavaSmgCost = builder
                 .comment("Ammo cost to fire Lava Bound SMGs")
-                .defineInRange("lavaSmgCost", 1, 0, 64);
+                .defineInRange("lavaSmgCost", 2, 0, 64);
         builder.pop();
 
         builder.push("plasma rifle");
@@ -947,7 +947,7 @@ public class KGConfig {
                 .defineInRange("goldPlasmaMeleeDamage", 2D, 0D, 40D);
         goldPlasmaCost = builder
                 .comment("Ammo cost to fire Plasma Rifles")
-                .defineInRange("goldPlasmaCost", 1, 0, 64);
+                .defineInRange("goldPlasmaCost", 2, 0, 64);
         builder.pop();
 
         builder.push("defenders carbine");
@@ -986,7 +986,7 @@ public class KGConfig {
                 .defineInRange("defenderRifleHealRatio", 1D, 0D, 10D);
         defenderRifleCost = builder
                 .comment("Ammo cost to fire Defender Rifles")
-                .defineInRange("defenderRifleCost", 2, 0, 64);
+                .defineInRange("defenderRifleCost", 3, 0, 64);
         builder.pop();
 
         builder.push("rocket launcher");
