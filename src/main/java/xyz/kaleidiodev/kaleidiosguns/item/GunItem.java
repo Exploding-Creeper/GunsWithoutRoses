@@ -78,11 +78,10 @@ public class GunItem extends Item {
 	protected boolean isOneHanded;
 	protected boolean isSensitive;
 	protected boolean canShatterBlocks;
-	protected boolean canBreakDoors;
 	protected boolean isJuggler;
 	protected boolean isLava;
 	protected boolean isMeleeBonus;
-	public boolean breachDoors;
+	protected boolean breachDoors;
 	protected double baseSpeed;
 	protected double baseDamage;
 	protected double currentSpeed;
@@ -336,7 +335,7 @@ public class GunItem extends Item {
 		shot.isWither = this.isWither;
 		shot.isCorrupted = this.isCorruption;
 		shot.isTorpedo = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.torpedo, gun) == 1;
-		shot.shouldBreakDoors = this.canBreakDoors;
+		shot.shouldBreakDoors = this.breachDoors;
 		shot.shouldShatterBlocks = this.canShatterBlocks;
 		shot.healsFriendlies = this.isDefender;
 		shot.isMeleeBonus = this.meleeBonusCounter > 0;
@@ -844,11 +843,10 @@ public class GunItem extends Item {
 			if (isSensitive) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.sensitive"));
 			if (this.getItem() == ModItems.plasmaGatling) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.plasma"));
 			if (isExplosive) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.explosive"));
-			if (canBreakDoors) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.doors"));
+			if (breachDoors) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.doors"));
 			if (canShatterBlocks) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.shatter"));
 			if (isJuggler) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.juggle"));
 			if (hasVoltage) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.voltage"));
-			if (breachDoors) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.breach"));
 			if (isMeleeBonus) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.melee"));
 			if (isLava) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.lava"));
 			if (!isOneHanded && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && (this instanceof ShotgunItem)) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.twohands_shotgun"));

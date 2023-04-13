@@ -72,7 +72,7 @@
 	"tooltip.kaleidiosguns.explosive": "Explosive projectiles, requires non-flint ammo",
 	"tooltip.kaleidiosguns.shatter": "",
 	"tooltip.kaleidiosguns.juggle": "High vertical knockback to juggle enemies",
-	"tooltip.kaleidiosguns.breach": "Can breach doors, windows and break parkour blocks",
+	"tooltip.kaleidiosguns.doors": "Can breach doors, windows and break parkour blocks",
 	"tooltip.kaleidiosguns.lava": "Entities on fire cause more damage",
 	"tooltip.kaleidiosguns.melee": "Get bonus damage a set amount of shots after melee",
 	"tooltip.kaleidiosguns.glove": "Acts as an empty hand",
