@@ -14,7 +14,6 @@ import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.Ingredient;
@@ -24,7 +23,6 @@ import net.minecraft.potion.Effects;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -42,11 +40,12 @@ import xyz.kaleidiodev.kaleidiosguns.registry.ModSounds;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import static xyz.kaleidiodev.kaleidiosguns.KaleidiosGuns.VivecraftForgeExtensionPresent;
 
-public class GunItem extends Item {
+public class GunItem extends ShootableItem {
 
 	protected int bonusDamage;
 	public double damageMultiplier;
@@ -581,22 +580,6 @@ public class GunItem extends Item {
 	}
 
 	/**
-	 * Sets whether the bullets ignore invulnerability frame (default no), used when making the item for registering.
-	 */
-	public GunItem ignoreInvulnerability(boolean ignoreInvulnerability) {
-		this.ignoreInvulnerability = ignoreInvulnerability;
-		return this;
-	}
-
-	/**
-	 * Sets a chance to NOT consume ammo, used when making the item for registering.
-	 */
-	public GunItem chanceFreeShot(double chanceFreeShot) {
-		this.chanceFreeShot = chanceFreeShot;
-		return this;
-	}
-
-	/**
 	 * Sets the firing sound, used when making the item for registering.
 	 */
 	public GunItem fireSound(SoundEvent fireSound) {
@@ -872,8 +855,18 @@ public class GunItem extends Item {
 	}
 
 	@Override
+	public Predicate<ItemStack> getAllSupportedProjectiles() {
+		return null;
+	}
+
+	@Override
 	public int getEnchantmentValue() {
 		return enchantability;
+	}
+
+	@Override
+	public int getDefaultProjectileRange() {
+		return 0;
 	}
 
 	@Override
@@ -884,13 +877,6 @@ public class GunItem extends Item {
 	@Override
 	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
 		return !ItemStack.isSameIgnoreDurability(oldStack, newStack);
-	}
-
-	private void shootProjectile(ProjectileEntity entity, float pX, float pY, float pZ, float pVelocity, float pInaccuracy) {
-		float f = -MathHelper.sin(pY * ((float)Math.PI / 180F)) * MathHelper.cos(pX * ((float)Math.PI / 180F));
-		float f1 = -MathHelper.sin((pX + pZ) * ((float)Math.PI / 180F));
-		float f2 = MathHelper.cos(pY * ((float)Math.PI / 180F)) * MathHelper.cos(pX * ((float)Math.PI / 180F));
-		entity.shoot(f, f1, f2, pVelocity, pInaccuracy);
 	}
 
 	@Override
