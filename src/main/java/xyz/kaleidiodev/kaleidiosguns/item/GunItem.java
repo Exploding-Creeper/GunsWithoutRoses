@@ -523,6 +523,11 @@ public class GunItem extends Item {
 				if (nextInaccuracy == 0) nextInaccuracy = KGConfig.oneHandInaccuracyReplacement.get();
 				else nextInaccuracy *= KGConfig.weaknessEffectInaccuracyMultiplier.get();
 			}
+
+			//check luck effect
+			if ((player.getEffect(Effects.LUCK) != null) && !(stack.getItem() instanceof ShotgunItem)) {
+				if (nextInaccuracy != 0) nextInaccuracy /= KGConfig.luckEffectInaccuracyDivisor.get();
+			}
 		}
 
 		return nextInaccuracy;
