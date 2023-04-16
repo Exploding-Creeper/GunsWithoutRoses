@@ -567,7 +567,7 @@ public class KGConfig {
                 .defineInRange("goldDoubleShotgunEnchantability", 23, 0, 30);
         goldDoubleShotgunDurability = builder
                 .comment("Configure the Durability for Double Barrel Shotguns")
-                .defineInRange("goldDoubleShotgunDurability", 80, 0, 32767);
+                .defineInRange("goldDoubleShotgunDurability", 160, 0, 32767);
         goldDoubleShotgunInaccuracy = builder
                 .comment("Configure the Inaccuracy for Double Barrel Shotguns")
                 .defineInRange("goldDoubleShotgunInaccuracy", 7D, 0D, 90D);
