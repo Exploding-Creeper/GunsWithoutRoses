@@ -16,7 +16,6 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue hasteBonusMineChance;
     public static ForgeConfigSpec.IntValue redstoneRadius;
     public static ForgeConfigSpec.DoubleValue weaknessEffectInaccuracyMultiplier;
-    public static ForgeConfigSpec.DoubleValue luckEffectInaccuracyDivisor;
 
     //ranger glove
     public static ForgeConfigSpec.DoubleValue gloveRangerSpeedUp;
@@ -329,9 +328,6 @@ public class KGConfig {
         weaknessEffectInaccuracyMultiplier = builder
                 .comment("Configure the inaccuracy multiplier for when the shooter has the weakness effect")
                 .defineInRange("weaknessEffectInaccuracyMultiplier", 2.0D, 0D, 5D);
-        luckEffectInaccuracyDivisor = builder
-                .comment("Configure the inaccuracy divisor for when the shooter has the luck effect")
-                .defineInRange("weaknessEffectInaccuracyDivisor", 2.0D, 0D, 5D);
         builder.pop();
 
         builder.push("ranger gloves");
