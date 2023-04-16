@@ -45,7 +45,7 @@ import java.util.function.Supplier;
 
 import static xyz.kaleidiodev.kaleidiosguns.KaleidiosGuns.VivecraftForgeExtensionPresent;
 
-public class GunItem extends ShootableItem {
+public class GunItem extends Item {
 
 	protected int bonusDamage;
 	public double damageMultiplier;
@@ -855,18 +855,8 @@ public class GunItem extends ShootableItem {
 	}
 
 	@Override
-	public Predicate<ItemStack> getAllSupportedProjectiles() {
-		return null;
-	}
-
-	@Override
 	public int getEnchantmentValue() {
 		return enchantability;
-	}
-
-	@Override
-	public int getDefaultProjectileRange() {
-		return 0;
 	}
 
 	@Override
