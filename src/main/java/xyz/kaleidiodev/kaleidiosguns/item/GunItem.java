@@ -371,22 +371,6 @@ public class GunItem extends Item {
 			this.onActualInventoryTick();
 		}
 
-		//apply glove switch speed perk if it's in the offhand
-		if (pEntity instanceof PlayerEntity) {
-			PlayerEntity player = (PlayerEntity)pEntity;
-			ItemStack offHandItem = player.getOffhandItem();
-
-			if (offHandItem.getItem() instanceof GloveItem) {
-				GloveItem gloveItem = (GloveItem)offHandItem.getItem();
-				double newSpeed = baseSpeed + (baseSpeed * gloveItem.percentSpeedUp);
-				if (newSpeed != currentSpeed) setAttributes(baseDamage, newSpeed);
-			}
-			else
-			{
-				if (baseSpeed != currentSpeed) setAttributes(baseDamage, baseSpeed);
-			}
-		}
-
 		super.inventoryTick(pStack, pLevel, pEntity, pItemSlot, pIsSelected);
 	}
 
@@ -460,7 +444,7 @@ public class GunItem extends Item {
 		//increase time spend if two hands on a shotgun class
 		if ((player != null) && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && (stack.getItem() instanceof ShotgunItem)) {
 			//if both hands are full, because one is the gun and one is something else
-			if (!player.getMainHandItem().isEmpty() && (!player.getOffhandItem().isEmpty() && !(player.getOffhandItem().getItem() instanceof GloveItem))) {
+			if (!player.getMainHandItem().isEmpty() && !player.getOffhandItem().isEmpty()) {
 				base *= KGConfig.oneHandShotgunRateMultiplier.get();
 			}
 		}
@@ -498,7 +482,7 @@ public class GunItem extends Item {
 			if ((EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && !(stack.getItem() instanceof ShotgunItem) && !isOneHanded) {
 				//if both hands are full, because one is the gun and one is something else
 				//ignore glove items for this effect
-				if (!player.getMainHandItem().isEmpty() && (!player.getOffhandItem().isEmpty() && !(player.getOffhandItem().getItem() instanceof GloveItem))) {
+				if (!player.getMainHandItem().isEmpty() && !player.getOffhandItem().isEmpty()) {
 					//if sniper class, give a new inaccuracy
 					if (nextInaccuracy == 0) nextInaccuracy = KGConfig.oneHandInaccuracyReplacement.get();
 						//else multiply
