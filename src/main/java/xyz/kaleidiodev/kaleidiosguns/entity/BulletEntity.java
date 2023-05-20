@@ -159,8 +159,6 @@ public class BulletEntity extends AbstractFireballEntity {
 				Set<Entity> entities = new HashSet<>();
 				AxisAlignedBB bb = this.getBoundingBox();
 
-				System.out.println(bb.getSize());
-
 				Vector3d incPosition = new Vector3d(this.getDeltaMovement().x / (bulletSpeed * 10), this.getDeltaMovement().y / (bulletSpeed * 10), this.getDeltaMovement().z / (bulletSpeed * 10));
 
 				//the raytrace is really just a bunch of steps for boundary boxes.  this means accelerator makes sniper collateral further
