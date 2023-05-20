@@ -157,8 +157,9 @@ public class BulletEntity extends AbstractFireballEntity {
 				//put some code here for the manual raytrace
 				//the raytrace needs to be from current position to delta from last known position
 				Set<Entity> entities = new HashSet<>();
-				AxisAlignedBB bb = new AxisAlignedBB(this.blockPosition());
-				bb.minmax(this.getBoundingBox());
+				AxisAlignedBB bb = this.getBoundingBox();
+
+				System.out.println(bb.getSize());
 
 				Vector3d incPosition = new Vector3d(this.getDeltaMovement().x / (bulletSpeed * 10), this.getDeltaMovement().y / (bulletSpeed * 10), this.getDeltaMovement().z / (bulletSpeed * 10));
 
