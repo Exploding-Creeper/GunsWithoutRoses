@@ -33,9 +33,7 @@ import xyz.kaleidiodev.kaleidiosguns.registry.ModEntities;
 import xyz.kaleidiodev.kaleidiosguns.registry.ModItems;
 import xyz.kaleidiodev.kaleidiosguns.registry.ModSounds;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class BulletEntity extends AbstractFireballEntity {
 	protected double damage = 1;
@@ -159,29 +157,27 @@ public class BulletEntity extends AbstractFireballEntity {
 		if (shouldCollateral) {
 			//put some code here for the manual raytrace
 			//the raytrace needs to be from current position to delta from last known position
-			List<Entity> entities = new ArrayList<Entity>();
-			AxisAlignedBB bb = this.getBoundingBox();
+			Set<Entity> entities = new HashSet<>();
+			AxisAlignedBB bb = new AxisAlignedBB(this.blockPosition());
+			bb.minmax(this.getBoundingBox());
+
 			Vector3d incPosition = new Vector3d(this.getDeltaMovement().x / (bulletSpeed * 10), this.getDeltaMovement().y / (bulletSpeed * 10), this.getDeltaMovement().z / (bulletSpeed * 10));
 
 			//the raytrace is really just a bunch of steps for boundary boxes.  this means accelerator makes sniper collateral further
 			for (double i = 0; i < this.bulletSpeed; i += 0.1) {
 				bb = bb.move(incPosition);
+
 				List<Entity> nextEntities = this.level.getEntities(this, bb);
 
 				//don't bother adding entities to the list that are already there.
-				for (Entity entity : nextEntities) {
-					//that entity doesn't exist in the array, so add it
-					if (!entities.contains(entity)) {
-						//also don't add if it's the same entity.
-						if (raytrace.getEntity() != entity) entities.add(entity);
-					}
-				}
+				entities.addAll(nextEntities);
 
 				//kill trace early if we hit a tile doing this, so it doesn't trace through walls.
 				BlockPos someBlockPos = new BlockPos(bb.getCenter());
 				BlockState someBlockState = this.level.getBlockState(someBlockPos);
-				if ((someBlockState.getBlock() != Blocks.AIR) && !(someBlockState.getBlockState().is(BlockTags.FLOWERS)) && !(someBlockState.getBlockState().is(BlockTags.TALL_FLOWERS)) && !(someBlockState.getBlockState().is(BlockTags.SMALL_FLOWERS)))
-					break;
+
+				//stop processing if we hit a solid block
+				if (someBlockState.getMaterial().blocksMotion()) break;
 			}
 
 			//because the sniper cannot have a projectile ignore invulnerability anyway, this is safe to do.
