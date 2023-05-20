@@ -184,11 +184,7 @@ public class GunItem extends Item {
 			ItemStack itemstack1 = player.inventory.getItem(i);
 			if (itemstack1.getItem() instanceof BulletItem) {
 				if (((BulletItem) itemstack1.getItem()).hasAmmo(itemstack1, player, gun)) {
-					if (newAmmo.getItem() instanceof BulletItem) {
-						if (((((BulletItem) newAmmo.getItem()).damage) < (((BulletItem) itemstack1.getItem()).damage)) &&
-								(newAmmo.getCount() > itemstack1.getCount()))
-							newAmmo = itemstack1;
-					} else newAmmo = itemstack1;
+					newAmmo = itemstack1;
 				}
 			}
 		}
