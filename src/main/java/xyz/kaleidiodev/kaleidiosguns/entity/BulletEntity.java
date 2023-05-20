@@ -84,14 +84,11 @@ public class BulletEntity extends AbstractFireballEntity {
 	//change the particle type the projectile is going to emit
 	@Override
 	protected IParticleData getTrailParticle() {
-		//seems that this method fires once on server and once on client.  something needs to be done in order to support multiple particle types
-		if (!this.removed) {
-			if (isExplosive) return ParticleTypes.POOF;
-			if (isPlasma) return ParticleTypes.INSTANT_EFFECT;
-			if (wasRevenge || isMeleeBonus) return ParticleTypes.HAPPY_VILLAGER;
-			if (wasDark) return ParticleTypes.SMOKE;
-			if ((lavaMode & 0x04) != 0) return ParticleTypes.LANDING_LAVA; //if was a slag bullet in any mode
-		}
+		if (isExplosive) return ParticleTypes.POOF;
+		if (isPlasma) return ParticleTypes.INSTANT_EFFECT;
+		if (wasRevenge || isMeleeBonus) return ParticleTypes.HAPPY_VILLAGER;
+		if (wasDark) return ParticleTypes.SMOKE;
+		if ((lavaMode & 0x04) != 0) return ParticleTypes.LANDING_LAVA; //if was a slag bullet in any mode
 		return ParticleTypes.CRIT;
 	}
 
@@ -151,46 +148,47 @@ public class BulletEntity extends AbstractFireballEntity {
 	protected void onHitEntity(EntityRayTraceResult raytrace) {
 		super.onHitEntity(raytrace); //this seems to be on the right track, but we also need a manual raytrace to get a full list of entities in the next delta, just in case the projectile is moving too fast
 
+		Entity target = raytrace.getEntity();
+
 		if (!level.isClientSide) {
-			Entity target = raytrace.getEntity();
 			entityHitProcess(target);
-		}
 
-		if (shouldCollateral) {
-			//put some code here for the manual raytrace
-			//the raytrace needs to be from current position to delta from last known position
-			Set<Entity> entities = new HashSet<>();
-			AxisAlignedBB bb = new AxisAlignedBB(this.blockPosition());
-			bb.minmax(this.getBoundingBox());
+			if (shouldCollateral) {
+				//put some code here for the manual raytrace
+				//the raytrace needs to be from current position to delta from last known position
+				Set<Entity> entities = new HashSet<>();
+				AxisAlignedBB bb = new AxisAlignedBB(this.blockPosition());
+				bb.minmax(this.getBoundingBox());
 
-			Vector3d incPosition = new Vector3d(this.getDeltaMovement().x / (bulletSpeed * 10), this.getDeltaMovement().y / (bulletSpeed * 10), this.getDeltaMovement().z / (bulletSpeed * 10));
+				Vector3d incPosition = new Vector3d(this.getDeltaMovement().x / (bulletSpeed * 10), this.getDeltaMovement().y / (bulletSpeed * 10), this.getDeltaMovement().z / (bulletSpeed * 10));
 
-			//the raytrace is really just a bunch of steps for boundary boxes.  this means accelerator makes sniper collateral further
-			for (double i = 0; i < this.bulletSpeed; i += 0.1) {
-				bb = bb.move(incPosition);
+				//the raytrace is really just a bunch of steps for boundary boxes.  this means accelerator makes sniper collateral further
+				for (double i = 0; i < this.bulletSpeed; i += 0.1) {
+					bb = bb.move(incPosition);
 
-				List<Entity> nextEntities = this.level.getEntities(this, bb);
+					List<Entity> nextEntities = this.level.getEntities(this, bb);
 
-				//don't bother adding entities to the list that are already there.
-				entities.addAll(nextEntities);
+					//don't bother adding entities to the list that are already there.
+					entities.addAll(nextEntities);
 
-				//kill trace early if we hit a tile doing this, so it doesn't trace through walls.
-				BlockPos someBlockPos = new BlockPos(bb.getCenter());
-				BlockState someBlockState = this.level.getBlockState(someBlockPos);
+					//kill trace early if we hit a tile doing this, so it doesn't trace through walls.
+					BlockPos someBlockPos = new BlockPos(bb.getCenter());
+					BlockState someBlockState = this.level.getBlockState(someBlockPos);
 
-				//stop processing if we hit a solid block
-				if (someBlockState.getMaterial().blocksMotion()) break;
+					//stop processing if we hit a solid block
+					if (someBlockState.getMaterial().blocksMotion()) break;
+				}
+
+				//because the sniper cannot have a projectile ignore invulnerability anyway, this is safe to do.
+				for (Entity entity : entities) {
+					if (!(entity instanceof PlayerEntity) && (entity instanceof LivingEntity)) entityHitProcess(entity);
+				}
 			}
-
-			//because the sniper cannot have a projectile ignore invulnerability anyway, this is safe to do.
-			for (Entity entity : entities) {
-				if (!(entity instanceof PlayerEntity) && (entity instanceof LivingEntity)) entityHitProcess(entity);
+			else if (target != getOwner())
+			{
+				//remove immediately on first entity hit
+				this.remove();
 			}
-		}
-		else
-		{
-			//remove immediately on first entity hit
-			this.remove();
 		}
 	}
 
@@ -395,7 +393,7 @@ public class BulletEntity extends AbstractFireballEntity {
 		else super.onHit(result);
 
 		//remove will be present inside onHitBlock instead
-		if (!shouldCollateral) {
+		if (!level.isClientSide && !shouldCollateral) {
 			remove();
 		}
 	}
