@@ -148,12 +148,24 @@ public class GunItem extends Item {
 				if (itemstack1.getItem() instanceof BulletItem) {
 					//first, automerge the stack, before judging the count
 					//automerge stacks to prevent a bunch of slots with unusable ammo
-					if (!itemstack1.isEmpty() && (itemstack1.getMaxStackSize() == 64)) {
-						for (int j = 0; j < player.inventory.getContainerSize(); j++) {
+					if (!itemstack1.isEmpty()) {
+						//only look at indexes ahead of the current, forcing permutation without duplicate checks
+						for (int j = i; j < player.inventory.getContainerSize(); j++) {
 							if ((j != i) && (player.inventory.getItem(j).getItem() == itemstack1.getItem())) {
-								while ((player.inventory.getItem(j).getCount() < 64) && (!itemstack1.isEmpty())) {
-									itemstack1.shrink(1);
-									player.inventory.getItem(j).grow(1);
+								ItemStack itemstack2 = player.inventory.getItem(j);
+
+								int needed = 64 - itemstack1.getCount();
+								int has = itemstack2.getCount();
+
+								//if the entirety of the second stack can merge, destroy it and add all count to the other
+								if (has < needed) {
+									player.inventory.removeItem(itemstack2);
+									itemstack1.grow(has);
+								}
+								//otherwise only bring over as many as needed.
+								else {
+									itemstack2.shrink(needed);
+									itemstack1.grow(needed);
 								}
 							}
 						}
