@@ -40,7 +40,6 @@ import xyz.kaleidiodev.kaleidiosguns.registry.ModSounds;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import static xyz.kaleidiodev.kaleidiosguns.KaleidiosGuns.VivecraftForgeExtensionPresent;
@@ -486,13 +485,19 @@ public class GunItem extends Item {
 		nextInaccuracy += shotsBeforeStability * Math.max(0, instabilitySpreadAdditional / ((EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.bullseye, stack) * KGConfig.bullseyeAccuracyIncrease.get()) + 1.0D));
 
 		if (player != null) {
+			//check sniper class
+			if ((inaccuracy == 0) && (player.getDeltaMovement().x != 0) && (player.getDeltaMovement().z != 0) && !(this instanceof GatlingItem) && !(this instanceof ShotgunItem)) {
+				System.out.println("Sniper");
+				nextInaccuracy = KGConfig.sniperInaccuracyReplacement.get();
+			}
+
 			//check player hands
 			if ((EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && !(stack.getItem() instanceof ShotgunItem) && !isOneHanded) {
 				//if both hands are full, because one is the gun and one is something else
 				//ignore glove items for this effect
 				if (!player.getMainHandItem().isEmpty() && !player.getOffhandItem().isEmpty()) {
 					//if sniper class, give a new inaccuracy
-					if (nextInaccuracy == 0) nextInaccuracy = KGConfig.oneHandInaccuracyReplacement.get();
+					if (inaccuracy == 0) nextInaccuracy = KGConfig.sniperInaccuracyReplacement.get();
 						//else multiply
 					else nextInaccuracy *= KGConfig.oneHandInaccuracyMultiplier.get();
 				}
@@ -500,12 +505,15 @@ public class GunItem extends Item {
 
 			//check assault rifle
 			if (!player.isOnGround() && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && this.isSensitive) {
-				nextInaccuracy *= KGConfig.automaticMidairMultiplier.get();
+				nextInaccuracy *= KGConfig.sensitivityMultiplier.get() * 2;
+			}
+			else if (this.isSensitive && !player.isCrouching()) {
+				nextInaccuracy *= KGConfig.sensitivityMultiplier.get();
 			}
 
 			//check weakness effect
 			if ((player.getEffect(Effects.WEAKNESS) != null) && !(stack.getItem() instanceof ShotgunItem)) {
-				if (nextInaccuracy == 0) nextInaccuracy = KGConfig.oneHandInaccuracyReplacement.get();
+				if (nextInaccuracy == 0) nextInaccuracy = KGConfig.sniperInaccuracyReplacement.get();
 				else nextInaccuracy *= KGConfig.weaknessEffectInaccuracyMultiplier.get();
 			}
 		}
@@ -818,6 +826,7 @@ public class GunItem extends Item {
 			if (isLava) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.lava"));
 			if (!isOneHanded && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && (this instanceof ShotgunItem)) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.twohands_shotgun"));
 			if (!isOneHanded && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && !(this instanceof ShotgunItem)) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.twohands"));
+			if (inaccuracy == 0) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.sniper"));
 
 			addExtraStatsTooltip(stack, world, tooltip);
 		}

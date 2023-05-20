@@ -10,7 +10,7 @@ public class KGConfig {
     public static ForgeConfigSpec.BooleanValue explosionsEnabled;
     public static ForgeConfigSpec.BooleanValue griefEnabled;
     public static ForgeConfigSpec.DoubleValue oneHandInaccuracyMultiplier;
-    public static ForgeConfigSpec.DoubleValue oneHandInaccuracyReplacement;
+    public static ForgeConfigSpec.DoubleValue sniperInaccuracyReplacement;
     public static ForgeConfigSpec.DoubleValue oneHandShotgunRateMultiplier;
     public static ForgeConfigSpec.DoubleValue hasteBonusMineChance;
     public static ForgeConfigSpec.IntValue redstoneRadius;
@@ -216,7 +216,7 @@ public class KGConfig {
     public static ForgeConfigSpec.IntValue diamondAssaultDurability;
     public static ForgeConfigSpec.DoubleValue diamondAssaultInaccuracy;
     public static ForgeConfigSpec.DoubleValue diamondAssaultProjectileSpeed;
-    public static ForgeConfigSpec.DoubleValue automaticMidairMultiplier;
+    public static ForgeConfigSpec.DoubleValue sensitivityMultiplier;
     public static ForgeConfigSpec.DoubleValue diamondAssaultSwitchSpeed;
     public static ForgeConfigSpec.DoubleValue diamondAssaultMeleeDamage;
     public static ForgeConfigSpec.IntValue diamondAssaultCost;
@@ -303,9 +303,9 @@ public class KGConfig {
         oneHandInaccuracyMultiplier = builder
                 .comment("Inaccuracy multiplier for when the user has one hand filled")
                 .defineInRange("oneHandInaccuracyMultiplier", 2.0D, 0.1D, 5D);
-        oneHandInaccuracyReplacement = builder
-                .comment("Inaccuracy of any perfect accuracy weapons in the case of one hand being filled")
-                .defineInRange("oneHandInaccuracyReplacement", 2.0D, 0D, 90D);
+        sniperInaccuracyReplacement = builder
+                .comment("Inaccuracy of any perfect accuracy weapons in the case of one hand being filled, or movement not stopped")
+                .defineInRange("sniperInaccuracyReplacement", 2.0D, 0D, 90D);
         oneHandShotgunRateMultiplier = builder
                 .comment("Fire rate multiplier for shotguns for when the user has one hand filled")
                 .defineInRange("oneHandShotgunRateMultiplier", 2.0D, 0.1D, 5D);
@@ -315,9 +315,9 @@ public class KGConfig {
         redstoneRadius = builder
                 .comment("Configure the radius for a redstone block to activate redstone class gun.  WARNING, PERFORMANCE BOTTLENECKS CAN OCCUR")
                 .defineInRange("redstoneRadius", 10, 0, 31);
-        automaticMidairMultiplier = builder
-                .comment("Configure the midair inaccuracy multiplier for Assault Rifles and Lava SMG")
-                .defineInRange("automaticMidairMultiplier", 2.0D, 0D, 5D);
+        sensitivityMultiplier = builder
+                .comment("Configure the midair and non-crouching inaccuracy multiplier for Assault Rifles and Lava SMG")
+                .defineInRange("sensitivityMultiplier", 1.5D, 0D, 5D);
         weaknessEffectInaccuracyMultiplier = builder
                 .comment("Configure the inaccuracy multiplier for when the shooter has the weakness effect")
                 .defineInRange("weaknessEffectInaccuracyMultiplier", 2.0D, 0D, 5D);

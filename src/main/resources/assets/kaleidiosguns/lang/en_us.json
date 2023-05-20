@@ -68,7 +68,7 @@
 	"tooltip.kaleidiosguns.redstone": "A Redstone Block must be close-by to use this weapon",
 	"tooltip.kaleidiosguns.voltage": "Increases damage the closer you are to a Redstone Block",
 	"tooltip.kaleidiosguns.defender": "Increases fire rate if standing near any Tile Entity",
-	"tooltip.kaleidiosguns.sensitive": "Accuracy decreases if shot in midair",
+	"tooltip.kaleidiosguns.sensitive": "Accuracy decreases if shot in midair or whilst not crouching",
 	"tooltip.kaleidiosguns.explosive": "Explosive projectiles, requires non-flint ammo",
 	"tooltip.kaleidiosguns.shatter": "",
 	"tooltip.kaleidiosguns.juggle": "High vertical knockback to juggle enemies",
@@ -78,6 +78,7 @@
 	"tooltip.kaleidiosguns.glove": "Acts as an empty hand",
 	"tooltip.kaleidiosguns.twohands": "Requires an empty offhand for full accuracy",
 	"tooltip.kaleidiosguns.twohands_shotgun": "Requires an empty offhand for full fire rate",
+	"tooltip.kaleidiosguns.sniper": "Only has perfect accuracy whilst you are standing still",
 
 	"tooltip.kaleidiosguns.blaze_bullet": "Sets entities on fire",
 	"tooltip.kaleidiosguns.hunger_bullet": "Uses hunger as ammo",
