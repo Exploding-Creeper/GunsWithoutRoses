@@ -12,7 +12,6 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue oneHandInaccuracyMultiplier;
     public static ForgeConfigSpec.DoubleValue oneHandInaccuracyReplacement;
     public static ForgeConfigSpec.DoubleValue oneHandShotgunRateMultiplier;
-    public static ForgeConfigSpec.DoubleValue crouchAccuracyDivider;
     public static ForgeConfigSpec.DoubleValue hasteBonusMineChance;
     public static ForgeConfigSpec.IntValue redstoneRadius;
     public static ForgeConfigSpec.DoubleValue weaknessEffectInaccuracyMultiplier;
@@ -284,9 +283,6 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue passionForBloodRateIncrease;
     public static ForgeConfigSpec.DoubleValue passionForBloodHealIncrease;
     public static ForgeConfigSpec.IntValue divisionCountIncrease;
-    public static ForgeConfigSpec.DoubleValue frostyDistancePerLevel;
-    public static ForgeConfigSpec.DoubleValue frostyMaxAddition;
-    public static ForgeConfigSpec.DoubleValue frostyMinAddition;
     public static ForgeConfigSpec.DoubleValue signalMultiplier;
     public static ForgeConfigSpec.IntValue playerGlowTicks;
     public static ForgeConfigSpec.IntValue enemyGlowTicks;
@@ -313,9 +309,6 @@ public class KGConfig {
         oneHandShotgunRateMultiplier = builder
                 .comment("Fire rate multiplier for shotguns for when the user has one hand filled")
                 .defineInRange("oneHandShotgunRateMultiplier", 2.0D, 0.1D, 5D);
-        crouchAccuracyDivider = builder
-                .comment("Accuracy multiplier for when the user is crouching")
-                .defineInRange("crouchAccuracyMultiplier", 2.0D, 0.1D, 90D);
         hasteBonusMineChance = builder
                 .comment("Bonus mine chance percent per level of haste the player has")
                 .defineInRange("hasteBonusMineChance", 0.3D, 0.01D, 10D);
@@ -1133,18 +1126,6 @@ public class KGConfig {
         divisionCountIncrease = builder
                 .comment("Multiplier for how many extra bullets per division level on shotguns")
                 .defineInRange("divisionCountIncrease", 1, 1, 5);
-        builder.pop();
-
-        builder.push("frost shard enchantment");
-        frostyMaxAddition = builder
-                .comment("Maximum damage of a frosty bullet")
-                .defineInRange("frostyMaxAddition", 4D, -20D, 20D);
-        frostyMinAddition = builder
-                .comment("Minimum damage of a frosty bullet")
-                .defineInRange("frostyMinAddition", -1D, -20D, 20D);
-        frostyDistancePerLevel = builder
-                .comment("Block distance from origin until a frosty bullet is at minimum multiplier")
-                .defineInRange("frostyDistancePerLevel", 16D, 0D, 128D);
         builder.pop();
 
         builder.push("signal boost enchantment");
