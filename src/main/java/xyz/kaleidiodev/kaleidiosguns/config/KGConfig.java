@@ -305,7 +305,7 @@ public class KGConfig {
                 .defineInRange("oneHandInaccuracyMultiplier", 2.0D, 0.1D, 5D);
         sniperInaccuracyReplacement = builder
                 .comment("Inaccuracy of any perfect accuracy weapons in the case of one hand being filled, or movement not stopped")
-                .defineInRange("sniperInaccuracyReplacement", 2.0D, 0D, 90D);
+                .defineInRange("sniperInaccuracyReplacement", 4.0D, 0D, 90D);
         oneHandShotgunRateMultiplier = builder
                 .comment("Fire rate multiplier for shotguns for when the user has one hand filled")
                 .defineInRange("oneHandShotgunRateMultiplier", 2.0D, 0.1D, 5D);

@@ -87,6 +87,8 @@ public class GunItem extends Item {
 	protected int meleeBonusCounter;
 	protected double mineChance;
 	protected int ammoCost = 1;
+	protected Vector3d previousPos = Vector3d.ZERO;
+	protected Vector3d playerVelocity = Vector3d.ZERO;
 
 	protected SoundEvent fireSound = ModSounds.gun;
 	protected SoundEvent reloadSound = ModSounds.double_shotgunReload;
@@ -376,6 +378,11 @@ public class GunItem extends Item {
 		if (currentTime > this.ticksPassed) {
 			this.ticksPassed = currentTime;
 			this.onActualInventoryTick();
+
+			//get previous player velocity
+			this.playerVelocity = pEntity.position().subtract(previousPos);
+
+			this.previousPos = pEntity.position();
 		}
 
 		super.inventoryTick(pStack, pLevel, pEntity, pItemSlot, pIsSelected);
@@ -486,8 +493,10 @@ public class GunItem extends Item {
 
 		if (player != null) {
 			//check sniper class
-			if ((inaccuracy == 0) && (player.getDeltaMovement().x != 0) && (player.getDeltaMovement().z != 0) && !(this instanceof GatlingItem) && !(this instanceof ShotgunItem)) {
-				System.out.println("Sniper");
+			if ((inaccuracy == 0) &&
+					playerVelocity.length() > 0.0001 &&
+					!(this instanceof GatlingItem) &&
+					!(this instanceof ShotgunItem)) {
 				nextInaccuracy = KGConfig.sniperInaccuracyReplacement.get();
 			}
 
@@ -826,7 +835,7 @@ public class GunItem extends Item {
 			if (isLava) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.lava"));
 			if (!isOneHanded && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && (this instanceof ShotgunItem)) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.twohands_shotgun"));
 			if (!isOneHanded && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && !(this instanceof ShotgunItem)) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.twohands"));
-			if (inaccuracy == 0) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.sniper"));
+			if ((inaccuracy == 0) && !(this instanceof ShotgunItem) && !(this instanceof GatlingItem)) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.sniper"));
 
 			addExtraStatsTooltip(stack, world, tooltip);
 		}
