@@ -319,6 +319,7 @@ public class GunItem extends Item {
 		shot.setExplosive(isExplosive);
 		shot.setShouldGlow(EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.tracer, gun) > 0);
 		shot.setOrigin(player.position());
+		shot.setOwner(player);
 
 		double someDamage = (shot.getDamage() + getBonusDamage(gun, player)) * getDamageMultiplier(gun);
 		if (gun.getItem() instanceof ShotgunItem) {

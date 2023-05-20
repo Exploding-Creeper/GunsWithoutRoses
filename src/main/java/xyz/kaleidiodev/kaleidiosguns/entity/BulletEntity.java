@@ -85,11 +85,13 @@ public class BulletEntity extends AbstractFireballEntity {
 	@Override
 	protected IParticleData getTrailParticle() {
 		//seems that this method fires once on server and once on client.  something needs to be done in order to support multiple particle types
-		if (isExplosive) return ParticleTypes.POOF;
-		if (isPlasma) return ParticleTypes.INSTANT_EFFECT;
-		if (wasRevenge || isMeleeBonus) return ParticleTypes.HAPPY_VILLAGER;
-		if (wasDark) return ParticleTypes.SMOKE;
-		if ((lavaMode & 0x04) != 0) return ParticleTypes.LANDING_LAVA; //if was a slag bullet in any mode
+		if (!this.removed) {
+			if (isExplosive) return ParticleTypes.POOF;
+			if (isPlasma) return ParticleTypes.INSTANT_EFFECT;
+			if (wasRevenge || isMeleeBonus) return ParticleTypes.HAPPY_VILLAGER;
+			if (wasDark) return ParticleTypes.SMOKE;
+			if ((lavaMode & 0x04) != 0) return ParticleTypes.LANDING_LAVA; //if was a slag bullet in any mode
+		}
 		return ParticleTypes.CRIT;
 	}
 
@@ -187,6 +189,7 @@ public class BulletEntity extends AbstractFireballEntity {
 		}
 		else
 		{
+			//remove immediately on first entity hit
 			this.remove();
 		}
 	}
@@ -194,6 +197,8 @@ public class BulletEntity extends AbstractFireballEntity {
 	@Override
 	protected void onHitBlock(BlockRayTraceResult raytrace) {
 		//make a spherical poof and a sound
+		if (this.removed) return;
+
 		this.level.playSound(null, this.getX(), this.getY(), this.getZ(), ModSounds.impact, SoundCategory.VOICE, 0.25f, (random.nextFloat() * 0.5f) + 0.75f);
 		double d0 = raytrace.getLocation().x();
 		double d1 = raytrace.getLocation().y() + (this.getBoundingBox().getYsize() / 2);
@@ -390,7 +395,7 @@ public class BulletEntity extends AbstractFireballEntity {
 		else super.onHit(result);
 
 		//remove will be present inside onHitBlock instead
-		if (!level.isClientSide && !shouldCollateral) {
+		if (!shouldCollateral) {
 			remove();
 		}
 	}
