@@ -329,7 +329,6 @@ public class GunItem extends Item {
 
 		shot.noPhysics = this.shouldCollateral;
 		shot.isPlasma = (this.getItem() == ModItems.plasmaGatling);
-		shot.frostyDistance = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.frostShot, gun) * KGConfig.frostyDistancePerLevel.get();
 		shot.isClean = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cleanShot, gun) > 0;
 		shot.isWither = this.isWither;
 		shot.isCorrupted = this.isCorruption;
@@ -487,13 +486,6 @@ public class GunItem extends Item {
 					if (nextInaccuracy == 0) nextInaccuracy = KGConfig.oneHandInaccuracyReplacement.get();
 						//else multiply
 					else nextInaccuracy *= KGConfig.oneHandInaccuracyMultiplier.get();
-				}
-			}
-
-			//check crouching
-			if ((EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.counterStrike, stack) != 0)) {
-				if (player.isCrouching() && player.isOnGround()) {
-					nextInaccuracy /= KGConfig.crouchAccuracyDivider.get();
 				}
 			}
 
@@ -743,7 +735,6 @@ public class GunItem extends Item {
 		if ((enchantment instanceof GunAccuracyEnchantment) && hasPerfectAccuracy()) return false; //not for sniper
 		if ((enchantment instanceof GunDamageEnchantment) && isExplosive) return false; //not for launcher
 		if ((enchantment == ModEnchantments.cowboy) && isOneHanded) return false; //not for pistol
-		if (((enchantment == ModEnchantments.counterStrike)) && (me instanceof ShotgunItem)) return false; //not for shotgun
 		if (((enchantment == ModEnchantments.sleightOfHand)) && (me instanceof GatlingItem)) return false; //not for gatling
 
 		//only let these apply to certain gun types
@@ -818,8 +809,6 @@ public class GunItem extends Item {
 			if (isLava) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.lava"));
 			if (!isOneHanded && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && (this instanceof ShotgunItem)) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.twohands_shotgun"));
 			if (!isOneHanded && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && !(this instanceof ShotgunItem)) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.twohands"));
-
-			if (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.frostShot, stack) > 0) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.frost_distance", EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.frostShot, stack) * KGConfig.frostyDistancePerLevel.get()));
 
 			addExtraStatsTooltip(stack, world, tooltip);
 		}

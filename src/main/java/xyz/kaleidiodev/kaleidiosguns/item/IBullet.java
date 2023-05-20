@@ -57,17 +57,6 @@ public interface IBullet {
 		//if puncturing enchantment is present.
 		double newDamage = damage;
 
-		//add damage based on distance from target to origin, using max and min
-		if (projectile.frostyDistance > 0) {
-			double distanceTravelledToTarget = target.position().distanceTo(projectile.getOrigin());
-			double multiplierPerBlock = (KGConfig.frostyMaxAddition.get() - KGConfig.frostyMinAddition.get()) / projectile.frostyDistance; //get a fraction that can be multiplied by the amount of blocks travelled
-			double newMultiplier = (projectile.frostyDistance - distanceTravelledToTarget) * multiplierPerBlock; //multiply by amount of blocks until we reach the maximum travel cap
-
-			if (newMultiplier < 0) newMultiplier = 0; //don't go below zero.
-			newMultiplier += KGConfig.frostyMinAddition.get(); //add minimum multiplier back, it was removed before so block multiplier would be correct.
-			newDamage += newMultiplier;
-		}
-
 		//if the bullet is a plasma type, deal very high damage to a shield if one is in use.
 		//this way we let the vanilla mechanic of a shield taking damage as durability into effect
 		if ((projectile.isPlasma) && (target instanceof LivingEntity)) {

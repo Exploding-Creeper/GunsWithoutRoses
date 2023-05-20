@@ -54,7 +54,6 @@ public class BulletEntity extends AbstractFireballEntity {
 	protected Vector3d origin;
 	public boolean isExplosive;
 	public boolean isPlasma;
-	public double frostyDistance;
 	public boolean isWither;
 	public boolean wasRevenge;
 	public boolean wasDark;

@@ -16,7 +16,7 @@ import xyz.kaleidiodev.kaleidiosguns.item.GunItem;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = KaleidiosGuns.MODID)
 public class ModEnchantments {
 
-	public static Enchantment impact, bullseye, sleightOfHand, preserving, accelerator, division, passionForBlood, cowboy, frostShot, counterStrike, silenced, cleanShot, signalBoost, torpedo, tracer;
+	public static Enchantment impact, bullseye, sleightOfHand, preserving, accelerator, division, passionForBlood, cowboy, silenced, cleanShot, signalBoost, torpedo, tracer;
 	public static final EnchantmentType TYPE_GUN = EnchantmentType.create("GWR_GUN", (item) -> item instanceof GunItem);
 
 	@SubscribeEvent
@@ -40,10 +40,6 @@ public class ModEnchantments {
 		preserving = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.RARE, 3, 5, 10, 30, TYPE_GUN), "preserving"); //rt
 		torpedo = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.UNCOMMON, 1, 6, 12, 25, TYPE_GUN), "torpedo"); //spd
 		silenced = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.UNCOMMON, 1, 3, 6, 20, TYPE_GUN), "silenced"); //hndl
-
-		//alternate upgrade (replaces base)
-		frostShot = initEnchant(reg, new GunDamageEnchantment(Enchantment.Rarity.RARE, 3, 5, 10, 30, TYPE_GUN), "frost_shard"); //dmg
-		counterStrike = initEnchant(reg, new GunAccuracyEnchantment(Enchantment.Rarity.RARE, 1, 10, 20, 30, TYPE_GUN), "counter_strike"); //acc
 
 		//curses
 		tracer = initEnchant(reg, new GunCurseEnchantment(Enchantment.Rarity.RARE, 1, 7, 14, 30, TYPE_GUN), "tracer_ammo");
