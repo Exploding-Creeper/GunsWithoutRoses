@@ -24,7 +24,9 @@ public class ClientGunUseEvent {
                 if (gun.getItem() instanceof GunItem) {
                     GunItem gunItem = (GunItem)gun.getItem();
 
-                    if (1 > player.getAttackStrengthScale(0)) event.setCanceled(true);
+                    if (1 > player.getAttackStrengthScale(0)) {
+                        event.setCanceled(true);
+                    }
                 }
             }
         }

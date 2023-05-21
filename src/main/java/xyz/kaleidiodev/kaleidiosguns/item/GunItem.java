@@ -87,6 +87,10 @@ public class GunItem extends Item {
 	protected int meleeBonusCounter;
 	protected double mineChance;
 	protected int ammoCost = 1;
+	public int burstTimer;
+	protected int burstSpeed;
+	protected int burstAmount;
+	protected boolean isVex;
 	protected Vector3d previousPos = Vector3d.ZERO;
 	protected Vector3d playerVelocity = Vector3d.ZERO;
 
@@ -366,6 +370,7 @@ public class GunItem extends Item {
 		int base = Math.max(1, stabilityTime - (int)(stabilityTime * EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.sleightOfHand, gun) * KGConfig.sleightOfHandFireRateDecrease.get()));
 		stabilizerTimer = base;
 		shotsBeforeStability++;
+		if (burstTimer == 0) burstTimer = burstSpeed * burstAmount;
 
 		world.addFreshEntity(shot);
 	}
@@ -377,12 +382,7 @@ public class GunItem extends Item {
 		long currentTime = pLevel.getGameTime();
 		if (currentTime > this.ticksPassed) {
 			this.ticksPassed = currentTime;
-			this.onActualInventoryTick();
-
-			//get previous player velocity
-			this.playerVelocity = pEntity.position().subtract(previousPos);
-
-			this.previousPos = pEntity.position();
+			this.onActualInventoryTick(pLevel, pEntity);
 		}
 
 		super.inventoryTick(pStack, pLevel, pEntity, pItemSlot, pIsSelected);
@@ -394,13 +394,21 @@ public class GunItem extends Item {
 		return super.hurtEnemy(pStack, pTarget, pAttacker);
 	}
 
-	protected void onActualInventoryTick() {
-		if (this.stabilizerTimer > 0) {
-			this.stabilizerTimer--;
-		}
+	protected void onActualInventoryTick(World world, Entity entity) {
+		//get previous player velocity
+		this.playerVelocity = entity.position().subtract(previousPos);
+		this.previousPos = entity.position();
 
-		if (this.stabilizerTimer == 0) {
-			this.shotsBeforeStability = 0;
+		if (this.stabilizerTimer > 0) this.stabilizerTimer--;
+		if (this.stabilizerTimer == 0) this.shotsBeforeStability = 0;
+
+		if (this.burstTimer > 0) this.burstTimer--;
+		if (burstSpeed != 0) {
+			if ((this.burstTimer % burstSpeed == 0) && (entity instanceof PlayerEntity) && (this.burstTimer > 0)) {
+				PlayerEntity player = (PlayerEntity) entity;
+				if (this == player.getMainHandItem().getItem()) this.use(world, (PlayerEntity) entity, Hand.MAIN_HAND);
+				if (this == player.getOffhandItem().getItem()) this.use(world, (PlayerEntity) entity, Hand.OFF_HAND);
+			}
 		}
 	}
 
@@ -734,6 +742,17 @@ public class GunItem extends Item {
 
 	public GunItem setCost(int cost) {
 		this.ammoCost = cost;
+		return this;
+	}
+
+	public GunItem setVex(boolean vex) {
+		this.isVex = vex;
+		return this;
+	}
+
+	public GunItem setBurst(int burstRate, int burstCount) {
+		this.burstSpeed = burstRate;
+		this.burstAmount = burstCount;
 		return this;
 	}
 

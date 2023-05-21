@@ -153,6 +153,18 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue ironCarbineMeleeDamage;
     public static ForgeConfigSpec.IntValue ironCarbineCost;
 
+    public static ForgeConfigSpec.DoubleValue goldVexDamageMultiplier;
+    public static ForgeConfigSpec.IntValue goldVexFireDelay;
+    public static ForgeConfigSpec.IntValue goldVexEnchantability;
+    public static ForgeConfigSpec.IntValue goldVexDurability;
+    public static ForgeConfigSpec.DoubleValue goldVexInaccuracy;
+    public static ForgeConfigSpec.DoubleValue goldVexProjectileSpeed;
+    public static ForgeConfigSpec.DoubleValue goldVexSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue goldVexMeleeDamage;
+    public static ForgeConfigSpec.IntValue goldVexCost;
+    public static ForgeConfigSpec.IntValue goldVexBurstAmount;
+    public static ForgeConfigSpec.IntValue goldVexBurstSpeed;
+
     public static ForgeConfigSpec.DoubleValue diamondLauncherDamageMultiplier;
     public static ForgeConfigSpec.IntValue diamondLauncherFireDelay;
     public static ForgeConfigSpec.IntValue diamondLauncherEnchantability;
@@ -726,6 +738,42 @@ public class KGConfig {
         ironCarbineCost = builder
                 .comment("Ammo cost to fire Carbines")
                 .defineInRange("ironCarbineCost", 4, 0, 64);
+        builder.pop();
+
+        builder.push("carbine");
+        goldVexDamageMultiplier = builder
+                .comment("Define the Damage multiplier for Vex Burst Carbines")
+                .defineInRange("goldVexDamageMultiplier", 1.45D, 0.5D, 5D);
+        goldVexFireDelay = builder
+                .comment("Configure the Fire delay for Vex Burst Carbines")
+                .defineInRange("goldVexFireDelay", 12, 0, 72000);
+        goldVexEnchantability = builder
+                .comment("Configure the Enchantability for Vex Burst Carbines")
+                .defineInRange("goldVexEnchantability", 14, 0, 30);
+        goldVexDurability = builder
+                .comment("Configure the Durability for Vex Burst Carbines")
+                .defineInRange("goldVexDurability", 414, 0, 32767);
+        goldVexInaccuracy = builder
+                .comment("Configure the Inaccuracy for Vex Burst Carbines")
+                .defineInRange("goldVexInaccuracy", 0D, 0D, 90D);
+        goldVexProjectileSpeed = builder
+                .comment("Configure the Projectile Speed for Vex Burst Carbines")
+                .defineInRange("goldVexProjectileSpeed", 13.5D, 0D, 64D);
+        goldVexSwitchSpeed = builder
+                .comment("Configure the Weapon Switch Speed for Vex Burst Carbines")
+                .defineInRange("goldVexSwitchSpeed", 1.8D, 0D, 5D);
+        goldVexMeleeDamage = builder
+                .comment("Configure the Melee Damage for Vex Burst Carbines (additive)")
+                .defineInRange("goldVexMeleeDamage", 3D, 0D, 40D);
+        goldVexCost = builder
+                .comment("Ammo cost to fire Vex Burst Carbines")
+                .defineInRange("goldVexCost", 4, 0, 64);
+        goldVexBurstAmount = builder
+                .comment("How many shots fire in a burst for Vex Burst Carbines")
+                .defineInRange("goldVexBurstAmount", 3, 0, 64);
+        goldVexBurstSpeed = builder
+                .comment("How many ticks each shot in a burst takes for Vex Burst Carbines")
+                .defineInRange("goldVexBurstSpeed", 2, 0, 64);
         builder.pop();
 
         builder.push("minegun");
