@@ -66,6 +66,9 @@ public class BulletEntity extends AbstractFireballEntity {
 	public boolean isMeleeBonus;
 	public int redstoneLevel;
 	public double mineChance;
+	public boolean clip;
+
+	protected Set<Entity> entityHitHistory = new HashSet<>();
 
 	public BulletEntity(EntityType<? extends BulletEntity> entityType, World worldIn) {
 		super(entityType, worldIn);
@@ -100,7 +103,7 @@ public class BulletEntity extends AbstractFireballEntity {
 			this.remove();
 		}
 
-		if (shouldGlow) {
+		if (shouldGlow || clip) {
 			this.setGlowing(true);
 		}
 
@@ -110,6 +113,11 @@ public class BulletEntity extends AbstractFireballEntity {
 			this.setSharedFlag(6, this.isGlowing());
 			//note that "is away from owner" is absolutely useless anyway, so it was not included
 			this.baseTick();
+
+			if (!level.isClientSide) {
+				if (clip) traceHits(false, true);
+				if (shouldCollateral) traceHits(true, false);
+			}
 
 			RayTraceResult raytraceresult = ProjectileHelper.getHitResult(this, this::canHitEntity);
 			if (raytraceresult.getType() != RayTraceResult.Type.MISS && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, raytraceresult)) {
@@ -150,40 +158,13 @@ public class BulletEntity extends AbstractFireballEntity {
 
 		Entity target = raytrace.getEntity();
 
+		if (entityHitHistory.contains(target)) return;
+		entityHitHistory.add(target);
+
 		if (!level.isClientSide) {
 			entityHitProcess(target);
 
-			if (shouldCollateral) {
-				//put some code here for the manual raytrace
-				//the raytrace needs to be from current position to delta from last known position
-				Set<Entity> entities = new HashSet<>();
-				AxisAlignedBB bb = this.getBoundingBox();
-
-				Vector3d incPosition = new Vector3d(this.getDeltaMovement().x / (bulletSpeed * 10), this.getDeltaMovement().y / (bulletSpeed * 10), this.getDeltaMovement().z / (bulletSpeed * 10));
-
-				//the raytrace is really just a bunch of steps for boundary boxes.  this means accelerator makes sniper collateral further
-				for (double i = 0; i < this.bulletSpeed; i += 0.1) {
-					bb = bb.move(incPosition);
-
-					List<Entity> nextEntities = this.level.getEntities(this, bb);
-
-					//don't bother adding entities to the list that are already there.
-					entities.addAll(nextEntities);
-
-					//kill trace early if we hit a tile doing this, so it doesn't trace through walls.
-					BlockPos someBlockPos = new BlockPos(bb.getCenter());
-					BlockState someBlockState = this.level.getBlockState(someBlockPos);
-
-					//stop processing if we hit a solid block
-					if (someBlockState.getMaterial().blocksMotion()) break;
-				}
-
-				//because the sniper cannot have a projectile ignore invulnerability anyway, this is safe to do.
-				for (Entity entity : entities) {
-					if (!(entity instanceof PlayerEntity) && (entity instanceof LivingEntity)) entityHitProcess(entity);
-				}
-			}
-			else if (target != getOwner())
+			if (target != getOwner() && !shouldCollateral)
 			{
 				//remove immediately on first entity hit
 				this.remove();
@@ -191,11 +172,65 @@ public class BulletEntity extends AbstractFireballEntity {
 		}
 	}
 
+	//for any hit types that aren't vanilla, such as vex carbine's through blocks check since it can be unpredictable, or a sniper's collateral
+	protected void traceHits(boolean collateral, boolean testClip) {
+		//put some code here for the manual raytrace
+		//the raytrace needs to be from current position to delta from last known position
+		Set<Entity> entities = new HashSet<>();
+		AxisAlignedBB bb = this.getBoundingBox();
+
+		//start at previous position
+		Vector3d delta = this.getDeltaMovement();
+		Vector3d incPosition = new Vector3d(delta.x / (bulletSpeed * 10), delta.y / (bulletSpeed * 10), delta.z / (bulletSpeed * 10));
+		delta.reverse();
+
+		//the raytrace is really just a bunch of steps for boundary boxes.  this means accelerator makes sniper collateral further
+		for (double i = 0; i < this.bulletSpeed; i += 0.1) {
+			bb = bb.move(incPosition);
+
+			List<Entity> nextEntities = this.level.getEntities(this, bb);
+
+			//don't bother adding entities to the list that are already there.
+			entities.addAll(nextEntities);
+			entities.remove(this.getOwner());
+
+			//don't process anything we've previously hit on this hit as well
+			entities.removeAll(entityHitHistory);
+			entityHitHistory.addAll(entities);
+
+			if (!testClip) {
+				//kill trace early if we hit a tile doing this, so it doesn't trace through walls.
+				BlockPos someBlockPos = new BlockPos(bb.getCenter());
+				BlockState someBlockState = this.level.getBlockState(someBlockPos);
+
+				//stop processing if we hit a solid block
+				if (someBlockState.getMaterial().blocksMotion()) break;
+			}
+		}
+
+		//because the sniper cannot have a projectile ignore invulnerability anyway, this is safe to do.
+		if (collateral) {
+			for (Entity entity : entities) {
+				if (!(entity instanceof PlayerEntity) && (entity instanceof LivingEntity)) entityHitProcess(entity);
+			}
+		}
+		else if (!entities.isEmpty()){
+			//only process the last entity in the list, which is the closest to the previous position.
+			entityHitProcess(getLastElement(entities));
+			if (testClip) this.remove();
+		}
+	}
+
+	public Entity getLastElement(Set<Entity> s) {
+		final Iterator itr = s.iterator();
+		Object lastElement = itr.next();
+		while (itr.hasNext()) lastElement = itr.next();
+		return (Entity)lastElement;
+	}
+
 	@Override
 	protected void onHitBlock(BlockRayTraceResult raytrace) {
 		//make a spherical poof and a sound
-		if (this.removed) return;
-
 		this.level.playSound(null, this.getX(), this.getY(), this.getZ(), ModSounds.impact, SoundCategory.VOICE, 0.25f, (random.nextFloat() * 0.5f) + 0.75f);
 		double d0 = raytrace.getLocation().x();
 		double d1 = raytrace.getLocation().y() + (this.getBoundingBox().getYsize() / 2);
@@ -294,7 +329,7 @@ public class BulletEntity extends AbstractFireballEntity {
 			}
 		}
 
-		this.remove();
+		if (!this.clip) this.remove();
 	}
 
 	protected void breakWeakBlocks(BlockPos blockPosToTest) {
@@ -392,7 +427,7 @@ public class BulletEntity extends AbstractFireballEntity {
 		else super.onHit(result);
 
 		//remove will be present inside onHitBlock instead
-		if (!level.isClientSide && !shouldCollateral) {
+		if (!clip) {
 			remove();
 		}
 	}
@@ -446,6 +481,7 @@ public class BulletEntity extends AbstractFireballEntity {
 		//compound.putBoolean("isPlasma", isPlasma);
 		if (ignoreInvulnerability) compound.putBoolean("ignoreinv", ignoreInvulnerability);
 		if (knockbackStrength != 0) compound.putDouble("knockback", knockbackStrength);
+		compound.putBoolean("clip", clip);
 	}
 
 	@Override
@@ -459,6 +495,7 @@ public class BulletEntity extends AbstractFireballEntity {
 		//The docs says if it's not here it's gonna be false/0 so it should be good
 		ignoreInvulnerability = compound.getBoolean("ignoreinv");
 		knockbackStrength = compound.getDouble("knockback");
+		clip = compound.getBoolean("clip");
 	}
 
 	public void setDamage(double damage) {

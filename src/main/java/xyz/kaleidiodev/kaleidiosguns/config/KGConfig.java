@@ -758,7 +758,7 @@ public class KGConfig {
                 .defineInRange("goldVexInaccuracy", 0D, 0D, 90D);
         goldVexProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for Vex Burst Carbines")
-                .defineInRange("goldVexProjectileSpeed", 13.5D, 0D, 64D);
+                .defineInRange("goldVexProjectileSpeed", 4D, 0D, 64D);
         goldVexSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Vex Burst Carbines")
                 .defineInRange("goldVexSwitchSpeed", 1.8D, 0D, 5D);

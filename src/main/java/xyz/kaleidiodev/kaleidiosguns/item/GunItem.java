@@ -324,7 +324,6 @@ public class GunItem extends Item {
 		shot.setExplosive(isExplosive);
 		shot.setShouldGlow(EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.tracer, gun) > 0);
 		shot.setOrigin(player.position());
-		shot.setOwner(player);
 
 		double someDamage = (shot.getDamage() + getBonusDamage(gun, player)) * getDamageMultiplier(gun);
 		if (gun.getItem() instanceof ShotgunItem) {
@@ -341,7 +340,8 @@ public class GunItem extends Item {
 
 		if (hasVoltage) shot.redstoneLevel = checkRedstoneLevel(world, player, gun);
 
-		shot.noPhysics = this.shouldCollateral;
+		shot.noPhysics = this.isVex || this.shouldCollateral;
+		shot.clip = this.isVex;
 		shot.isPlasma = (this.getItem() == ModItems.plasmaGatling);
 		shot.isClean = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cleanShot, gun) > 0;
 		shot.isWither = this.isWither;
