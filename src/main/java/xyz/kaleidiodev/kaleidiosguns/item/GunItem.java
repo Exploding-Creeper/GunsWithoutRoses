@@ -340,8 +340,30 @@ public class GunItem extends Item {
 
 		if (hasVoltage) shot.redstoneLevel = checkRedstoneLevel(world, player, gun);
 
-		shot.noPhysics = this.isVex || this.shouldCollateral;
-		shot.clip = this.isVex;
+		boolean noPhysics = this.shouldCollateral;
+		boolean vex = false;
+
+		if (this.isVex) {
+			ItemStack membrane = ItemStack.EMPTY;
+			if (player.getUsedItemHand() == Hand.OFF_HAND) {
+				membrane = player.getItemInHand(Hand.MAIN_HAND);
+			} else {
+				membrane = player.getItemInHand(Hand.OFF_HAND);
+			}
+
+			if (membrane.getItem() == Items.PHANTOM_MEMBRANE) {
+				noPhysics = true;
+				vex = true;
+
+				if (!player.abilities.instabuild) {
+					membrane.shrink(1);
+					if (membrane.isEmpty()) player.inventory.removeItem(membrane);
+				}
+			}
+		}
+
+		shot.noPhysics = noPhysics;
+		shot.clip = vex;
 		shot.isPlasma = (this.getItem() == ModItems.plasmaGatling);
 		shot.isClean = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cleanShot, gun) > 0;
 		shot.isWither = this.isWither;
@@ -855,6 +877,7 @@ public class GunItem extends Item {
 			if (!isOneHanded && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && (this instanceof ShotgunItem)) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.twohands_shotgun"));
 			if (!isOneHanded && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && !(this instanceof ShotgunItem)) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.twohands"));
 			if ((inaccuracy == 0) && !(this instanceof ShotgunItem) && !(this instanceof GatlingItem)) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.sniper"));
+			if (isVex) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.vex"));
 
 			addExtraStatsTooltip(stack, world, tooltip);
 		}

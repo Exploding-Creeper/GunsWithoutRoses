@@ -19,14 +19,13 @@
 	"item.kaleidiosguns.defender_rifle": "Defender Rifle",
 	"item.kaleidiosguns.bayonet": "Bayonet Sniper",
 	"item.kaleidiosguns.lava_smg": "Lava Bound SMG",
+	"item.kaleidiosguns.vex_burst_carbine": "Vex Burst Carbine",
 
 	"item.kaleidiosguns.flint_bullet": "Flint Bullet",
 	"item.kaleidiosguns.iron_bullet": "Iron Bullet",
 	"item.kaleidiosguns.blaze_bullet": "Blaze Bullet",
 	"item.kaleidiosguns.hunger_bullet": "Maws of Gluttony",
 	"item.kaleidiosguns.xp_bullet": "Cleric Cartridge",
-
-	"item.kaleidiosguns.ranger_glove": "Ranger Glove",
 
 	"tooltip.kaleidiosguns.shift": "§7Hold §fSHIFT§7 for stats§r",
 	"tooltip.kaleidiosguns.bullet.damage": "%d damage",
@@ -75,10 +74,10 @@
 	"tooltip.kaleidiosguns.doors": "Can breach doors, windows and break parkour blocks",
 	"tooltip.kaleidiosguns.lava": "Entities on fire cause more damage",
 	"tooltip.kaleidiosguns.melee": "Get bonus damage a set amount of shots after melee",
-	"tooltip.kaleidiosguns.glove": "Acts as an empty hand",
 	"tooltip.kaleidiosguns.twohands": "Requires an empty offhand for full accuracy",
 	"tooltip.kaleidiosguns.twohands_shotgun": "Requires an empty offhand for full fire rate",
 	"tooltip.kaleidiosguns.sniper": "Only has perfect accuracy whilst you are standing still",
+	"tooltip.kaleidiosguns.vex": "Consumes offhand Phantom Membrane to no-clip shots through walls",
 
 	"tooltip.kaleidiosguns.blaze_bullet": "Sets entities on fire",
 	"tooltip.kaleidiosguns.hunger_bullet": "Uses hunger as ammo",
@@ -144,5 +143,6 @@
 	"subtitles.kaleidiosguns.item.defender.shoot": "Defender Rifle fired",
 	"subtitles.kaleidiosguns.item.lava_smg.shoot": "Lava Bound SMG fired",
 	"subtitles.kaleidiosguns.item.bayonet.shoot": "Bayonet Sniper fired",
+	"subtitles.kaleidiosguns.item.vex_burst_carbine.shoot": "Vex Burst Carbine fired",
 	"subtitles.kaleidiosguns.item.bullet.impact": "Bullet landed"
 }

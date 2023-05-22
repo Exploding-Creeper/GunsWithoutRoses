@@ -123,6 +123,11 @@
 		"subtitle": "subtitles.kaleidiosguns.item.bayonet.shoot",
 		"sounds": [ "kaleidiosguns:bayonet_sniper" ]
 	},
+	"item.vex_burst.shoot": {
+		"category": "item",
+		"subtitle": "subtitles.kaleidiosguns.item.vex_burst_carbine.shoot",
+		"sounds": [ "kaleidiosguns:vex_burst" ]
+	},
 	"entity.bullet.impact": {
 		"category": "entity",
 		"subtitle": "subtitles.kaleidiosguns.item.bullet.impact",
