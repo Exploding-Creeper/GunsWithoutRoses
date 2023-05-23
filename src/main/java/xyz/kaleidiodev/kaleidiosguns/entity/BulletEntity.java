@@ -425,11 +425,6 @@ public class BulletEntity extends AbstractFireballEntity {
 		}
 		//damage should try to hurt tiles and entities without using an explosion, so it will need to fire this super.
 		else super.onHit(result);
-
-		//remove will be present inside onHitBlock instead
-		if (!clip) {
-			remove();
-		}
 	}
 
 	protected boolean checkIsSameTeam(Entity player, Entity victim) {
