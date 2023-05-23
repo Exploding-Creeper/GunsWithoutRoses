@@ -1,33 +1,33 @@
 package xyz.kaleidiodev.kaleidiosguns.item;
 
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
-import net.minecraft.util.IndirectEntityDamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import xyz.kaleidiodev.kaleidiosguns.config.KGConfig;
+import xyz.kaleidiodev.kaleidiosguns.entity.BulletEntity;
 import xyz.kaleidiodev.kaleidiosguns.registry.ModEnchantments;
+import xyz.kaleidiodev.kaleidiosguns.registry.ModItems;
 
 import javax.annotation.Nullable;
 import java.util.List;
+
+import static xyz.kaleidiodev.kaleidiosguns.KaleidiosGuns.VivecraftForgeExtensionPresent;
 
 public class ShotgunItem extends GunItem {
 
 	private final int bulletCount;
 	protected boolean isVampire;
 	private int vampireCount;
+	private int currentShot;
+	private boolean isWave;
 
 	public ShotgunItem(Properties properties, int bonusDamage, double damageMultiplier, int fireDelay, double inaccuracy, int enchantability, int bulletCount, double attackSpeed, double attackDamage) {
 		super(properties, bonusDamage, damageMultiplier, fireDelay, inaccuracy, enchantability, attackSpeed, attackDamage);
@@ -39,7 +39,10 @@ public class ShotgunItem extends GunItem {
 		//always fire vampire check first
 		vampireBulletCount(player);
 		//then fire bullet count check.  this will ensure that division only applies to bullets AFTER vampire check has added its own so damage scales accordingly
-		for (int i = 0; i < getBulletCount(gun, player); i++) super.fireWeapon(world, player, gun, ammo, bulletItem, bulletFree);
+		for (int i = 0; i < getBulletCount(gun, player); i++) {
+			currentShot = i;
+			super.fireWeapon(world, player, gun, ammo, bulletItem, bulletFree);
+		}
 	}
 
 	@Override
@@ -48,10 +51,32 @@ public class ShotgunItem extends GunItem {
 		if (isVampire) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.vampire_shotgun"));
 	}
 
+	@Override
+	public void shootShot(BulletEntity shot, PlayerEntity player, ItemStack gun, double nextInaccuracy) {
+		if (this.isWave) {
+			//shoot in a vertical wave by scrolling through xRots step by step, no inaccuracy
+			float bounds = (float)(KGConfig.diamondShotgunInaccuracy.get() * 2);
+			float shotHorizBound = -bounds / 2; //get only one side of the arc
+			float shotHorizStep = (bounds / (getBulletCount(gun, player) - 1)); //subtract by one so we don't count the first shot, which is always on the lower bound.
+			float currentStep = shotHorizBound + (shotHorizStep * currentShot);
+
+			System.out.println(currentStep);
+
+			shot.shootFromRotation(player, player.xRot, player.yRot + currentStep, 0, (float)getProjectileSpeed(gun, player), 0.0F);
+		}
+		else super.shootShot(shot, player, gun, nextInaccuracy);
+	}
+
 	protected int getBulletCount(ItemStack stack, @Nullable PlayerEntity player) {
 		int divisionFactor = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.division, stack) * KGConfig.divisionCountIncrease.get();
 
 		return getBaseBulletCount() + divisionFactor;
+	}
+
+	@Override
+	public double getInaccuracy(ItemStack stack, @Nullable PlayerEntity player) {
+		if (this.isWave) return 0;  //trick inaccuracy into being 0 so the wave attack specifies angles on its own
+		else return super.getInaccuracy(stack, player);
 	}
 
 	protected void vampireBulletCount(@Nullable PlayerEntity player) {
@@ -94,11 +119,13 @@ public class ShotgunItem extends GunItem {
 		return this.bulletCount + this.vampireCount;
 	}
 
-	public boolean getIsVampire() { return isVampire; }
-
 	public ShotgunItem setIsVampire(boolean vampire) {
 		this.isVampire = vampire;
 		return this;
 	}
 
+	public ShotgunItem setIsWave(boolean wave) {
+		this.isWave = wave;
+		return this;
+	}
 }

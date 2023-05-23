@@ -20,6 +20,7 @@
 	"item.kaleidiosguns.bayonet": "Bayonet Sniper",
 	"item.kaleidiosguns.lava_smg": "Lava Bound SMG",
 	"item.kaleidiosguns.vex_burst_carbine": "Vex Burst Carbine",
+	"item.kaleidiosguns.hero_wave_shotgun": "Hero Wave Shotgun",
 
 	"item.kaleidiosguns.flint_bullet": "Flint Bullet",
 	"item.kaleidiosguns.iron_bullet": "Iron Bullet",
@@ -78,6 +79,8 @@
 	"tooltip.kaleidiosguns.twohands_shotgun": "Requires an empty offhand for full fire rate",
 	"tooltip.kaleidiosguns.sniper": "Only has perfect accuracy whilst you are standing still",
 	"tooltip.kaleidiosguns.vex": "Consumes offhand Phantom Membrane to no-clip shots through walls",
+	"tooltip.kaleidiosguns.wave": "Shoots waves of shots instead of blasts",
+	"tooltip.kaleidiosguns.hero": "Increases damage if you have any negative effect",
 
 	"tooltip.kaleidiosguns.blaze_bullet": "Sets entities on fire",
 	"tooltip.kaleidiosguns.hunger_bullet": "Uses hunger as ammo",
@@ -144,5 +147,6 @@
 	"subtitles.kaleidiosguns.item.lava_smg.shoot": "Lava Bound SMG fired",
 	"subtitles.kaleidiosguns.item.bayonet.shoot": "Bayonet Sniper fired",
 	"subtitles.kaleidiosguns.item.vex_burst_carbine.shoot": "Vex Burst Carbine fired",
+	"subtitles.kaleidiosguns.item.hero_wave_shotgun.shoot": "Hero Wave Shotgun fired",
 	"subtitles.kaleidiosguns.item.bullet.impact": "Bullet landed"
 }

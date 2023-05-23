@@ -91,6 +91,7 @@ public class GunItem extends Item {
 	protected int burstSpeed;
 	protected int burstAmount;
 	protected boolean isVex;
+	protected boolean isHero;
 	protected Vector3d previousPos = Vector3d.ZERO;
 	protected Vector3d playerVelocity = Vector3d.ZERO;
 
@@ -307,7 +308,8 @@ public class GunItem extends Item {
 		boolean isPlasma = gun.getItem() == ModItems.plasmaGatling;
 		double nextInaccuracy = getInaccuracy(gun, player);
 		BulletEntity shot = bulletItem.createProjectile(world, ammo, player, isPlasma);
-		shot.shootFromRotation(player, player.xRot, player.yRot, 0, (float)getProjectileSpeed(gun, player), VivecraftForgeExtensionPresent ? 0.0F : (float)nextInaccuracy);
+
+		shootShot(shot, player, gun, nextInaccuracy);
 
 		//subtract player velocity to make the bullet independent
 		Vector3d projectileMotion = player.getDeltaMovement();
@@ -395,6 +397,11 @@ public class GunItem extends Item {
 		if (burstTimer == 0) burstTimer = burstSpeed * burstAmount;
 
 		world.addFreshEntity(shot);
+	}
+
+	//called during the firing sequence, override if the spray pattern needs to be specified
+	public void shootShot(BulletEntity shot, PlayerEntity player, ItemStack gun, double nextInaccuracy) {
+		shot.shootFromRotation(player, player.xRot, player.yRot, 0, (float)getProjectileSpeed(gun, player), VivecraftForgeExtensionPresent ? 0.0F : (float)nextInaccuracy);
 	}
 
 	//used to tick the stability timer on guns that use it.
@@ -778,6 +785,11 @@ public class GunItem extends Item {
 		return this;
 	}
 
+	public GunItem setHero(boolean hero) {
+		this.isHero = hero;
+		return this;
+	}
+
 	public int getCost() { return ammoCost; }
 
 	/**
@@ -878,6 +890,8 @@ public class GunItem extends Item {
 			if (!isOneHanded && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && !(this instanceof ShotgunItem)) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.twohands"));
 			if ((inaccuracy == 0) && !(this instanceof ShotgunItem) && !(this instanceof GatlingItem)) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.sniper"));
 			if (isVex) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.vex"));
+			if (this == ModItems.heroShotgun) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.wave"));
+			if (isHero) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.hero"));
 
 			addExtraStatsTooltip(stack, world, tooltip);
 		}
