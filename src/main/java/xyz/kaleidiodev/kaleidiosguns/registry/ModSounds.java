@@ -35,12 +35,13 @@ public class ModSounds {
 			bayonet = initSound("item.bayonet.shoot"),
 			lava_smg = initSound("item.lava_smg.shoot"),
 			vexBurst = initSound("item.vex_burst.shoot"),
+			heroWave = initSound("item.hero_wave.shoot"),
 			impact = initSound("entity.bullet.impact");
 
 
 	@SubscribeEvent
 	public static void registerSounds(final RegistryEvent.Register<SoundEvent> event) {
-		event.getRegistry().registerAll(gun, pistol, smg, double_shotgun, plasma_rifle, carbine, shotgun, sniper, impact, revolver, skillShot, revolverReload, double_shotgunReload, rocketLauncher, witherLauncher, vampireShotgun, blessedPistol, shadowMagnum, corruptionGun, voltgun, defender_rifle, bayonet, lava_smg, vexBurst);
+		event.getRegistry().registerAll(gun, pistol, smg, double_shotgun, plasma_rifle, carbine, shotgun, sniper, impact, revolver, skillShot, revolverReload, double_shotgunReload, rocketLauncher, witherLauncher, vampireShotgun, blessedPistol, shadowMagnum, corruptionGun, voltgun, defender_rifle, bayonet, lava_smg, vexBurst, heroWave);
 	}
 
 	public static SoundEvent initSound(String name) {

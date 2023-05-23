@@ -128,6 +128,11 @@
 		"subtitle": "subtitles.kaleidiosguns.item.vex_burst_carbine.shoot",
 		"sounds": [ "kaleidiosguns:vex_burst" ]
 	},
+	"item.hero_wave.shoot": {
+		"category": "item",
+		"subtitle": "subtitles.kaleidiosguns.item.hero_wave_shotgun.shoot",
+		"sounds": [ "kaleidiosguns:hero_wave" ]
+	},
 	"entity.bullet.impact": {
 		"category": "entity",
 		"subtitle": "subtitles.kaleidiosguns.item.bullet.impact",
