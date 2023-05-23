@@ -36,10 +36,16 @@ public class ModTradesEvent {
             trades.get(5).add((trader, rand) -> new MerchantOffer(new ItemStack(Items.EMERALD, 30), new ItemStack(ModItems.defenderRifle, 1), 1, 80, 0.3F));
         }
 
+        if (event.getType() == VillagerProfession.MASON) {
+            Int2ObjectMap<List<VillagerTrades.ITrade>> trades = event.getTrades();
+
+            trades.get(5).add((trader, rand) -> new MerchantOffer(new ItemStack(Items.EMERALD, 50), new ItemStack(ModItems.heroShotgun, 1), 1, 80, 0.3F));
+        }
+
         if (event.getType() == VillagerProfession.CLERIC) {
             Int2ObjectMap<List<VillagerTrades.ITrade>> trades = event.getTrades();
 
-            trades.get(5).add((trader, rand) -> new MerchantOffer(new ItemStack(Items.EMERALD, 45), new ItemStack(Items.DRAGON_BREATH, 1), new ItemStack(ModItems.xpBullet, 1), 1, 32, 0.3F));
+            trades.get(5).add((trader, rand) -> new MerchantOffer(new ItemStack(Items.EMERALD, 45), new ItemStack(Items.DRAGON_BREATH, 1), new ItemStack(ModItems.xpBullet, 1), 10, 32, 0.3F));
         }
     }
 }
