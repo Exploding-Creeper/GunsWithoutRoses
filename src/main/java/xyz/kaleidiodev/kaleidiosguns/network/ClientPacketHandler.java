@@ -77,6 +77,7 @@ public class ClientPacketHandler {
         bullet.isMeleeBonus = packet.readBoolean();
         bullet.lavaMode = packet.readByte();
         bullet.clip = packet.readBoolean();
+        bullet.hero = packet.readBoolean();
 
         mc.level.putNonPlayerEntity(entityID, bullet);
         entity.lerpMotion(velocity.x, velocity.y, velocity.z);

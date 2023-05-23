@@ -41,6 +41,7 @@ public class NetworkUtils {
             buffer.writeBoolean(bullet.isMeleeBonus);
             buffer.writeByte(bullet.lavaMode);
             buffer.writeBoolean(bullet.clip);
+            buffer.writeBoolean(bullet.hero);
         }
 
         return NetworkDirection.PLAY_TO_CLIENT.buildPacket(Pair.of(buffer, 10), KaleidiosGuns.rl("custom_channel")).getThis();

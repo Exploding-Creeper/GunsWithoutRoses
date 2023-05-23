@@ -79,6 +79,8 @@ public interface IBullet {
 		//revenge shots should multiply their damage.
 		if (projectile.wasRevenge) newDamage *= KGConfig.emeraldBlessedBlessingMultiplier.get();
 
+		if (projectile.hero) newDamage *= KGConfig.heroShotgunEffectMultiplier.get();
+
 		//shooting shadow in the dark multiplies damage.
 		if (projectile.wasDark) {
 			newDamage /= projectile.getShootingGun().getDamageMultiplier(new ItemStack(projectile.getShootingGun().getItem()));

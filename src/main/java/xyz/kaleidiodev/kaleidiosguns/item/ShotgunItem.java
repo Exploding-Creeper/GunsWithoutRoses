@@ -55,7 +55,7 @@ public class ShotgunItem extends GunItem {
 	public void shootShot(BulletEntity shot, PlayerEntity player, ItemStack gun, double nextInaccuracy) {
 		if (this.isWave) {
 			//shoot in a vertical wave by scrolling through xRots step by step, no inaccuracy
-			float bounds = (float)((KGConfig.diamondShotgunInaccuracy.get() * 2) / ((EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.bullseye, gun) * KGConfig.bullseyeAccuracyIncrease.get()) + 1.0));
+			float bounds = (float)((KGConfig.heroShotgunInaccuracy.get() * 2) / ((EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.bullseye, gun) * KGConfig.bullseyeAccuracyIncrease.get()) + 1.0));
 			float shotHorizBound = -bounds / 2; //get only one side of the arc
 			float shotHorizStep = (bounds / (getBulletCount(gun, player) - 1)); //subtract by one so we don't count the first shot, which is always on the lower bound.
 			float currentStep = shotHorizBound + (shotHorizStep * currentShot);

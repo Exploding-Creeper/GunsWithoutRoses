@@ -67,6 +67,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	public int redstoneLevel;
 	public double mineChance;
 	public boolean clip;
+	public boolean hero;
 
 	protected Set<Entity> entityHitHistory = new HashSet<>();
 
@@ -89,7 +90,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	protected IParticleData getTrailParticle() {
 		if (isExplosive) return ParticleTypes.POOF;
 		if (isPlasma) return ParticleTypes.INSTANT_EFFECT;
-		if (wasRevenge || isMeleeBonus) return ParticleTypes.HAPPY_VILLAGER;
+		if (wasRevenge || isMeleeBonus || hero) return ParticleTypes.HAPPY_VILLAGER;
 		if (wasDark) return ParticleTypes.SMOKE;
 		if ((lavaMode & 0x04) != 0) return ParticleTypes.LANDING_LAVA; //if was a slag bullet in any mode
 		return ParticleTypes.CRIT;

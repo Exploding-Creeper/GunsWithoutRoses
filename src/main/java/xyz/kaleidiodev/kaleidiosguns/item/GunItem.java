@@ -19,6 +19,7 @@ import net.minecraft.item.*;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.EffectType;
 import net.minecraft.potion.Effects;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.*;
@@ -39,6 +40,7 @@ import xyz.kaleidiodev.kaleidiosguns.registry.ModItems;
 import xyz.kaleidiodev.kaleidiosguns.registry.ModSounds;
 
 import javax.annotation.Nullable;
+import java.util.Collection;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -377,6 +379,19 @@ public class GunItem extends Item {
 		shot.isMeleeBonus = this.meleeBonusCounter > 0;
 		shot.shootsLights = this.isShadow;
 		shot.juggle = this.isJuggler;
+
+		shot.hero = false;
+		if (isHero) {
+			//find if any harmful effects are on the player.  break on the first found
+			Collection<EffectInstance> effectsOnPlayer = player.getActiveEffects();
+			for (EffectInstance effect : effectsOnPlayer) {
+				if (effect.getEffect().getCategory() == EffectType.HARMFUL) {
+					shot.hero = true;
+					break;
+				}
+			}
+		}
+
 		if (player.getEffect(Effects.DIG_SPEED) != null) {
 			shot.mineChance = this.mineChance + (KGConfig.hasteBonusMineChance.get() * player.getEffect(Effects.DIG_SPEED).getAmplifier());
 		}

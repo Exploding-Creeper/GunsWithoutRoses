@@ -121,6 +121,18 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue netheriteShotgunMeleeDamage;
     public static ForgeConfigSpec.IntValue netheriteShotgunCost;
 
+    public static ForgeConfigSpec.DoubleValue heroShotgunDamageMultiplier;
+    public static ForgeConfigSpec.IntValue heroShotgunFireDelay;
+    public static ForgeConfigSpec.IntValue heroShotgunEnchantability;
+    public static ForgeConfigSpec.IntValue heroShotgunDurability;
+    public static ForgeConfigSpec.DoubleValue heroShotgunInaccuracy;
+    public static ForgeConfigSpec.IntValue heroShotgunBulletCount;
+    public static ForgeConfigSpec.DoubleValue heroShotgunProjectileSpeed;
+    public static ForgeConfigSpec.DoubleValue heroShotgunSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue heroShotgunMeleeDamage;
+    public static ForgeConfigSpec.IntValue heroShotgunCost;
+    public static ForgeConfigSpec.DoubleValue heroShotgunEffectMultiplier;
+
     public static ForgeConfigSpec.DoubleValue diamondSniperDamageMultiplier;
     public static ForgeConfigSpec.IntValue diamondSniperFireDelay;
     public static ForgeConfigSpec.IntValue diamondSniperEnchantability;
@@ -560,6 +572,42 @@ public class KGConfig {
                 .defineInRange("diamondShotgunCost", 6, 0, 64);
         builder.pop();
 
+        builder.push("hero wave shotgun");
+        heroShotgunDamageMultiplier = builder
+                .comment("Define the Damage multiplier for Hero Wave Shotguns")
+                .defineInRange("heroShotgunDamageMultiplier", 0.75D, 0.1D, 5D);
+        heroShotgunFireDelay = builder
+                .comment("Configure the Fire delay for Hero Wave Shotguns")
+                .defineInRange("heroShotgunFireDelay", 19, 0, 72000);
+        heroShotgunEnchantability = builder
+                .comment("Configure the Enchantability for Hero Wave Shotguns")
+                .defineInRange("heroShotgunEnchantability", 10, 0, 30);
+        heroShotgunDurability = builder
+                .comment("Configure the Durability for Hero Wave Shotguns")
+                .defineInRange("heroShotgunDurability", 320, 0, 32767);
+        heroShotgunInaccuracy = builder
+                .comment("Configure the Inaccuracy for Hero Wave Shotguns")
+                .defineInRange("heroShotgunInaccuracy", 5D, 0D, 90D);
+        heroShotgunBulletCount = builder
+                .comment("Configure the amount of Bullets at once for Hero Wave Shotguns")
+                .defineInRange("heroShotgunBulletCount", 5, 0, 50);
+        heroShotgunProjectileSpeed = builder
+                .comment("Configure the Projectile Speed for Hero Wave Shotguns")
+                .defineInRange("heroShotgunProjectileSpeed", 8D, 0D, 64D);
+        heroShotgunSwitchSpeed = builder
+                .comment("Configure the Weapon Switch Speed for Hero Wave Shotguns")
+                .defineInRange("heroShotgunSwitchSpeed", 2.1D, 0D, 5D);
+        heroShotgunMeleeDamage = builder
+                .comment("Configure the Melee Damage for Hero Wave Shotguns")
+                .defineInRange("heroShotgunMeleeDamage", 4D, 0D, 40D);
+        heroShotgunCost = builder
+                .comment("Ammo cost to fire Hero Wave Shotguns")
+                .defineInRange("heroShotgunCost", 6, 0, 64);
+        heroShotgunEffectMultiplier = builder
+                .comment("Configure the damage bonus when the shooter has a negative effect for Hero Wave Shotguns")
+                .defineInRange("heroShotgunEffectMultiplier", 1.5D, 0D, 40D);
+        builder.pop();
+
         builder.push("double barrel shotgun");
         goldDoubleShotgunDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Double Barrel Shotguns")
@@ -740,7 +788,7 @@ public class KGConfig {
                 .defineInRange("ironCarbineCost", 4, 0, 64);
         builder.pop();
 
-        builder.push("carbine");
+        builder.push("ver burst carbine");
         goldVexDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Vex Burst Carbines")
                 .defineInRange("goldVexDamageMultiplier", 1.45D, 0.5D, 5D);
