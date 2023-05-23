@@ -60,8 +60,6 @@ public class ShotgunItem extends GunItem {
 			float shotHorizStep = (bounds / (getBulletCount(gun, player) - 1)); //subtract by one so we don't count the first shot, which is always on the lower bound.
 			float currentStep = shotHorizBound + (shotHorizStep * currentShot);
 
-			System.out.println(currentStep);
-
 			shot.shootFromRotation(player, player.xRot, player.yRot + currentStep, 0, (float)getProjectileSpeed(gun, player), 0.0F);
 		}
 		else super.shootShot(shot, player, gun, nextInaccuracy);
