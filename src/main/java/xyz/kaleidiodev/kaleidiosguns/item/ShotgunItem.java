@@ -50,6 +50,8 @@ public class ShotgunItem extends GunItem {
 	protected void addExtraStatsTooltip(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip) {
 		tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.shotgun.shots" + (isProjectileCountModified(stack) ? ".modified" : ""), getBulletCount(stack, null)));
 		if (isVampire) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.vampire_shotgun"));
+		if (isWave) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.wave"));
+		if (isSpread) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.spread"));
 	}
 
 	@Override

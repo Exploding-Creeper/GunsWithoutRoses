@@ -133,6 +133,11 @@
 		"subtitle": "subtitles.kaleidiosguns.item.hero_wave_shotgun.shoot",
 		"sounds": [ "kaleidiosguns:hero_wave" ]
 	},
+	"item.spreadgun.shoot": {
+		"category": "item",
+		"subtitle": "subtitles.kaleidiosguns.item.spreadgun.shoot",
+		"sounds": [ "kaleidiosguns:spreadgun" ]
+	},
 	"entity.bullet.impact": {
 		"category": "entity",
 		"subtitle": "subtitles.kaleidiosguns.item.bullet.impact",
