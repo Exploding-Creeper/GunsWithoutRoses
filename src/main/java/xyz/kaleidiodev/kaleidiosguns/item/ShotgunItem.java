@@ -28,6 +28,7 @@ public class ShotgunItem extends GunItem {
 	private int vampireCount;
 	private int currentShot;
 	private boolean isWave;
+	private boolean isSpread;
 
 	public ShotgunItem(Properties properties, int bonusDamage, double damageMultiplier, int fireDelay, double inaccuracy, int enchantability, int bulletCount, double attackSpeed, double attackDamage) {
 		super(properties, bonusDamage, damageMultiplier, fireDelay, inaccuracy, enchantability, attackSpeed, attackDamage);
@@ -63,6 +64,13 @@ public class ShotgunItem extends GunItem {
 			shot.shootFromRotation(player, player.xRot, player.yRot + currentStep, 0, (float)getProjectileSpeed(gun, player), 0.0F);
 		}
 		else super.shootShot(shot, player, gun, nextInaccuracy);
+	}
+
+	@Override
+	public double getProjectileSpeed(ItemStack stack, @Nullable PlayerEntity player) {
+		if (this.isSpread) {
+			return super.baseSpeed(stack, null) * (KGConfig.spreadgunMinimumSpeed.get() + (Math.random() * (KGConfig.spreadgunMaximumSpeed.get() - KGConfig.spreadgunMinimumSpeed.get())));
+		} else return super.baseSpeed(stack, null);
 	}
 
 	protected int getBulletCount(ItemStack stack, @Nullable PlayerEntity player) {
@@ -124,6 +132,11 @@ public class ShotgunItem extends GunItem {
 
 	public ShotgunItem setIsWave(boolean wave) {
 		this.isWave = wave;
+		return this;
+	}
+
+	public ShotgunItem setIsSpread(boolean spread) {
+		this.isSpread = spread;
 		return this;
 	}
 }

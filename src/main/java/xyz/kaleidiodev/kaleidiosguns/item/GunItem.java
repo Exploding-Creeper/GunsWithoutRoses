@@ -323,7 +323,9 @@ public class GunItem extends Item {
 		shot.setHealthRewardChance(EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.passionForBlood, gun) * 0.1);
 		shot.setShouldBreakBlock(hasBlockMineAbility);
 		shot.setShouldCollateral(shouldCollateral);
-		shot.setBulletSpeed(getProjectileSpeed(gun, player));
+		double nextSpeed = getProjectileSpeed(gun, player);
+		System.out.println(nextSpeed);
+		shot.setBulletSpeed(nextSpeed);
 		shot.setKnockbackStrength(myKnockback);
 		shot.setExplosive(isExplosive);
 		shot.setShouldGlow(EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.tracer, gun) > 0);
@@ -591,6 +593,10 @@ public class GunItem extends Item {
 	 * Gets the projectile speed, taking into account Accelerator enchantment.
 	 */
 	public double getProjectileSpeed(ItemStack stack, @Nullable PlayerEntity player) {
+		return baseSpeed(stack, player);
+	}
+
+	public double baseSpeed(ItemStack stack, @Nullable PlayerEntity player) {
 		return Math.max(0, projectileSpeed + ((EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.accelerator, stack) * KGConfig.acceleratorSpeedIncrease.get() * projectileSpeed)));
 	}
 
@@ -873,7 +879,7 @@ public class GunItem extends Item {
 			else tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.accuracy" + (isInaccuracyModified(stack) ? ".modified" : ""), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(1.0 / inaccuracy)));
 
 			//Projectile Speed
-			double projectileSpeed = getProjectileSpeed(stack, null);
+			double projectileSpeed = baseSpeed(stack, null);
 			tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.speed" + (isProjectileSpeedModified(stack) ? ".modified" : ""), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(projectileSpeed)));
 
 			if (ammoCost != 1) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.cost", ammoCost));
