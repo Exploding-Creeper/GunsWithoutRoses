@@ -539,7 +539,7 @@ public class GunItem extends Item {
 	 * The formula is just accuracy = 1 / inaccuracy.
 	 */
 	public double getInaccuracy(ItemStack stack, @Nullable PlayerEntity player) {
-		double nextInaccuracy = Math.max(0, inaccuracy / ((EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.bullseye, stack) * KGConfig.bullseyeAccuracyIncrease.get()) + 1.0));
+		double nextInaccuracy = baseInaccuracy(stack, player);
 
 		nextInaccuracy += shotsBeforeStability * Math.max(0, instabilitySpreadAdditional / ((EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.bullseye, stack) * KGConfig.bullseyeAccuracyIncrease.get()) + 1.0D));
 
@@ -580,6 +580,10 @@ public class GunItem extends Item {
 		}
 
 		return nextInaccuracy;
+	}
+
+	public double baseInaccuracy(ItemStack stack, @Nullable PlayerEntity player) {
+		return Math.max(0, inaccuracy / ((EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.bullseye, stack) * KGConfig.bullseyeAccuracyIncrease.get()) + 1.0));
 	}
 
 	/**
@@ -864,7 +868,7 @@ public class GunItem extends Item {
 
 
 			//Accuracy
-			double inaccuracy = getInaccuracy(stack, null);
+			double inaccuracy = baseInaccuracy(stack, null);
 			if (inaccuracy <= 0) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.accuracy.perfect" + (isInaccuracyModified(stack) ? ".modified" : "")));
 			else tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.accuracy" + (isInaccuracyModified(stack) ? ".modified" : ""), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(1.0 / inaccuracy)));
 
