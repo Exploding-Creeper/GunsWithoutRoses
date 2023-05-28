@@ -81,11 +81,11 @@ public class ModItems {
 		corruptionGatling = initItem(reg, new GatlingItem(defP().durability(KGConfig.netheriteMinegunDurability.get()), 0, KGConfig.netheriteMinegunDamageMultiplier.get(), KGConfig.netheriteMinegunFireDelay.get(), KGConfig.netheriteMinegunInaccuracy.get(), KGConfig.netheriteMinegunEnchantability.get(), KGConfig.netheriteMinegunSwitchSpeed.get(), KGConfig.netheriteMinegunMeleeDamage.get()).repair(() -> Ingredient.of(Tags.Items.INGOTS_NETHERITE)), "corruption_gun").projectileSpeed(KGConfig.netheriteMinegunProjectileSpeed.get()).canMineBlocks(true).setIsRedstone(true).setIsCorruption(true).fireSound(ModSounds.corruptionGun).setMineChance(KGConfig.netheriteMinegunMineChance.get()).setCost(KGConfig.netheriteMinegunCost.get()).setSniperReplacementAim(KGConfig.netheriteMinegunReplacementInaccuracy.get());
 
 		// Bullets
-		flintBullet = initItem(reg, new BulletItem(defP(), KGConfig.flintBulletDamage.get()), "flint_bullet");
-		ironBullet = initItem(reg, new BulletItem(defP(), KGConfig.ironBulletDamage.get()), "iron_bullet");
-		blazeBullet = initItem(reg, new BlazeBulletItem(defP(), KGConfig.blazeBulletDamage.get()), "blaze_bullet");
-		hungerBullet = initItem(reg, new HungerBulletItem(defP().stacksTo(1).durability(KGConfig.hungerBulletDurability.get()), KGConfig.hungerBulletDamage.get()), "hunger_bullet");
-		xpBullet = initItem(reg, new XPBulletItem(defP().stacksTo(1).durability(KGConfig.xpBulletDurability.get()), KGConfig.xpBulletDamage.get()), "xp_bullet");
+		flintBullet = initItem(reg, new BulletItem(defP(), KGConfig.flintBulletDamage.get(), KGConfig.flintBulletDurabilityDamage.get()), "flint_bullet");
+		ironBullet = initItem(reg, new BulletItem(defP(), KGConfig.ironBulletDamage.get(), KGConfig.ironBulletDurabilityDamage.get()), "iron_bullet");
+		blazeBullet = initItem(reg, new BlazeBulletItem(defP(), KGConfig.blazeBulletDamage.get(), KGConfig.blazeBulletDurabilityDamage.get()), "blaze_bullet");
+		hungerBullet = initItem(reg, new HungerBulletItem(defP().stacksTo(1).durability(KGConfig.hungerBulletDurability.get()), KGConfig.hungerBulletDamage.get(), KGConfig.hungerBulletDurabilityDamage.get()), "hunger_bullet");
+		xpBullet = initItem(reg, new XPBulletItem(defP().stacksTo(1).durability(KGConfig.xpBulletDurability.get()), KGConfig.xpBulletDamage.get(), KGConfig.xpBulletDurabilityDamage.get()), "xp_bullet");
 	}
 
 	public static Item.Properties defP() {

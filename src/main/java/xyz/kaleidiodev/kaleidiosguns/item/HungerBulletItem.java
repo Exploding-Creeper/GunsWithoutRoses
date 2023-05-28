@@ -19,8 +19,8 @@ import java.util.List;
 
 public class HungerBulletItem extends BulletItem {
 
-	public HungerBulletItem(Properties properties, double damage) {
-		super(properties, damage);
+	public HungerBulletItem(Properties properties, double damage, int durability) {
+		super(properties, damage, durability);
 	}
 
 	@Override

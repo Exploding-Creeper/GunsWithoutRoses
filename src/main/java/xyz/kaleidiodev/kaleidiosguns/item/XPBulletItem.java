@@ -19,8 +19,8 @@ import java.util.List;
 
 public class XPBulletItem extends BulletItem {
 
-	public XPBulletItem(Properties properties, double damage) {
-		super(properties, damage);
+	public XPBulletItem(Properties properties, double damage, int durability) {
+		super(properties, damage, durability);
 	}
 
 	@Override

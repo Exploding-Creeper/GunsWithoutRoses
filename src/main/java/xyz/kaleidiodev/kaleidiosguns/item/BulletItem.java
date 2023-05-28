@@ -22,10 +22,12 @@ import java.util.List;
 public class BulletItem extends Item implements IBullet {
 
 	public final double damage;
+	public final int durabilityDamage;
 
-	public BulletItem(Properties properties, double damage) {
+	public BulletItem(Properties properties, double newDamage, int durability) {
 		super(properties);
-		this.damage = damage;
+		this.damage = newDamage;
+		this.durabilityDamage = durability;
 	}
 
 	@Override
@@ -61,7 +63,8 @@ public class BulletItem extends Item implements IBullet {
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-		tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.bullet.damage", damage).withStyle(TextFormatting.DARK_GREEN));
+		tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.bullet.damage", damage));
+		tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.bullet.durability", durabilityDamage));
 	}
 
 	@Override

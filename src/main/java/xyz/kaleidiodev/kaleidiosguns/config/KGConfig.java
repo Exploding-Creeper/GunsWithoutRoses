@@ -15,10 +15,6 @@ public class KGConfig {
     public static ForgeConfigSpec.IntValue redstoneRadius;
     public static ForgeConfigSpec.DoubleValue weaknessEffectInaccuracyMultiplier;
 
-    //ranger glove
-    public static ForgeConfigSpec.DoubleValue gloveRangerSpeedUp;
-    public static ForgeConfigSpec.IntValue gloveRangerDurability;
-
     //Guns
     public static ForgeConfigSpec.DoubleValue ironPistolDamageMultiplier;
     public static ForgeConfigSpec.IntValue ironPistolFireDelay;
@@ -315,6 +311,11 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue blazeBulletDamage;
     public static ForgeConfigSpec.DoubleValue hungerBulletDamage;
     public static ForgeConfigSpec.DoubleValue xpBulletDamage;
+    public static ForgeConfigSpec.IntValue flintBulletDurabilityDamage;
+    public static ForgeConfigSpec.IntValue ironBulletDurabilityDamage;
+    public static ForgeConfigSpec.IntValue blazeBulletDurabilityDamage;
+    public static ForgeConfigSpec.IntValue hungerBulletDurabilityDamage;
+    public static ForgeConfigSpec.IntValue xpBulletDurabilityDamage;
     public static ForgeConfigSpec.IntValue hungerBulletDurability;
     public static ForgeConfigSpec.IntValue xpBulletDurability;
 
@@ -368,15 +369,6 @@ public class KGConfig {
         weaknessEffectInaccuracyMultiplier = builder
                 .comment("Configure the inaccuracy multiplier for when the shooter has the weakness effect")
                 .defineInRange("weaknessEffectInaccuracyMultiplier", 2.0D, 0D, 5D);
-        builder.pop();
-
-        builder.push("ranger gloves");
-        gloveRangerSpeedUp = builder
-                .comment("How much faster is weapon switch with Ranger Gloves")
-                .defineInRange("gloveRangerSpeedUp", 1D, 0.1D, 5D);
-        gloveRangerDurability = builder
-                .comment("How many weapon switches does Ranger Gloves last")
-                .defineInRange("gloveRangerDurability", 100, 1, 32767);
         builder.pop();
 
         builder.push("pistol");
@@ -1259,6 +1251,21 @@ public class KGConfig {
         xpBulletDamage = builder
                 .comment("Configure the damage of XP Bullets.  This tier should always be the highest tier of damage.")
                 .defineInRange("xpBulletDamage", 8D, 1D, 20D);
+        flintBulletDurabilityDamage = builder
+                .comment("Configure the durability usage of Flint Bullets.  This tier should always be minimal damage")
+                .defineInRange("flintBulletDurabilityDamage", 1, 1, 32767);
+        ironBulletDurabilityDamage = builder
+                .comment("Configure the durability usage of Iron Bullets")
+                .defineInRange("ironBulletDurabilityDamage", 2, 1, 32767);
+        blazeBulletDurabilityDamage = builder
+                .comment("Configure the durability usage of Blaze Bullets.  This tier should always be the middle ground in damage total including flames.")
+                .defineInRange("blazeBulletDurabilityDamage", 2, 1, 32767);
+        hungerBulletDurabilityDamage = builder
+                .comment("Configure the durability usage of Hunger Bullets")
+                .defineInRange("hungerBulletDurabilityDamage", 3, 1, 32767);
+        xpBulletDurabilityDamage = builder
+                .comment("Configure the durability usage of XP Bullets.  This tier should always be the highest tier of damage.")
+                .defineInRange("xpBulletDurabilityDamage", 3, 1, 32767);
         hungerBulletDurability = builder
                 .comment("Configure the durability of Hunger Bullets.")
                 .defineInRange("hungerBulletDurability", 72, 1, 32767);

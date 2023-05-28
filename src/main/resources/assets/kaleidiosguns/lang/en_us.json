@@ -30,7 +30,8 @@
 	"item.kaleidiosguns.xp_bullet": "Cleric Cartridge",
 
 	"tooltip.kaleidiosguns.shift": "§7Hold §fSHIFT§7 for stats§r",
-	"tooltip.kaleidiosguns.bullet.damage": "%d damage",
+	"tooltip.kaleidiosguns.bullet.damage": "§2Damage: §f%s§r",
+	"tooltip.kaleidiosguns.bullet.durability": "§2Durability Usage: §f%s§r",
 	"tooltip.kaleidiosguns.gun.damage.flat": "§2Damage: §f+%s§r",
 	"tooltip.kaleidiosguns.gun.damage.mult": "§2Damage: §fx%s§r",
 	"tooltip.kaleidiosguns.gun.damage.both": "§2Damage: §fx%s +%s§r",
