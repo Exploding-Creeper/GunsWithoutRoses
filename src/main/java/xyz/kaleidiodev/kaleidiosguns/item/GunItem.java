@@ -259,15 +259,7 @@ public class GunItem extends Item {
 				ItemStack shotAmmo = ammo.getItem() instanceof IBullet ? ammo : new ItemStack(ModItems.flintBullet);
 				fireWeapon(world, player, gun, shotAmmo, bulletItem, bulletFree);
 
-				int durabilityDamage = 1;
-				if (((BulletItem)ammo.getItem()).damage >= KGConfig.blazeBulletDamage.get()) {
-					durabilityDamage += 1;
-				}
-				if (((BulletItem)ammo.getItem()).damage >= KGConfig.xpBulletDamage.get()) {
-					durabilityDamage += 1;
-				}
-
-				gun.hurtAndBreak(durabilityDamage, player, (p) -> p.broadcastBreakEvent(player.getUsedItemHand()));
+				gun.hurtAndBreak(((BulletItem)ammo.getItem()).durabilityDamage, player, (p) -> p.broadcastBreakEvent(player.getUsedItemHand()));
 				if (!bulletFree) bulletItem.consume(ammo, player, gun);
 
 				float volume = (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.silenced, gun) > 0 ? 2.0F : 10.0F);
