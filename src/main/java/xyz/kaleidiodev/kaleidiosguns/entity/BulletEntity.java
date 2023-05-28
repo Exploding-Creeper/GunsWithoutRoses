@@ -182,8 +182,8 @@ public class BulletEntity extends AbstractFireballEntity {
 
 		//start at previous position
 		Vector3d delta = this.getDeltaMovement();
+		bb = bb.move(delta.reverse());
 		Vector3d incPosition = new Vector3d(delta.x / (bulletSpeed * 10), delta.y / (bulletSpeed * 10), delta.z / (bulletSpeed * 10));
-		delta.reverse();
 
 		//the raytrace is really just a bunch of steps for boundary boxes.  this means accelerator makes sniper collateral further
 		for (double i = 0; i < this.bulletSpeed; i += 0.1) {
@@ -200,6 +200,8 @@ public class BulletEntity extends AbstractFireballEntity {
 			entityHitHistory.addAll(entities);
 
 			if (!testClip) {
+				System.out.println("testing clip");
+
 				//kill trace early if we hit a tile doing this, so it doesn't trace through walls.
 				BlockPos someBlockPos = new BlockPos(bb.getCenter());
 				BlockState someBlockState = this.level.getBlockState(someBlockPos);

@@ -105,7 +105,7 @@ public interface IBullet {
 		}
 
 		//deal no damage at all if it's for marking
-		if (projectile.isGlowing()) newDamage /= KGConfig.glowDamageDivider.get();
+		if (projectile.isGlowing() && !projectile.clip) newDamage /= KGConfig.glowDamageDivider.get();
 
 		return newDamage;
 	}
