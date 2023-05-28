@@ -62,9 +62,6 @@ public class GunItem extends Item {
 	protected int barrelSwitchSpeed = -1;
 	protected double myKnockback = 0.1D;
 	protected int stabilityTime;
-	protected int shotsBeforeStability;
-	protected int stabilizerTimer; //internal timer.  falls to zero when gun is stable.
-	protected long ticksPassed;
 	protected double instabilitySpreadAdditional; //additional spread to add every time a shot recharges stabilizer timer.
 	protected boolean twoHandBonus;
 	public boolean isExplosive;
@@ -89,15 +86,12 @@ public class GunItem extends Item {
 	protected int meleeBonusCounter;
 	protected double mineChance;
 	protected int ammoCost = 1;
-	public int burstTimer;
 	protected int burstSpeed;
 	protected int burstAmount;
 	protected boolean isVex;
 	protected boolean isHero;
 	protected float sniperReplacementAim = 0.0f;
 	protected float sniperMovementAim = 0.0f;
-	protected Vector3d previousPos = Vector3d.ZERO;
-	protected Vector3d playerVelocity = Vector3d.ZERO;
 
 	protected SoundEvent fireSound = ModSounds.gun;
 	protected SoundEvent reloadSound = ModSounds.double_shotgunReload;
@@ -267,14 +261,18 @@ public class GunItem extends Item {
 				world.playSound(null, player.getX(), player.getY(), player.getZ(), fireSound, SoundCategory.PLAYERS, volume, 1.0F);
 				player.awardStat(Stats.ITEM_USED.get(this));
 
+				CompoundNBT nbt = gun.getOrCreateTag();
+
 				if (this.revolutions > 1) {
-					int chambers = getChambers(gun); //note, happens first, so the tag will get created, even if tooltip wasn't inspected first.
+					if (!nbt.contains("chambers")) nbt.putInt("chambers", revolutions);
+					int chambers = nbt.getInt("chambers"); //note, happens first, so the tag will get created, even if tooltip wasn't inspected first.
 					chambers--;
 					if (chambers <= 0) {
 						world.playSound(null, player.getX(), player.getY(), player.getZ(), reloadSound, SoundCategory.HOSTILE, 1.0F, 1.0F);
 						chambers = this.revolutions;
 					}
-					setChambers(gun, chambers);
+					nbt.putInt("chambers",chambers);
+					gun.setTag(nbt);
 				}
 
 				if (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.tracer, gun) > 0) {
@@ -400,10 +398,17 @@ public class GunItem extends Item {
 		changeBullet(world, player, gun, shot, bulletFree);
 
 		//reset timer for stability
+		CompoundNBT nbt = gun.getOrCreateTag();
+
 		int base = Math.max(1, stabilityTime - (int)(stabilityTime * EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.sleightOfHand, gun) * KGConfig.sleightOfHandFireRateDecrease.get()));
-		stabilizerTimer = base;
-		shotsBeforeStability++;
+		nbt.putInt("stabilizerTimer", base);
+		nbt.putInt("shotsBeforeStability", nbt.getInt("shotsBeforeStability") + 1);
+
+		int burstTimer = nbt.getInt("burstTimer");
 		if (burstTimer == 0) burstTimer = burstSpeed * burstAmount;
+		nbt.putInt("burstTimer", burstTimer);
+
+		gun.setTag(nbt);
 
 		world.addFreshEntity(shot);
 	}
@@ -417,10 +422,16 @@ public class GunItem extends Item {
 	@Override
 	public void inventoryTick(ItemStack pStack, World pLevel, Entity pEntity, int pItemSlot, boolean pIsSelected) {
 		//turns out this method gets called for every chunk generator thread.  let's avoid that, with a tick elapsed counter and client filter
+		CompoundNBT nbt = pStack.getOrCreateTag();
 		long currentTime = pLevel.getGameTime();
-		if (currentTime > this.ticksPassed) {
-			this.ticksPassed = currentTime;
-			this.onActualInventoryTick(pLevel, pEntity);
+		if (!nbt.contains("ticksPassed")) nbt.putLong("ticksPassed", currentTime);
+
+		long ticksPassed = nbt.getLong("ticksPassed");
+		if (currentTime > ticksPassed) {
+			nbt.putLong("ticksPassed", currentTime);
+			pStack.setTag(nbt);
+
+			this.onActualInventoryTick(pLevel, pEntity, pStack);
 		}
 
 		super.inventoryTick(pStack, pLevel, pEntity, pItemSlot, pIsSelected);
@@ -432,37 +443,37 @@ public class GunItem extends Item {
 		return super.hurtEnemy(pStack, pTarget, pAttacker);
 	}
 
-	protected void onActualInventoryTick(World world, Entity entity) {
+	protected void onActualInventoryTick(World world, Entity entity, ItemStack stack) {
+		CompoundNBT nbt = stack.getOrCreateTag();
+
 		//get previous player velocity
-		this.playerVelocity = entity.position().subtract(previousPos);
-		this.previousPos = entity.position();
+		Vector3d previousPos = new Vector3d(nbt.getDouble("previousPosX"), nbt.getDouble("previousPosY"), nbt.getDouble("previousPosZ"));
+		int stabilizerTimer = nbt.getInt("stabilizerTimer");
+		int burstTimer = nbt.getInt("burstTimer");
 
-		if (this.stabilizerTimer > 0) this.stabilizerTimer--;
-		if (this.stabilizerTimer == 0) this.shotsBeforeStability = 0;
+		Vector3d playerVelocity = entity.position().subtract(previousPos);
+		nbt.putDouble("playerVelocityX", playerVelocity.x);
+		nbt.putDouble("playerVelocityY", playerVelocity.y);
+		nbt.putDouble("playerVelocityZ", playerVelocity.z);
+		nbt.putDouble("previousPosX", entity.position().x);
+		nbt.putDouble("previousPosY", entity.position().y);
+		nbt.putDouble("previousPosZ", entity.position().z);
 
-		if (this.burstTimer > 0) this.burstTimer--;
+		if (stabilizerTimer > 0) stabilizerTimer--;
+		if (stabilizerTimer == 0) nbt.putInt("shotsBeforeStability", 0);
+		nbt.putInt("stabilizerTimer", stabilizerTimer);
+
+		if (burstTimer > 0) burstTimer--;
 		if (burstSpeed != 0) {
-			if ((this.burstTimer % burstSpeed == 0) && (entity instanceof PlayerEntity) && (this.burstTimer > 0)) {
+			if ((burstTimer % burstSpeed == 0) && (entity instanceof PlayerEntity) && (burstTimer > 0)) {
 				PlayerEntity player = (PlayerEntity) entity;
 				if (this == player.getMainHandItem().getItem()) this.use(world, (PlayerEntity) entity, Hand.MAIN_HAND);
 				if (this == player.getOffhandItem().getItem()) this.use(world, (PlayerEntity) entity, Hand.OFF_HAND);
 			}
 		}
-	}
+		nbt.putInt("burstTimer", burstTimer);
 
-	protected int getChambers(ItemStack stack) {
-		CompoundNBT nbt = stack.getOrCreateTag();
-
-		//reset to revolutions if the tag was empty
-		if (!nbt.contains("chambers")) nbt.putInt("chambers", revolutions);
-		return nbt.getInt("chambers");
-	}
-
-	protected void setChambers(ItemStack stack, int newValue) {
-		CompoundNBT nbt = stack.getOrCreateTag();
-
-		//generate a tag if it didn't exist before
-		nbt.putInt("chambers", newValue);
+		stack.setTag(nbt);
 	}
 
 	/**
@@ -509,8 +520,11 @@ public class GunItem extends Item {
 			}
 		}
 
+		CompoundNBT nbt = stack.getOrCreateTag();
+
 		//have instant tick time if barrel side has been switched
-		if (getChambers(stack) == revolutions) {
+		if (!nbt.contains("chambers")) return base;
+		if (nbt.getInt("chambers") == revolutions) {
 			return base;
 		}
 		else
@@ -535,9 +549,13 @@ public class GunItem extends Item {
 	public double getInaccuracy(ItemStack stack, @Nullable PlayerEntity player) {
 		double nextInaccuracy = baseInaccuracy(stack, player);
 
-		nextInaccuracy += shotsBeforeStability * Math.max(0, instabilitySpreadAdditional / ((EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.bullseye, stack) * KGConfig.bullseyeAccuracyIncrease.get()) + 1.0D));
+		CompoundNBT nbt = stack.getOrCreateTag();
+
+		nextInaccuracy += nbt.getInt("shotsBeforeStability") * Math.max(0, instabilitySpreadAdditional / ((EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.bullseye, stack) * KGConfig.bullseyeAccuracyIncrease.get()) + 1.0D));
 
 		if (player != null) {
+			Vector3d playerVelocity = new Vector3d(nbt.getDouble("playerVelocityX"), nbt.getDouble("playerVelocityY"), nbt.getDouble("playerVelocityZ"));
+
 			//check sniper class
 			if ((inaccuracy == 0) &&
 					playerVelocity.length() > 0.0001 &&
@@ -855,6 +873,11 @@ public class GunItem extends Item {
 	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		if (Screen.hasShiftDown()) {
+			CompoundNBT nbt = stack.getOrCreateTag();
+
+			if (!nbt.contains("chambers")) nbt.putInt("chambers", revolutions);
+			stack.setTag(nbt);
+
 			//Damage
 			double damageMultiplier = getDamageMultiplier(stack);
 			double damageBonus = getBonusDamage(stack, null) * damageMultiplier;
@@ -869,7 +892,7 @@ public class GunItem extends Item {
 			int fireRate = Math.max(1, this.fireDelay - (int)(this.fireDelay * EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.sleightOfHand, stack) * KGConfig.sleightOfHandFireRateDecrease.get()));
 			if (revolutions > 1) {
 				tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.reloadspeed" + (isFireDelayModified(stack) ? ".modified" : ""), fireRate, (60*20) / fireRate));
-				tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.barrels_left", getChambers(stack), revolutions));
+				tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.barrels_left", nbt.getInt("chambers"), revolutions));
 				fireRate /= barrelSwitchSpeed;
 			}
 			tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.firerate" + (isFireDelayModified(stack) ? ".modified" : ""), fireRate, (60*20) / fireRate));
