@@ -94,6 +94,8 @@ public class GunItem extends Item {
 	protected int burstAmount;
 	protected boolean isVex;
 	protected boolean isHero;
+	protected float sniperReplacementAim = 0.0f;
+	protected float sniperMovementAim = 0.0f;
 	protected Vector3d previousPos = Vector3d.ZERO;
 	protected Vector3d playerVelocity = Vector3d.ZERO;
 
@@ -323,9 +325,7 @@ public class GunItem extends Item {
 		shot.setHealthRewardChance(EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.passionForBlood, gun) * 0.1);
 		shot.setShouldBreakBlock(hasBlockMineAbility);
 		shot.setShouldCollateral(shouldCollateral);
-		double nextSpeed = getProjectileSpeed(gun, player);
-		System.out.println(nextSpeed);
-		shot.setBulletSpeed(nextSpeed);
+		shot.setBulletSpeed(getProjectileSpeed(gun, player));
 		shot.setKnockbackStrength(myKnockback);
 		shot.setExplosive(isExplosive);
 		shot.setShouldGlow(EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.tracer, gun) > 0);
@@ -551,7 +551,7 @@ public class GunItem extends Item {
 					playerVelocity.length() > 0.0001 &&
 					!(this instanceof GatlingItem) &&
 					!(this instanceof ShotgunItem)) {
-				nextInaccuracy = KGConfig.sniperInaccuracyReplacement.get();
+				nextInaccuracy = sniperMovementAim;
 			}
 
 			//check player hands
@@ -560,7 +560,7 @@ public class GunItem extends Item {
 				//ignore glove items for this effect
 				if (!player.getMainHandItem().isEmpty() && !player.getOffhandItem().isEmpty()) {
 					//if sniper class, give a new inaccuracy
-					if (inaccuracy == 0) nextInaccuracy = KGConfig.sniperInaccuracyReplacement.get();
+					if (inaccuracy == 0) nextInaccuracy += sniperReplacementAim;
 						//else multiply
 					else nextInaccuracy *= KGConfig.oneHandInaccuracyMultiplier.get();
 				}
@@ -576,7 +576,7 @@ public class GunItem extends Item {
 
 			//check weakness effect
 			if ((player.getEffect(Effects.WEAKNESS) != null) && !(stack.getItem() instanceof ShotgunItem)) {
-				if (nextInaccuracy == 0) nextInaccuracy = KGConfig.sniperInaccuracyReplacement.get();
+				if (nextInaccuracy == 0) nextInaccuracy += sniperReplacementAim;
 				else nextInaccuracy *= KGConfig.weaknessEffectInaccuracyMultiplier.get();
 			}
 		}
@@ -812,6 +812,16 @@ public class GunItem extends Item {
 
 	public GunItem setHero(boolean hero) {
 		this.isHero = hero;
+		return this;
+	}
+
+	public GunItem setSniperAim(double sniperAim) {
+		this.sniperMovementAim = (float)sniperAim;
+		return this;
+	}
+
+	public GunItem setSniperReplacementAim(double sniperReplacement) {
+		this.sniperReplacementAim = (float)sniperReplacement;
 		return this;
 	}
 

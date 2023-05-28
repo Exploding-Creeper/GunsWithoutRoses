@@ -10,7 +10,6 @@ public class KGConfig {
     public static ForgeConfigSpec.BooleanValue explosionsEnabled;
     public static ForgeConfigSpec.BooleanValue griefEnabled;
     public static ForgeConfigSpec.DoubleValue oneHandInaccuracyMultiplier;
-    public static ForgeConfigSpec.DoubleValue sniperInaccuracyReplacement;
     public static ForgeConfigSpec.DoubleValue oneHandShotgunRateMultiplier;
     public static ForgeConfigSpec.DoubleValue hasteBonusMineChance;
     public static ForgeConfigSpec.IntValue redstoneRadius;
@@ -155,6 +154,8 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue diamondSniperSwitchSpeed;
     public static ForgeConfigSpec.DoubleValue diamondSniperMeleeDamage;
     public static ForgeConfigSpec.IntValue diamondSniperCost;
+    public static ForgeConfigSpec.DoubleValue diamondSniperReplacementInaccuracy;
+    public static ForgeConfigSpec.DoubleValue diamondSniperMovementInaccuracy;
 
     public static ForgeConfigSpec.DoubleValue emeraldBayonetDamageMultiplier;
     public static ForgeConfigSpec.IntValue emeraldBayonetFireDelay;
@@ -167,6 +168,8 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue emeraldBayonetPostMeleeMultiplier;
     public static ForgeConfigSpec.IntValue emeraldBayonetPostMeleeCount;
     public static ForgeConfigSpec.IntValue emeraldBayonetCost;
+    public static ForgeConfigSpec.DoubleValue emeraldBayonetReplacementInaccuracy;
+    public static ForgeConfigSpec.DoubleValue emeraldBayonetMovementInaccuracy;
 
     public static ForgeConfigSpec.DoubleValue ironCarbineDamageMultiplier;
     public static ForgeConfigSpec.IntValue ironCarbineFireDelay;
@@ -177,6 +180,8 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue ironCarbineSwitchSpeed;
     public static ForgeConfigSpec.DoubleValue ironCarbineMeleeDamage;
     public static ForgeConfigSpec.IntValue ironCarbineCost;
+    public static ForgeConfigSpec.DoubleValue ironCarbineReplacementInaccuracy;
+    public static ForgeConfigSpec.DoubleValue ironCarbineMovementInaccuracy;
 
     public static ForgeConfigSpec.DoubleValue goldVexDamageMultiplier;
     public static ForgeConfigSpec.IntValue goldVexFireDelay;
@@ -189,6 +194,8 @@ public class KGConfig {
     public static ForgeConfigSpec.IntValue goldVexCost;
     public static ForgeConfigSpec.IntValue goldVexBurstAmount;
     public static ForgeConfigSpec.IntValue goldVexBurstSpeed;
+    public static ForgeConfigSpec.DoubleValue goldVexReplacementInaccuracy;
+    public static ForgeConfigSpec.DoubleValue goldVexMovementInaccuracy;
 
     public static ForgeConfigSpec.DoubleValue diamondLauncherDamageMultiplier;
     public static ForgeConfigSpec.IntValue diamondLauncherFireDelay;
@@ -199,6 +206,7 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue diamondLauncherSwitchSpeed;
     public static ForgeConfigSpec.DoubleValue diamondLauncherMeleeDamage;
     public static ForgeConfigSpec.IntValue diamondLauncherCost;
+    public static ForgeConfigSpec.DoubleValue diamondLauncherReplacementInaccuracy;
 
     public static ForgeConfigSpec.DoubleValue witherLauncherDamageMultiplier;
     public static ForgeConfigSpec.IntValue witherLauncherFireDelay;
@@ -210,6 +218,7 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue witherLauncherSwitchSpeed;
     public static ForgeConfigSpec.DoubleValue witherLauncherMeleeDamage;
     public static ForgeConfigSpec.IntValue witherLauncherCost;
+    public static ForgeConfigSpec.DoubleValue witherLauncherReplacementInaccuracy;
 
     public static ForgeConfigSpec.DoubleValue diamondMinegunDamageMultiplier;
     public static ForgeConfigSpec.IntValue diamondMinegunFireDelay;
@@ -221,6 +230,7 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue diamondMinegunSwitchSpeed;
     public static ForgeConfigSpec.DoubleValue diamondMinegunMeleeDamage;
     public static ForgeConfigSpec.IntValue diamondMinegunCost;
+    public static ForgeConfigSpec.DoubleValue diamondMinegunReplacementInaccuracy;
 
     public static ForgeConfigSpec.DoubleValue netheriteMinegunDamageMultiplier;
     public static ForgeConfigSpec.IntValue netheriteMinegunFireDelay;
@@ -234,6 +244,7 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue netheriteMinegunMeleeDamage;
     public static ForgeConfigSpec.BooleanValue netheriteMinegunCorruptBlock;
     public static ForgeConfigSpec.IntValue netheriteMinegunCost;
+    public static ForgeConfigSpec.DoubleValue netheriteMinegunReplacementInaccuracy;
 
     public static ForgeConfigSpec.DoubleValue ironVoltgunDamageMultiplier;
     public static ForgeConfigSpec.IntValue ironVoltgunFireDelay;
@@ -246,6 +257,7 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue ironVoltgunSwitchSpeed;
     public static ForgeConfigSpec.DoubleValue ironVoltgunMeleeDamage;
     public static ForgeConfigSpec.IntValue ironVoltgunCost;
+    public static ForgeConfigSpec.DoubleValue ironVoltgunReplacementInaccuracy;
 
     public static ForgeConfigSpec.DoubleValue diamondAssaultDamageMultiplier;
     public static ForgeConfigSpec.IntValue diamondAssaultFireDelay;
@@ -295,6 +307,7 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue goldPlasmaSwitchSpeed;
     public static ForgeConfigSpec.DoubleValue goldPlasmaMeleeDamage;
     public static ForgeConfigSpec.IntValue goldPlasmaCost;
+    public static ForgeConfigSpec.DoubleValue goldPlasmaReplacementInaccuracy;
 
     //Bullets
     public static ForgeConfigSpec.DoubleValue flintBulletDamage;
@@ -340,9 +353,6 @@ public class KGConfig {
         oneHandInaccuracyMultiplier = builder
                 .comment("Inaccuracy multiplier for when the user has one hand filled")
                 .defineInRange("oneHandInaccuracyMultiplier", 2.0D, 0.1D, 5D);
-        sniperInaccuracyReplacement = builder
-                .comment("Inaccuracy of any perfect accuracy weapons in the case of one hand being filled, or movement not stopped")
-                .defineInRange("sniperInaccuracyReplacement", 4.0D, 0D, 90D);
         oneHandShotgunRateMultiplier = builder
                 .comment("Fire rate multiplier for shotguns for when the user has one hand filled")
                 .defineInRange("oneHandShotgunRateMultiplier", 2.0D, 0.1D, 5D);
@@ -772,6 +782,12 @@ public class KGConfig {
         diamondSniperCost = builder
                 .comment("Ammo cost to fire Snipers")
                 .defineInRange("diamondSniperCost", 6, 0, 64);
+        diamondSniperMovementInaccuracy = builder
+                .comment("Configure the inaccuracy addition whilst moving with Snipers")
+                .defineInRange("diamondSniperMovementInaccuracy", 4D, 0D, 40D);
+        diamondSniperReplacementInaccuracy = builder
+                .comment("Configure the inaccuracy addition whilst using one hand with Snipers")
+                .defineInRange("diamondSniperReplacementInaccuracy", 2D, 0D, 40D);
         builder.pop();
 
         builder.push("bayonet sniper");
@@ -808,6 +824,12 @@ public class KGConfig {
         emeraldBayonetCost = builder
                 .comment("Ammo cost to fire Bayonet Snipers")
                 .defineInRange("emeraldBayonetCost", 6, 0, 64);
+        emeraldBayonetMovementInaccuracy = builder
+                .comment("Configure the inaccuracy addition whilst moving with Bayonet Snipers")
+                .defineInRange("emeraldBayonetMovementInaccuracy", 4D, 0D, 40D);
+        emeraldBayonetReplacementInaccuracy = builder
+                .comment("Configure the inaccuracy addition whilst using one hand with Bayonet Snipers")
+                .defineInRange("emeraldBayonetReplacementInaccuracy", 2D, 0D, 40D);
         builder.pop();
 
         builder.push("carbine");
@@ -838,6 +860,12 @@ public class KGConfig {
         ironCarbineCost = builder
                 .comment("Ammo cost to fire Carbines")
                 .defineInRange("ironCarbineCost", 4, 0, 64);
+        ironCarbineMovementInaccuracy = builder
+                .comment("Configure the inaccuracy addition whilst moving with Carbines")
+                .defineInRange("ironCarbineMovementInaccuracy", 2D, 0D, 40D);
+        ironCarbineReplacementInaccuracy = builder
+                .comment("Configure the inaccuracy addition whilst using one hand with Carbines")
+                .defineInRange("ironCarbineReplacementInaccuracy", 2D, 0D, 40D);
         builder.pop();
 
         builder.push("ver burst carbine");
@@ -874,6 +902,12 @@ public class KGConfig {
         goldVexBurstSpeed = builder
                 .comment("How many ticks each shot in a burst takes for Vex Burst Carbines")
                 .defineInRange("goldVexBurstSpeed", 2, 0, 64);
+        goldVexMovementInaccuracy = builder
+                .comment("Configure the inaccuracy addition whilst moving with Carbines")
+                .defineInRange("goldVexMovementInaccuracy", 1.5D, 0D, 40D);
+        goldVexReplacementInaccuracy = builder
+                .comment("Configure the inaccuracy addition whilst using one hand with Carbines")
+                .defineInRange("goldVexReplacementInaccuracy", 1.5D, 0D, 40D);
         builder.pop();
 
         builder.push("minegun");
@@ -907,6 +941,9 @@ public class KGConfig {
         diamondMinegunCost = builder
                 .comment("Ammo cost to fire Mineguns")
                 .defineInRange("diamondMinegunCost", 1, 0, 64);
+        diamondMinegunReplacementInaccuracy = builder
+                .comment("Configure the inaccuracy addition whilst using one hand with Mineguns")
+                .defineInRange("diamondMinegunReplacementInaccuracy", 2D, 0D, 40D);
         builder.pop();
 
         builder.push("corruption gun");
@@ -946,6 +983,9 @@ public class KGConfig {
         netheriteMinegunCost = builder
                 .comment("Ammo cost to fire Corruption Guns")
                 .defineInRange("netheriteMinegunCost", 1, 0, 64);
+        netheriteMinegunReplacementInaccuracy = builder
+                .comment("Configure the inaccuracy addition whilst using one hand with Corruption Guns")
+                .defineInRange("netheriteMinegunReplacementInaccuracy", 3D, 0D, 40D);
         builder.pop();
 
         builder.push("voltgun");
@@ -982,6 +1022,9 @@ public class KGConfig {
         ironVoltgunCost = builder
                 .comment("Ammo cost to fire Voltguns")
                 .defineInRange("ironVoltgunCost", 2, 0, 64);
+        ironVoltgunReplacementInaccuracy = builder
+                .comment("Configure the inaccuracy addition whilst using one hand with Voltguns")
+                .defineInRange("ironVoltgunReplacementInaccuracy", 2D, 0D, 40D);
         builder.pop();
 
         builder.push("assault rifle");
@@ -1087,6 +1130,9 @@ public class KGConfig {
         goldPlasmaCost = builder
                 .comment("Ammo cost to fire Plasma Rifles")
                 .defineInRange("goldPlasmaCost", 2, 0, 64);
+        goldPlasmaReplacementInaccuracy = builder
+                .comment("Configure the inaccuracy addition whilst using one hand with Plasma Rifles")
+                .defineInRange("goldPlasmaReplacementInaccuracy", 2D, 0D, 40D);
         builder.pop();
 
         builder.push("defenders carbine");
@@ -1156,6 +1202,9 @@ public class KGConfig {
         diamondLauncherCost = builder
                 .comment("Ammo cost to fire Rocket Launchers")
                 .defineInRange("diamondLauncherCost", 8, 0, 64);
+        diamondLauncherReplacementInaccuracy = builder
+                .comment("Configure the inaccuracy addition whilst using one hand with Rocket Launchers")
+                .defineInRange("diamondLauncherReplacementInaccuracy", 2D, 0D, 40D);
         builder.pop();
 
         builder.push("wither cannon");
@@ -1189,6 +1238,9 @@ public class KGConfig {
         witherLauncherCost = builder
                 .comment("Ammo cost to fire Wither Launchers")
                 .defineInRange("witherLauncherCost", 10, 0, 64);
+        witherLauncherReplacementInaccuracy = builder
+                .comment("Configure the inaccuracy addition whilst using one hand with Wither Launchers")
+                .defineInRange("witherLauncherReplacementInaccuracy", 3D, 0D, 40D);
         builder.pop();
 
         builder.push("bullet_config");
