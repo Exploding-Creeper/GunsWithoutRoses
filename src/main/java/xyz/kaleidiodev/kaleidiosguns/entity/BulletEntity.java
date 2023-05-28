@@ -24,6 +24,7 @@ import net.minecraft.world.World;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraftforge.common.ForgeHooks;
+import org.lwjgl.system.CallbackI;
 import xyz.kaleidiodev.kaleidiosguns.config.KGConfig;
 import xyz.kaleidiodev.kaleidiosguns.item.GatlingItem;
 import xyz.kaleidiodev.kaleidiosguns.item.GunItem;
@@ -189,19 +190,22 @@ public class BulletEntity extends AbstractFireballEntity {
 		for (double i = 0; i < this.bulletSpeed; i += 0.1) {
 			bb = bb.move(incPosition);
 
-			List<Entity> nextEntities = this.level.getEntities(this, bb);
-
 			//don't bother adding entities to the list that are already there.
-			entities.addAll(nextEntities);
-			entities.remove(this.getOwner());
+			Set<Entity> thisEntities = new HashSet<>(this.level.getEntities(this, bb));
+			thisEntities.removeIf(entity -> checkIsSameTeam(getOwner(), entity));
+			thisEntities.remove(getOwner());
 
 			//don't process anything we've previously hit on this hit as well
-			entities.removeAll(entityHitHistory);
-			entityHitHistory.addAll(entities);
+			thisEntities.removeAll(entityHitHistory);
+
+			for (Entity entity : entities) {
+				System.out.println(entity);
+			}
+
+			entities.addAll(thisEntities);
+			entityHitHistory.addAll(entities); //entity hit history is shared between ticks.  entities is for the current line trace.
 
 			if (!testClip) {
-				System.out.println("testing clip");
-
 				//kill trace early if we hit a tile doing this, so it doesn't trace through walls.
 				BlockPos someBlockPos = new BlockPos(bb.getCenter());
 				BlockState someBlockState = this.level.getBlockState(someBlockPos);
@@ -214,21 +218,18 @@ public class BulletEntity extends AbstractFireballEntity {
 		//because the sniper cannot have a projectile ignore invulnerability anyway, this is safe to do.
 		if (collateral) {
 			for (Entity entity : entities) {
-				if (!(entity instanceof PlayerEntity) && (entity instanceof LivingEntity)) entityHitProcess(entity);
+				if (entity instanceof LivingEntity) {
+					entityHitProcess(entity);
+				}
 			}
 		}
 		else if (!entities.isEmpty()){
 			//only process the last entity in the list, which is the closest to the previous position.
-			entityHitProcess(getLastElement(entities));
-			if (testClip) this.remove();
+			Entity next = entities.iterator().next();
+			System.out.println(next);
+			entityHitProcess(next);
+			this.remove();
 		}
-	}
-
-	public Entity getLastElement(Set<Entity> s) {
-		final Iterator itr = s.iterator();
-		Object lastElement = itr.next();
-		while (itr.hasNext()) lastElement = itr.next();
-		return (Entity)lastElement;
 	}
 
 	@Override
@@ -435,7 +436,7 @@ public class BulletEntity extends AbstractFireballEntity {
 		if (victim instanceof TameableEntity) {
 			return ((TameableEntity) victim).getOwner() == player;
 		}
-		if ((player.getTeam() == null) && (victim.getTeam() == null)) return false;
+		if ((player.getTeam() == null) || (victim.getTeam() == null)) return false;
 		return player.getTeam() == victim.getTeam();
 	}
 
