@@ -590,19 +590,19 @@ public class KGConfig {
         builder.push("spreadgun");
         spreadgunDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Spreadguns")
-                .defineInRange("spreadgunDamageMultiplier", 0.75D, 0.1D, 5D);
+                .defineInRange("spreadgunDamageMultiplier", 3D, 0.1D, 5D);
         spreadgunFireDelay = builder
                 .comment("Configure the Fire delay for Shotguns")
-                .defineInRange("spreadgunFireDelay", 19, 0, 72000);
+                .defineInRange("spreadgunFireDelay", 20, 0, 72000);
         spreadgunEnchantability = builder
                 .comment("Configure the Enchantability for Spreadguns")
-                .defineInRange("spreadgunEnchantability", 10, 0, 30);
+                .defineInRange("spreadgunEnchantability", 14, 0, 30);
         spreadgunDurability = builder
                 .comment("Configure the Durability for Spreadguns")
-                .defineInRange("spreadgunDurability", 320, 0, 32767);
+                .defineInRange("spreadgunDurability", 400, 0, 32767);
         spreadgunInaccuracy = builder
                 .comment("Configure the Inaccuracy for Spreadguns")
-                .defineInRange("spreadgunInaccuracy", 5D, 0D, 90D);
+                .defineInRange("spreadgunInaccuracy", 6D, 0D, 90D);
         spreadgunBulletCount = builder
                 .comment("Configure the amount of Bullets at once for Spreadguns")
                 .defineInRange("spreadgunBulletCount", 10, 0, 50);
@@ -611,13 +611,13 @@ public class KGConfig {
                 .defineInRange("spreadgunProjectileSpeed", 8D, 0D, 64D);
         spreadgunSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Spreadguns")
-                .defineInRange("spreadgunSwitchSpeed", 2.1D, 0D, 5D);
+                .defineInRange("spreadgunSwitchSpeed", 2.2D, 0D, 5D);
         spreadgunMeleeDamage = builder
                 .comment("Configure the Melee Damage for Spreadguns")
                 .defineInRange("spreadgunMeleeDamage", 4D, 0D, 40D);
         spreadgunCost = builder
                 .comment("Ammo cost to fire Spreadguns")
-                .defineInRange("spreadgunCost", 6, 0, 64);
+                .defineInRange("spreadgunCost", 8, 0, 64);
         spreadgunMinimumSpeed = builder
                 .comment("Configure the Minimum Speed for projectiles shot from Spreadguns")
                 .defineInRange("spreadgunMinimumSpeed", 0.25D, 0.1D, 10D);
@@ -629,34 +629,34 @@ public class KGConfig {
         builder.push("hero wave shotgun");
         heroShotgunDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Hero Wave Shotguns")
-                .defineInRange("heroShotgunDamageMultiplier", 0.75D, 0.1D, 5D);
+                .defineInRange("heroShotgunDamageMultiplier", 0.85D, 0.1D, 5D);
         heroShotgunFireDelay = builder
                 .comment("Configure the Fire delay for Hero Wave Shotguns")
-                .defineInRange("heroShotgunFireDelay", 19, 0, 72000);
+                .defineInRange("heroShotgunFireDelay", 21, 0, 72000);
         heroShotgunEnchantability = builder
                 .comment("Configure the Enchantability for Hero Wave Shotguns")
                 .defineInRange("heroShotgunEnchantability", 10, 0, 30);
         heroShotgunDurability = builder
                 .comment("Configure the Durability for Hero Wave Shotguns")
-                .defineInRange("heroShotgunDurability", 320, 0, 32767);
+                .defineInRange("heroShotgunDurability", 169, 0, 32767);
         heroShotgunInaccuracy = builder
                 .comment("Configure the Inaccuracy for Hero Wave Shotguns")
-                .defineInRange("heroShotgunInaccuracy", 5D, 0D, 90D);
+                .defineInRange("heroShotgunInaccuracy", 8D, 0D, 90D);
         heroShotgunBulletCount = builder
                 .comment("Configure the amount of Bullets at once for Hero Wave Shotguns")
                 .defineInRange("heroShotgunBulletCount", 5, 0, 50);
         heroShotgunProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for Hero Wave Shotguns")
-                .defineInRange("heroShotgunProjectileSpeed", 8D, 0D, 64D);
+                .defineInRange("heroShotgunProjectileSpeed", 7D, 0D, 64D);
         heroShotgunSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Hero Wave Shotguns")
-                .defineInRange("heroShotgunSwitchSpeed", 2.1D, 0D, 5D);
+                .defineInRange("heroShotgunSwitchSpeed", 2.0D, 0D, 5D);
         heroShotgunMeleeDamage = builder
                 .comment("Configure the Melee Damage for Hero Wave Shotguns")
                 .defineInRange("heroShotgunMeleeDamage", 4D, 0D, 40D);
         heroShotgunCost = builder
                 .comment("Ammo cost to fire Hero Wave Shotguns")
-                .defineInRange("heroShotgunCost", 6, 0, 64);
+                .defineInRange("heroShotgunCost", 10, 0, 64);
         heroShotgunEffectMultiplier = builder
                 .comment("Configure the damage bonus when the shooter has a negative effect for Hero Wave Shotguns")
                 .defineInRange("heroShotgunEffectMultiplier", 1.5D, 0D, 40D);
@@ -845,7 +845,7 @@ public class KGConfig {
                 .defineInRange("ironCarbineProjectileSpeed", 13.5D, 0D, 64D);
         ironCarbineSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Carbines")
-                .defineInRange("ironCarbineSwitchSpeed", 1.8D, 0D, 5D);
+                .defineInRange("ironCarbineSwitchSpeed", 2.1D, 0D, 5D);
         ironCarbineMeleeDamage = builder
                 .comment("Configure the Melee Damage for Carbines (additive)")
                 .defineInRange("ironCarbineMeleeDamage", 3D, 0D, 40D);
@@ -863,31 +863,31 @@ public class KGConfig {
         builder.push("ver burst carbine");
         goldVexDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Vex Burst Carbines")
-                .defineInRange("goldVexDamageMultiplier", 1.45D, 0.5D, 5D);
+                .defineInRange("goldVexDamageMultiplier", 0.8D, 0.5D, 5D);
         goldVexFireDelay = builder
                 .comment("Configure the Fire delay for Vex Burst Carbines")
-                .defineInRange("goldVexFireDelay", 12, 0, 72000);
+                .defineInRange("goldVexFireDelay", 16, 0, 72000);
         goldVexEnchantability = builder
                 .comment("Configure the Enchantability for Vex Burst Carbines")
-                .defineInRange("goldVexEnchantability", 14, 0, 30);
+                .defineInRange("goldVexEnchantability", 23, 0, 30);
         goldVexDurability = builder
                 .comment("Configure the Durability for Vex Burst Carbines")
-                .defineInRange("goldVexDurability", 414, 0, 32767);
+                .defineInRange("goldVexDurability", 675, 0, 32767);
         goldVexInaccuracy = builder
                 .comment("Configure the Inaccuracy for Vex Burst Carbines")
                 .defineInRange("goldVexInaccuracy", 0D, 0D, 90D);
         goldVexProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for Vex Burst Carbines")
-                .defineInRange("goldVexProjectileSpeed", 4D, 0D, 64D);
+                .defineInRange("goldVexProjectileSpeed", 14D, 0D, 64D);
         goldVexSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Vex Burst Carbines")
-                .defineInRange("goldVexSwitchSpeed", 1.8D, 0D, 5D);
+                .defineInRange("goldVexSwitchSpeed", 1.9D, 0D, 5D);
         goldVexMeleeDamage = builder
                 .comment("Configure the Melee Damage for Vex Burst Carbines (additive)")
                 .defineInRange("goldVexMeleeDamage", 3D, 0D, 40D);
         goldVexCost = builder
                 .comment("Ammo cost to fire Vex Burst Carbines")
-                .defineInRange("goldVexCost", 4, 0, 64);
+                .defineInRange("goldVexCost", 2, 0, 64);
         goldVexBurstAmount = builder
                 .comment("How many shots fire in a burst for Vex Burst Carbines")
                 .defineInRange("goldVexBurstAmount", 3, 0, 64);
