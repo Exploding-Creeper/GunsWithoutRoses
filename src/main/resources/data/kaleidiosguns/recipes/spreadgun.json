@@ -11,5 +11,5 @@
 		"F": { "item": "minecraft:flint" },
 		"L": { "tag": "minecraft:logs" }
 	},
-	"result": { "item": "kaleidiosguns:shotgun" }
+	"result": { "item": "kaleidiosguns:spreadgun" }
 }

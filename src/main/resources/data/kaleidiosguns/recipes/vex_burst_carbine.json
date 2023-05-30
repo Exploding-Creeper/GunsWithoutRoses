@@ -12,5 +12,5 @@
 		"F": { "item": "minecraft:flint" },
 		"G": { "tag": "forge:glass" }
 	},
-	"result": { "item": "kaleidiosguns:carbine" }
+	"result": { "item": "kaleidiosguns:vex_burst_carbine" }
 }
