@@ -590,7 +590,7 @@ public class KGConfig {
         builder.push("spreadgun");
         spreadgunDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Spreadguns")
-                .defineInRange("spreadgunDamageMultiplier", 3D, 0.1D, 5D);
+                .defineInRange("spreadgunDamageMultiplier", 0.3D, 0.1D, 5D);
         spreadgunFireDelay = builder
                 .comment("Configure the Fire delay for Shotguns")
                 .defineInRange("spreadgunFireDelay", 20, 0, 72000);
