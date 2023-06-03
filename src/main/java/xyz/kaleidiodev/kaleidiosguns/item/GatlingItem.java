@@ -158,12 +158,8 @@ public class GatlingItem extends GunItem {
 
 		if (closestPos != null) distance = closestPos.distManhattan(player.blockPosition());
 
-		System.out.println(closestPos);
-
 		//only allow a circular radius
 		if (distance > checkRadius) distance = -1;
-
-		System.out.println(distance);
 
 		return distance != -1;
 	}
