@@ -148,12 +148,7 @@ public class GatlingItem extends GunItem {
 					if (world.getBlockEntity(checkPos) != null) {
 						// check if it is closer than any previously found position
 						if (closestPos == null ||
-								player.distanceToSqr(player.getX() - checkPos.getX(),
-										player.getY() - checkPos.getY(),
-										player.getZ() - checkPos.getZ())
-										< player.distanceToSqr(player.getX() - closestPos.getX(),
-										player.getY() - closestPos.getY(),
-										player.getZ() - closestPos.getZ())) {
+								player.blockPosition().distManhattan(checkPos) < player.blockPosition().distManhattan(closestPos)) {
 							closestPos = checkPos;
 						}
 					}
@@ -163,8 +158,12 @@ public class GatlingItem extends GunItem {
 
 		if (closestPos != null) distance = closestPos.distManhattan(player.blockPosition());
 
+		System.out.println(closestPos);
+
 		//only allow a circular radius
 		if (distance > checkRadius) distance = -1;
+
+		System.out.println(distance);
 
 		return distance != -1;
 	}
