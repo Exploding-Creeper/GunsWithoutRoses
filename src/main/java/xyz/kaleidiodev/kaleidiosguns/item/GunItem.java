@@ -200,7 +200,6 @@ public class GunItem extends Item {
 		//check for redstone block in radius
 		int redstone = -1; //is -1 if there is no redstone block nearby
 		if (((GunItem)gun.getItem()).isRedstone) {
-			Block targetBlock = Blocks.REDSTONE_BLOCK;
 			BlockPos closestPos = null;
 			BlockPos checkPos;
 
@@ -211,15 +210,10 @@ public class GunItem extends Item {
 				for (int y = player.blockPosition().getY() - checkRadius; y < player.blockPosition().getY() + checkRadius; y++) {
 					for (int z = player.blockPosition().getZ() - checkRadius; z < player.blockPosition().getZ() + checkRadius; z++) {
 						checkPos = new BlockPos(x, y, z);
-						if (world.getBlockState(checkPos).getBlock() == targetBlock) {
+						if (world.getBlockState(checkPos).getBlock() == Blocks.REDSTONE_BLOCK) {
 							// check if it is closer than any previously found position
 							if (closestPos == null ||
-									player.distanceToSqr(player.getX() - checkPos.getX(),
-											player.getY() - checkPos.getY(),
-											player.getZ() - checkPos.getZ())
-											< player.distanceToSqr(player.getX() - closestPos.getX(),
-											player.getY() - closestPos.getY(),
-											player.getZ() - closestPos.getZ())) {
+									player.blockPosition().distManhattan(checkPos) < player.blockPosition().distManhattan(closestPos)) {
 								closestPos = checkPos;
 							}
 						}
