@@ -6,7 +6,6 @@ import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.TameableEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractFireballEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.nbt.CompoundNBT;
@@ -24,7 +23,6 @@ import net.minecraft.world.World;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraftforge.common.ForgeHooks;
-import org.lwjgl.system.CallbackI;
 import xyz.kaleidiodev.kaleidiosguns.config.KGConfig;
 import xyz.kaleidiodev.kaleidiosguns.item.GatlingItem;
 import xyz.kaleidiodev.kaleidiosguns.item.GunItem;
@@ -41,7 +39,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	protected double inaccuracy = 0.0;
 	protected boolean ignoreInvulnerability = false;
 	protected double knockbackStrength = 0.0;
-	protected int ticksSinceFired;
+	protected long ticksOnFire;
 	protected double healthRewardChance = 0.0f;
 	protected float healthOfVictim;
 	protected boolean shouldBreakBlock;
@@ -69,6 +67,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	public double mineChance;
 	public boolean clip;
 	public boolean hero;
+	public long actualTick;
 
 	protected Set<Entity> entityHitHistory = new HashSet<>();
 
@@ -78,6 +77,7 @@ public class BulletEntity extends AbstractFireballEntity {
 
 	public BulletEntity(World worldIn, LivingEntity shooter) {
 		this(worldIn, shooter, 0, 0, 0);
+		ticksOnFire = level.getGameTime();
 		setPos(shooter.getX(), shooter.getEyeY() - 0.1, shooter.getZ());
 	}
 
@@ -99,11 +99,16 @@ public class BulletEntity extends AbstractFireballEntity {
 
 	@Override
 	public void tick() {
-		//Using a thing I save so that bullets don't get clogged up on chunk borders
-		ticksSinceFired++;
-		if (ticksSinceFired > 100) {
-			this.remove();
+		//check timestamp of fire versus current world.  if longer than 5 seconds, or world time is sooner, assume the bullet was created last session rather than current
+		actualTick++;
+		if (!this.level.isClientSide) {
+			long passage = this.level.getGameTime() - ticksOnFire;
+			if (passage != actualTick) this.remove();
 		}
+		if (actualTick > 100) this.remove();
+
+		//skip all processing if we were removed this or last tick
+		if (this.removed) return;
 
 		if (shouldGlow || clip) {
 			this.setGlowing(true);
@@ -146,7 +151,7 @@ public class BulletEntity extends AbstractFireballEntity {
 			this.setDeltaMovement(vector3d.add(this.xPower, this.yPower, this.zPower).scale((double) f));
 			//summon the particles in the center of the projectile instead of above it.
 			//disable emitters when underwater, as otherwise it looks messy to have two emitters (bubble emitter happens elsewhere)
-			if (!this.isInWater() && ticksSinceFired > 1 && this.level.isClientSide())
+			if (!this.isInWater() && actualTick > 1 && this.level.isClientSide())
 				this.level.addParticle(this.getTrailParticle(), true, this.getBoundingBox().getCenter().x, this.getBoundingBox().getCenter().y, this.getBoundingBox().getCenter().z, 0.0D, 0.0D, 0.0D);
 			this.setPos(this.getX() + vector3d.x, this.getY() + vector3d.y, this.getZ() + vector3d.z);
 		} else {
@@ -198,10 +203,6 @@ public class BulletEntity extends AbstractFireballEntity {
 			//don't process anything we've previously hit on this hit as well
 			thisEntities.removeAll(entityHitHistory);
 
-			for (Entity entity : entities) {
-				System.out.println(entity);
-			}
-
 			entities.addAll(thisEntities);
 			entityHitHistory.addAll(entities); //entity hit history is shared between ticks.  entities is for the current line trace.
 
@@ -226,7 +227,6 @@ public class BulletEntity extends AbstractFireballEntity {
 		else if (!entities.isEmpty()){
 			//only process the last entity in the list, which is the closest to the previous position.
 			Entity next = entities.iterator().next();
-			System.out.println(next);
 			entityHitProcess(next);
 			this.remove();
 		}
@@ -395,7 +395,7 @@ public class BulletEntity extends AbstractFireballEntity {
 			double actualKnockback;
 			if (this.shootingGun != null) {
 				if (this.shootingGun.getItem() == ModItems.doubleBarrelShotgun) {
-					actualKnockback = knockbackStrength / ticksSinceFired;
+					actualKnockback = knockbackStrength / actualTick;
 
 					Vector3d vec = getDeltaMovement().multiply(1, 0.25, 1).normalize().scale(actualKnockback);
 					livingTarget.push(vec.x, vec.y, vec.z);
@@ -473,7 +473,8 @@ public class BulletEntity extends AbstractFireballEntity {
 	@Override
 	public void addAdditionalSaveData(CompoundNBT compound) {
 		super.addAdditionalSaveData(compound);
-		compound.putInt("tsf", ticksSinceFired);
+		compound.putLong("tickfired", ticksOnFire);
+		compound.putLong("tsf", actualTick);
 		compound.putDouble("damage", damage);
 		compound.putBoolean("explosive", isExplosive);
 		compound.putBoolean("collateral", shouldCollateral);
@@ -486,7 +487,8 @@ public class BulletEntity extends AbstractFireballEntity {
 	@Override
 	public void readAdditionalSaveData(CompoundNBT compound) {
 		super.readAdditionalSaveData(compound);
-		ticksSinceFired = compound.getInt("tsf");
+		ticksOnFire = compound.getLong("tickfired");
+		actualTick = compound.getLong("tsf");
 		damage = compound.getDouble("damage");
 		isExplosive = compound.getBoolean("explosive");
 		shouldCollateral = compound.getBoolean("collateral");
