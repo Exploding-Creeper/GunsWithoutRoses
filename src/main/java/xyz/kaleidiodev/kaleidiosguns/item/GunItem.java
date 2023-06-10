@@ -187,8 +187,19 @@ public class GunItem extends Item {
 			//now read in order, prioritizing leftmost, fixes issue with three stacks at a time
 			ItemStack itemstack1 = player.inventory.getItem(i);
 			if (itemstack1.getItem() instanceof BulletItem) {
-				if (((BulletItem) itemstack1.getItem()).hasAmmo(itemstack1, player, gun)) {
-					newAmmo = itemstack1;
+				BulletItem item = (BulletItem)itemstack1.getItem();
+				if (newAmmo.getItem() instanceof BulletItem) {
+					BulletItem otherItem = (BulletItem)newAmmo.getItem();
+					if (item.hasAmmo(itemstack1, player, gun) && (item.damage > otherItem.damage)) {
+						newAmmo = itemstack1;
+					}
+				}
+				else
+				{
+					//assume null, pick immediately
+					if (item.hasAmmo(itemstack1, player, gun)) {
+						newAmmo = itemstack1;
+					}
 				}
 			}
 		}
