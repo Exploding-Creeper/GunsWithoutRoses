@@ -123,14 +123,16 @@ public class BulletEntity extends AbstractFireballEntity {
 			this.baseTick();
 
 			if (!level.isClientSide) {
-				if (clip) traceHits(false, true, false, false);
-				if (shouldCollateral) traceHits(true, false, false, false);
-				if ((lavaMode & 0x04) != 0) traceHits(false, false, true, false);
+				if (clip) traceHits();
+				if (shouldCollateral) traceHits();
+				if ((lavaMode & 0x04) != 0) traceHits();
 			}
 
-			RayTraceResult raytraceresult = ProjectileHelper.getHitResult(this, this::canHitEntity);
-			if (raytraceresult.getType() != RayTraceResult.Type.MISS && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, raytraceresult)) {
-				this.onHit(raytraceresult);
+			if (!clip) {
+				RayTraceResult raytraceresult = ProjectileHelper.getHitResult(this, this::canHitEntity);
+				if (raytraceresult.getType() != RayTraceResult.Type.MISS && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, raytraceresult)) {
+					this.onHit(raytraceresult);
+				}
 			}
 
 			//why rotate toward movement?  that makes no sense
@@ -182,7 +184,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	}
 
 	//for any hit types that aren't vanilla, such as vex carbine's through blocks check since it can be unpredictable, or a sniper's collateral
-	protected void traceHits(boolean collateral, boolean testClip, boolean lavaTest, boolean redstoneTest) {
+	protected void traceHits() {
 		//put some code here for the manual raytrace
 		//the raytrace needs to be from current position to delta from last known position
 		Set<Entity> entities = new HashSet<>();
@@ -208,12 +210,12 @@ public class BulletEntity extends AbstractFireballEntity {
 			entities.addAll(thisEntities);
 			entityHitHistory.addAll(entities); //entity hit history is shared between ticks.  entities is for the current line trace.
 
-			if (!testClip) {
+			if (!clip) {
 				//kill trace early if we hit a tile doing this, so it doesn't trace through walls.
 				BlockPos someBlockPos = new BlockPos(bb.getCenter());
 				BlockState someBlockState = this.level.getBlockState(someBlockPos);
 
-				if (lavaTest) {
+				if ((this.lavaMode & 0x04) != 0) {
 					if (someBlockState.getBlock() == Blocks.LAVA) {
 						this.shootingGun.hadLava = KGConfig.lavaSmgLavaBonusCount.get();
 						level.setBlock(someBlockPos, Blocks.AIR.defaultBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
@@ -235,7 +237,7 @@ public class BulletEntity extends AbstractFireballEntity {
 		}
 
 		//because the sniper cannot have a projectile ignore invulnerability anyway, this is safe to do.
-		if (collateral) {
+		if (shouldCollateral) {
 			for (Entity entity : entities) {
 				if (entity instanceof LivingEntity) {
 					entityHitProcess(entity);
