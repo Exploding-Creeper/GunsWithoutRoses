@@ -93,7 +93,7 @@ public class BulletEntity extends AbstractFireballEntity {
 		if (isPlasma) return ParticleTypes.INSTANT_EFFECT;
 		if (wasRevenge || isMeleeBonus || hero) return ParticleTypes.HAPPY_VILLAGER;
 		if (wasDark) return ParticleTypes.SMOKE;
-		if ((lavaMode & 0x04) != 0) return ParticleTypes.LANDING_LAVA; //if was a slag bullet in any mode
+		if (((lavaMode & 0x04) != 0) && (lavaMode > 0x04)) return ParticleTypes.LANDING_LAVA; //if was a slag bullet in any mode
 		return ParticleTypes.CRIT;
 	}
 
@@ -122,8 +122,9 @@ public class BulletEntity extends AbstractFireballEntity {
 			this.baseTick();
 
 			if (!level.isClientSide) {
-				if (clip) traceHits(false, true);
-				if (shouldCollateral) traceHits(true, false);
+				if (clip) traceHits(false, true, false, false);
+				if (shouldCollateral) traceHits(true, false, false, false);
+				if ((lavaMode & 0x04) != 0) traceHits(false, false, true, false);
 			}
 
 			RayTraceResult raytraceresult = ProjectileHelper.getHitResult(this, this::canHitEntity);
@@ -180,7 +181,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	}
 
 	//for any hit types that aren't vanilla, such as vex carbine's through blocks check since it can be unpredictable, or a sniper's collateral
-	protected void traceHits(boolean collateral, boolean testClip) {
+	protected void traceHits(boolean collateral, boolean testClip, boolean lavaTest, boolean redstoneTest) {
 		//put some code here for the manual raytrace
 		//the raytrace needs to be from current position to delta from last known position
 		Set<Entity> entities = new HashSet<>();
@@ -211,8 +212,19 @@ public class BulletEntity extends AbstractFireballEntity {
 				BlockPos someBlockPos = new BlockPos(bb.getCenter());
 				BlockState someBlockState = this.level.getBlockState(someBlockPos);
 
+				if (lavaTest) {
+					if (someBlockState != Blocks.AIR.defaultBlockState()) System.out.println(someBlockState.getBlock());
+					if (someBlockState.getBlock() == Blocks.LAVA) {
+						this.shootingGun.hadLava = KGConfig.lavaSmgLavaBonusCount.get();
+						level.destroyBlock(someBlockPos, false);
+						break;
+					}
+				}
+
 				//stop processing if we hit a solid block
-				if (someBlockState.getMaterial().blocksMotion()) break;
+				if (someBlockState.getMaterial().blocksMotion()) {
+					break;
+				}
 			}
 		}
 
@@ -482,6 +494,7 @@ public class BulletEntity extends AbstractFireballEntity {
 		if (ignoreInvulnerability) compound.putBoolean("ignoreinv", ignoreInvulnerability);
 		if (knockbackStrength != 0) compound.putDouble("knockback", knockbackStrength);
 		compound.putBoolean("clip", clip);
+		compound.putByte("lava", lavaMode);
 	}
 
 	@Override
@@ -497,6 +510,7 @@ public class BulletEntity extends AbstractFireballEntity {
 		ignoreInvulnerability = compound.getBoolean("ignoreinv");
 		knockbackStrength = compound.getDouble("knockback");
 		clip = compound.getBoolean("clip");
+		lavaMode = compound.getByte("lava");
 	}
 
 	public void setDamage(double damage) {

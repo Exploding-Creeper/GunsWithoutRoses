@@ -50,6 +50,7 @@ public class GunItem extends Item {
 
 	protected int bonusDamage;
 	public double damageMultiplier;
+	public int hadLava;
 	protected int fireDelay;
 	protected double inaccuracy;
 	protected double projectileSpeed = 3;
@@ -396,6 +397,10 @@ public class GunItem extends Item {
 		if (this.isLava) {
 			shot.lavaMode = 0x04;
 			if (player.isOnFire()) shot.lavaMode += 0x01;
+			if (this.hadLava > 0) {
+				shot.lavaMode += 0x08;
+				hadLava--;
+			}
 		}
 
 		if (this.meleeBonusCounter > 0) this.meleeBonusCounter--;

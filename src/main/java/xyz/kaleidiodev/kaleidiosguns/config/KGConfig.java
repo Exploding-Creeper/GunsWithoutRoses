@@ -277,6 +277,8 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue lavaSmgMeleeDamage;
     public static ForgeConfigSpec.DoubleValue lavaSmgOnFireMultiplier;
     public static ForgeConfigSpec.DoubleValue lavaSmgSelfOnFireMultiplier;
+    public static ForgeConfigSpec.DoubleValue lavaSmgLavaMultiplier;
+    public static ForgeConfigSpec.IntValue lavaSmgLavaBonusCount;
     public static ForgeConfigSpec.IntValue lavaSmgCost;
 
     public static ForgeConfigSpec.DoubleValue defenderRifleDamageMultiplier;
@@ -1084,6 +1086,12 @@ public class KGConfig {
         lavaSmgSelfOnFireMultiplier = builder
                 .comment("Set the damage multiplier if the shooter is on fire")
                 .defineInRange("lavaSmgSelfOnFireMultiplier", 1.25D, 0D, 40D);
+        lavaSmgLavaMultiplier = builder
+                .comment("Set the damage multiplier if the last shot consumed lava")
+                .defineInRange("lavaSmgLavaMultiplier", 1.25D, 0D, 40D);
+        lavaSmgLavaBonusCount = builder
+                .comment("Configure the damage bonus if a Lava Bound SMG consumed lava blocks recently")
+                .defineInRange("lavaSmgLavaBonusCount", 15, 0, 30);
         lavaSmgCost = builder
                 .comment("Ammo cost to fire Lava Bound SMGs")
                 .defineInRange("lavaSmgCost", 2, 0, 64);
