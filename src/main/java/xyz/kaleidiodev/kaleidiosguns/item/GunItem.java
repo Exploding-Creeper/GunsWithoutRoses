@@ -594,6 +594,10 @@ public class GunItem extends Item {
 				if (nextInaccuracy == 0) nextInaccuracy += sniperReplacementAim;
 				else nextInaccuracy *= KGConfig.weaknessEffectInaccuracyMultiplier.get();
 			}
+
+			if ((player.getEffect(Effects.LUCK) != null) && !(stack.getItem() instanceof ShotgunItem)) {
+				nextInaccuracy /= KGConfig.luckEffectInaccuracyDivider.get();
+			}
 		}
 
 		return nextInaccuracy;
