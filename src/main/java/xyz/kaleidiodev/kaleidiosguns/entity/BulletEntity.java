@@ -23,6 +23,7 @@ import net.minecraft.world.World;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.util.Constants;
 import xyz.kaleidiodev.kaleidiosguns.config.KGConfig;
 import xyz.kaleidiodev.kaleidiosguns.item.GatlingItem;
 import xyz.kaleidiodev.kaleidiosguns.item.GunItem;
@@ -213,10 +214,15 @@ public class BulletEntity extends AbstractFireballEntity {
 				BlockState someBlockState = this.level.getBlockState(someBlockPos);
 
 				if (lavaTest) {
-					if (someBlockState != Blocks.AIR.defaultBlockState()) System.out.println(someBlockState.getBlock());
 					if (someBlockState.getBlock() == Blocks.LAVA) {
 						this.shootingGun.hadLava = KGConfig.lavaSmgLavaBonusCount.get();
-						level.destroyBlock(someBlockPos, false);
+						level.setBlock(someBlockPos, Blocks.AIR.defaultBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
+						this.remove();
+						break;
+					}
+					if ((someBlockState.getBlock() == Blocks.WATER) && (this.lavaMode > 0x04)) {
+						level.setBlock(someBlockPos, Blocks.STONE.defaultBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
+						this.remove();
 						break;
 					}
 				}
