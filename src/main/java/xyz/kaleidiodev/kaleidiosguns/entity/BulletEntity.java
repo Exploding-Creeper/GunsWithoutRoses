@@ -312,7 +312,7 @@ public class BulletEntity extends AbstractFireballEntity {
 
 			}
 
-			if (shouldBreakDoors) {
+			if (shouldBreakDoors && actualTick <= 2) {
 				Block blockToChange = level.getBlockState(raytrace.getBlockPos()).getBlock();
 				//break wooden doors
 				if (BlockTags.WOODEN_DOORS.getValues().contains(blockToChange) ||
