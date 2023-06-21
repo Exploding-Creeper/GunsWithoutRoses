@@ -269,17 +269,17 @@ public class BulletEntity extends AbstractFireballEntity {
 			thisEntities.remove(getOwner());
 
 			if (thisEntities.contains(victim)) {
-				double bulletBBFloor = bb.getCenter().y - bb.getYsize();
+				double bulletBBFloor = bb.getCenter().y - (bb.getYsize() / 2);
 
 				AxisAlignedBB tempBB = victim.getBoundingBox();
-				double enemyBoxHeight = tempBB.getYsize();
+				double enemyBoxHeight = (tempBB.getYsize() / 2);
 				double enemyTop = tempBB.getCenter().y + enemyBoxHeight;
 				double enemyChin = enemyTop - ((enemyBoxHeight * 2) / 3);
 
 				//if the raytrace is at or above the enemy's chin, it's a headshot
 				//the chin is a third of the height from the top of the entity
 				if ((bulletBBFloor > enemyChin) && (bulletBBFloor < enemyTop)) {
-					level.playSound(null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundCategory.PLAYERS, 1.0f, 1.0f);
+					level.playSound(null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundCategory.MASTER, 1.0f, 1.0f);
 					this.headshot = true;
 				}
 				else this.headshot = false;
