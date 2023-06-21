@@ -81,6 +81,8 @@ public interface IBullet {
 
 		if (projectile.hero) newDamage *= KGConfig.heroShotgunEffectMultiplier.get();
 
+		if (projectile.headshot) newDamage *= KGConfig.headshotMultiplier.get();
+
 		//shooting shadow in the dark multiplies damage.
 		if (projectile.wasDark) {
 			newDamage /= projectile.getShootingGun().getDamageMultiplier(new ItemStack(projectile.getShootingGun().getItem()));

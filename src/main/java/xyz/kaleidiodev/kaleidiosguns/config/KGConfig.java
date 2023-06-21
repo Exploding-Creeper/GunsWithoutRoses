@@ -15,6 +15,7 @@ public class KGConfig {
     public static ForgeConfigSpec.IntValue redstoneRadius;
     public static ForgeConfigSpec.DoubleValue weaknessEffectInaccuracyMultiplier;
     public static ForgeConfigSpec.DoubleValue luckEffectInaccuracyDivider;
+    public static ForgeConfigSpec.DoubleValue headshotMultiplier;
 
     //Guns
     public static ForgeConfigSpec.DoubleValue ironPistolDamageMultiplier;
@@ -375,6 +376,9 @@ public class KGConfig {
         luckEffectInaccuracyDivider = builder
                 .comment("Configure the inaccuracy divider for when the shooter has the luck effect")
                 .defineInRange("luckEffectInaccuracyDivider", 2.0D, 1D, 10D);
+        headshotMultiplier = builder
+                .comment("Configure the damage multiplier for a headshot")
+                .defineInRange("headshotMultiplier", 1.5D, 1D, 100D);
         builder.pop();
 
         builder.push("pistol");

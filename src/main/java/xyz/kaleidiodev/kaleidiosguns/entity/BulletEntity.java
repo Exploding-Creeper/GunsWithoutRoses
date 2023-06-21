@@ -69,6 +69,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	public boolean clip;
 	public boolean hero;
 	public long actualTick;
+	public boolean headshot;
 
 	protected Set<Entity> entityHitHistory = new HashSet<>();
 
@@ -252,6 +253,45 @@ public class BulletEntity extends AbstractFireballEntity {
 		}
 	}
 
+	protected void isHeadshot(Entity shooter, Entity victim) {
+		AxisAlignedBB bb = this.getBoundingBox();
+
+		//start at previous position
+		Vector3d delta = this.getDeltaMovement();
+		//bb = bb.move(delta.reverse());
+		Vector3d incPosition = new Vector3d(delta.x / (bulletSpeed * 10), delta.y / (bulletSpeed * 10), delta.z / (bulletSpeed * 10));
+
+		for (double i = 0; i < this.bulletSpeed; i += 0.1) {
+			bb = bb.move(incPosition);
+
+			List<Entity> thisEntities = this.level.getEntities(this, bb);
+			thisEntities.removeIf(entity -> checkIsSameTeam(getOwner(), entity));
+			thisEntities.remove(getOwner());
+
+			if (thisEntities.contains(victim)) {
+				double bulletBBFloor = bb.getCenter().y - bb.getYsize();
+
+				AxisAlignedBB tempBB = victim.getBoundingBox();
+				double enemyBoxHeight = tempBB.getYsize();
+				double enemyTop = tempBB.getCenter().y + enemyBoxHeight;
+				double enemyChin = enemyTop - ((enemyBoxHeight * 2) / 3);
+
+				//if the raytrace is at or above the enemy's chin, it's a headshot
+				//the chin is a third of the height from the top of the entity
+				if ((bulletBBFloor > enemyChin) && (bulletBBFloor < enemyTop)) {
+					level.playSound(null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundCategory.PLAYERS, 1.0f, 1.0f);
+					this.headshot = true;
+				}
+				else this.headshot = false;
+				//exit early after first box calculated, so we ignore any boxes actually inside the entity
+				return;
+			}
+			else this.headshot = false;
+		}
+
+		//if we reach this point, tracing has probably gone horribly wrong, but it's going to return anyway.  it should have exited at some point inside the loop instead.
+	}
+
 	@Override
 	protected void onHitBlock(BlockRayTraceResult raytrace) {
 		//make a spherical poof and a sound
@@ -405,6 +445,8 @@ public class BulletEntity extends AbstractFireballEntity {
 		if (victim instanceof LivingEntity) {
 			healthOfVictim = ((LivingEntity)victim).getHealth();
 		}
+
+		isHeadshot(shooter, victim);
 
 		boolean damaged = victim.hurt((new IndirectEntityDamageSource("arrow", this, shooter)).setProjectile(), (float) bullet.modifyDamage(damage, this, victim, shooter, level));
 
