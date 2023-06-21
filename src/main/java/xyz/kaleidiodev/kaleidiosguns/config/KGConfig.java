@@ -16,6 +16,7 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue weaknessEffectInaccuracyMultiplier;
     public static ForgeConfigSpec.DoubleValue luckEffectInaccuracyDivider;
     public static ForgeConfigSpec.DoubleValue headshotMultiplier;
+    public static ForgeConfigSpec.DoubleValue projectileProtectionHelmetHeadshotReduction;
 
     //Guns
     public static ForgeConfigSpec.DoubleValue ironPistolDamageMultiplier;
@@ -379,6 +380,9 @@ public class KGConfig {
         headshotMultiplier = builder
                 .comment("Configure the damage multiplier for a headshot")
                 .defineInRange("headshotMultiplier", 1.5D, 1D, 100D);
+        projectileProtectionHelmetHeadshotReduction = builder
+                .comment("Configure the damage difference above x1.0 for a headshot, reduced by projectile protection, put into a base calculation for a logarithm")
+                .defineInRange("projectileProtectionHelmetHeadshotReduction", 1.5D, 1D, 100D);
         builder.pop();
 
         builder.push("pistol");

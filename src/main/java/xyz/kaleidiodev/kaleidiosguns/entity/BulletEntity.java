@@ -446,7 +446,8 @@ public class BulletEntity extends AbstractFireballEntity {
 			healthOfVictim = ((LivingEntity)victim).getHealth();
 		}
 
-		isHeadshot(shooter, victim);
+		//on a bipedal entity with a vertically higher hitbox than it is wide, calculate headshot
+		if ((victim.getBoundingBox().getYsize() > victim.getBoundingBox().getXsize()) || (victim.getBoundingBox().getYsize() > victim.getBoundingBox().getZsize())) isHeadshot(shooter, victim);
 
 		boolean damaged = victim.hurt((new IndirectEntityDamageSource("arrow", this, shooter)).setProjectile(), (float) bullet.modifyDamage(damage, this, victim, shooter, level));
 

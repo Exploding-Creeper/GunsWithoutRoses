@@ -1,9 +1,11 @@
 package xyz.kaleidiodev.kaleidiosguns.item;
 
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -81,7 +83,27 @@ public interface IBullet {
 
 		if (projectile.hero) newDamage *= KGConfig.heroShotgunEffectMultiplier.get();
 
-		if (projectile.headshot) newDamage *= KGConfig.headshotMultiplier.get();
+		if (projectile.headshot) {
+			double actualHeadshot = KGConfig.headshotMultiplier.get();
+
+			//use a logarithm to reduce headshot damage based on projectile protection level on the helmet
+			if (target instanceof LivingEntity) {
+				LivingEntity livingTarget = (LivingEntity) target;
+
+				ItemStack helmet = livingTarget.getItemBySlot(EquipmentSlotType.HEAD);
+				if (helmet != ItemStack.EMPTY) {
+					//this works with a level of 0.  that's why the 1 + is in the logarithmic equation
+					int projectileProtectionLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PROJECTILE_PROTECTION, helmet);
+
+					double headshotTemp = KGConfig.headshotMultiplier.get() - 1.0;
+					headshotTemp *= 1 / (1 + (projectileProtectionLevel * KGConfig.projectileProtectionHelmetHeadshotReduction.get()));
+
+					actualHeadshot = 1 + headshotTemp;
+				}
+			}
+
+			newDamage *= actualHeadshot;
+		}
 
 		//shooting shadow in the dark multiplies damage.
 		if (projectile.wasDark) {
