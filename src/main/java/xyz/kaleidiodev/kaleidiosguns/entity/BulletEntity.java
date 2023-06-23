@@ -41,7 +41,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	protected double inaccuracy = 0.0;
 	protected boolean ignoreInvulnerability = false;
 	protected double knockbackStrength = 0.0;
-	protected long ticksOnFire;
+	public long ticksOnFire;
 	protected double healthRewardChance = 0.0f;
 	protected float healthOfVictim;
 	protected boolean shouldBreakBlock;
@@ -109,6 +109,9 @@ public class BulletEntity extends AbstractFireballEntity {
 			if (passage != actualTick) this.remove();
 		}
 		if (actualTick > 100) this.remove();
+
+		//if the bullet stopped moving, such as being underwater, remove.
+		if (this.getDeltaMovement() == Vector3d.ZERO) this.remove();
 
 		//skip all processing if we were removed this or last tick
 		if (this.removed) return;
@@ -481,6 +484,7 @@ public class BulletEntity extends AbstractFireballEntity {
 		super.addAdditionalSaveData(compound);
 		compound.putLong("tickfired", ticksOnFire);
 		compound.putDouble("damage", damage);
+		compound.putDouble("tsf", actualTick);
 		compound.putBoolean("explosive", isExplosive);
 		compound.putBoolean("collateral", shouldCollateral);
 		//compound.putBoolean("isPlasma", isPlasma);
@@ -494,6 +498,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	public void readAdditionalSaveData(CompoundNBT compound) {
 		super.readAdditionalSaveData(compound);
 		ticksOnFire = compound.getLong("tickfired");
+		actualTick = compound.getLong("tsf");
 		damage = compound.getDouble("damage");
 		isExplosive = compound.getBoolean("explosive");
 		shouldCollateral = compound.getBoolean("collateral");
