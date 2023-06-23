@@ -185,7 +185,8 @@ public class BulletEntity extends AbstractFireballEntity {
 			//calculate headshot for the first trace an entity is found.  this prevents future trace steps from trying to count as headshots.
 			//a shot to the leg and up through the body will not count as a headshot!
 			if (thisEntities.size() > 0) {
-				if (isExplosive) this.explode(bb.getCenter());
+				//subtract by position so explosion is outside of block, not inside.  fixes physics
+				if (isExplosive) this.explode(bb.getCenter().subtract(incPosition));
 
 				double bulletBBFloor = bb.getCenter().y - (bb.getYsize() / 2);
 
@@ -228,7 +229,7 @@ public class BulletEntity extends AbstractFireballEntity {
 
 				//solid blocks are handled different
 				if (someBlockState.getMaterial().blocksMotion()) {
-					if (isExplosive) explode(bb.getCenter());
+					if (isExplosive) explode(bb.getCenter().subtract(incPosition));
 					else onHitBlock(bb.getCenter());
 				}
 			}
