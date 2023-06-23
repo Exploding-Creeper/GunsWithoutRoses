@@ -123,19 +123,6 @@ public class BulletEntity extends AbstractFireballEntity {
 			//note that "is away from owner" is absolutely useless anyway, so it was not included
 			this.baseTick();
 
-			if (!level.isClientSide) {
-				if (clip) traceHits();
-				if (shouldCollateral) traceHits();
-				if ((lavaMode & 0x04) != 0) traceHits();
-			}
-
-			if (!clip) {
-				RayTraceResult raytraceresult = ProjectileHelper.getHitResult(this, this::canHitEntity);
-				if (raytraceresult.getType() != RayTraceResult.Type.MISS && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, raytraceresult)) {
-					this.onHit(raytraceresult);
-				}
-			}
-
 			//why rotate toward movement?  that makes no sense
 			//this needs rewritten so that:
 			//1. the rotation is correct on spawn before first tick
@@ -159,28 +146,10 @@ public class BulletEntity extends AbstractFireballEntity {
 			if (!this.isInWater() && actualTick > 1 && this.level.isClientSide())
 				this.level.addParticle(this.getTrailParticle(), true, this.getBoundingBox().getCenter().x, this.getBoundingBox().getCenter().y, this.getBoundingBox().getCenter().z, 0.0D, 0.0D, 0.0D);
 			this.setPos(this.getX() + vector3d.x, this.getY() + vector3d.y, this.getZ() + vector3d.z);
+
+			this.traceHits();
 		} else {
 			this.remove();
-		}
-	}
-
-	@Override
-	protected void onHitEntity(EntityRayTraceResult raytrace) {
-		super.onHitEntity(raytrace); //this seems to be on the right track, but we also need a manual raytrace to get a full list of entities in the next delta, just in case the projectile is moving too fast
-
-		Entity target = raytrace.getEntity();
-
-		if (entityHitHistory.contains(target)) return;
-		entityHitHistory.add(target);
-
-		if (!level.isClientSide) {
-			entityHitProcess(target);
-
-			if (target != getOwner() && !shouldCollateral)
-			{
-				//remove immediately on first entity hit
-				this.remove();
-			}
 		}
 	}
 
@@ -211,6 +180,32 @@ public class BulletEntity extends AbstractFireballEntity {
 			entities.addAll(thisEntities);
 			entityHitHistory.addAll(entities); //entity hit history is shared between ticks.  entities is for the current line trace.
 
+			//calculate headshot for the first trace an entity is found.  this prevents future trace steps from trying to count as headshots.
+			//a shot to the leg and up through the body will not count as a headshot!
+			if (thisEntities.size() > 0) {
+				if (isExplosive) this.explode(bb.getCenter());
+
+				double bulletBBFloor = bb.getCenter().y - (bb.getYsize() / 2);
+
+				for (Entity victim : thisEntities) {
+					if ((victim.getBoundingBox().getYsize() < victim.getBoundingBox().getXsize()) && (victim.getBoundingBox().getYsize() < victim.getBoundingBox().getZsize())) continue;
+
+					AxisAlignedBB tempBB = victim.getBoundingBox();
+					double enemyBoxHeight = (tempBB.getYsize() / 2);
+					double enemyTop = tempBB.getCenter().y + enemyBoxHeight;
+					double enemyChin = enemyTop - ((enemyBoxHeight * 2) / 3);
+
+					//if the raytrace is at or above the enemy's chin, it's a headshot
+					//the chin is a third of the height from the top of the entity
+					if ((bulletBBFloor > enemyChin) && (bulletBBFloor < enemyTop)) {
+						//this might not be working appropriately in multiplayer...
+						if (getOwner() != null) getOwner().level.playSound(null, getOwner().getX(), getOwner().getY(), getOwner().getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundCategory.MASTER, 1.0f, 1.0f);
+						this.headshot = true;
+					} else this.headshot = false;
+				}
+			}
+			else this.headshot = false;
+
 			if (!clip) {
 				//kill trace early if we hit a tile doing this, so it doesn't trace through walls.
 				BlockPos someBlockPos = new BlockPos(bb.getCenter());
@@ -230,9 +225,10 @@ public class BulletEntity extends AbstractFireballEntity {
 					}
 				}
 
-				//stop processing if we hit a solid block
+				//solid blocks are handled different
 				if (someBlockState.getMaterial().blocksMotion()) {
-					break;
+					if (isExplosive) explode(bb.getCenter());
+					else onHitBlock(bb.getCenter());
 				}
 			}
 		}
@@ -253,60 +249,17 @@ public class BulletEntity extends AbstractFireballEntity {
 		}
 	}
 
-	protected void isHeadshot(Entity shooter, Entity victim) {
-		AxisAlignedBB bb = this.getBoundingBox();
-
-		//start at previous position
-		Vector3d delta = this.getDeltaMovement();
-		//bb = bb.move(delta.reverse());
-		Vector3d incPosition = new Vector3d(delta.x / (bulletSpeed * 10), delta.y / (bulletSpeed * 10), delta.z / (bulletSpeed * 10));
-
-		for (double i = 0; i < this.bulletSpeed; i += 0.1) {
-			bb = bb.move(incPosition);
-
-			List<Entity> thisEntities = this.level.getEntities(this, bb);
-			thisEntities.removeIf(entity -> checkIsSameTeam(getOwner(), entity));
-			thisEntities.remove(getOwner());
-
-			if (thisEntities.contains(victim)) {
-				double bulletBBFloor = bb.getCenter().y - (bb.getYsize() / 2);
-
-				AxisAlignedBB tempBB = victim.getBoundingBox();
-				double enemyBoxHeight = (tempBB.getYsize() / 2);
-				double enemyTop = tempBB.getCenter().y + enemyBoxHeight;
-				double enemyChin = enemyTop - ((enemyBoxHeight * 2) / 3);
-
-				//if the raytrace is at or above the enemy's chin, it's a headshot
-				//the chin is a third of the height from the top of the entity
-				if ((bulletBBFloor > enemyChin) && (bulletBBFloor < enemyTop)) {
-					level.playSound(null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundCategory.MASTER, 1.0f, 1.0f);
-					this.headshot = true;
-				}
-				else this.headshot = false;
-				//exit early after first box calculated, so we ignore any boxes actually inside the entity
-				return;
-			}
-			else this.headshot = false;
-		}
-
-		//if we reach this point, tracing has probably gone horribly wrong, but it's going to return anyway.  it should have exited at some point inside the loop instead.
-	}
-
-	@Override
-	protected void onHitBlock(BlockRayTraceResult raytrace) {
+	protected void onHitBlock(Vector3d pos) {
 		//make a spherical poof and a sound
 		this.level.playSound(null, this.getX(), this.getY(), this.getZ(), ModSounds.impact, SoundCategory.VOICE, 0.25f, (random.nextFloat() * 0.5f) + 0.75f);
-		double d0 = raytrace.getLocation().x();
-		double d1 = raytrace.getLocation().y() + (this.getBoundingBox().getYsize() / 2);
-		double d2 = raytrace.getLocation().z();
-		this.level.addParticle(ParticleTypes.POOF, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+
+		BlockPos blockPositionToMine = new BlockPos(pos);
 
 		if (KGConfig.griefEnabled.get() && !level.isClientSide) {
 			if (shouldBreakBlock) {
 				//test if the block is of the right tool type to mine with.
 				//we could not guarantee the projectile ended up inside the block on this tick, so let's add some mathematics to work around that
 
-				BlockPos blockPositionToMine = raytrace.getBlockPos();
 				ItemStack newTool;
 
 				if (this.getDamage() > KGConfig.mineGunFifthLevel.get()) {
@@ -362,9 +315,9 @@ public class BulletEntity extends AbstractFireballEntity {
 			}
 
 			if (shootsLights) {
-				Block blockToChange = level.getBlockState(raytrace.getBlockPos()).getBlock();
-				if (blockToChange.getLightValue(level.getBlockState(raytrace.getBlockPos()), level, raytrace.getBlockPos()) > 0) {
-					level.destroyBlock(raytrace.getBlockPos(), false);
+				Block blockToChange = level.getBlockState(blockPositionToMine).getBlock();
+				if (blockToChange.getLightValue(level.getBlockState(blockPositionToMine), level, blockPositionToMine) > 0) {
+					level.destroyBlock(blockPositionToMine, false);
 				}
 			}
 
@@ -373,7 +326,7 @@ public class BulletEntity extends AbstractFireballEntity {
 			}
 
 			if (shouldBreakDoors && actualTick <= 2) {
-				Block blockToChange = level.getBlockState(raytrace.getBlockPos()).getBlock();
+				Block blockToChange = level.getBlockState(blockPositionToMine).getBlock();
 				//break wooden doors
 				if (BlockTags.WOODEN_DOORS.getValues().contains(blockToChange) ||
 						BlockTags.WOODEN_TRAPDOORS.getValues().contains(blockToChange) ||
@@ -388,7 +341,7 @@ public class BulletEntity extends AbstractFireballEntity {
 						blockToChange == Blocks.HAY_BLOCK ||
 						blockToChange == Blocks.HONEY_BLOCK ||
 						blockToChange == Blocks.SLIME_BLOCK) {
-					level.destroyBlock(raytrace.getBlockPos(), false);
+					level.destroyBlock(blockPositionToMine, false);
 				}
 			}
 		}
@@ -446,9 +399,6 @@ public class BulletEntity extends AbstractFireballEntity {
 			healthOfVictim = ((LivingEntity)victim).getHealth();
 		}
 
-		//on a bipedal entity with a vertically higher hitbox than it is wide, calculate headshot
-		if ((victim.getBoundingBox().getYsize() > victim.getBoundingBox().getXsize()) || (victim.getBoundingBox().getYsize() > victim.getBoundingBox().getZsize())) isHeadshot(shooter, victim);
-
 		boolean damaged = victim.hurt((new IndirectEntityDamageSource("arrow", this, shooter)).setProjectile(), (float) bullet.modifyDamage(damage, this, victim, shooter, level));
 
 		if (isClean) victim.setDeltaMovement(previousDelta);
@@ -484,18 +434,9 @@ public class BulletEntity extends AbstractFireballEntity {
 		} else if (!damaged && ignoreInvulnerability) victim.invulnerableTime = lastHurtResistant;
 	}
 
-	@Override
-	protected void onHit(RayTraceResult result) {
-		//explode or damage?
-		if (isExplosive && !level.isClientSide) {
-			explode(result.getLocation());
-		}
-		//damage should try to hurt tiles and entities without using an explosion, so it will need to fire this super.
-		else super.onHit(result);
-	}
-
 	protected boolean checkIsSameTeam(Entity player, Entity victim) {
 		//check pet role first before team, as null team means they don't belong to any team in the first place
+		if (victim instanceof BulletEntity) return true;
 		if (victim instanceof TameableEntity) {
 			return ((TameableEntity) victim).getOwner() == player;
 		}
