@@ -191,7 +191,7 @@ public class BulletEntity extends AbstractFireballEntity {
 				double bulletBBFloor = bb.getCenter().y - (bb.getYsize() / 2);
 
 				for (Entity victim : thisEntities) {
-					if ((victim.getBoundingBox().getYsize() < victim.getBoundingBox().getXsize()) && (victim.getBoundingBox().getYsize() < victim.getBoundingBox().getZsize())) continue;
+					if ((victim.getBoundingBox().getYsize() / 2 < victim.getBoundingBox().getXsize()) || (victim.getBoundingBox().getYsize() / 2 < victim.getBoundingBox().getZsize())) continue;
 
 					AxisAlignedBB tempBB = victim.getBoundingBox();
 					double enemyBoxHeight = (tempBB.getYsize() / 2);
@@ -480,7 +480,6 @@ public class BulletEntity extends AbstractFireballEntity {
 	public void addAdditionalSaveData(CompoundNBT compound) {
 		super.addAdditionalSaveData(compound);
 		compound.putLong("tickfired", ticksOnFire);
-		compound.putLong("tsf", actualTick);
 		compound.putDouble("damage", damage);
 		compound.putBoolean("explosive", isExplosive);
 		compound.putBoolean("collateral", shouldCollateral);
@@ -495,7 +494,6 @@ public class BulletEntity extends AbstractFireballEntity {
 	public void readAdditionalSaveData(CompoundNBT compound) {
 		super.readAdditionalSaveData(compound);
 		ticksOnFire = compound.getLong("tickfired");
-		actualTick = compound.getLong("tsf");
 		damage = compound.getDouble("damage");
 		isExplosive = compound.getBoolean("explosive");
 		shouldCollateral = compound.getBoolean("collateral");
