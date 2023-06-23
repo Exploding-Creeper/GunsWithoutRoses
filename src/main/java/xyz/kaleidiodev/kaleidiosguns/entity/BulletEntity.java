@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.TameableEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractFireballEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.nbt.CompoundNBT;
@@ -69,9 +70,9 @@ public class BulletEntity extends AbstractFireballEntity {
 	public boolean clip;
 	public boolean hero;
 	public long actualTick;
-	public boolean headshot;
 
 	protected Set<Entity> entityHitHistory = new HashSet<>();
+	public Set<Entity> headshotHistory = new HashSet<>();
 
 	public BulletEntity(EntityType<? extends BulletEntity> entityType, World worldIn) {
 		super(entityType, worldIn);
@@ -173,6 +174,7 @@ public class BulletEntity extends AbstractFireballEntity {
 			Set<Entity> thisEntities = new HashSet<>(this.level.getEntities(this, bb));
 			thisEntities.removeIf(entity -> checkIsSameTeam(getOwner(), entity));
 			thisEntities.remove(getOwner());
+			thisEntities.removeIf(entity -> !entity.isAlive());
 
 			//don't process anything we've previously hit on this hit as well
 			thisEntities.removeAll(entityHitHistory);
@@ -199,12 +201,11 @@ public class BulletEntity extends AbstractFireballEntity {
 					//the chin is a third of the height from the top of the entity
 					if ((bulletBBFloor > enemyChin) && (bulletBBFloor < enemyTop)) {
 						//this might not be working appropriately in multiplayer...
-						if (getOwner() != null) getOwner().level.playSound(null, getOwner().getX(), getOwner().getY(), getOwner().getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundCategory.MASTER, 1.0f, 1.0f);
-						this.headshot = true;
-					} else this.headshot = false;
+						if (getOwner() != null) getOwner().level.playSound(null, victim.getX(), victim.getY(), victim.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundCategory.VOICE, 5.0f, 1.0f);
+						headshotHistory.add(victim);
+					}
 				}
 			}
-			else this.headshot = false;
 
 			if (!clip) {
 				//kill trace early if we hit a tile doing this, so it doesn't trace through walls.

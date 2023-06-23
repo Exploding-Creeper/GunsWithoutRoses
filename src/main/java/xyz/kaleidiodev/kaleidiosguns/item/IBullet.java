@@ -83,7 +83,7 @@ public interface IBullet {
 
 		if (projectile.hero) newDamage *= KGConfig.heroShotgunEffectMultiplier.get();
 
-		if (projectile.headshot) {
+		if (projectile.headshotHistory.contains(target)) {
 			double actualHeadshot = KGConfig.headshotMultiplier.get();
 
 			//use a logarithm to reduce headshot damage based on projectile protection level on the helmet
