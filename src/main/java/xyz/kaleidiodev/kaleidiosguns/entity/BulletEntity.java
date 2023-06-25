@@ -1,10 +1,7 @@
 package xyz.kaleidiodev.kaleidiosguns.entity;
 
 import net.minecraft.block.*;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractFireballEntity;
@@ -13,8 +10,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
+import net.minecraft.potion.*;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
@@ -37,6 +33,13 @@ import xyz.kaleidiodev.kaleidiosguns.registry.ModSounds;
 import java.util.*;
 
 public class BulletEntity extends AbstractFireballEntity {
+	public enum PotionApplyMode {
+		NONE,
+		INJECT,
+		SPLASH,
+		LINGER
+	}
+
 	protected double damage = 1;
 	protected double inaccuracy = 0.0;
 	protected boolean ignoreInvulnerability = false;
@@ -70,6 +73,9 @@ public class BulletEntity extends AbstractFireballEntity {
 	public boolean clip;
 	public boolean hero;
 	public long actualTick;
+	public List<EffectInstance> potionInstance = new ArrayList<EffectInstance>();
+	public PotionApplyMode applyMode;
+	public int lingeringTime;
 
 	protected Set<Entity> entityHitHistory = new HashSet<>();
 	public Set<Entity> headshotHistory = new HashSet<>();
@@ -86,7 +92,6 @@ public class BulletEntity extends AbstractFireballEntity {
 
 	public BulletEntity(World worldIn, LivingEntity shooter, double accelX, double accelY, double accelZ) {
 		super(ModEntities.BULLET, shooter, accelX, accelY, accelZ, worldIn);
-		this.setNoGravity(true);
 	}
 
 	//change the particle type the projectile is going to emit
@@ -143,6 +148,8 @@ public class BulletEntity extends AbstractFireballEntity {
 				//don't decrease inertia if the torpedo enchantment was on the gun
 				if (!this.isTorpedo) f = 0.5f;
 			}
+
+			if (!this.isNoGravity()) this.yPower = this.yPower - 0.0025;
 
 			this.setDeltaMovement(vector3d.add(this.xPower, this.yPower, this.zPower).scale((double) f));
 			//summon the particles in the center of the projectile instead of above it.
@@ -435,6 +442,12 @@ public class BulletEntity extends AbstractFireballEntity {
 				livingTarget.setDeltaMovement(new Vector3d(vel.x, 0.4, vel.z));
 			}
 
+			if (applyMode == PotionApplyMode.INJECT) {
+				for (EffectInstance effect : potionInstance) {
+					livingTarget.addEffect(effect);
+				}
+			}
+
 			bullet.onLivingEntityHit(this, livingTarget, shooter, level);
 		} else if (!damaged && ignoreInvulnerability) victim.invulnerableTime = lastHurtResistant;
 	}
@@ -455,15 +468,44 @@ public class BulletEntity extends AbstractFireballEntity {
 		level.explode(this, position.x, position.y, position.z, newRadius, isOnFire(), KGConfig.explosionsEnabled.get() ? Explosion.Mode.DESTROY : Explosion.Mode.NONE);
 		if (isWither) {
 			newRadius *= KGConfig.witherLauncherEffectRadiusMultiplier.get();
-			AxisAlignedBB witherTrace = new AxisAlignedBB(position.x - newRadius, position.y - newRadius, position.z - newRadius, position.x + newRadius, position.y + newRadius, position.z + newRadius);
-			List<LivingEntity> entities = this.level.getEntitiesOfClass(LivingEntity.class, witherTrace);
+
+			List<LivingEntity> entities = getExplosionAffected(position, newRadius);
 
 			for (LivingEntity mob : entities) {
 				if (getOwner() != null) if (!checkIsSameTeam(getOwner(), mob)) mob.addEffect(new EffectInstance(Effects.WITHER, 200, 1));
 			}
 		}
 
+		if (applyMode == PotionApplyMode.SPLASH) {
+			for (EffectInstance effect : potionInstance) {
+				List<LivingEntity> entities = getExplosionAffected(position, newRadius);
+
+				for (LivingEntity mob : entities) {
+					mob.addEffect(effect);
+				}
+			}
+
+		}
+
+		if (applyMode == PotionApplyMode.LINGER) {
+			for (EffectInstance effect : potionInstance) {
+				AreaEffectCloudEntity areaEffectCloud = new AreaEffectCloudEntity(level, position.x, position.y, position.z);
+
+				areaEffectCloud.setPotion(new Potion(effect));
+				areaEffectCloud.setDuration(lingeringTime);
+				areaEffectCloud.setRadius(newRadius);
+				areaEffectCloud.setRadiusPerTick(-(newRadius / lingeringTime));
+
+				level.addFreshEntity(areaEffectCloud);
+			}
+		}
+
 		remove();
+	}
+
+	public List<LivingEntity> getExplosionAffected(Vector3d position, float newRadius) {
+		AxisAlignedBB explosionTrace = new AxisAlignedBB(position.x - newRadius, position.y - newRadius, position.z - newRadius, position.x + newRadius, position.y + newRadius, position.z + newRadius);
+		return this.level.getEntitiesOfClass(LivingEntity.class, explosionTrace);
 	}
 
 	protected void tryBreakBlock(BlockPos blockPosToTest, ItemStack stack) {

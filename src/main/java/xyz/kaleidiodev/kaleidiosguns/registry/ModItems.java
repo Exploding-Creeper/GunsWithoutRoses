@@ -28,11 +28,12 @@ public class ModItems {
 			carbineSniper,
 			vexCarbine,
 			diamondSniper,
+			potionCannon,
 			diamondLauncher,
 			witherLauncher,
+			voltgun,
 			minegunGatling,
 			corruptionGatling,
-	        voltgun,
 			plasmaGatling,
 			assaultGatling,
 			lavaGatling,
@@ -72,6 +73,7 @@ public class ModItems {
 		defenderRifle = initItem(reg, new GatlingItem(defP().durability(KGConfig.defenderRifleDurability.get()), 0, KGConfig.defenderRifleDamageMultiplier.get(), KGConfig.defenderRifleFireDelay.get(), KGConfig.defenderRifleInaccuracy.get(), KGConfig.defenderRifleEnchantability.get(), KGConfig.defenderRifleSwitchSpeed.get(), KGConfig.defenderRifleMeleeDamage.get()).repair(() -> Ingredient.of(Tags.Items.GEMS_EMERALD)), "defender_rifle").projectileSpeed(KGConfig.defenderRifleProjectileSpeed.get()).fireSound(ModSounds.defender_rifle).setIsDefender(true).setCost(KGConfig.defenderRifleCost.get());
 
 		// Launchers
+		potionCannon = initItem(reg, new GunItem(defP().durability(KGConfig.potionCannonDurability.get()), 0, KGConfig.potionCannonDamageMultiplier.get(), KGConfig.potionCannonFireDelay.get(), KGConfig.potionCannonInaccuracy.get(), KGConfig.potionCannonEnchantability.get(), KGConfig.potionCannonSwitchSpeed.get(), KGConfig.potionCannonMeleeDamage.get()).projectileSpeed(KGConfig.potionCannonProjectileSpeed.get()).fireSound(ModSounds.potion_cannon).repair(() -> Ingredient.of(Tags.Items.INGOTS_GOLD)), "potion_cannon").setIsExplosive(true).setIsGravity(true).setIsPotion(true).setCost(KGConfig.potionCannonCost.get()).setSniperReplacementAim(KGConfig.potionCannonReplacementInaccuracy.get());
 		diamondLauncher = initItem(reg, new GunItem(defP().durability(KGConfig.diamondLauncherDurability.get()), 0, KGConfig.diamondLauncherDamageMultiplier.get(), KGConfig.diamondLauncherFireDelay.get(), KGConfig.diamondLauncherInaccuracy.get(), KGConfig.diamondLauncherEnchantability.get(), KGConfig.diamondLauncherSwitchSpeed.get(), KGConfig.diamondLauncherMeleeDamage.get()).projectileSpeed(KGConfig.diamondLauncherProjectileSpeed.get()).fireSound(ModSounds.rocketLauncher).repair(() -> Ingredient.of(Tags.Items.GEMS_DIAMOND)), "rocket_launcher").setIsExplosive(true).setCost(KGConfig.diamondLauncherCost.get()).setSniperReplacementAim(KGConfig.diamondLauncherReplacementInaccuracy.get());
 		witherLauncher = initItem(reg, new GunItem(defP().durability(KGConfig.witherLauncherDurability.get()), 0, KGConfig.witherLauncherDamageMultiplier.get(), KGConfig.witherLauncherFireDelay.get(), KGConfig.witherLauncherInaccuracy.get(), KGConfig.witherLauncherEnchantability.get(), KGConfig.witherLauncherSwitchSpeed.get(), KGConfig.witherLauncherMeleeDamage.get()).projectileSpeed(KGConfig.witherLauncherProjectileSpeed.get()).fireSound(ModSounds.witherLauncher).repair(() -> Ingredient.of(Tags.Items.INGOTS_NETHERITE)), "wither_launcher").setIsExplosive(true).setIsWither(true).setCost(KGConfig.witherLauncherCost.get()).setSniperReplacementAim(KGConfig.witherLauncherReplacementInaccuracy.get());
 

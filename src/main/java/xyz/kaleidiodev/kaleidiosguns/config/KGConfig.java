@@ -196,6 +196,18 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue goldVexReplacementInaccuracy;
     public static ForgeConfigSpec.DoubleValue goldVexMovementInaccuracy;
 
+    public static ForgeConfigSpec.DoubleValue potionCannonDamageMultiplier;
+    public static ForgeConfigSpec.IntValue potionCannonFireDelay;
+    public static ForgeConfigSpec.IntValue potionCannonEnchantability;
+    public static ForgeConfigSpec.IntValue potionCannonDurability;
+    public static ForgeConfigSpec.DoubleValue potionCannonInaccuracy;
+    public static ForgeConfigSpec.DoubleValue potionCannonProjectileSpeed;
+    public static ForgeConfigSpec.DoubleValue potionCannonSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue potionCannonMeleeDamage;
+    public static ForgeConfigSpec.IntValue potionCannonCost;
+    public static ForgeConfigSpec.DoubleValue potionCannonReplacementInaccuracy;
+    public static ForgeConfigSpec.IntValue potionCannonLingeringTime;
+
     public static ForgeConfigSpec.DoubleValue diamondLauncherDamageMultiplier;
     public static ForgeConfigSpec.IntValue diamondLauncherFireDelay;
     public static ForgeConfigSpec.IntValue diamondLauncherEnchantability;
@@ -1184,6 +1196,42 @@ public class KGConfig {
         defenderRifleCost = builder
                 .comment("Ammo cost to fire Defender Rifles")
                 .defineInRange("defenderRifleCost", 3, 0, 64);
+        builder.pop();
+
+        builder.push("potion cannon");
+        potionCannonDamageMultiplier = builder
+                .comment("Define the base damage to multiply against for Potion Cannons")
+                .defineInRange("potionCannonDamageMultiplier", 2D, 0.1D, 5D);
+        potionCannonFireDelay = builder
+                .comment("Configure the Fire delay for Potion Cannons")
+                .defineInRange("potionCannonFireDelay", 40, 0, 72000);
+        potionCannonEnchantability = builder
+                .comment("Configure the Enchantability for Potion Cannons")
+                .defineInRange("potionCannonEnchantability", 10, 0, 30);
+        potionCannonDurability = builder
+                .comment("Configure the Durability for Potion Cannons")
+                .defineInRange("potionCannonDurability", 86, 0, 32767);
+        potionCannonInaccuracy = builder
+                .comment("Configure the Inaccuracy for Potion Cannons")
+                .defineInRange("potionCannonInaccuracy", 0D, 0D, 90D);
+        potionCannonProjectileSpeed = builder
+                .comment("Configure the Projectile Speed for Potion Cannons")
+                .defineInRange("potionCannonProjectileSpeed", 1.5D, 0D, 64D);
+        potionCannonSwitchSpeed = builder
+                .comment("Configure the Weapon Switch Speed for Potion Cannons")
+                .defineInRange("potionCannonSwitchSpeed", 1.4D, 0D, 5D);
+        potionCannonMeleeDamage = builder
+                .comment("Configure the Melee Damage for Potion Cannons")
+                .defineInRange("potionCannonMeleeDamage", 4D, 0D, 40D);
+        potionCannonCost = builder
+                .comment("Ammo cost to fire Potion Cannons")
+                .defineInRange("potionCannonCost", 8, 0, 64);
+        potionCannonReplacementInaccuracy = builder
+                .comment("Configure the inaccuracy addition whilst using one hand with Potion Cannons")
+                .defineInRange("potionCannonReplacementInaccuracy", 2D, 0D, 40D);
+        potionCannonLingeringTime = builder
+                .comment("Time a lingering cloud lasts with potion cannon")
+                .defineInRange("potionCannonLingeringTime", 300, 30, 32767);
         builder.pop();
 
         builder.push("rocket launcher");

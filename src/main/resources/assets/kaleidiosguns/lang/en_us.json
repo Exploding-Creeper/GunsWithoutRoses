@@ -22,6 +22,7 @@
 	"item.kaleidiosguns.vex_burst_carbine": "Vex Burst Carbine",
 	"item.kaleidiosguns.hero_wave_shotgun": "Hero Wave Shotgun",
 	"item.kaleidiosguns.spreadgun": "Spreadgun",
+	"item.kaleidiosguns.potion_cannon": "Potion Cannon",
 
 	"item.kaleidiosguns.flint_bullet": "Flint Bullet",
 	"item.kaleidiosguns.iron_bullet": "Iron Bullet",
@@ -84,6 +85,8 @@
 	"tooltip.kaleidiosguns.wave": "Shoots waves of shots instead of blasts",
 	"tooltip.kaleidiosguns.hero": "Increases damage if you have any negative effect",
 	"tooltip.kaleidiosguns.spread": "Every pellet has a different speed",
+	"tooltip.kaleidiosguns.gravity": "Shots fall due to gravity",
+	"tooltip.kaleidiosguns.potion": "Consumes an offhand potion, lingering potion or splash potion to apply effects.",
 
 	"tooltip.kaleidiosguns.blaze_bullet": "Sets entities on fire",
 	"tooltip.kaleidiosguns.hunger_bullet": "Uses hunger as ammo",
@@ -152,5 +155,6 @@
 	"subtitles.kaleidiosguns.item.vex_burst_carbine.shoot": "Vex Burst Carbine fired",
 	"subtitles.kaleidiosguns.item.hero_wave_shotgun.shoot": "Hero Wave Shotgun fired",
 	"subtitles.kaleidiosguns.item.spreadgun.shoot": "Spreadgun fired",
+	"subtitles.kaleidiosguns.item.potion_cannon.shoot": "Potion Cannon fired",
 	"subtitles.kaleidiosguns.item.bullet.impact": "Bullet landed"
 }

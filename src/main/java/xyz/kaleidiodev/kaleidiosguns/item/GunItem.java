@@ -18,9 +18,7 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.EffectType;
-import net.minecraft.potion.Effects;
+import net.minecraft.potion.*;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
@@ -91,6 +89,8 @@ public class GunItem extends Item {
 	protected int burstAmount;
 	protected boolean isVex;
 	protected boolean isHero;
+	protected boolean isGravity;
+	protected boolean isPotion;
 	protected float sniperReplacementAim = 0.0f;
 	protected float sniperMovementAim = 0.0f;
 
@@ -326,6 +326,7 @@ public class GunItem extends Item {
 		shot.setExplosive(isExplosive);
 		shot.setShouldGlow(EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.tracer, gun) > 0);
 		shot.setOrigin(player.position());
+		shot.setNoGravity(!isGravity);
 
 		double someDamage = (shot.getDamage() + getBonusDamage(gun, player)) * getDamageMultiplier(gun);
 		if (gun.getItem() instanceof ShotgunItem) {
@@ -346,12 +347,7 @@ public class GunItem extends Item {
 		boolean vex = false;
 
 		if (this.isVex) {
-			ItemStack membrane = ItemStack.EMPTY;
-			if (player.getUsedItemHand() == Hand.OFF_HAND) {
-				membrane = player.getItemInHand(Hand.MAIN_HAND);
-			} else {
-				membrane = player.getItemInHand(Hand.OFF_HAND);
-			}
+			ItemStack membrane = getOtherHand(player);
 
 			if (membrane.getItem() == Items.PHANTOM_MEMBRANE) {
 				noPhysics = true;
@@ -403,6 +399,26 @@ public class GunItem extends Item {
 			}
 		}
 
+		if (this.isPotion) {
+			ItemStack potion = getOtherHand(player);
+
+			if (potion.getItem() == Items.POTION) shot.applyMode = BulletEntity.PotionApplyMode.INJECT;
+			if (potion.getItem() == Items.LINGERING_POTION) {
+				shot.applyMode = BulletEntity.PotionApplyMode.LINGER;
+				shot.lingeringTime = KGConfig.potionCannonLingeringTime.get();
+			}
+			if (potion.getItem() == Items.SPLASH_POTION) shot.applyMode = BulletEntity.PotionApplyMode.SPLASH;
+
+			if (shot.applyMode != BulletEntity.PotionApplyMode.NONE) {
+				Potion actualPotion = PotionUtils.getPotion(potion);
+				shot.potionInstance = actualPotion.getEffects();
+
+				//shrink by one to support mods that stack potions
+				potion.shrink(1);
+				if (potion.isEmpty()) player.inventory.removeItem(potion);
+			}
+		}
+
 		if (this.meleeBonusCounter > 0) this.meleeBonusCounter--;
 
 		changeBullet(world, player, gun, shot, bulletFree);
@@ -421,6 +437,18 @@ public class GunItem extends Item {
 		gun.setTag(nbt);
 
 		world.addFreshEntity(shot);
+	}
+
+	public ItemStack getOtherHand(PlayerEntity player) {
+		ItemStack otherItem;
+
+		if (player.getUsedItemHand() == Hand.OFF_HAND) {
+			otherItem = player.getItemInHand(Hand.MAIN_HAND);
+		} else {
+			otherItem = player.getItemInHand(Hand.OFF_HAND);
+		}
+
+		return otherItem;
 	}
 
 	//called during the firing sequence, override if the spray pattern needs to be specified
@@ -849,6 +877,16 @@ public class GunItem extends Item {
 		return this;
 	}
 
+	public GunItem setIsGravity(boolean gravity) {
+		this.isGravity = gravity;
+		return this;
+	}
+
+	public GunItem setIsPotion(boolean potion) {
+		this.isPotion = potion;
+		return this;
+	}
+
 	public int getCost() { return ammoCost; }
 
 	/**
@@ -956,6 +994,8 @@ public class GunItem extends Item {
 			if (isVex) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.vex"));
 			if (this == ModItems.heroShotgun) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.wave"));
 			if (isHero) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.hero"));
+			if (isGravity) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gravity"));
+			if (isPotion) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.potion"));
 
 			addExtraStatsTooltip(stack, world, tooltip);
 		}

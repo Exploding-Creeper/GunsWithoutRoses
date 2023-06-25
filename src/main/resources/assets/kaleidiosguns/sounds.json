@@ -138,6 +138,11 @@
 		"subtitle": "subtitles.kaleidiosguns.item.spreadgun.shoot",
 		"sounds": [ "kaleidiosguns:spreadgun" ]
 	},
+	"item.potion_cannon.shoot": {
+		"category": "item",
+		"subtitle": "subtitles.kaleidiosguns.item.potion_cannon.shoot",
+		"sounds": [ "kaleidiosguns:potion_cannon" ]
+	},
 	"entity.bullet.impact": {
 		"category": "entity",
 		"subtitle": "subtitles.kaleidiosguns.item.bullet.impact",

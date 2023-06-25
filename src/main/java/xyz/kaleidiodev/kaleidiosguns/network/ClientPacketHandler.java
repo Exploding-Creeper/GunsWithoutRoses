@@ -55,6 +55,7 @@ public class ClientPacketHandler {
         byte yaw = packet.readByte();
         byte pitch = packet.readByte();
         byte headYaw = packet.readByte();
+        boolean noGravity = packet.readBoolean();
         Vector3d velocity = new Vector3d(packet.readFloat(), packet.readFloat(), packet.readFloat());
         Entity entity = type.create(mc.level);
         if (entity == null) {
@@ -67,6 +68,7 @@ public class ClientPacketHandler {
         entity.setYBodyRot((headYaw * 360) / 256.0F);
         entity.setId(entityID);
         entity.setUUID(uuid);
+        entity.setNoGravity(noGravity);
 
         BulletEntity bullet = (BulletEntity) entity;
         bullet.isExplosive = packet.readBoolean();

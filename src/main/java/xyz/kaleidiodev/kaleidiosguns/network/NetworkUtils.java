@@ -27,6 +27,7 @@ public class NetworkUtils {
         buffer.writeByte((byte) MathHelper.floor(entity.xRot * 256.0F / 360.0F));
         buffer.writeByte((byte) MathHelper.floor(entity.yRot * 256.0F / 360.0F));
         buffer.writeByte((byte) (entity.getYHeadRot() * 256.0F / 360.0F));
+        buffer.writeBoolean(entity.isNoGravity());
         Vector3d velocity = entity.getDeltaMovement();
         buffer.writeFloat((float) velocity.x);
         buffer.writeFloat((float) velocity.y);
