@@ -2,10 +2,10 @@ package xyz.kaleidiodev.kaleidiosguns.item;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.command.arguments.SlotArgument;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -392,6 +392,14 @@ public class GunItem extends Item {
 		else shot.mineChance = this.mineChance;
 		if (this.isLava) {
 			shot.lavaMode = 0x04;
+
+			ItemStack bucket = getOtherHand(player);
+			if (bucket.getItem() == Items.LAVA_BUCKET) {
+				this.hadLava = KGConfig.lavaSmgLavaBonusCount.get();
+				player.inventory.removeItem(bucket);
+				player.inventory.add(new ItemStack(Items.BUCKET));
+			}
+
 			if (player.isOnFire()) shot.lavaMode += 0x01;
 			if (this.hadLava > 0) {
 				shot.lavaMode += 0x08;
@@ -996,6 +1004,7 @@ public class GunItem extends Item {
 			if (isHero) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.hero"));
 			if (isGravity) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gravity"));
 			if (isPotion) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.potion"));
+			if (isLava) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.lava"));
 
 			addExtraStatsTooltip(stack, world, tooltip);
 		}
