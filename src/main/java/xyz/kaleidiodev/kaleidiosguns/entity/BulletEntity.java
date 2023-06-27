@@ -172,12 +172,14 @@ public class BulletEntity extends AbstractFireballEntity {
 		AxisAlignedBB bb = this.getBoundingBox();
 
 		//start at previous position
+		//we cannot rely on the speed being the same for the bullet over its lifetime, so let's recalculate per tick
+		double actualSpeed = Vector3d.ZERO.distanceTo(this.getDeltaMovement());
 		Vector3d delta = this.getDeltaMovement();
 		bb = bb.move(delta.reverse());
-		Vector3d incPosition = new Vector3d(delta.x / (bulletSpeed * 10), delta.y / (bulletSpeed * 10), delta.z / (bulletSpeed * 10));
+		Vector3d incPosition = new Vector3d(delta.x / (actualSpeed * 10), delta.y / (actualSpeed * 10), delta.z / (actualSpeed * 10));
 
 		//the raytrace is really just a bunch of steps for boundary boxes.  this means accelerator makes sniper collateral further
-		for (double i = 0; i < this.bulletSpeed; i += 0.1) {
+		for (double i = 0; i < actualSpeed; i += 0.1) {
 			bb = bb.move(incPosition);
 
 			//don't bother adding entities to the list that are already there.
@@ -454,18 +456,22 @@ public class BulletEntity extends AbstractFireballEntity {
 
 	protected boolean checkIsSameTeam(Entity player, Entity victim) {
 		//check pet role first before team, as null team means they don't belong to any team in the first place
-		if (victim instanceof BulletEntity) return true;
-		if (victim instanceof TameableEntity) {
-			return ((TameableEntity) victim).getOwner() == player;
+		if (player != null && victim != null) {
+			if (victim instanceof BulletEntity) return true;
+			if (victim instanceof TameableEntity) {
+				return ((TameableEntity) victim).getOwner() == player;
+			}
+			if ((player.getTeam() == null) || (victim.getTeam() == null)) return false;
+			return player.getTeam() == victim.getTeam();
 		}
-		if ((player.getTeam() == null) || (victim.getTeam() == null)) return false;
-		return player.getTeam() == victim.getTeam();
+		return true; //assume same team if anything is null
 	}
 
 	public void explode(Vector3d position) {
-		float newRadius = (float)this.getShootingGun().damageMultiplier;
+		if (this.getShootingGun() == null) return;
+		double newRadius = this.getShootingGun().damageMultiplier;
 
-		level.explode(this, position.x, position.y, position.z, newRadius, isOnFire(), KGConfig.explosionsEnabled.get() ? Explosion.Mode.DESTROY : Explosion.Mode.NONE);
+		level.explode(this, position.x, position.y, position.z, (float)newRadius, isOnFire(), KGConfig.explosionsEnabled.get() ? Explosion.Mode.DESTROY : Explosion.Mode.NONE);
 		if (isWither) {
 			newRadius *= KGConfig.witherLauncherEffectRadiusMultiplier.get();
 
@@ -478,10 +484,11 @@ public class BulletEntity extends AbstractFireballEntity {
 
 		if (applyMode == PotionApplyMode.SPLASH) {
 			for (EffectInstance effect : potionInstance) {
-				List<LivingEntity> entities = getExplosionAffected(position, newRadius);
+				List<LivingEntity> entities = getExplosionAffected(position, newRadius * KGConfig.potionCannonSplashMultiplier.get());
 
 				for (LivingEntity mob : entities) {
-					mob.addEffect(effect);
+					//we must construct a new one because java's for loop will destroy this instance
+					mob.addEffect(new EffectInstance(effect));
 				}
 			}
 
@@ -493,8 +500,8 @@ public class BulletEntity extends AbstractFireballEntity {
 
 				areaEffectCloud.setPotion(new Potion(effect));
 				areaEffectCloud.setDuration(lingeringTime);
-				areaEffectCloud.setRadius(newRadius);
-				areaEffectCloud.setRadiusPerTick(-(newRadius / lingeringTime));
+				areaEffectCloud.setRadius((float)newRadius);
+				areaEffectCloud.setRadiusPerTick(-((float)newRadius / lingeringTime));
 
 				level.addFreshEntity(areaEffectCloud);
 			}
@@ -503,7 +510,7 @@ public class BulletEntity extends AbstractFireballEntity {
 		remove();
 	}
 
-	public List<LivingEntity> getExplosionAffected(Vector3d position, float newRadius) {
+	public List<LivingEntity> getExplosionAffected(Vector3d position, double newRadius) {
 		AxisAlignedBB explosionTrace = new AxisAlignedBB(position.x - newRadius, position.y - newRadius, position.z - newRadius, position.x + newRadius, position.y + newRadius, position.z + newRadius);
 		return this.level.getEntitiesOfClass(LivingEntity.class, explosionTrace);
 	}

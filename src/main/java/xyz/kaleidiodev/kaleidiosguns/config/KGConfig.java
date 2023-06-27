@@ -207,6 +207,7 @@ public class KGConfig {
     public static ForgeConfigSpec.IntValue potionCannonCost;
     public static ForgeConfigSpec.DoubleValue potionCannonReplacementInaccuracy;
     public static ForgeConfigSpec.IntValue potionCannonLingeringTime;
+    public static ForgeConfigSpec.DoubleValue potionCannonSplashMultiplier;
 
     public static ForgeConfigSpec.DoubleValue diamondLauncherDamageMultiplier;
     public static ForgeConfigSpec.IntValue diamondLauncherFireDelay;
@@ -1232,6 +1233,9 @@ public class KGConfig {
         potionCannonLingeringTime = builder
                 .comment("Time a lingering cloud lasts with potion cannon")
                 .defineInRange("potionCannonLingeringTime", 300, 30, 32767);
+        potionCannonSplashMultiplier = builder
+                .comment("Configure the radius multiplier for splash potion use with Potion Cannons")
+                .defineInRange("potionCannonSplashMultiplier", 2D, 0.5D, 40D);
         builder.pop();
 
         builder.push("rocket launcher");
