@@ -179,7 +179,6 @@ public class BulletEntity extends AbstractFireballEntity {
 
 		//the raytrace is really just a bunch of steps for boundary boxes.  this means accelerator makes sniper collateral further
 		for (double i = 0; i < actualSpeed; i += 0.1) {
-			System.out.println(i);
 			bb = bb.move(incPosition);
 
 			//don't bother adding entities to the list that are already there.
@@ -216,6 +215,10 @@ public class BulletEntity extends AbstractFireballEntity {
 						//this might not be working appropriately in multiplayer...
 						if (getOwner() != null) getOwner().level.playSound(null, victim.getX(), victim.getY(), victim.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundCategory.VOICE, 5.0f, 1.0f);
 						headshotHistory.add(victim);
+						if (!shouldCollateral) {
+							this.remove();
+							break;
+						}
 					}
 				}
 			}
@@ -243,6 +246,8 @@ public class BulletEntity extends AbstractFireballEntity {
 				if (someBlockState.getMaterial().blocksMotion()) {
 					if (isExplosive) explode(bb.getCenter().subtract(incPosition));
 					else onHitBlock(bb.getCenter());
+					if (!this.clip) this.remove();
+					break;
 				}
 			}
 		}
@@ -363,8 +368,6 @@ public class BulletEntity extends AbstractFireballEntity {
 				}
 			}
 		}
-
-		if (!this.clip) this.remove();
 	}
 
 	protected void breakWeakBlocks(BlockPos blockPosToTest) {
