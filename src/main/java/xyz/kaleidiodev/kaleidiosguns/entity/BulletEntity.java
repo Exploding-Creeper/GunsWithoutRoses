@@ -272,7 +272,7 @@ public class BulletEntity extends AbstractFireballEntity {
 		//make a spherical poof and a sound
 		this.level.playSound(null, pos.x, pos.y, pos.z, ModSounds.impact, SoundCategory.VOICE, 0.25f, (random.nextFloat() * 0.5f) + 0.75f);
 
-		Vector3d motionDiv = this.getDeltaMovement().multiply(new Vector3d(0.05, 0.05, 0.05)).reverse();
+		Vector3d motionDiv = this.getDeltaMovement().normalize().multiply(new Vector3d(0.1, 0.1, 0.1)).reverse();
 
 		if (this.level.isClientSide) level.addParticle(ParticleTypes.POOF, true, pos.x, pos.y, pos.z, motionDiv.x, motionDiv.y, motionDiv.z);
 
