@@ -119,49 +119,48 @@ public class BulletEntity extends AbstractFireballEntity {
 		if (this.getDeltaMovement() == Vector3d.ZERO) this.remove();
 
 		//skip all processing if we were removed this or last tick
+		Entity entity = this.getOwner();
 		if (this.removed) return;
+		if (entity != null) if (entity.removed) {
+			this.remove();
+			return;
+		}
 
 		if (shouldGlow || clip) {
 			this.setGlowing(true);
 		}
 
-		//completely rewrite the entity code here
-		Entity entity = this.getOwner();
-		if (this.level.isClientSide || (entity == null || !entity.removed)) {
-			this.setSharedFlag(6, this.isGlowing());
-			//note that "is away from owner" is absolutely useless anyway, so it was not included
-			this.baseTick();
+		this.setSharedFlag(6, this.isGlowing());
+		//note that "is away from owner" is absolutely useless anyway, so it was not included
+		this.baseTick();
 
-			//why rotate toward movement?  that makes no sense
-			//this needs rewritten so that:
-			//1. the rotation is correct on spawn before first tick
-			//2. the rotation is always correct at any rotation speed, like an arrow
-			this.checkInsideBlocks();
-			ProjectileHelper.rotateTowardsMovement(this, 1.0F);
+		//why rotate toward movement?  that makes no sense
+		//this needs rewritten so that:
+		//1. the rotation is correct on spawn before first tick
+		//2. the rotation is always correct at any rotation speed, like an arrow
+		this.checkInsideBlocks();
+		ProjectileHelper.rotateTowardsMovement(this, 1.0F);
 
-			//add support for torpedo enchantment
-			float f = this.getInertia();
-			Vector3d vector3d = this.getDeltaMovement();
+		//add support for torpedo enchantment
+		float f = this.getInertia();
+		Vector3d vector3d = this.getDeltaMovement();
 
-			if (this.isInWater() && this.level.isClientSide()) {
-				this.level.addParticle(ParticleTypes.BUBBLE, true, this.getBoundingBox().getCenter().x, this.getBoundingBox().getCenter().y, this.getBoundingBox().getCenter().z, 0, 0, 0);
-				//don't decrease inertia if the torpedo enchantment was on the gun
-				if (!this.isTorpedo) f = 0.5f;
-			}
-
-			if (!this.isNoGravity()) this.yPower = this.yPower - 0.0025;
-
-			this.setDeltaMovement(vector3d.add(this.xPower, this.yPower, this.zPower).scale((double) f));
-			//summon the particles in the center of the projectile instead of above it.
-			//disable emitters when underwater, as otherwise it looks messy to have two emitters (bubble emitter happens elsewhere)
-			if (!this.isInWater() && actualTick > 1 && this.level.isClientSide())
-				this.level.addParticle(this.getTrailParticle(), true, this.getBoundingBox().getCenter().x, this.getBoundingBox().getCenter().y, this.getBoundingBox().getCenter().z, 0.0D, 0.0D, 0.0D);
-			this.setPos(this.getX() + vector3d.x, this.getY() + vector3d.y, this.getZ() + vector3d.z);
-
-			this.traceHits();
-		} else {
-			this.remove();
+		if (this.isInWater() && this.level.isClientSide()) {
+			this.level.addParticle(ParticleTypes.BUBBLE, true, this.getBoundingBox().getCenter().x, this.getBoundingBox().getCenter().y, this.getBoundingBox().getCenter().z, 0, 0, 0);
+			//don't decrease inertia if the torpedo enchantment was on the gun
+			if (!this.isTorpedo) f = 0.5f;
 		}
+
+		if (!this.isNoGravity()) this.yPower = this.yPower - 0.0025;
+
+		this.setDeltaMovement(vector3d.add(this.xPower, this.yPower, this.zPower).scale(f));
+		//summon the particles in the center of the projectile instead of above it.
+		//disable emitters when underwater, as otherwise it looks messy to have two emitters (bubble emitter happens elsewhere)
+		if (!this.isInWater() && actualTick > 1 && this.level.isClientSide())
+			this.level.addParticle(this.getTrailParticle(), true, this.getBoundingBox().getCenter().x, this.getBoundingBox().getCenter().y, this.getBoundingBox().getCenter().z, 0.0D, 0.0D, 0.0D);
+		this.setPos(this.getX() + vector3d.x, this.getY() + vector3d.y, this.getZ() + vector3d.z);
+
+		this.traceHits();
 	}
 
 	//for any hit types that aren't vanilla, such as vex carbine's through blocks check since it can be unpredictable, or a sniper's collateral
@@ -180,6 +179,7 @@ public class BulletEntity extends AbstractFireballEntity {
 
 		//the raytrace is really just a bunch of steps for boundary boxes.  this means accelerator makes sniper collateral further
 		for (double i = 0; i < actualSpeed; i += 0.1) {
+			System.out.println(i);
 			bb = bb.move(incPosition);
 
 			//don't bother adding entities to the list that are already there.
@@ -265,7 +265,9 @@ public class BulletEntity extends AbstractFireballEntity {
 
 	protected void onHitBlock(Vector3d pos) {
 		//make a spherical poof and a sound
-		this.level.playSound(null, this.getX(), this.getY(), this.getZ(), ModSounds.impact, SoundCategory.VOICE, 0.25f, (random.nextFloat() * 0.5f) + 0.75f);
+		this.level.playSound(null, pos.x, pos.y, pos.z, ModSounds.impact, SoundCategory.VOICE, 0.25f, (random.nextFloat() * 0.5f) + 0.75f);
+
+		if (this.level.isClientSide) level.addParticle(ParticleTypes.POOF, true, pos.x, pos.y, pos.z, 0, 0, 0);
 
 		BlockPos blockPositionToMine = new BlockPos(pos);
 
