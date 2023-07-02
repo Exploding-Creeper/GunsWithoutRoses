@@ -32,7 +32,7 @@ public class HungerBulletItem extends BulletItem {
 	//this bullet type allows for suicide kills
 	@Override
 	public boolean hasAmmo(ItemStack stack, PlayerEntity player, ItemStack gunItem) {
-		return player.getFoodData().getFoodLevel() >= costToUse(gunItem) * 3;
+		return player.getFoodData().getFoodLevel() >= costToUse(gunItem);
 	}
 
 	@Override
