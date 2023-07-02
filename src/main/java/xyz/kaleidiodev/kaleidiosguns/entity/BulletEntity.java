@@ -227,26 +227,33 @@ public class BulletEntity extends AbstractFireballEntity {
 				//kill trace early if we hit a tile doing this, so it doesn't trace through walls.
 				BlockPos someBlockPos = new BlockPos(bb.getCenter());
 				BlockState someBlockState = this.level.getBlockState(someBlockPos);
+				boolean done = false;
 
 				if ((this.lavaMode & 0x04) != 0) {
 					if (someBlockState.getBlock() == Blocks.LAVA) {
 						this.shootingGun.hadLava = KGConfig.lavaSmgLavaBonusCount.get();
 						level.setBlock(someBlockPos, Blocks.AIR.defaultBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
-						this.remove();
-						break;
+
+						done = true;
 					}
 					if ((someBlockState.getBlock() == Blocks.WATER) && (this.lavaMode > 0x04)) {
 						level.setBlock(someBlockPos, Blocks.STONE.defaultBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
-						this.remove();
-						break;
+
+						done = true;
 					}
 				}
 
 				//solid blocks are handled different
-				if (someBlockState.getMaterial().blocksMotion()) {
+				//the getBlockCollisions check makes sure only to fire this if the collision box overlaps the block
+				if (someBlockState.getMaterial().blocksMotion() && this.level.getBlockCollisions(this, bb).findAny().isPresent()) {
 					if (isExplosive) explode(bb.getCenter().subtract(incPosition));
 					else onHitBlock(bb.getCenter());
-					if (!this.clip) this.remove();
+
+					done = true;
+				}
+
+				if (done) {
+					this.remove();
 					break;
 				}
 			}
