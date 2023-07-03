@@ -30,7 +30,7 @@ public class ModEnchantments {
 		accelerator = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.COMMON, 4, 3, 6, 20, TYPE_GUN), "accelerator"); //spd
 
 		//class specialized enhancement (compounds but only for certain gun types.
-		division = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.COMMON, 4, 4, 8, 20, TYPE_GUN), "division"); //shotgun
+		division = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.COMMON, 5, 4, 8, 20, TYPE_GUN), "division"); //shotgun
 		cleanShot = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.UNCOMMON, 1, 6, 12, 25, TYPE_GUN), "clean_shot"); //sniper
 		signalBoost = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.COMMON, 3, 6, 12, 25, TYPE_GUN), "signal_boost"); //redstone
 
