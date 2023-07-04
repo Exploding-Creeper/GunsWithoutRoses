@@ -527,7 +527,7 @@ public class KGConfig {
                 .defineInRange("goldShowmanDurability", 375, 0, 32767);
         goldShowmanInaccuracy = builder
                 .comment("Configure the Inaccuracy for Showman's Glocks")
-                .defineInRange("goldShowmanInaccuracy", 1.65D, 0D, 90D);
+                .defineInRange("goldShowmanInaccuracy", 1D, 0D, 90D);
         goldShowmanProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for Showman's Glocks")
                 .defineInRange("goldShowmanProjectileSpeed", 7.5D, 0D, 64D);

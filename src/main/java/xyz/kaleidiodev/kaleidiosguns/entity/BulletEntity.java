@@ -151,7 +151,7 @@ public class BulletEntity extends AbstractFireballEntity {
 			if (!this.isTorpedo) f = 0.5f;
 		}
 
-		if (!this.isNoGravity()) this.yPower = this.yPower - 0.0025;
+		if (!this.isNoGravity()) this.yPower = this.yPower - 0.005;
 
 		this.setDeltaMovement(vector3d.add(this.xPower, this.yPower, this.zPower).scale(f));
 		//summon the particles in the center of the projectile instead of above it.
