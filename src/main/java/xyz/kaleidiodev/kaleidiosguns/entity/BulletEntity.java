@@ -215,11 +215,12 @@ public class BulletEntity extends AbstractFireballEntity {
 						//this might not be working appropriately in multiplayer...
 						if (getOwner() != null) getOwner().level.playSound(null, victim.getX(), victim.getY(), victim.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundCategory.VOICE, 5.0f, 1.0f);
 						headshotHistory.add(victim);
-						if (!shouldCollateral) {
-							this.remove();
-							break;
-						}
 					}
+				}
+
+				if (!shouldCollateral) {
+					this.remove();
+					break;
 				}
 			}
 
@@ -271,7 +272,6 @@ public class BulletEntity extends AbstractFireballEntity {
 			//only process the last entity in the list, which is the closest to the previous position.
 			Entity next = entities.iterator().next();
 			entityHitProcess(next);
-			this.remove();
 		}
 	}
 

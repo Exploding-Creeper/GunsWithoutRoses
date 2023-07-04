@@ -942,7 +942,8 @@ public class GunItem extends Item {
 			double damageMultiplier = getDamageMultiplier(stack);
 			double damageBonus = getBonusDamage(stack, null) * damageMultiplier;
 
-			if (damageMultiplier != 1) {
+			if (isExplosive) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.damage.explosion", ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(damageMultiplier)));
+			else if (damageMultiplier != 1) {
 				if (damageBonus != 0) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.damage.both" + (isDamageModified(stack) ? ".modified" : ""), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(damageMultiplier), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(damageBonus)));
 				else tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.damage.mult" + (isDamageModified(stack) ? ".modified" : ""), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(damageMultiplier)));
 			}
@@ -951,20 +952,30 @@ public class GunItem extends Item {
 			//Fire rate
 			int fireRate = Math.max(1, this.fireDelay - (int)(this.fireDelay * EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.sleightOfHand, stack) * KGConfig.sleightOfHandFireRateDecrease.get()));
 			if (revolutions > 1) {
-				tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.reloadspeed" + (isFireDelayModified(stack) ? ".modified" : ""), fireRate, (60*20) / fireRate));
+				tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.reloadspeed" + (isFireDelayModified(stack) ? ".modified" : ""), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(fireRate / 20.0)));
 				tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.barrels_left", nbt.getInt("chambers"), revolutions));
 				fireRate /= barrelSwitchSpeed;
 			}
-			tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.firerate" + (isFireDelayModified(stack) ? ".modified" : ""), fireRate, (60*20) / fireRate));
+			tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.firerate" + (isFireDelayModified(stack) ? ".modified" : ""), 1200 / fireRate));
 
 
 			//Accuracy
 			double inaccuracy = baseInaccuracy(stack, null);
-			if (inaccuracy <= 0) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.accuracy.perfect" + (isInaccuracyModified(stack) ? ".modified" : "")));
-			else tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.accuracy" + (isInaccuracyModified(stack) ? ".modified" : ""), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(1.0 / inaccuracy)));
+			double projectileSpeed = baseSpeed(stack, null) * 16;
+			//don't ask me why this formula is correct to get "deviation radius in blocks per second", it just is.  it's the same formula used in the balance calculator excel document as well
+			inaccuracy = inaccuracy * 0.0075 * 16 * 20;
+			//now we get how many seconds it takes for the radius to become 50% likely to hit which makes the "perfect accuracy limit" in terms of time...
+			//since inaccuracy is actually spread in a square shape, and not a circle, we can deduce that 200% of the size of 1 block face will denote a 50% chance to miss.
+			//200% of 1x1 is sqrt(2) * sqrt(2).  so use that and multiply that by 50%.
+			//now divide the deviation radius in blocks per second to see how many seconds it takes for that 50% accuracy to be reached with the spread cone.
+			inaccuracy = 0.425 / inaccuracy;
+			//now we use the projectile's speed to judge how many blocks it travels before it reaches this value
+			inaccuracy = projectileSpeed * inaccuracy;
+			if (inaccuracy == Double.POSITIVE_INFINITY) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.accuracy.perfect" + (isInaccuracyModified(stack) ? ".modified" : "")));
+			else tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.accuracy" + (isInaccuracyModified(stack) ? ".modified" : ""), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(inaccuracy)));
 
 			//Projectile Speed
-			double projectileSpeed = baseSpeed(stack, null);
+
 			tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.speed" + (isProjectileSpeedModified(stack) ? ".modified" : ""), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(projectileSpeed)));
 
 			if (ammoCost != 1) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.cost", ammoCost));
