@@ -968,7 +968,10 @@ public class GunItem extends Item {
 			inaccuracy = 0.425 / inaccuracy;
 			//now we use the projectile's speed to judge how many blocks it travels before it reaches this value
 			inaccuracy = projectileSpeed * inaccuracy;
-			if (inaccuracy == Double.POSITIVE_INFINITY) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.accuracy.perfect" + (isInaccuracyModified(stack) ? ".modified" : "")));
+			if (inaccuracy == Double.POSITIVE_INFINITY) {
+				if (this instanceof GatlingItem || this instanceof ShotgunItem || this.isExplosive || this.isRedstone) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.accuracy.perfect" + (isInaccuracyModified(stack) ? ".modified" : "")));
+				else tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.accuracy.perfect.sniper"));
+			}
 			else tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.accuracy" + (isInaccuracyModified(stack) ? ".modified" : ""), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(inaccuracy)));
 
 			//Projectile Speed
