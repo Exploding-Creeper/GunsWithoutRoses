@@ -392,7 +392,7 @@ public class KGConfig {
                 .defineInRange("luckEffectInaccuracyDivider", 2.0D, 1D, 10D);
         headshotMultiplier = builder
                 .comment("Configure the damage multiplier for a headshot")
-                .defineInRange("headshotMultiplier", 1.5D, 1D, 100D);
+                .defineInRange("headshotMultiplier", 2D, 1D, 100D);
         projectileProtectionHelmetHeadshotReduction = builder
                 .comment("Configure the damage difference above x1.0 for a headshot, reduced by projectile protection, put into a base calculation for a logarithm")
                 .defineInRange("projectileProtectionHelmetHeadshotReduction", 1.5D, 1D, 100D);
