@@ -213,7 +213,7 @@ public class BulletEntity extends AbstractFireballEntity {
 					//the chin is a third of the height from the top of the entity
 					if ((bulletBBFloor > enemyChin) && (bulletBBFloor < enemyTop)) {
 						//this might not be working appropriately in multiplayer...
-						if (getOwner() != null) getOwner().level.playSound(null, victim.getX(), victim.getY(), victim.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundCategory.VOICE, 5.0f, 1.0f);
+						if (getOwner() != null) getOwner().level.playSound(null, bb.getCenter().x, bb.getCenter().y, bb.getCenter().z, SoundEvents.PLAYER_ATTACK_CRIT, SoundCategory.VOICE, 5.0f, 1.0f);
 						headshotHistory.add(victim);
 					}
 				}
