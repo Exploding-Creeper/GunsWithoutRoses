@@ -653,7 +653,7 @@ public class KGConfig {
                 .defineInRange("spreadgunMaximumSpeed", 2.0D, 0.1D, 10D);
         builder.pop();
 
-        builder.push("hero wave shotgun");
+        builder.push("hero wave shotgun !!!CURRENTLY DISABLED!!!");
         heroShotgunDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Hero Wave Shotguns")
                 .defineInRange("heroShotgunDamageMultiplier", 0.6D, 0.1D, 5D);
