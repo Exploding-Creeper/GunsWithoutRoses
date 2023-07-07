@@ -24,7 +24,7 @@ public class ModItems {
 			doubleBarrelShotgun,
 			diamondShotgun,
 			vampireShotgun,
-			heroShotgun,
+			//heroShotgun,
 			carbineSniper,
 			vexCarbine,
 			diamondSniper,

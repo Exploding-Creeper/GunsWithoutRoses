@@ -1011,7 +1011,7 @@ public class GunItem extends Item {
 			if (!isOneHanded && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && !(this instanceof ShotgunItem)) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.twohands"));
 			if ((inaccuracy == 0) && !(this instanceof ShotgunItem) && !(this instanceof GatlingItem)) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.sniper"));
 			if (isVex) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.vex"));
-			if (this == ModItems.heroShotgun) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.wave"));
+			//if (this == ModItems.heroShotgun) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.wave"));
 			if (isHero) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.hero"));
 			if (isGravity) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gravity"));
 			if (isPotion) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.potion"));
