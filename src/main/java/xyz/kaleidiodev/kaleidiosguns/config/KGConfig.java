@@ -979,43 +979,43 @@ public class KGConfig {
 
         builder.push("corruption gun");
         netheriteMinegunDamageMultiplier = builder
-                .comment("Define the Damage multiplier for Corruption Gun")
+                .comment("Define the Damage multiplier for Nethermaykr")
                 .defineInRange("netheriteMinegunDamageMultiplier", 2D, 0.1D, 5D);
         netheriteMinegunFireDelay = builder
-                .comment("Configure the Fire delay for Corruption Gun")
+                .comment("Configure the Fire delay for Nethermaykr")
                 .defineInRange("netheriteMinegunFireDelay", 3, 0, 72000);
         netheriteMinegunEnchantability = builder
-                .comment("Configure the Enchantability for Corruption Gun")
+                .comment("Configure the Enchantability for Nethermaykr")
                 .defineInRange("netheriteMinegunEnchantability", 10, 0, 30);
         netheriteMinegunDurability = builder
-                .comment("Configure the Durability for Corruption Gun")
+                .comment("Configure the Durability for Nethermaykr")
                 .defineInRange("netheriteMinegunDurability",  660, 0, 32767);
         netheriteMinegunInaccuracy = builder
-                .comment("Configure the Inaccuracy for Corruption Gun")
+                .comment("Configure the Inaccuracy for Nethermaykr")
                 .defineInRange("netheriteMinegunInaccuracy", 0D, 0D, 90D);
         netheriteMinegunProjectileSpeed = builder
-                .comment("Configure the Projectile Speed for Corruption Gun")
+                .comment("Configure the Projectile Speed for Nethermaykr")
                 .defineInRange("netheriteMinegunProjectileSpeed", 1.8D, 0D, 64D);
         netheriteMinegunMineChance = builder
-                .comment("Configure the Break Block Chance for Corruption Gun")
+                .comment("Configure the Break Block Chance for Nethermaykr")
                 .defineInRange("netheriteMinegunMineChance", 0.33D, 0D, 1D);
         netheriteMinegunIgnitionChance = builder
-                .comment("Configure the Fire Set Chance for Corruption Guns when it is a blaze bullet in use")
+                .comment("Configure the Fire Set Chance for Nethermaykr when it is a blaze bullet in use")
                 .defineInRange("netheriteMinegunIgnitionChance", 0.25D, 0D, 1D);
         netheriteMinegunSwitchSpeed = builder
-                .comment("Configure the Weapon Switch Speed for Corruption Gun")
+                .comment("Configure the Weapon Switch Speed for Nethermaykr")
                 .defineInRange("netheriteMinegunSwitchSpeed", 2.4D, 0D, 5D);
         netheriteMinegunMeleeDamage = builder
-                .comment("Configure the Melee Damage for Corruption Gun")
+                .comment("Configure the Melee Damage for Nethermaykr")
                 .defineInRange("netheriteMinegunMeleeDamage", 2D, 0D, 40D);
         netheriteMinegunCorruptBlock = builder
-                .comment("Change if the Corruption Gun actually corrupts blocks")
+                .comment("Change if the Nethermaykr actually corrupts blocks")
                 .define("netheriteMinegunCorruptBlock", true);
         netheriteMinegunCost = builder
-                .comment("Ammo cost to fire Corruption Guns")
+                .comment("Ammo cost to fire Nethermaykr")
                 .defineInRange("netheriteMinegunCost", 1, 0, 64);
         netheriteMinegunReplacementInaccuracy = builder
-                .comment("Configure the inaccuracy addition whilst using one hand with Corruption Guns")
+                .comment("Configure the inaccuracy addition whilst using one hand with Nethermaykr")
                 .defineInRange("netheriteMinegunReplacementInaccuracy", 3D, 0D, 40D);
         builder.pop();
 

@@ -2,5 +2,5 @@
 	"type": "minecraft:smithing",
 	"base": { "item": "kaleidiosguns:minegun" },
 	"addition": { "item": "minecraft:netherite_ingot" },
-	"result": { "item": "kaleidiosguns:corruption_gun" }
+	"result": { "item": "kaleidiosguns:nethermaykr"}
 }
