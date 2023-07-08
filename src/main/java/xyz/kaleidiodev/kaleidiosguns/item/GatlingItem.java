@@ -132,7 +132,7 @@ public class GatlingItem extends GunItem {
 
 	@Override
 	protected void addExtraStatsTooltip(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip) {
-		tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gatling.hold"));
+		if (KGConfig.showClassDetails.get()) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gatling.hold"));
 	}
 
 	protected boolean checkTileEntities(World world, PlayerEntity player) {
