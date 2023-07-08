@@ -115,9 +115,6 @@ public class BulletEntity extends AbstractFireballEntity {
 		}
 		if (actualTick > 100) this.remove();
 
-		//if the bullet stopped moving, such as being underwater, remove.
-		if (this.getDeltaMovement() == Vector3d.ZERO) this.remove();
-
 		//skip all processing if we were removed this or last tick
 		Entity entity = this.getOwner();
 		if (this.removed) return;
@@ -145,8 +142,8 @@ public class BulletEntity extends AbstractFireballEntity {
 		float f = this.getInertia();
 		Vector3d vector3d = this.getDeltaMovement();
 
-		if (this.isInWater() && this.level.isClientSide()) {
-			this.level.addParticle(ParticleTypes.BUBBLE, true, this.getBoundingBox().getCenter().x, this.getBoundingBox().getCenter().y, this.getBoundingBox().getCenter().z, 0, 0, 0);
+		if (this.isInWater()) {
+			if (this.level.isClientSide()) this.level.addParticle(ParticleTypes.BUBBLE, true, this.getBoundingBox().getCenter().x, this.getBoundingBox().getCenter().y, this.getBoundingBox().getCenter().z, 0, 0, 0);
 			//don't decrease inertia if the torpedo enchantment was on the gun
 			if (!this.isTorpedo) f = 0.5f;
 		}
