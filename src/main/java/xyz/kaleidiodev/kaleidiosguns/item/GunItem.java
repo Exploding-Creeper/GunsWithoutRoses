@@ -409,6 +409,7 @@ public class GunItem extends Item {
 
 		if (this.isPotion) {
 			ItemStack potion = getOtherHand(player);
+			shot.applyMode = BulletEntity.PotionApplyMode.NONE;
 
 			if (potion.getItem() == Items.POTION) shot.applyMode = BulletEntity.PotionApplyMode.INJECT;
 			if (potion.getItem() == Items.LINGERING_POTION) {
