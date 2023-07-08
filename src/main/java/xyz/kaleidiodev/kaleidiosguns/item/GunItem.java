@@ -984,38 +984,48 @@ public class GunItem extends Item {
 			double inverseChanceFree = getInverseChanceFreeShot(stack, null);
 			if (inverseChanceFree < 1) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.chance_free" + (isChanceFreeShotModified(stack) ? ".modified" : ""), (int)((1 - inverseChanceFree) * 100)));
 
-			if (isRedstone) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.redstone"));
 
-			if (hasBlockMineAbility) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.minegun"));
+			if (KGConfig.showWeaponDetails.get()) {
+				if (shouldCollateral) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.collateral"));
+				if (twoHandBonus) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.showman_glock"));
+				if (shouldRevenge) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.blessed"));
+				if (isShadow) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.shadow"));
+				if (isDefender) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.defender"));
+				if (canShatterBlocks) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.shatter"));
+				if (isJuggler) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.juggle"));
+				if (hasVoltage) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.voltage"));
+				if (isMeleeBonus) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.melee"));
+				if (isLava) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.lava"));
+				if (isVex) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.vex"));
+				//if (this == ModItems.heroShotgun) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.wave"));
+				if (isHero) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.hero"));
+				if (isPotion) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.potion"));
+			}
 
-			if (shouldCollateral) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.collateral"));
+			if (KGConfig.showWeaponSecrets.get()) {
+				if (this.getItem() == ModItems.plasmaGatling) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.plasma"));
+				if (hasBlockMineAbility) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.minegun"));
+				if (isWither) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.wither"));
+				if (breachDoors) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.doors"));
+				if (isCorruption) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.corruption"));
+				if (isShadow) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.shadow_block"));
+			}
 
-			if (revolutions > 1) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.double_barrel"));
-			if (stack.getItem() == ModItems.revolver) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.revolver"));
-			if (twoHandBonus) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.showman_glock"));
-			if (isWither) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.wither"));
-			if (shouldRevenge) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.blessed"));
-			if (isShadow) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.shadow"));
-			if (isCorruption) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.corruption"));
-			if (isDefender) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.defender"));
-			if (isSensitive) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.sensitive"));
-			if (this.getItem() == ModItems.plasmaGatling) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.plasma"));
-			if (isExplosive) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.explosive"));
-			if (breachDoors) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.doors"));
-			if (canShatterBlocks) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.shatter"));
-			if (isJuggler) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.juggle"));
-			if (hasVoltage) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.voltage"));
-			if (isMeleeBonus) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.melee"));
-			if (isLava) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.lava"));
-			if (!isOneHanded && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && (this instanceof ShotgunItem)) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.twohands_shotgun"));
-			if (!isOneHanded && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && !(this instanceof ShotgunItem)) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.twohands"));
-			if ((inaccuracy == 0) && !(this instanceof ShotgunItem) && !(this instanceof GatlingItem)) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.sniper"));
-			if (isVex) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.vex"));
-			//if (this == ModItems.heroShotgun) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.wave"));
-			if (isHero) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.hero"));
-			if (isGravity) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gravity"));
-			if (isPotion) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.potion"));
-			if (isLava) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.lava"));
+			if (KGConfig.showClassDetails.get()) {
+				if (isRedstone) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.redstone"));
+				if (revolutions > 1) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.double_barrel"));
+				if (stack.getItem() == ModItems.revolver)
+					tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.revolver"));
+				if (isSensitive) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.sensitive"));
+				if (isExplosive) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.explosive"));
+				if (!isOneHanded && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && (this instanceof ShotgunItem))
+					tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.twohands_shotgun"));
+				if (!isOneHanded && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && !(this instanceof ShotgunItem))
+					tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.twohands"));
+				if ((inaccuracy == 0) && !(this instanceof ShotgunItem) && !(this instanceof GatlingItem))
+					tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.sniper"));
+				if (isGravity) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gravity"));
+			}
 
 			addExtraStatsTooltip(stack, world, tooltip);
 		}

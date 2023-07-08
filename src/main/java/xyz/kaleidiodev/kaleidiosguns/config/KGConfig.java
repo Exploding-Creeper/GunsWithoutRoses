@@ -17,6 +17,9 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue luckEffectInaccuracyDivider;
     public static ForgeConfigSpec.DoubleValue headshotMultiplier;
     public static ForgeConfigSpec.DoubleValue projectileProtectionHelmetHeadshotReduction;
+    public static ForgeConfigSpec.BooleanValue showClassDetails;
+    public static ForgeConfigSpec.BooleanValue showWeaponDetails;
+    public static ForgeConfigSpec.BooleanValue showWeaponSecrets;
 
     //Guns
     public static ForgeConfigSpec.DoubleValue ironPistolDamageMultiplier;
@@ -396,6 +399,15 @@ public class KGConfig {
         projectileProtectionHelmetHeadshotReduction = builder
                 .comment("Configure the damage difference above x1.0 for a headshot, reduced by projectile protection, put into a base calculation for a logarithm")
                 .defineInRange("projectileProtectionHelmetHeadshotReduction", 1.5D, 1D, 100D);
+        showClassDetails = builder
+                .comment("Show details of class mechanics (such as needing two hands for full accuracy).  Disabling this declutters tooltips in sacrifice for making the mod difficult to understand.")
+                .define("showClassDetails", false);
+        showWeaponDetails = builder
+                .comment("Show details of weapon mechanics (such as the Shadow Magnum giving a bonus in the shadows).  Disabling this declutters tooltips and can give players the chance to explore their new weapon.")
+                .define("showWeaponDetails", true);
+        showWeaponSecrets = builder
+                .comment("Show details of secret weapon mechanics (such as the Shotgun being able to destroy some blocks).  Disabling this declutters tooltips and keeps the mechanics secret, as intended.")
+                .define("showWeaponSecrets", false);
         builder.pop();
 
         builder.push("pistol");
