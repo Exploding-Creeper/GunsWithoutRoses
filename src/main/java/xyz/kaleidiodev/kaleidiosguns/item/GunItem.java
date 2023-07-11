@@ -285,7 +285,7 @@ public class GunItem extends Item {
 					player.addEffect(new EffectInstance(Effects.GLOWING, KGConfig.playerGlowTicks.get(), 0));
 				}
 
-				player.getCooldowns().addCooldown(this, getFireDelay(gun, player));
+				player.getCooldowns().addCooldown(this, getActualFireDelay(gun, player));
 				mergeStacks(player, gun);
 			}
 
@@ -578,6 +578,18 @@ public class GunItem extends Item {
 		{
 			return Math.max(1, base / barrelSwitchSpeed);
 		}
+	}
+
+	public int getActualFireDelay(ItemStack stack, @Nullable PlayerEntity player) {
+		int base = getFireDelay(stack, player);
+
+		if (player != null) {
+			if (player.hasEffect(Effects.DIG_SLOWDOWN) && !(stack.getItem() instanceof GatlingItem)) {
+				base = (int)((float)base * (1 + ((float)player.getEffect(Effects.DIG_SLOWDOWN).getAmplifier() * 0.2f)));
+			}
+		}
+
+		return base;
 	}
 
 	/**

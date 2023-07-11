@@ -75,6 +75,7 @@ public interface IBullet {
 
 			if (Math.random() < KGConfig.goldPlasmaSlowChance.get()) {
 				livingTarget.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, KGConfig.goldPlasmaSlowTicks.get(), 2));
+				livingTarget.addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, KGConfig.goldPlasmaSlowTicks.get(), 2));
 			}
 		}
 
