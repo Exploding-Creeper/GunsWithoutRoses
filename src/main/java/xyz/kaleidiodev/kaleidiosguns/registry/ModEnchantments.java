@@ -24,7 +24,7 @@ public class ModEnchantments {
 		IForgeRegistry<Enchantment> reg = event.getRegistry();
 
 		//flat upgrade (unbreaking counts as drbl)
-		impact = initEnchant(reg, new GunDamageEnchantment(Enchantment.Rarity.COMMON, 6, 4, 8, 20, TYPE_GUN), "impact"); //dmg
+		impact = initEnchant(reg, new GunDamageEnchantment(Enchantment.Rarity.COMMON, 4, 4, 8, 20, TYPE_GUN), "impact"); //dmg
 		bullseye = initEnchant(reg, new GunAccuracyEnchantment(Enchantment.Rarity.COMMON, 4, 5, 10, 30, TYPE_GUN), "bullseye"); //acc
 		sleightOfHand = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.UNCOMMON, 2, 6, 12, 30, TYPE_GUN), "sleight_of_hand"); //rt
 		accelerator = initEnchant(reg, new GunEnchantment(Enchantment.Rarity.COMMON, 4, 3, 6, 20, TYPE_GUN), "accelerator"); //spd
