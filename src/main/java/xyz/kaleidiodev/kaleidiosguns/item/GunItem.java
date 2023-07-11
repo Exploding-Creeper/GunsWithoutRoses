@@ -1022,13 +1022,13 @@ public class GunItem extends Item {
 				if (isPotion) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.potion"));
 				if (interactsWithBlocks) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.interact"));
 				if (breachDoors) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.doors"));
+				if (isCorruption) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.corruption"));
+				if (isWither) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.wither"));
+				if (this.getItem() == ModItems.plasmaGatling) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.plasma"));
 			}
 
 			if (KGConfig.showWeaponSecrets.get()) {
-				if (this.getItem() == ModItems.plasmaGatling) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.plasma"));
 				if (hasBlockMineAbility) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.minegun"));
-				if (isWither) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.wither"));
-				if (isCorruption) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.corruption"));
 				if (isShadow) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.shadow_block"));
 			}
 

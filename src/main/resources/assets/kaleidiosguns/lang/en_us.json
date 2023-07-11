@@ -67,7 +67,7 @@
 	"tooltip.kaleidiosguns.frost_distance": "Damage is minimum at %s blocks away§r",
 	"tooltip.kaleidiosguns.wither": "Gives wither around the explosion's epicentre§r",
 	"tooltip.kaleidiosguns.blessed": "Having low health multiplies damage§r",
-	"tooltip.kaleidiosguns.plasma": "Can give slowness or disable shields§r",
+	"tooltip.kaleidiosguns.plasma": "Can give slowness and mining fatigue, or disable shields§r",
 	"tooltip.kaleidiosguns.shadow": "Damage is higher when shot from the dark§r",
 	"tooltip.kaleidiosguns.shadow_block": "Destroys light emitting blocks§r",
 	"tooltip.kaleidiosguns.corruption": "Can replace a mined block with netherrack blocks§r",

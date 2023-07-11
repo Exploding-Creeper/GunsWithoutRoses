@@ -231,7 +231,7 @@ public class BulletEntity extends AbstractFireballEntity {
 				BlockState someBlockState = this.level.getBlockState(someBlockPos);
 				boolean done = false;
 
-				if ((this.lavaMode & 0x04) != 0) {
+				if (((this.lavaMode & 0x04) != 0) && (this.shootingGun != null)) {
 					if (someBlockState.getBlock() == Blocks.LAVA) {
 						this.shootingGun.hadLava = KGConfig.lavaSmgLavaBonusCount.get();
 						level.setBlock(someBlockPos, Blocks.AIR.defaultBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
@@ -366,6 +366,7 @@ public class BulletEntity extends AbstractFireballEntity {
 			}
 
 			if (((lavaMode & 0x08) != 0) && (this.getOwner() != null) && KGConfig.lavaSmgCatchFire.get()) {
+				System.out.println("testing block...");
 				BlockState someBlockState = level.getBlockState(blockPositionToMine);
 				someBlockState.getBlock().catchFire(someBlockState, this.level, blockPositionToMine, Direction.getNearest(this.getDeltaMovement().x, this.getDeltaMovement().y, this.getDeltaMovement().z), (LivingEntity)this.getOwner());
 			}
