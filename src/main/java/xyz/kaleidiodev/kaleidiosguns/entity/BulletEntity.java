@@ -1,5 +1,6 @@
 package xyz.kaleidiodev.kaleidiosguns.entity;
 
+import com.mojang.authlib.GameProfile;
 import net.minecraft.block.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.monster.EndermanEntity;
@@ -20,8 +21,10 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.common.util.FakePlayer;
 import xyz.kaleidiodev.kaleidiosguns.config.KGConfig;
 import xyz.kaleidiodev.kaleidiosguns.item.GatlingItem;
 import xyz.kaleidiodev.kaleidiosguns.item.GunItem;
@@ -69,6 +72,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	public boolean juggle;
 	public byte lavaMode; //bit 0 is player is on fire, bit 1 is enemy is on fire, bit 2 is is active
 	public boolean isMeleeBonus;
+	public boolean interactsWithBlocks;
 	public int redstoneLevel;
 	public double mineChance;
 	public boolean clip;
@@ -248,6 +252,13 @@ public class BulletEntity extends AbstractFireballEntity {
 
 						done = true;
 					}
+				}
+
+				if (interactsWithBlocks) {
+					FakePlayer fakePlayer = new FakePlayer((ServerWorld)level, new GameProfile(null, "[KaleidiosGunsFakePlayer]"));
+					ActionResultType result = someBlockState.use(this.level, fakePlayer, Hand.MAIN_HAND, new BlockRayTraceResult(bb.getCenter(), Direction.getNearest(this.getDeltaMovement().x, this.getDeltaMovement().y,this.getDeltaMovement().z), someBlockPos, true));
+
+					if (result.shouldSwing()) done = true;
 				}
 
 				//solid blocks are handled different

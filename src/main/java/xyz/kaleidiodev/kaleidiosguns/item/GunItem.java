@@ -91,6 +91,7 @@ public class GunItem extends Item {
 	protected boolean isHero;
 	protected boolean isGravity;
 	protected boolean isPotion;
+	protected boolean interactsWithBlocks;
 	protected float sniperReplacementAim = 0.0f;
 	protected float sniperMovementAim = 0.0f;
 
@@ -373,6 +374,7 @@ public class GunItem extends Item {
 		shot.isMeleeBonus = this.meleeBonusCounter > 0;
 		shot.shootsLights = this.isShadow;
 		shot.juggle = this.isJuggler;
+		shot.interactsWithBlocks = this.interactsWithBlocks;
 
 		shot.hero = false;
 		if (isHero) {
@@ -905,6 +907,11 @@ public class GunItem extends Item {
 
 	public GunItem setIsPotion(boolean potion) {
 		this.isPotion = potion;
+		return this;
+	}
+
+	public GunItem setInteractBlocks(boolean interact) {
+		this.interactsWithBlocks = interact;
 		return this;
 	}
 
