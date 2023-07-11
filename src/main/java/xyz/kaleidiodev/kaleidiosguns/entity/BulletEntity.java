@@ -254,11 +254,11 @@ public class BulletEntity extends AbstractFireballEntity {
 					}
 				}
 
-				if (interactsWithBlocks) {
+				if (interactsWithBlocks && this.level.getBlockCollisions(this, bb).findAny().isPresent()) {
 					FakePlayer fakePlayer = new FakePlayer((ServerWorld)level, new GameProfile(null, "[KaleidiosGunsFakePlayer]"));
-					ActionResultType result = someBlockState.use(this.level, fakePlayer, Hand.MAIN_HAND, new BlockRayTraceResult(bb.getCenter(), Direction.getNearest(this.getDeltaMovement().x, this.getDeltaMovement().y,this.getDeltaMovement().z), someBlockPos, true));
+					someBlockState.use(this.level, fakePlayer, Hand.MAIN_HAND, new BlockRayTraceResult(bb.getCenter(), Direction.getNearest(this.getDeltaMovement().x, this.getDeltaMovement().y,this.getDeltaMovement().z), someBlockPos, true));
 
-					if (result.shouldSwing()) done = true;
+					done = true;
 				}
 
 				//solid blocks are handled different
