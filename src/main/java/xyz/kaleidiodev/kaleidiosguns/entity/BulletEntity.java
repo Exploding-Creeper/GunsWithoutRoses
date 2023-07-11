@@ -241,6 +241,15 @@ public class BulletEntity extends AbstractFireballEntity {
 					}
 				}
 
+				if (shootsLights) {
+					Block blockToChange = someBlockState.getBlock();
+					if (blockToChange.getLightValue(someBlockState, level, someBlockPos) > 0) {
+						level.destroyBlock(someBlockPos, false);
+
+						done = true;
+					}
+				}
+
 				//solid blocks are handled different
 				//the getBlockCollisions check makes sure only to fire this if the collision box overlaps the block
 				if (someBlockState.getMaterial().blocksMotion() && this.level.getBlockCollisions(this, bb).findAny().isPresent()) {
@@ -338,13 +347,6 @@ public class BulletEntity extends AbstractFireballEntity {
 							(level.getBlockState(blockPositionToMine.above(1)).getBlock() == Blocks.AIR)) {
 						level.setBlock(blockPositionToMine.above(1), Blocks.FIRE.defaultBlockState(), 3);
 					}
-				}
-			}
-
-			if (shootsLights) {
-				Block blockToChange = level.getBlockState(blockPositionToMine).getBlock();
-				if (blockToChange.getLightValue(level.getBlockState(blockPositionToMine), level, blockPositionToMine) > 0) {
-					level.destroyBlock(blockPositionToMine, false);
 				}
 			}
 
