@@ -619,7 +619,7 @@ public class GunItem extends Item {
 
 			//check sniper class
 			if ((inaccuracy == 0) &&
-					playerVelocity.length() > 0.0001 &&
+					playerVelocity.length() > 0.03 &&
 					!(this instanceof GatlingItem) &&
 					!(this instanceof ShotgunItem)) {
 				nextInaccuracy = sniperMovementAim;
