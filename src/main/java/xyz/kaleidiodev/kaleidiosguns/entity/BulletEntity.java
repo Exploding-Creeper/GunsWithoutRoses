@@ -2,6 +2,7 @@ package xyz.kaleidiodev.kaleidiosguns.entity;
 
 import net.minecraft.block.*;
 import net.minecraft.entity.*;
+import net.minecraft.entity.monster.EndermanEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractFireballEntity;
@@ -209,8 +210,7 @@ public class BulletEntity extends AbstractFireballEntity {
 					//if the raytrace is at or above the enemy's chin, it's a headshot
 					//the chin is a third of the height from the top of the entity
 					if ((bulletBBFloor > enemyChin) && (bulletBBFloor < enemyTop)) {
-						//this might not be working appropriately in multiplayer...
-						if (getOwner() != null) getOwner().level.playSound(null, bb.getCenter().x, bb.getCenter().y, bb.getCenter().z, SoundEvents.PLAYER_ATTACK_CRIT, SoundCategory.VOICE, 5.0f, 1.0f);
+						if ((getOwner() != null) && (!this.level.isClientSide()) && !(victim instanceof EndermanEntity)) getOwner().level.playSound(null, bb.getCenter().x, bb.getCenter().y, bb.getCenter().z, SoundEvents.PLAYER_ATTACK_CRIT, SoundCategory.VOICE, 5.0f, 1.0f);
 						headshotHistory.add(victim);
 					}
 				}
