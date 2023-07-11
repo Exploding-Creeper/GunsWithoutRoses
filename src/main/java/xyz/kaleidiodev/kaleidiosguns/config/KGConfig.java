@@ -743,7 +743,7 @@ public class KGConfig {
         builder.push("vampire shotgun");
         netheriteShotgunDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Vampire Shotguns")
-                .defineInRange("netheriteShotgunDamageMultiplier", 0.75D, 0.1D, 5D);
+                .defineInRange("netheriteShotgunDamageMultiplier", 0.45D, 0.1D, 5D);
         netheriteShotgunFireDelay = builder
                 .comment("Configure the Fire delay for Vampire Shotguns")
                 .defineInRange("netheriteShotgunFireDelay", 12, 0, 72000);
@@ -755,13 +755,13 @@ public class KGConfig {
                 .defineInRange("netheriteShotgunDurability", 287, 0, 32767);
         netheriteShotgunInaccuracy = builder
                 .comment("Configure the Inaccuracy for Vampire Shotguns")
-                .defineInRange("netheriteShotgunInaccuracy", 4D, 0D, 90D);
+                .defineInRange("netheriteShotgunInaccuracy", 7D, 0D, 90D);
         netheriteShotgunBulletCount = builder
                 .comment("Configure the amount of Bullets at once for Vampire Shotguns")
                 .defineInRange("netheriteShotgunBulletCount", 4, 0, 50);
         netheriteShotgunProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for Vampire Shotguns")
-                .defineInRange("netheriteShotgunProjectileSpeed", 9D, 0D, 64D);
+                .defineInRange("netheriteShotgunProjectileSpeed", 8D, 0D, 64D);
         netheriteShotgunEntityCap = builder
                 .comment("Configure the amount of entities at once for Vampire Shotguns")
                 .defineInRange("netheriteShotgunEntityCap", 5, 1, 25);
@@ -782,7 +782,7 @@ public class KGConfig {
                 .defineInRange("netheriteShotgunMeleeDamage", 4D, 0D, 40D);
         netheriteShotgunCost = builder
                 .comment("Ammo cost to fire Vampire Shotguns")
-                .defineInRange("netheriteShotgunCost", 6, 0, 64);
+                .defineInRange("netheriteShotgunCost", 5, 0, 64);
         builder.pop();
 
         builder.push("sniper rifle");
