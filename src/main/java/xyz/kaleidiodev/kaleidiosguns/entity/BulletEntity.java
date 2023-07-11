@@ -365,12 +365,6 @@ public class BulletEntity extends AbstractFireballEntity {
 
 			}
 
-			if (((lavaMode & 0x08) != 0) && (this.getOwner() != null) && KGConfig.lavaSmgCatchFire.get()) {
-				System.out.println("testing block...");
-				BlockState someBlockState = level.getBlockState(blockPositionToMine);
-				someBlockState.getBlock().catchFire(someBlockState, this.level, blockPositionToMine, Direction.getNearest(this.getDeltaMovement().x, this.getDeltaMovement().y, this.getDeltaMovement().z), (LivingEntity)this.getOwner());
-			}
-
 			if (shouldBreakDoors && actualTick <= 2) {
 				Block blockToChange = level.getBlockState(blockPositionToMine).getBlock();
 				//break wooden doors

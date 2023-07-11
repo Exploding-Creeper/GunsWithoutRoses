@@ -1129,9 +1129,6 @@ public class KGConfig {
         lavaSmgCost = builder
                 .comment("Ammo cost to fire Lava Bound SMGs")
                 .defineInRange("lavaSmgCost", 1, 0, 64);
-        lavaSmgCatchFire = builder
-                .comment("Let Lava Bound SMGs set blocks on fire")
-                .define("lavaSmgCatchFire", false);
         builder.pop();
 
         builder.push("plasma rifle");
