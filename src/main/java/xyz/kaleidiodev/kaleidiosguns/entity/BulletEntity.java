@@ -70,7 +70,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	public boolean shouldShatterBlocks;
 	public boolean healsFriendlies;
 	public boolean juggle;
-	public byte lavaMode; //bit 0 is player is on fire, bit 1 is enemy is on fire, bit 2 is is active
+	public byte lavaMode; //bit 0 is player is on fire, bit 1 is enemy is on fire, bit 2 is is active, bit 3 is lava absorb
 	public boolean isMeleeBonus;
 	public boolean interactsWithBlocks;
 	public int redstoneLevel;
@@ -363,6 +363,11 @@ public class BulletEntity extends AbstractFireballEntity {
 
 			if (shouldShatterBlocks) {
 
+			}
+
+			if (((lavaMode & 0x08) != 0) && (this.getOwner() != null) && KGConfig.lavaSmgCatchFire.get()) {
+				BlockState someBlockState = level.getBlockState(blockPositionToMine);
+				someBlockState.getBlock().catchFire(someBlockState, this.level, blockPositionToMine, Direction.getNearest(this.getDeltaMovement().x, this.getDeltaMovement().y, this.getDeltaMovement().z), (LivingEntity)this.getOwner());
 			}
 
 			if (shouldBreakDoors && actualTick <= 2) {

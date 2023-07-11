@@ -298,6 +298,7 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue lavaSmgLavaMultiplier;
     public static ForgeConfigSpec.IntValue lavaSmgLavaBonusCount;
     public static ForgeConfigSpec.IntValue lavaSmgCost;
+    public static ForgeConfigSpec.BooleanValue lavaSmgCatchFire;
 
     public static ForgeConfigSpec.DoubleValue defenderRifleDamageMultiplier;
     public static ForgeConfigSpec.IntValue defenderRifleFireDelay;
@@ -1088,7 +1089,7 @@ public class KGConfig {
                 .defineInRange("diamondAssaultCost", 1, 0, 64);
         builder.pop();
 
-        builder.push("slag bound smg");
+        builder.push("lava bound smg");
         lavaSmgDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Lava Bound SMGs")
                 .defineInRange("lavaSmgDamageMultiplier", 0.9D, 0.1D, 5D);
@@ -1128,6 +1129,9 @@ public class KGConfig {
         lavaSmgCost = builder
                 .comment("Ammo cost to fire Lava Bound SMGs")
                 .defineInRange("lavaSmgCost", 1, 0, 64);
+        lavaSmgCatchFire = builder
+                .comment("Let Lava Bound SMGs set blocks on fire")
+                .define("lavaSmgCatchFire", false);
         builder.pop();
 
         builder.push("plasma rifle");
