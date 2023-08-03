@@ -462,7 +462,7 @@ public class KGConfig {
                 .defineInRange("diamondRevolverProjectileSpeed", 10D, 0D, 64D);
         diamondRevolverSpreadoutStrength = builder
                 .comment("Configure the strength a Revolver increases its spread cone every time it's used too fast")
-                .defineInRange("diamondRevolverSpreadoutStrength", 0.4D, 0D, 64D);
+                .defineInRange("diamondRevolverSpreadoutStrength", 1.0D, 0D, 64D);
         diamondRevolverChamberSwitchSpeed = builder
                 .comment("Configure a divider of base fire delay how long switching chambers takes between shots on Revolvers")
                 .defineInRange("diamondRevolverChamberSwitchSpeed", 6, 1, 72000);
@@ -501,7 +501,7 @@ public class KGConfig {
                 .defineInRange("shadowRevolverProjectileSpeed", 9D, 0D, 64D);
         shadowRevolverSpreadoutStrength = builder
                 .comment("Configure the strength a Shadow Magnums increases its spread cone every time it's used too fast")
-                .defineInRange("shadowRevolverSpreadoutStrength", 0.4D, 0D, 64D);
+                .defineInRange("shadowRevolverSpreadoutStrength", 0.8D, 0D, 64D);
         shadowRevolverChamberSwitchSpeed = builder
                 .comment("Configure a divider of base fire delay how long switching chambers takes between shots on Shadow Magnums")
                 .defineInRange("shadowRevolverChamberSwitchSpeed", 4, 1, 72000);
