@@ -962,12 +962,28 @@ public class GunItem extends Item {
 			double damageMultiplier = getDamageMultiplier(stack);
 			double damageBonus = getBonusDamage(stack, null) * damageMultiplier;
 
-			if (isExplosive) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.damage.explosion", ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(damageMultiplier)));
-			else if (damageMultiplier != 1) {
-				if (damageBonus != 0) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.damage.both" + (isDamageModified(stack) ? ".modified" : ""), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(damageMultiplier), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(damageBonus)));
-				else tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.damage.mult" + (isDamageModified(stack) ? ".modified" : ""), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(damageMultiplier)));
+			if (this instanceof ShotgunItem) {
+				if (isExplosive)
+					tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.shotgun.damage.explosion", ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(damageMultiplier)));
+				else if (damageMultiplier != 1) {
+					if (damageBonus != 0)
+						tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.shotgun.damage.both" + (isDamageModified(stack) ? ".modified" : ""), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(damageMultiplier), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(damageBonus)));
+					else
+						tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.shotgun.damage.mult" + (isDamageModified(stack) ? ".modified" : ""), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(damageMultiplier)));
+				} else if (damageBonus != 0)
+					tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.shotgun.damage.flat" + (isDamageModified(stack) ? ".modified" : ""), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(damageBonus)));
 			}
-			else if (damageBonus != 0) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.damage.flat" + (isDamageModified(stack) ? ".modified" : ""), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(damageBonus)));
+			else {
+				if (isExplosive)
+					tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.damage.explosion", ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(damageMultiplier)));
+				else if (damageMultiplier != 1) {
+					if (damageBonus != 0)
+						tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.damage.both" + (isDamageModified(stack) ? ".modified" : ""), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(damageMultiplier), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(damageBonus)));
+					else
+						tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.damage.mult" + (isDamageModified(stack) ? ".modified" : ""), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(damageMultiplier)));
+				} else if (damageBonus != 0)
+					tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.damage.flat" + (isDamageModified(stack) ? ".modified" : ""), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(damageBonus)));
+			}
 
 			//Fire rate
 			int fireRate = Math.max(1, this.fireDelay - (int)(this.fireDelay * EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.sleightOfHand, stack) * KGConfig.sleightOfHandFireRateDecrease.get()));
