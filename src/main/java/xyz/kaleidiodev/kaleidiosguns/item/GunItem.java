@@ -989,7 +989,7 @@ public class GunItem extends Item {
 			if (revolutions > 1) {
 				tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.reloadspeed" + (isFireDelayModified(stack) ? ".modified" : ""), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(fireRate / 20.0)));
 				tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.barrels_left", nbt.getInt("chambers"), revolutions));
-				fireRate /= barrelSwitchSpeed;
+				fireRate = Math.max(1, fireRate / barrelSwitchSpeed);
 			}
 			tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.firerate" + (isFireDelayModified(stack) ? ".modified" : ""), 1200 / fireRate));
 
