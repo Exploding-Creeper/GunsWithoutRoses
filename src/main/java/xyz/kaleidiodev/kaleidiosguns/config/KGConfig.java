@@ -375,13 +375,13 @@ public class KGConfig {
                 .define("griefEnabled", true);
         oneHandInaccuracyMultiplier = builder
                 .comment("Inaccuracy multiplier for when the user has one hand filled")
-                .defineInRange("oneHandInaccuracyMultiplier", 2.0D, 0.1D, 5D);
+                .defineInRange("oneHandInaccuracyMultiplier", 1.5D, 0.1D, 5D);
         oneHandShotgunRateMultiplier = builder
                 .comment("Fire rate multiplier for shotguns for when the user has one hand filled")
-                .defineInRange("oneHandShotgunRateMultiplier", 2.0D, 0.1D, 5D);
+                .defineInRange("oneHandShotgunRateMultiplier", 1.5D, 0.1D, 5D);
         hasteBonusMineChance = builder
                 .comment("Bonus mine chance percent per level of haste the player has")
-                .defineInRange("hasteBonusMineChance", 0.3D, 0.01D, 10D);
+                .defineInRange("hasteBonusMineChance", 0.34D, 0.01D, 10D);
         redstoneRadius = builder
                 .comment("Configure the radius for a redstone block to activate redstone class gun.  WARNING, PERFORMANCE BOTTLENECKS CAN OCCUR")
                 .defineInRange("redstoneRadius", 6, 0, 31);
@@ -390,10 +390,10 @@ public class KGConfig {
                 .defineInRange("sensitivityMultiplier", 1.5D, 0D, 5D);
         weaknessEffectInaccuracyMultiplier = builder
                 .comment("Configure the inaccuracy multiplier for when the shooter has the weakness effect")
-                .defineInRange("weaknessEffectInaccuracyMultiplier", 2.0D, 0D, 5D);
+                .defineInRange("weaknessEffectInaccuracyMultiplier", 1.5D, 0D, 5D);
         luckEffectInaccuracyDivider = builder
                 .comment("Configure the inaccuracy divider for when the shooter has the luck effect")
-                .defineInRange("luckEffectInaccuracyDivider", 2.0D, 1D, 10D);
+                .defineInRange("luckEffectInaccuracyDivider", 1.5D, 1D, 10D);
         headshotMultiplier = builder
                 .comment("Configure the damage multiplier for a headshot")
                 .defineInRange("headshotMultiplier", 1.5D, 1D, 100D);

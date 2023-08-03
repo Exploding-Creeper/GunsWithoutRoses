@@ -308,6 +308,7 @@ public class GunItem extends Item {
 	protected void fireWeapon(World world, PlayerEntity player, ItemStack gun, ItemStack ammo, IBullet bulletItem, boolean bulletFree) {
 		boolean isPlasma = gun.getItem() == ModItems.plasmaGatling;
 		double nextInaccuracy = getInaccuracy(gun, player);
+		System.out.println(nextInaccuracy);
 		BulletEntity shot = bulletItem.createProjectile(world, ammo, player, isPlasma);
 
 		shootShot(shot, player, gun, nextInaccuracy);
@@ -622,13 +623,12 @@ public class GunItem extends Item {
 					playerVelocity.length() > 0.03 &&
 					!(this instanceof GatlingItem) &&
 					!(this instanceof ShotgunItem)) {
-				nextInaccuracy = sniperMovementAim;
+				nextInaccuracy += sniperMovementAim;
 			}
 
 			//check player hands
 			if ((EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && !(stack.getItem() instanceof ShotgunItem) && !isOneHanded) {
 				//if both hands are full, because one is the gun and one is something else
-				//ignore glove items for this effect
 				if (!player.getMainHandItem().isEmpty() && !player.getOffhandItem().isEmpty()) {
 					//if sniper class, give a new inaccuracy
 					if (inaccuracy == 0) nextInaccuracy += sniperReplacementAim;
@@ -641,8 +641,8 @@ public class GunItem extends Item {
 			if (!player.isOnGround() && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && this.isSensitive) {
 				nextInaccuracy *= KGConfig.sensitivityMultiplier.get();
 			}
-			else if (this.isSensitive && player.isCrouching() && (KGConfig.sensitivityMultiplier.get() != 0)) {
-				nextInaccuracy /= KGConfig.sensitivityMultiplier.get();
+			else if (this.isSensitive && !player.isCrouching() && (KGConfig.sensitivityMultiplier.get() != 0)) {
+				nextInaccuracy *= KGConfig.sensitivityMultiplier.get();
 			}
 
 			//check weakness effect
