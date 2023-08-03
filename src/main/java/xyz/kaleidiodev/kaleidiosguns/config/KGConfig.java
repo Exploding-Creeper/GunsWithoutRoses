@@ -1134,28 +1134,28 @@ public class KGConfig {
         builder.push("plasma rifle");
         goldPlasmaDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Plasma Rifles")
-                .defineInRange("goldPlasmaDamageMultiplier", 1.2D, 0.1D, 5D);
+                .defineInRange("goldPlasmaDamageMultiplier", 1D, 0.1D, 5D);
         goldPlasmaFireDelay = builder
                 .comment("Configure the Fire delay for Plasma Rifles")
-                .defineInRange("goldPlasmaFireDelay", 3, 0, 72000);
+                .defineInRange("goldPlasmaFireDelay", 4, 0, 72000);
         goldPlasmaEnchantability = builder
                 .comment("Configure the Enchantability for Plasma Rifles")
                 .defineInRange("goldPlasmaEnchantability", 23, 0, 30);
         goldPlasmaDurability = builder
                 .comment("Configure the Durability for Plasma Rifles")
-                .defineInRange("goldPlasmaDurability", 326, 0, 32767);
+                .defineInRange("goldPlasmaDurability", 356, 0, 32767);
         goldPlasmaInaccuracy = builder
                 .comment("Configure the Inaccuracy for Plasma Rifles")
                 .defineInRange("goldPlasmaInaccuracy", 0D, 0D, 90D);
         goldPlasmaProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for Plasma Rifles")
-                .defineInRange("goldPlasmaProjectileSpeed", 3.25D, 0D, 64D);
+                .defineInRange("goldPlasmaProjectileSpeed", 1.8D, 0D, 64D);
         goldPlasmaShieldAdditional = builder
                 .comment("Configure the chance for shields to be disabled against Plasma Rifles")
                 .defineInRange("goldPlasmaShieldAdditional", 0.33D, 0.01D, 1D);
         goldPlasmaSlowChance = builder
                 .comment("Configure the chance for slowness effect against a target of Plasma Rifles")
-                .defineInRange("goldPlasmaSlowChance", 0.33D, 0.05D, 1D);
+                .defineInRange("goldPlasmaSlowChance", 1.0D, 0.05D, 1D);
         goldPlasmaSlowTicks = builder
                 .comment("Configure the length slowness effect lasts for from Plasma Rifles")
                 .defineInRange("goldPlasmaSlowTicks", 60, 10, 72000);
