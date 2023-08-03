@@ -308,7 +308,6 @@ public class GunItem extends Item {
 	protected void fireWeapon(World world, PlayerEntity player, ItemStack gun, ItemStack ammo, IBullet bulletItem, boolean bulletFree) {
 		boolean isPlasma = gun.getItem() == ModItems.plasmaGatling;
 		double nextInaccuracy = getInaccuracy(gun, player);
-		System.out.println(nextInaccuracy);
 		BulletEntity shot = bulletItem.createProjectile(world, ammo, player, isPlasma);
 
 		shootShot(shot, player, gun, nextInaccuracy);
