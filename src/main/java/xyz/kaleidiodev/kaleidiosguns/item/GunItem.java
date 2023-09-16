@@ -586,7 +586,7 @@ public class GunItem extends Item {
 				base = (int)((double)base * (1 + ((double)player.getEffect(Effects.DIG_SLOWDOWN).getAmplifier() * 0.2)));
 			}
 			if (player.hasEffect(Effects.DIG_SPEED) && !(stack.getItem() instanceof GatlingItem)) {
-				base = (int)((double)base * (1 - (0.2 * (double)player.getEffect(Effects.DIG_SPEED).getAmplifier())));
+				base = (int)((double)base * (1 - (0.1 * (double)player.getEffect(Effects.DIG_SPEED).getAmplifier())));
 			}
 		}
 
