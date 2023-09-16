@@ -111,7 +111,7 @@
 	"enchantment.kaleidiosguns.bullseye": "Bullseye",
 	"enchantment.kaleidiosguns.bullseye.desc": "Increases projectile accuracy",
 	"enchantment.kaleidiosguns.sleight_of_hand": "Sleight of Hand",
-	"enchantment.kaleidiosguns.sleight_of_hand.desc": "Decreases fire delay",
+	"enchantment.kaleidiosguns.sleight_of_hand.desc": "Increases fire rate whilst decreasing damage",
 	"enchantment.kaleidiosguns.preserving": "Preserving",
 	"enchantment.kaleidiosguns.preserving.desc": "Gives a chance to not use ammo when fired",
 	"enchantment.kaleidiosguns.accelerator": "Accelerator",

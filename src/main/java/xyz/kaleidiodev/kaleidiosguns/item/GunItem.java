@@ -552,22 +552,18 @@ public class GunItem extends Item {
 	}
 
 	public double getDamageMultiplier(ItemStack stack) {
-		return damageMultiplier;
+		return damageMultiplier * ((double)getFireDelayRaw(stack) / (double)fireDelay);
 	}
 
 	/**
 	 * Gets the min time in ticks between 2 shots. This takes into account Sleight of Hand enchantment.
 	 */
-	public int getFireDelay(ItemStack stack, @Nullable PlayerEntity player) {
-		int base = Math.max(1, fireDelay - (int)(fireDelay * EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.sleightOfHand, stack) * KGConfig.sleightOfHandFireRateDecrease.get()));
+	public int getFireDelayRaw(ItemStack stack) {
+		return Math.max(1, fireDelay - (int)(fireDelay * EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.sleightOfHand, stack) * KGConfig.sleightOfHandFireRateDecrease.get()));
+	}
 
-		//increase time spend if two hands on a shotgun class
-		if ((player != null) && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && (stack.getItem() instanceof ShotgunItem)) {
-			//if both hands are full, because one is the gun and one is something else
-			if (!player.getMainHandItem().isEmpty() && !player.getOffhandItem().isEmpty()) {
-				base *= KGConfig.oneHandShotgunRateMultiplier.get();
-			}
-		}
+	public int getFireDelay(ItemStack stack, @Nullable PlayerEntity player) {
+		int base = getFireDelayRaw(stack);
 
 		CompoundNBT nbt = stack.getOrCreateTag();
 
@@ -587,7 +583,18 @@ public class GunItem extends Item {
 
 		if (player != null) {
 			if (player.hasEffect(Effects.DIG_SLOWDOWN) && !(stack.getItem() instanceof GatlingItem)) {
-				base = (int)((float)base * (1 + ((float)player.getEffect(Effects.DIG_SLOWDOWN).getAmplifier() * 0.2f)));
+				base = (int)((double)base * (1 + ((double)player.getEffect(Effects.DIG_SLOWDOWN).getAmplifier() * 0.2)));
+			}
+			if (player.hasEffect(Effects.DIG_SPEED) && !(stack.getItem() instanceof GatlingItem)) {
+				base = (int)((double)base * (1 - (0.2 * (double)player.getEffect(Effects.DIG_SPEED).getAmplifier())));
+			}
+		}
+
+		//increase time spend if two hands on a shotgun class
+		if ((player != null) && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && (stack.getItem() instanceof ShotgunItem)) {
+			//if both hands are full, because one is the gun and one is something else
+			if (!player.getMainHandItem().isEmpty() && !player.getOffhandItem().isEmpty()) {
+				base *= KGConfig.oneHandShotgunRateMultiplier.get();
 			}
 		}
 
@@ -985,7 +992,7 @@ public class GunItem extends Item {
 			}
 
 			//Fire rate
-			int fireRate = Math.max(1, this.fireDelay - (int)(this.fireDelay * EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.sleightOfHand, stack) * KGConfig.sleightOfHandFireRateDecrease.get()));
+			int fireRate = getFireDelayRaw(stack);
 			if (revolutions > 1) {
 				tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.reloadspeed" + (isFireDelayModified(stack) ? ".modified" : ""), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(fireRate / 20.0)));
 				tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.barrels_left", nbt.getInt("chambers"), revolutions));
