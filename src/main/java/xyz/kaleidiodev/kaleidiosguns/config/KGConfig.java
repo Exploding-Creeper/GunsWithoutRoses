@@ -465,10 +465,10 @@ public class KGConfig {
                 .defineInRange("diamondRevolverSpreadoutStrength", 1.0D, 0D, 64D);
         diamondRevolverChamberSwitchSpeed = builder
                 .comment("Configure a divider of base fire delay how long switching chambers takes between shots on Revolvers")
-                .defineInRange("diamondRevolverChamberSwitchSpeed", 6, 1, 72000);
+                .defineInRange("diamondRevolverChamberSwitchSpeed", 3, 1, 72000);
         diamondRevolverStabilityTime = builder
                 .comment("Configure how long the gun must not be fired for spread cone to stabilize on Revolvers")
-                .defineInRange("diamondRevolverStabilityTime", 18, 1, 72000);
+                .defineInRange("diamondRevolverStabilityTime", 24, 1, 72000);
         diamondRevolverSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Revolvers")
                 .defineInRange("diamondRevolverSwitchSpeed", 2.0D, 0D, 5D);
@@ -507,7 +507,7 @@ public class KGConfig {
                 .defineInRange("shadowRevolverChamberSwitchSpeed", 4, 1, 72000);
         shadowRevolverStabilityTime = builder
                 .comment("Configure how long the gun must not be fired for spread cone to stabilize on Shadow Magnums")
-                .defineInRange("shadowRevolverStabilityTime", 20, 1, 72000);
+                .defineInRange("shadowRevolverStabilityTime", 18, 1, 72000);
         shadowRevolverShadowAdditionalMultiplier = builder
                 .comment("Define the additional damage multiplier for Shadow Magnums when the player is standing in the dark.  Is additive to base multiplier.")
                 .defineInRange("shadowRevolverShadowAdditionalMultiplier", 0.45D, 0.1D, 5D);
@@ -828,7 +828,7 @@ public class KGConfig {
                 .defineInRange("emeraldBayonetDamageMultiplier", 3D, 0.1D, 5D);
         emeraldBayonetFireDelay = builder
                 .comment("Configure the Fire delay for Bayonet Snipers")
-                .defineInRange("emeraldBayonetFireDelay", 32, 0, 72000);
+                .defineInRange("emeraldBayonetFireDelay", 24, 0, 72000);
         emeraldBayonetEnchantability = builder
                 .comment("Configure the Enchantability for Bayonet Snipers")
                 .defineInRange("emeraldBayonetEnchantability", 18, 0, 30);
@@ -840,7 +840,7 @@ public class KGConfig {
                 .defineInRange("emeraldBayonetInaccuracy", 0D, 0D, 90D);
         emeraldBayonetProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for Bayonet Snipers")
-                .defineInRange("emeraldBayonetProjectileSpeed", 26D, 0D, 64D);
+                .defineInRange("emeraldBayonetProjectileSpeed", 33D, 0D, 64D);
         emeraldBayonetSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Bayonet Snipers")
                 .defineInRange("emeraldBayonetSwitchSpeed", 1.6D, 0D, 5D);
@@ -855,7 +855,7 @@ public class KGConfig {
                 .defineInRange("emeraldBayonetPostMeleeCount", 3, 1, 60);
         emeraldBayonetCost = builder
                 .comment("Ammo cost to fire Bayonet Snipers")
-                .defineInRange("emeraldBayonetCost", 10, 0, 64);
+                .defineInRange("emeraldBayonetCost", 7, 0, 64);
         emeraldBayonetMovementInaccuracy = builder
                 .comment("Configure the inaccuracy addition whilst moving with Bayonet Snipers")
                 .defineInRange("emeraldBayonetMovementInaccuracy", 4D, 0D, 40D);
