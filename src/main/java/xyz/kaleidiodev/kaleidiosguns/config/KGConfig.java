@@ -906,7 +906,7 @@ public class KGConfig {
                 .defineInRange("goldVexDamageMultiplier", 0.6D, 0.5D, 5D);
         goldVexFireDelay = builder
                 .comment("Configure the Fire delay for Vex Burst Carbines")
-                .defineInRange("goldVexFireDelay", 20, 0, 72000);
+                .defineInRange("goldVexFireDelay", 18, 0, 72000);
         goldVexEnchantability = builder
                 .comment("Configure the Enchantability for Vex Burst Carbines")
                 .defineInRange("goldVexEnchantability", 23, 0, 30);
@@ -918,7 +918,7 @@ public class KGConfig {
                 .defineInRange("goldVexInaccuracy", 0D, 0D, 90D);
         goldVexProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for Vex Burst Carbines")
-                .defineInRange("goldVexProjectileSpeed", 8D, 0D, 64D);
+                .defineInRange("goldVexProjectileSpeed", 12D, 0D, 64D);
         goldVexSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Vex Burst Carbines")
                 .defineInRange("goldVexSwitchSpeed", 1.6D, 0D, 5D);
