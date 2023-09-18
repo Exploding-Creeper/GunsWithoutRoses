@@ -618,7 +618,7 @@ public class KGConfig {
                 .defineInRange("diamondShotgunProjectileSpeed", 7D, 0D, 64D);
         diamondShotgunSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Shotguns")
-                .defineInRange("diamondShotgunSwitchSpeed", 1.2D, 0D, 5D);
+                .defineInRange("diamondShotgunSwitchSpeed", 0.9D, 0D, 5D);
         diamondShotgunMeleeDamage = builder
                 .comment("Configure the Melee Damage for Shotguns")
                 .defineInRange("diamondShotgunMeleeDamage", 4D, 0D, 40D);
@@ -1047,7 +1047,7 @@ public class KGConfig {
                 .defineInRange("ironVoltgunMaximumDamage", 1.5D, 0D, 5D);
         ironVoltgunSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Voltguns")
-                .defineInRange("ironVoltgunSwitchSpeed", 1.8D, 0D, 5D);
+                .defineInRange("ironVoltgunSwitchSpeed", 1.4D, 0D, 5D);
         ironVoltgunMeleeDamage = builder
                 .comment("Configure the Melee Damage for Voltguns")
                 .defineInRange("ironVoltgunMeleeDamage", 2D, 0D, 40D);
