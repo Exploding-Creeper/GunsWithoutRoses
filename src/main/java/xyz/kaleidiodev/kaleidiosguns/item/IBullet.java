@@ -30,7 +30,7 @@ public interface IBullet {
 	void consume(ItemStack stack, PlayerEntity player, ItemStack gunItem);
 
 	default int costToUse(ItemStack stack) {
-		if (stack.getItem() instanceof GunItem) return ((GunItem)stack.getItem()).getCost();
+		if (stack.getItem() instanceof GunItem) return ((GunItem)stack.getItem()).getCost(stack);
 		else return 1;
 	}
 

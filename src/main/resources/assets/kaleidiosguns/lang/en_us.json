@@ -59,6 +59,7 @@
 	"tooltip.kaleidiosguns.gun.speed": "§2Projectile speed: §f%s§r §7m/s§r",
 	"tooltip.kaleidiosguns.gun.speed.modified": "§dProjectile speed: §f%s§r §7m/s§r",
 	"tooltip.kaleidiosguns.gun.cost": "§2Ammo cost: §f%s§r",
+	"tooltip.kaleidiosguns.gun.cost.modified": "§dAmmo cost: §f%s§r",
 	"tooltip.kaleidiosguns.gun.chance_free": "§2Chance to consume ammo: §f%s%%§r",
 	"tooltip.kaleidiosguns.gun.chance_free.modified": "§dChance to consume ammo: §f%s%%§r",
 	"tooltip.kaleidiosguns.gun.barrels_left": "§2Chambers remaining: §f%s§r / §f%s§r",

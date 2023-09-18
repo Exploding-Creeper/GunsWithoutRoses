@@ -1,6 +1,8 @@
 package xyz.kaleidiodev.kaleidiosguns.item;
 
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -15,6 +17,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.ItemStackHandler;
 import xyz.kaleidiodev.kaleidiosguns.config.KGConfig;
 import xyz.kaleidiodev.kaleidiosguns.entity.BulletEntity;
+import xyz.kaleidiodev.kaleidiosguns.registry.ModEnchantments;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -49,7 +52,7 @@ public class BulletItem extends Item implements IBullet {
 
 	@Override
 	public void consume(ItemStack stack, PlayerEntity player, ItemStack gunItem) {
-		stack.shrink(costToUse(gunItem));
+		stack.shrink(costToUse(stack));
 
 		if (stack.isEmpty()) {
 			player.inventory.removeItem(stack);

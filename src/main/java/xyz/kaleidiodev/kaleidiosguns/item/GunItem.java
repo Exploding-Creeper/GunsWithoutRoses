@@ -921,7 +921,9 @@ public class GunItem extends Item {
 		return this;
 	}
 
-	public int getCost() { return ammoCost; }
+	public int getCost(ItemStack stack) {
+		return Math.max(1, ammoCost - (int)(ammoCost * EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.sleightOfHand, stack) * KGConfig.sleightOfHandFireRateDecrease.get()));
+	}
 
 	/**
 	 *
@@ -1020,7 +1022,8 @@ public class GunItem extends Item {
 
 			tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.speed" + (isProjectileSpeedModified(stack) ? ".modified" : ""), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(projectileSpeed)));
 
-			if (ammoCost != 1) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.cost", ammoCost));
+			int cost = getCost(stack);
+			tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.cost" + (ammoCost > cost ? ".modified" : ""), cost));
 
 			//Chance to not consume ammo
 			double inverseChanceFree = getInverseChanceFreeShot(stack, null);
