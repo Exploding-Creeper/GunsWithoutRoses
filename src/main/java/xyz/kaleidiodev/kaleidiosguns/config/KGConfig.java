@@ -83,29 +83,29 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue emeraldBlessedMeleeDamage;
     public static ForgeConfigSpec.IntValue emeraldBlessedCost;
 
-    public static ForgeConfigSpec.DoubleValue diamondShotgunDamageMultiplier;
-    public static ForgeConfigSpec.IntValue diamondShotgunFireDelay;
-    public static ForgeConfigSpec.IntValue diamondShotgunEnchantability;
-    public static ForgeConfigSpec.IntValue diamondShotgunDurability;
-    public static ForgeConfigSpec.DoubleValue diamondShotgunInaccuracy;
-    public static ForgeConfigSpec.IntValue diamondShotgunBulletCount;
-    public static ForgeConfigSpec.DoubleValue diamondShotgunProjectileSpeed;
-    public static ForgeConfigSpec.DoubleValue diamondShotgunSwitchSpeed;
-    public static ForgeConfigSpec.DoubleValue diamondShotgunMeleeDamage;
-    public static ForgeConfigSpec.IntValue diamondShotgunCost;
+    public static ForgeConfigSpec.DoubleValue diamondBoomstickDamageMultiplier;
+    public static ForgeConfigSpec.IntValue diamondBoomstickFireDelay;
+    public static ForgeConfigSpec.IntValue diamondBoomstickEnchantability;
+    public static ForgeConfigSpec.IntValue diamondBoomstickDurability;
+    public static ForgeConfigSpec.DoubleValue diamondBoomstickInaccuracy;
+    public static ForgeConfigSpec.IntValue diamondBoomstickBulletCount;
+    public static ForgeConfigSpec.DoubleValue diamondBoomstickProjectileSpeed;
+    public static ForgeConfigSpec.DoubleValue diamondBoomstickSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue diamondBoomstickMeleeDamage;
+    public static ForgeConfigSpec.IntValue diamondBoomstickCost;
 
-    public static ForgeConfigSpec.DoubleValue spreadgunDamageMultiplier;
-    public static ForgeConfigSpec.IntValue spreadgunFireDelay;
-    public static ForgeConfigSpec.IntValue spreadgunEnchantability;
-    public static ForgeConfigSpec.IntValue spreadgunDurability;
-    public static ForgeConfigSpec.DoubleValue spreadgunInaccuracy;
-    public static ForgeConfigSpec.IntValue spreadgunBulletCount;
-    public static ForgeConfigSpec.DoubleValue spreadgunProjectileSpeed;
-    public static ForgeConfigSpec.DoubleValue spreadgunSwitchSpeed;
-    public static ForgeConfigSpec.DoubleValue spreadgunMeleeDamage;
-    public static ForgeConfigSpec.IntValue spreadgunCost;
-    public static ForgeConfigSpec.DoubleValue spreadgunMinimumSpeed;
-    public static ForgeConfigSpec.DoubleValue spreadgunMaximumSpeed;
+    public static ForgeConfigSpec.DoubleValue shotgunDamageMultiplier;
+    public static ForgeConfigSpec.IntValue shotgunFireDelay;
+    public static ForgeConfigSpec.IntValue shotgunEnchantability;
+    public static ForgeConfigSpec.IntValue shotgunDurability;
+    public static ForgeConfigSpec.DoubleValue shotgunInaccuracy;
+    public static ForgeConfigSpec.IntValue shotgunBulletCount;
+    public static ForgeConfigSpec.DoubleValue shotgunProjectileSpeed;
+    public static ForgeConfigSpec.DoubleValue shotgunSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue shotgunMeleeDamage;
+    public static ForgeConfigSpec.IntValue shotgunCost;
+    public static ForgeConfigSpec.DoubleValue shotgunMinimumSpeed;
+    public static ForgeConfigSpec.DoubleValue shotgunMaximumSpeed;
 
     public static ForgeConfigSpec.DoubleValue goldDoubleShotgunDamageMultiplier;
     public static ForgeConfigSpec.IntValue goldDoubleShotgunFireDelay;
@@ -595,75 +595,75 @@ public class KGConfig {
         builder.pop();
 
         builder.push("shotgun");
-        diamondShotgunDamageMultiplier = builder
-                .comment("Define the Damage multiplier for Shotguns")
-                .defineInRange("diamondShotgunDamageMultiplier", 0.6D, 0.1D, 5D);
-        diamondShotgunFireDelay = builder
-                .comment("Configure the Fire delay for Shotguns")
-                .defineInRange("diamondShotgunFireDelay", 16, 0, 72000);
-        diamondShotgunEnchantability = builder
-                .comment("Configure the Enchantability for Shotguns")
-                .defineInRange("diamondShotgunEnchantability", 10, 0, 30);
-        diamondShotgunDurability = builder
-                .comment("Configure the Durability for Shotguns")
-                .defineInRange("diamondShotgunDurability", 400, 0, 32767);
-        diamondShotgunInaccuracy = builder
-                .comment("Configure the Inaccuracy for Shotguns")
-                .defineInRange("diamondShotgunInaccuracy", 4D, 0D, 90D);
-        diamondShotgunBulletCount = builder
-                .comment("Configure the amount of Bullets at once for Shotguns")
-                .defineInRange("diamondShotgunBulletCount", 5, 0, 50);
-        diamondShotgunProjectileSpeed = builder
-                .comment("Configure the Projectile Speed for Shotguns")
-                .defineInRange("diamondShotgunProjectileSpeed", 7D, 0D, 64D);
-        diamondShotgunSwitchSpeed = builder
-                .comment("Configure the Weapon Switch Speed for Shotguns")
-                .defineInRange("diamondShotgunSwitchSpeed", 0.9D, 0D, 5D);
-        diamondShotgunMeleeDamage = builder
-                .comment("Configure the Melee Damage for Shotguns")
-                .defineInRange("diamondShotgunMeleeDamage", 4D, 0D, 40D);
-        diamondShotgunCost = builder
-                .comment("Ammo cost to fire Shotguns")
-                .defineInRange("diamondShotgunCost", 6, 0, 64);
+        diamondBoomstickDamageMultiplier = builder
+                .comment("Define the Damage multiplier for Boom Sticks")
+                .defineInRange("diamondBoomstickDamageMultiplier", 0.6D, 0.1D, 5D);
+        diamondBoomstickFireDelay = builder
+                .comment("Configure the Fire delay for Boom Sticks")
+                .defineInRange("diamondBoomstickFireDelay", 16, 0, 72000);
+        diamondBoomstickEnchantability = builder
+                .comment("Configure the Enchantability for Boom Sticks")
+                .defineInRange("diamondBoomstickEnchantability", 10, 0, 30);
+        diamondBoomstickDurability = builder
+                .comment("Configure the Durability for Boom Sticks")
+                .defineInRange("diamondBoomstickDurability", 400, 0, 32767);
+        diamondBoomstickInaccuracy = builder
+                .comment("Configure the Inaccuracy for Boom Sticks")
+                .defineInRange("diamondBoomstickInaccuracy", 4D, 0D, 90D);
+        diamondBoomstickBulletCount = builder
+                .comment("Configure the amount of Bullets at once for Boom Sticks")
+                .defineInRange("diamondBoomstickBulletCount", 5, 0, 50);
+        diamondBoomstickProjectileSpeed = builder
+                .comment("Configure the Projectile Speed for Boom Sticks")
+                .defineInRange("diamondBoomstickProjectileSpeed", 7D, 0D, 64D);
+        diamondBoomstickSwitchSpeed = builder
+                .comment("Configure the Weapon Switch Speed for Boom Sticks")
+                .defineInRange("diamondBoomstickSwitchSpeed", 0.9D, 0D, 5D);
+        diamondBoomstickMeleeDamage = builder
+                .comment("Configure the Melee Damage for Boom Sticks")
+                .defineInRange("diamondBoomstickMeleeDamage", 4D, 0D, 40D);
+        diamondBoomstickCost = builder
+                .comment("Ammo cost to fire Boom Sticks")
+                .defineInRange("diamondBoomstickCost", 6, 0, 64);
         builder.pop();
 
         builder.push("spreadgun");
-        spreadgunDamageMultiplier = builder
-                .comment("Define the Damage multiplier for Spreadguns")
-                .defineInRange("spreadgunDamageMultiplier", 0.2D, 0.1D, 5D);
-        spreadgunFireDelay = builder
+        shotgunDamageMultiplier = builder
+                .comment("Define the Damage multiplier for Shotguns")
+                .defineInRange("shotgunDamageMultiplier", 0.2D, 0.1D, 5D);
+        shotgunFireDelay = builder
                 .comment("Configure the Fire delay for Shotguns")
-                .defineInRange("spreadgunFireDelay", 20, 0, 72000);
-        spreadgunEnchantability = builder
-                .comment("Configure the Enchantability for Spreadguns")
-                .defineInRange("spreadgunEnchantability", 14, 0, 30);
-        spreadgunDurability = builder
-                .comment("Configure the Durability for Spreadguns")
-                .defineInRange("spreadgunDurability", 600, 0, 32767);
-        spreadgunInaccuracy = builder
-                .comment("Configure the Inaccuracy for Spreadguns")
-                .defineInRange("spreadgunInaccuracy", 8D, 0D, 90D);
-        spreadgunBulletCount = builder
-                .comment("Configure the amount of Bullets at once for Spreadguns")
-                .defineInRange("spreadgunBulletCount", 10, 0, 50);
-        spreadgunProjectileSpeed = builder
-                .comment("Configure the Projectile Speed for Spreadguns")
-                .defineInRange("spreadgunProjectileSpeed", 6D, 0D, 64D);
-        spreadgunSwitchSpeed = builder
-                .comment("Configure the Weapon Switch Speed for Spreadguns")
-                .defineInRange("spreadgunSwitchSpeed", 0.9D, 0D, 5D);
-        spreadgunMeleeDamage = builder
-                .comment("Configure the Melee Damage for Spreadguns")
-                .defineInRange("spreadgunMeleeDamage", 4D, 0D, 40D);
-        spreadgunCost = builder
-                .comment("Ammo cost to fire Spreadguns")
-                .defineInRange("spreadgunCost", 8, 0, 64);
-        spreadgunMinimumSpeed = builder
-                .comment("Configure the Minimum Speed for projectiles shot from Spreadguns")
-                .defineInRange("spreadgunMinimumSpeed", 0.5D, 0.1D, 10D);
-        spreadgunMaximumSpeed = builder
-                .comment("Configure the Maximum Speed for projectiles shot from Spreadguns")
-                .defineInRange("spreadgunMaximumSpeed", 2.0D, 0.1D, 10D);
+                .defineInRange("shotgunFireDelay", 20, 0, 72000);
+        shotgunEnchantability = builder
+                .comment("Configure the Enchantability for Shotguns")
+                .defineInRange("shotgunEnchantability", 14, 0, 30);
+        shotgunDurability = builder
+                .comment("Configure the Durability for Shotguns")
+                .defineInRange("shotgunDurability", 600, 0, 32767);
+        shotgunInaccuracy = builder
+                .comment("Configure the Inaccuracy for Shotguns")
+                .defineInRange("shotgunInaccuracy", 8D, 0D, 90D);
+        shotgunBulletCount = builder
+                .comment("Configure the amount of Bullets at once for Shotguns")
+                .defineInRange("shotgunBulletCount", 10, 0, 50);
+        shotgunProjectileSpeed = builder
+                .comment("Configure the Projectile Speed for Shotguns")
+                .defineInRange("shotgunProjectileSpeed", 6D, 0D, 64D);
+        shotgunSwitchSpeed = builder
+                .comment("Configure the Weapon Switch Speed for Shotguns")
+                .defineInRange("shotgunSwitchSpeed", 0.9D, 0D, 5D);
+        shotgunMeleeDamage = builder
+                .comment("Configure the Melee Damage for Shotguns")
+                .defineInRange("shotgunMeleeDamage", 4D, 0D, 40D);
+        shotgunCost = builder
+                .comment("Ammo cost to fire Shotguns")
+                .defineInRange("shotgunCost", 8, 0, 64);
+        shotgunMinimumSpeed = builder
+                .comment("Configure the Minimum Speed for projectiles shot from Shotguns")
+                .defineInRange("shotgunMinimumSpeed", 0.5D, 0.1D, 10D);
+        shotgunMaximumSpeed = builder
+                .comment("Configure the Maximum Speed for projectiles shot from Shotguns")
+                .defineInRange("shotgunMaximumSpeed", 2.0D, 0.1D, 10D);
         builder.pop();
 
         builder.push("hero wave shotgun");

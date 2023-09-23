@@ -14,12 +14,9 @@ import net.minecraft.world.World;
 import xyz.kaleidiodev.kaleidiosguns.config.KGConfig;
 import xyz.kaleidiodev.kaleidiosguns.entity.BulletEntity;
 import xyz.kaleidiodev.kaleidiosguns.registry.ModEnchantments;
-import xyz.kaleidiodev.kaleidiosguns.registry.ModItems;
 
 import javax.annotation.Nullable;
 import java.util.List;
-
-import static xyz.kaleidiodev.kaleidiosguns.KaleidiosGuns.VivecraftForgeExtensionPresent;
 
 public class ShotgunItem extends GunItem {
 
@@ -71,7 +68,7 @@ public class ShotgunItem extends GunItem {
 	@Override
 	public double getProjectileSpeed(ItemStack stack, @Nullable PlayerEntity player) {
 		if (this.isSpread) {
-			return super.baseSpeed(stack, null) * (KGConfig.spreadgunMinimumSpeed.get() + (Math.random() * (KGConfig.spreadgunMaximumSpeed.get() - KGConfig.spreadgunMinimumSpeed.get())));
+			return super.baseSpeed(stack, null) * (KGConfig.shotgunMinimumSpeed.get() + (Math.random() * (KGConfig.shotgunMaximumSpeed.get() - KGConfig.shotgunMinimumSpeed.get())));
 		} else return super.baseSpeed(stack, null);
 	}
 
