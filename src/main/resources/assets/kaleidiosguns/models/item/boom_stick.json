@@ -1,6 +1,6 @@
 {
     "parent": "kaleidiosguns:item/base_gun",
     "textures": {
-        "layer0": "kaleidiosguns:item/spreadgun"
+        "layer0": "kaleidiosguns:item/boom_stick"
     }
 }

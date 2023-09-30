@@ -6,10 +6,10 @@
 		" SL"
 	],
 	"key": {
-		"D": { "tag": "forge:ingots/iron" },
+		"D": { "tag": "forge:gems/diamond" },
 		"S": { "tag": "forge:rods/wooden" },
 		"F": { "item": "minecraft:flint" },
 		"L": { "tag": "minecraft:logs" }
 	},
-	"result": { "item": "kaleidiosguns:spreadgun" }
+	"result": { "item": "kaleidiosguns:boom_stick" }
 }
