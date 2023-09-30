@@ -205,6 +205,8 @@ public class GunItem extends Item {
 			}
 		}
 
+		if (isExplosive && player.abilities.instabuild && (newAmmo.getItem() == ModItems.flintBullet)) newAmmo = new ItemStack(ModItems.ironBullet);
+
 		return newAmmo;
 	}
 
