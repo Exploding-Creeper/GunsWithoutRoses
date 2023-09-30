@@ -1,6 +1,6 @@
 {
 	"item.kaleidiosguns.pistol": "Pistol",
-	"item.kaleidiosguns.shotgun": "Shotgun",
+	"item.kaleidiosguns.boom_stick": "Boom Stick",
 	"item.kaleidiosguns.double_barrel_shotgun": "Double Barrel Shotgun",
 	"item.kaleidiosguns.sniper": "Sniper",
 	"item.kaleidiosguns.carbine": "Carbine",
@@ -21,7 +21,7 @@
 	"item.kaleidiosguns.lava_smg": "Lava Bound SMG",
 	"item.kaleidiosguns.vex_burst_carbine": "Vex Burst Carbine",
 	"item.kaleidiosguns.hero_wave_shotgun": "Hero Wave Shotgun",
-	"item.kaleidiosguns.spreadgun": "Spreadgun",
+	"item.kaleidiosguns.shotgun": "Shotgun",
 	"item.kaleidiosguns.potion_cannon": "Potion Cannon",
 
 	"item.kaleidiosguns.flint_bullet": "Flint Bullet",
