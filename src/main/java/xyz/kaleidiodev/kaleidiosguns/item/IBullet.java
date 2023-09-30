@@ -119,7 +119,7 @@ public interface IBullet {
 			if ((projectile.lavaMode & 0x01) != 0) newDamage *= KGConfig.lavaSmgSelfOnFireMultiplier.get();
 		}
 
-		if (projectile.isMeleeBonus) newDamage *= KGConfig.emeraldBayonetPostMeleeMultiplier.get();
+		if (projectile.isMeleeBonus) newDamage *= KGConfig.emeraldMusketPostMeleeMultiplier.get();
 
 		//redstone distance multiplies damage.
 		if (projectile.redstoneLevel > 0) {

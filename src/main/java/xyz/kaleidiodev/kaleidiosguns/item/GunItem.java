@@ -5,7 +5,6 @@ import com.google.common.collect.Multimap;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.command.arguments.SlotArgument;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -488,7 +487,7 @@ public class GunItem extends Item {
 
 	@Override
 	public boolean hurtEnemy(ItemStack pStack, LivingEntity pTarget, LivingEntity pAttacker) {
-		if (this.isMeleeBonus) this.meleeBonusCounter = KGConfig.emeraldBayonetPostMeleeCount.get();
+		if (this.isMeleeBonus) this.meleeBonusCounter = KGConfig.emeraldMusketPostMeleeCount.get();
 		return super.hurtEnemy(pStack, pTarget, pAttacker);
 	}
 

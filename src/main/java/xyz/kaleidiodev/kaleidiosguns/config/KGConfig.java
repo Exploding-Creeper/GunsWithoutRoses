@@ -159,19 +159,19 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue diamondSniperReplacementInaccuracy;
     public static ForgeConfigSpec.DoubleValue diamondSniperMovementInaccuracy;
 
-    public static ForgeConfigSpec.DoubleValue emeraldBayonetDamageMultiplier;
-    public static ForgeConfigSpec.IntValue emeraldBayonetFireDelay;
-    public static ForgeConfigSpec.IntValue emeraldBayonetEnchantability;
-    public static ForgeConfigSpec.IntValue emeraldBayonetDurability;
-    public static ForgeConfigSpec.DoubleValue emeraldBayonetInaccuracy;
-    public static ForgeConfigSpec.DoubleValue emeraldBayonetProjectileSpeed;
-    public static ForgeConfigSpec.DoubleValue emeraldBayonetSwitchSpeed;
-    public static ForgeConfigSpec.DoubleValue emeraldBayonetMeleeDamage;
-    public static ForgeConfigSpec.DoubleValue emeraldBayonetPostMeleeMultiplier;
-    public static ForgeConfigSpec.IntValue emeraldBayonetPostMeleeCount;
-    public static ForgeConfigSpec.IntValue emeraldBayonetCost;
-    public static ForgeConfigSpec.DoubleValue emeraldBayonetReplacementInaccuracy;
-    public static ForgeConfigSpec.DoubleValue emeraldBayonetMovementInaccuracy;
+    public static ForgeConfigSpec.DoubleValue emeraldMusketDamageMultiplier;
+    public static ForgeConfigSpec.IntValue emeraldMusketFireDelay;
+    public static ForgeConfigSpec.IntValue emeraldMusketEnchantability;
+    public static ForgeConfigSpec.IntValue emeraldMusketDurability;
+    public static ForgeConfigSpec.DoubleValue emeraldMusketInaccuracy;
+    public static ForgeConfigSpec.DoubleValue emeraldMusketProjectileSpeed;
+    public static ForgeConfigSpec.DoubleValue emeraldMusketSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue emeraldMusketMeleeDamage;
+    public static ForgeConfigSpec.DoubleValue emeraldMusketPostMeleeMultiplier;
+    public static ForgeConfigSpec.IntValue emeraldMusketPostMeleeCount;
+    public static ForgeConfigSpec.IntValue emeraldMusketCost;
+    public static ForgeConfigSpec.DoubleValue emeraldMusketReplacementInaccuracy;
+    public static ForgeConfigSpec.DoubleValue emeraldMusketMovementInaccuracy;
 
     public static ForgeConfigSpec.DoubleValue ironCarbineDamageMultiplier;
     public static ForgeConfigSpec.IntValue ironCarbineFireDelay;
@@ -823,45 +823,45 @@ public class KGConfig {
         builder.pop();
 
         builder.push("bayonet sniper");
-        emeraldBayonetDamageMultiplier = builder
-                .comment("Define the Damage multiplier for Bayonet Snipers")
-                .defineInRange("emeraldBayonetDamageMultiplier", 3D, 0.1D, 5D);
-        emeraldBayonetFireDelay = builder
-                .comment("Configure the Fire delay for Bayonet Snipers")
-                .defineInRange("emeraldBayonetFireDelay", 24, 0, 72000);
-        emeraldBayonetEnchantability = builder
-                .comment("Configure the Enchantability for Bayonet Snipers")
-                .defineInRange("emeraldBayonetEnchantability", 18, 0, 30);
-        emeraldBayonetDurability = builder
-                .comment("Configure the Durability for Bayonet Snipers")
-                .defineInRange("emeraldBayonetDurability", 240, 0, 32767);
-        emeraldBayonetInaccuracy = builder
-                .comment("Configure the Inaccuracy for Bayonet Snipers")
-                .defineInRange("emeraldBayonetInaccuracy", 0D, 0D, 90D);
-        emeraldBayonetProjectileSpeed = builder
-                .comment("Configure the Projectile Speed for Bayonet Snipers")
-                .defineInRange("emeraldBayonetProjectileSpeed", 33D, 0D, 64D);
-        emeraldBayonetSwitchSpeed = builder
-                .comment("Configure the Weapon Switch Speed for Bayonet Snipers")
-                .defineInRange("emeraldBayonetSwitchSpeed", 1.6D, 0D, 5D);
-        emeraldBayonetMeleeDamage = builder
-                .comment("Configure the Melee Damage for Bayonet Snipers")
-                .defineInRange("emeraldBayonetMeleeDamage", 8D, 0D, 40D);
-        emeraldBayonetPostMeleeMultiplier = builder
-                .comment("Multiplier for a shot's damage for the first shot after a successful melee")
-                .defineInRange("emeraldBayonetPostMeleeMultiplier", 1.5D, 0.1D, 5D);
-        emeraldBayonetPostMeleeCount = builder
-                .comment("How many shots the melee blessing lasts for")
-                .defineInRange("emeraldBayonetPostMeleeCount", 3, 1, 60);
-        emeraldBayonetCost = builder
-                .comment("Ammo cost to fire Bayonet Snipers")
-                .defineInRange("emeraldBayonetCost", 7, 0, 64);
-        emeraldBayonetMovementInaccuracy = builder
-                .comment("Configure the inaccuracy addition whilst moving with Bayonet Snipers")
-                .defineInRange("emeraldBayonetMovementInaccuracy", 4D, 0D, 40D);
-        emeraldBayonetReplacementInaccuracy = builder
-                .comment("Configure the inaccuracy addition whilst using one hand with Bayonet Snipers")
-                .defineInRange("emeraldBayonetReplacementInaccuracy", 2D, 0D, 40D);
+        emeraldMusketDamageMultiplier = builder
+                .comment("Define the Damage multiplier for Muskets")
+                .defineInRange("emeraldMusketDamageMultiplier", 3D, 0.1D, 5D);
+        emeraldMusketFireDelay = builder
+                .comment("Configure the Fire delay for Muskets")
+                .defineInRange("emeraldMusketFireDelay", 24, 0, 72000);
+        emeraldMusketEnchantability = builder
+                .comment("Configure the Enchantability for Muskets")
+                .defineInRange("emeraldMusketEnchantability", 18, 0, 30);
+        emeraldMusketDurability = builder
+                .comment("Configure the Durability for Muskets")
+                .defineInRange("emeraldMusketDurability", 240, 0, 32767);
+        emeraldMusketInaccuracy = builder
+                .comment("Configure the Inaccuracy for Muskets")
+                .defineInRange("emeraldMusketInaccuracy", 0D, 0D, 90D);
+        emeraldMusketProjectileSpeed = builder
+                .comment("Configure the Projectile Speed for Muskets")
+                .defineInRange("emeraldMusketProjectileSpeed", 33D, 0D, 64D);
+        emeraldMusketSwitchSpeed = builder
+                .comment("Configure the Weapon Switch Speed for Muskets")
+                .defineInRange("emeraldMusketSwitchSpeed", 1.6D, 0D, 5D);
+        emeraldMusketMeleeDamage = builder
+                .comment("Configure the Melee Damage for Muskets")
+                .defineInRange("emeraldMusketMeleeDamage", 8D, 0D, 40D);
+        emeraldMusketPostMeleeMultiplier = builder
+                .comment("Multiplier for a shot's damage for the first shot after a successful melee with Muskets")
+                .defineInRange("emeraldMusketPostMeleeMultiplier", 1.5D, 0.1D, 5D);
+        emeraldMusketPostMeleeCount = builder
+                .comment("How many shots the melee blessing lasts for Muskets")
+                .defineInRange("emeraldMusketPostMeleeCount", 3, 1, 60);
+        emeraldMusketCost = builder
+                .comment("Ammo cost to fire Muskets")
+                .defineInRange("emeraldMusketCost", 7, 0, 64);
+        emeraldMusketMovementInaccuracy = builder
+                .comment("Configure the inaccuracy addition whilst moving with Muskets")
+                .defineInRange("emeraldMusketMovementInaccuracy", 4D, 0D, 40D);
+        emeraldMusketReplacementInaccuracy = builder
+                .comment("Configure the inaccuracy addition whilst using one hand with Muskets")
+                .defineInRange("emeraldMusketReplacementInaccuracy", 2D, 0D, 40D);
         builder.pop();
 
         builder.push("carbine");
