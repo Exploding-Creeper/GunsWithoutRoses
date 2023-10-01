@@ -25,7 +25,10 @@ public class ShootEvent {
             BulletEntity shot = (BulletEntity)event.getEntity();
             Vector3d direction = shot.getDeltaMovement();
             double velocity = direction.length();
+
+            //TODO: hero wave shotgun mathematics from shot.heroStep goes here
             direction = direction.normalize().add(random.nextGaussian() * 0.0075 * shot.getInaccuracy(), random.nextGaussian() * 0.0075 * shot.getInaccuracy(), random.nextGaussian() * 0.0075 * shot.getInaccuracy()).scale(velocity);
+
             shot.setDeltaMovement(direction);
             float horizontalDistance = MathHelper.sqrt(direction.x * direction.x + direction.z * direction.z);
             shot.yRot = (float)(MathHelper.atan2(direction.x, direction.z) * (double)(180F / (float)Math.PI));

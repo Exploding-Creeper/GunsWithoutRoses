@@ -81,6 +81,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	public List<EffectInstance> potionInstance = new ArrayList<EffectInstance>();
 	public PotionApplyMode applyMode;
 	public int lingeringTime;
+	public double heroStep;
 
 	protected Set<Entity> entityHitHistory = new HashSet<>();
 	public Set<Entity> headshotHistory = new HashSet<>();
