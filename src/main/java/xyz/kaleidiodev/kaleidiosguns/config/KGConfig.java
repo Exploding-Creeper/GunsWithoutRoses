@@ -738,7 +738,7 @@ public class KGConfig {
                 .defineInRange("goldDoubleShotgunMeleeDamage", 4D, 0D, 40D);
         goldDoubleShotgunCost = builder
                 .comment("Ammo cost to fire Double Barrel Shotguns")
-                .defineInRange("goldDoubleShotgunCost", 3, 0, 64);
+                .defineInRange("goldDoubleShotgunCost", 5, 0, 64);
         builder.pop();
 
         builder.push("vampire shotgun");
