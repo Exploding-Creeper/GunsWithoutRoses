@@ -954,6 +954,7 @@ public class GunItem extends Item {
 		if ((enchantment == ModEnchantments.division) && !(me instanceof ShotgunItem)) return false; //shotgun only
 		if ((enchantment == ModEnchantments.cleanShot) && ((me instanceof ShotgunItem) || (me instanceof GatlingItem) || (me.isExplosive) || (me.getInaccuracy(stack, null) != 0))) return false; //sniper only
 		if ((enchantment == ModEnchantments.signalBoost) && !isRedstone) return false; //redstone only
+		if ((enchantment == ModEnchantments.tracer) && ((me instanceof ShotgunItem) || (me instanceof GatlingItem) || (me.isExplosive) || (me.getInaccuracy(stack, null) == 0))) return false; //pistol only
 
 		return super.canApplyAtEnchantingTable(stack, enchantment);
 	}
