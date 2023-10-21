@@ -663,8 +663,6 @@ public class GunItem extends Item {
 			}
 		}
 
-		System.out.println(nextInaccuracy);
-
 		return nextInaccuracy;
 	}
 
@@ -1010,12 +1008,17 @@ public class GunItem extends Item {
 			//Accuracy
 			double inaccuracy = baseInaccuracy(stack, null);
 			double projectileSpeed = baseSpeed(stack, null) * 16;
-			//don't ask me why this formula is correct to get "deviation radius in blocks per second", it just is.  it's the same formula used in the balance calculator excel document as well
-			inaccuracy = inaccuracy * 0.0075 * 16 * 20;
-			//now we get how many seconds it takes for the radius to become 50% likely to hit which makes the "perfect accuracy limit" in terms of time...
-			inaccuracy = 0.425 / inaccuracy;
-			//now we use the projectile's speed to judge how many blocks it travels before it reaches this value
-			inaccuracy = projectileSpeed * inaccuracy;
+			//0.0075 is the deviation set by the inaccuracy formula before it does a bunch of trigonometry to calculate angles.  it's the same formula used in the balance calculator excel document as well
+			//so let's see how deviated it can be after a whole second.
+			inaccuracy = inaccuracy * 0.0075 * projectileSpeed;
+
+			//now we get how many seconds it takes for the radius to become less than 100% likely to hit a humanoid which makes the "perfect accuracy limit" in terms of time...
+			//0.425 meters is half the width of a zombie hitbox plus the width of the bullet hitbox
+			double timeToInaccurate = 0.425 / inaccuracy;
+
+			//now we judge how many meters it is.
+			inaccuracy = projectileSpeed * timeToInaccurate;
+
 			if (inaccuracy == Double.POSITIVE_INFINITY) {
 				if (this instanceof GatlingItem || this instanceof ShotgunItem || this.isExplosive || this.isRedstone) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.accuracy.perfect" + (isInaccuracyModified(stack) ? ".modified" : "")));
 				else tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.accuracy.perfect.sniper"));
