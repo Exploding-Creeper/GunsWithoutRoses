@@ -85,7 +85,7 @@ public interface IBullet {
 		if (projectile.hero) newDamage *= KGConfig.heroShotgunEffectMultiplier.get();
 
 		if (projectile.headshotHistory.contains(target)) {
-			double actualHeadshot = KGConfig.headshotMultiplier.get();
+			double actualHeadshot = KGConfig.headshotMultiplierMaximum.get();
 
 			//use a logarithm to reduce headshot damage based on projectile protection level on the helmet
 			if (target instanceof LivingEntity) {
@@ -96,10 +96,10 @@ public interface IBullet {
 					//this works with a level of 0.  that's why the 1 + is in the logarithmic equation
 					int projectileProtectionLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PROJECTILE_PROTECTION, helmet);
 
-					double headshotTemp = KGConfig.headshotMultiplier.get() - 1.0;
+					double headshotTemp = KGConfig.headshotMultiplierMaximum.get() - KGConfig.headshotMultiplierMinimum.get();
 					headshotTemp *= 1 / (1 + (projectileProtectionLevel * KGConfig.projectileProtectionHelmetHeadshotReduction.get()));
 
-					actualHeadshot = 1 + headshotTemp;
+					actualHeadshot = KGConfig.headshotMultiplierMinimum.get() + headshotTemp;
 				}
 			}
 

@@ -15,7 +15,8 @@ public class KGConfig {
     public static ForgeConfigSpec.IntValue redstoneRadius;
     public static ForgeConfigSpec.DoubleValue weaknessEffectInaccuracyMultiplier;
     public static ForgeConfigSpec.DoubleValue luckEffectInaccuracyDivider;
-    public static ForgeConfigSpec.DoubleValue headshotMultiplier;
+    public static ForgeConfigSpec.DoubleValue headshotMultiplierMaximum;
+    public static ForgeConfigSpec.DoubleValue headshotMultiplierMinimum;
     public static ForgeConfigSpec.DoubleValue projectileProtectionHelmetHeadshotReduction;
     public static ForgeConfigSpec.BooleanValue showClassDetails;
     public static ForgeConfigSpec.BooleanValue showWeaponDetails;
@@ -394,9 +395,12 @@ public class KGConfig {
         luckEffectInaccuracyDivider = builder
                 .comment("Configure the inaccuracy divider for when the shooter has the luck effect")
                 .defineInRange("luckEffectInaccuracyDivider", 1.5D, 1D, 10D);
-        headshotMultiplier = builder
+        headshotMultiplierMaximum = builder
                 .comment("Configure the damage multiplier for a headshot")
-                .defineInRange("headshotMultiplier", 1.5D, 1D, 100D);
+                .defineInRange("headshotMaximumMultiplier", 2.5D, 1D, 100D);
+        headshotMultiplierMinimum = builder
+                .comment("Configure the damage multiplier for a headshot")
+                .defineInRange("headshotMinimumMultiplier", 1.5D, 1D, 100D);
         projectileProtectionHelmetHeadshotReduction = builder
                 .comment("Configure the damage difference above x1.0 for a headshot, reduced by projectile protection, put into a base calculation for a logarithm")
                 .defineInRange("projectileProtectionHelmetHeadshotReduction", 1.5D, 1D, 100D);
