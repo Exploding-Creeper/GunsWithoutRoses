@@ -1009,8 +1009,9 @@ public class GunItem extends Item {
 			double inaccuracy = baseInaccuracy(stack, null);
 			double projectileSpeed = baseSpeed(stack, null) * 16;
 			//0.0075 is the deviation set by the inaccuracy formula before it does a bunch of trigonometry to calculate angles.  it's the same formula used in the balance calculator excel document as well
+			//2.5 is the maximum expected deviation due to a Gaussian random weighted of 1.
 			//so let's see how deviated it can be after a whole second.
-			inaccuracy = inaccuracy * 0.0075 * projectileSpeed;
+			inaccuracy = inaccuracy * 0.0075 * 2.5 * projectileSpeed;
 
 			//now we get how many seconds it takes for the radius to become less than 100% likely to hit a humanoid which makes the "perfect accuracy limit" in terms of time...
 			//0.425 meters is half the width of a zombie hitbox plus the width of the bullet hitbox
