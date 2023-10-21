@@ -646,7 +646,7 @@ public class GunItem extends Item {
 
 			//check assault rifle
 			if (!player.isOnGround() && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && this.isSensitive) {
-				nextInaccuracy *= KGConfig.sensitivityMultiplier.get();
+				nextInaccuracy *= KGConfig.sensitivityMultiplier.get() * 1.5;
 			}
 			else if (this.isSensitive && !player.isCrouching() && (KGConfig.sensitivityMultiplier.get() != 0)) {
 				nextInaccuracy *= KGConfig.sensitivityMultiplier.get();
@@ -662,6 +662,8 @@ public class GunItem extends Item {
 				nextInaccuracy /= KGConfig.luckEffectInaccuracyDivider.get();
 			}
 		}
+
+		System.out.println(nextInaccuracy);
 
 		return nextInaccuracy;
 	}
