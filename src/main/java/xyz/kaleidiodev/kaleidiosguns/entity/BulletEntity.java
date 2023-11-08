@@ -82,6 +82,10 @@ public class BulletEntity extends AbstractFireballEntity {
 	public PotionApplyMode applyMode;
 	public int lingeringTime;
 	public double heroStep;
+	public Vector3d lastPos;
+	public boolean hitBlock;
+	public Set<Entity> entitiesThisTick = new HashSet<>();
+	public boolean pollRemove;
 
 	protected Set<Entity> entityHitHistory = new HashSet<>();
 	public Set<Entity> headshotHistory = new HashSet<>();
@@ -114,6 +118,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	@Override
 	public void tick() {
 		//check timestamp of fire versus current world.  if longer than 5 seconds, or world time is sooner, assume the bullet was created last session rather than current
+		//force remove
 		actualTick++;
 		if (!this.level.isClientSide) {
 			long passage = this.level.getGameTime() - ticksOnFire;
@@ -125,6 +130,11 @@ public class BulletEntity extends AbstractFireballEntity {
 		Entity entity = this.getOwner();
 		if (this.removed) return;
 		if (entity != null) if (entity.removed) {
+			pollRemove = true;
+			return;
+		}
+
+		if (pollRemove) {
 			this.remove();
 			return;
 		}
@@ -149,7 +159,6 @@ public class BulletEntity extends AbstractFireballEntity {
 		Vector3d vector3d = this.getDeltaMovement();
 
 		if (this.isInWater()) {
-			if (this.level.isClientSide()) this.level.addParticle(ParticleTypes.BUBBLE, true, this.getBoundingBox().getCenter().x, this.getBoundingBox().getCenter().y, this.getBoundingBox().getCenter().z, 0, 0, 0);
 			//don't decrease inertia if the torpedo enchantment was on the gun
 			if (!this.isTorpedo) f = 0.5f;
 		}
@@ -157,31 +166,70 @@ public class BulletEntity extends AbstractFireballEntity {
 		if (!this.isNoGravity()) this.yPower = this.yPower - 0.0025;
 
 		this.setDeltaMovement(vector3d.add(this.xPower, this.yPower, this.zPower).scale(f));
-		//summon the particles in the center of the projectile instead of above it.
-		//disable emitters when underwater, as otherwise it looks messy to have two emitters (bubble emitter happens elsewhere)
-		if (!this.isInWater() && actualTick > 1 && this.level.isClientSide())
-			this.level.addParticle(this.getTrailParticle(), true, this.getBoundingBox().getCenter().x, this.getBoundingBox().getCenter().y, this.getBoundingBox().getCenter().z, 0.0D, 0.0D, 0.0D);
+
 		this.setPos(this.getX() + vector3d.x, this.getY() + vector3d.y, this.getZ() + vector3d.z);
+
+		//because the sniper cannot have a projectile ignore invulnerability anyway, this is safe to do.
+		if (shouldCollateral) {
+			for (Entity currentEntity : entitiesThisTick) {
+				if (currentEntity instanceof LivingEntity) {
+					entityHitProcess(currentEntity);
+				}
+			}
+		}
+		else if (!entityHitHistory.isEmpty()){
+			//only process the last entity in the list, which is the closest to the previous position.
+			Entity next = entityHitHistory.iterator().next();
+			entityHitProcess(next);
+			this.setPos(lastPos.x, lastPos.y, lastPos.z);
+			pollRemove = true;
+		}
+
+		if (hitBlock) {
+			this.setPos(lastPos.x, lastPos.y, lastPos.z);
+			pollRemove = true;
+		}
+
+		//SYNC POLL REMOVE HERE
+
+		if (!pollRemove && this.level.isClientSide && (this.actualTick > 1)) {
+			//summon the particles in the center of the projectile instead of above it.
+			//disable emitters when underwater, as otherwise it looks messy to have two emitters (bubble emitter happens elsewhere)
+			if (this.isUnderWater()) {
+				this.level.addParticle(ParticleTypes.BUBBLE, true, this.getBoundingBox().getCenter().x, this.getBoundingBox().getCenter().y, this.getBoundingBox().getCenter().z, 0, 0, 0);
+			}
+			else if (hitBlock) {
+				if (this.level.isClientSide()) {
+					Vector3d motionDiv = this.getDeltaMovement().normalize().multiply(new Vector3d(0.25, 0.25, 0.25)).reverse();
+
+					level.addParticle(ParticleTypes.POOF, true, lastPos.x, lastPos.y, lastPos.z, motionDiv.x, motionDiv.y, motionDiv.z);
+				}
+			}
+			else {
+				this.level.addParticle(this.getTrailParticle(), true, this.getBoundingBox().getCenter().x, this.getBoundingBox().getCenter().y, this.getBoundingBox().getCenter().z, 0.0D, 0.0D, 0.0D);
+			}
+		}
 
 		this.traceHits();
 	}
 
 	//for any hit types that aren't vanilla, such as vex carbine's through blocks check since it can be unpredictable, or a sniper's collateral
-	protected void traceHits() {
+	public void traceHits() {
+		if (level.isClientSide) return;
+
 		//put some code here for the manual raytrace
 		//the raytrace needs to be from current position to delta from last known position
-		Set<Entity> entities = new HashSet<>();
+		entitiesThisTick.clear();
 		AxisAlignedBB bb = this.getBoundingBox();
 
 		//start at previous position
 		//we cannot rely on the speed being the same for the bullet over its lifetime, so let's recalculate per tick
 		double actualSpeed = Vector3d.ZERO.distanceTo(this.getDeltaMovement());
 		Vector3d delta = this.getDeltaMovement();
-		bb = bb.move(delta.reverse());
-		Vector3d incPosition = new Vector3d(delta.x / (actualSpeed * 10), delta.y / (actualSpeed * 10), delta.z / (actualSpeed * 10));
+		Vector3d incPosition = new Vector3d(delta.x / (actualSpeed * 8), delta.y / (actualSpeed * 8), delta.z / (actualSpeed * 8));
 
 		//the raytrace is really just a bunch of steps for boundary boxes.  this means accelerator makes sniper collateral further
-		for (double i = 0; i < actualSpeed; i += 0.1) {
+		for (int i = 0; i < (actualSpeed * 8); i ++) {
 			bb = bb.move(incPosition);
 
 			//don't bother adding entities to the list that are already there.
@@ -193,19 +241,20 @@ public class BulletEntity extends AbstractFireballEntity {
 			//don't process anything we've previously hit on this hit as well
 			thisEntities.removeAll(entityHitHistory);
 
-			entities.addAll(thisEntities);
-			entityHitHistory.addAll(entities); //entity hit history is shared between ticks.  entities is for the current line trace.
+			entitiesThisTick.addAll(thisEntities);
+			entityHitHistory.addAll(entitiesThisTick); //entity hit history is shared between ticks.  entities is for the current line trace.
 
 			//calculate headshot for the first trace an entity is found.  this prevents future trace steps from trying to count as headshots.
 			//a shot to the leg and up through the body will not count as a headshot!
 			if (thisEntities.size() > 0) {
 				//subtract by position so explosion is outside of block, not inside.  fixes physics
-				if (isExplosive) this.explode(bb.getCenter().subtract(incPosition));
+				if (isExplosive) this.explode(bb.getCenter());
 
 				double bulletBBFloor = bb.getCenter().y - (bb.getYsize() / 2);
 
 				for (Entity victim : thisEntities) {
-					if ((victim.getBoundingBox().getYsize() / 2 < victim.getBoundingBox().getXsize()) || (victim.getBoundingBox().getYsize() / 2 < victim.getBoundingBox().getZsize())) continue;
+					if ((victim.getBoundingBox().getYsize() / 2 < victim.getBoundingBox().getXsize()) || (victim.getBoundingBox().getYsize() / 2 < victim.getBoundingBox().getZsize()))
+						continue;
 
 					AxisAlignedBB tempBB = victim.getBoundingBox();
 					double enemyBoxHeight = (tempBB.getYsize() / 2);
@@ -215,13 +264,14 @@ public class BulletEntity extends AbstractFireballEntity {
 					//if the raytrace is at or above the enemy's chin, it's a headshot
 					//the chin is a third of the height from the top of the entity
 					if ((bulletBBFloor > enemyChin) && (bulletBBFloor < enemyTop)) {
-						if ((getOwner() != null) && (!this.level.isClientSide()) && !(victim instanceof EndermanEntity)) getOwner().level.playSound(null, bb.getCenter().x, bb.getCenter().y, bb.getCenter().z, SoundEvents.PLAYER_ATTACK_CRIT, SoundCategory.VOICE, 5.0f, 1.0f);
+						if ((getOwner() != null) && (!this.level.isClientSide()) && !(victim instanceof EndermanEntity))
+							getOwner().level.playSound(null, bb.getCenter().x, bb.getCenter().y, bb.getCenter().z, SoundEvents.PLAYER_ATTACK_CRIT, SoundCategory.VOICE, 5.0f, 1.0f);
 						headshotHistory.add(victim);
 					}
 				}
 
 				if (!shouldCollateral) {
-					this.remove();
+					lastPos = bb.getCenter(); //may need to subtract
 					break;
 				}
 			}
@@ -230,19 +280,18 @@ public class BulletEntity extends AbstractFireballEntity {
 				//kill trace early if we hit a tile doing this, so it doesn't trace through walls.
 				BlockPos someBlockPos = new BlockPos(bb.getCenter());
 				BlockState someBlockState = this.level.getBlockState(someBlockPos);
-				boolean done = false;
 
 				if (((this.lavaMode & 0x04) != 0) && (this.shootingGun != null)) {
 					if (someBlockState.getBlock() == Blocks.LAVA) {
 						this.shootingGun.hadLava = KGConfig.lavaSmgLavaBonusCount.get();
 						level.setBlock(someBlockPos, Blocks.AIR.defaultBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
 
-						done = true;
+						hitBlock = true;
 					}
 					if ((someBlockState.getBlock() == Blocks.WATER) && (this.lavaMode > 0x04)) {
 						level.setBlock(someBlockPos, Blocks.STONE.defaultBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
 
-						done = true;
+						hitBlock = true;
 					}
 				}
 
@@ -251,15 +300,15 @@ public class BulletEntity extends AbstractFireballEntity {
 					if (blockToChange.getLightValue(someBlockState, level, someBlockPos) > 0) {
 						level.destroyBlock(someBlockPos, false);
 
-						done = true;
+						hitBlock = true;
 					}
 				}
 
 				if (interactsWithBlocks && this.level.getBlockCollisions(this, bb).findAny().isPresent()) {
-					FakePlayer fakePlayer = new FakePlayer((ServerWorld)level, new GameProfile(null, "[KaleidiosGunsFakePlayer]"));
-					someBlockState.use(this.level, fakePlayer, Hand.MAIN_HAND, new BlockRayTraceResult(bb.getCenter(), Direction.getNearest(this.getDeltaMovement().x, this.getDeltaMovement().y,this.getDeltaMovement().z), someBlockPos, true));
+					FakePlayer fakePlayer = new FakePlayer((ServerWorld) level, new GameProfile(null, "[KaleidiosGunsFakePlayer]"));
+					someBlockState.use(this.level, fakePlayer, Hand.MAIN_HAND, new BlockRayTraceResult(bb.getCenter(), Direction.getNearest(this.getDeltaMovement().x, this.getDeltaMovement().y, this.getDeltaMovement().z), someBlockPos, true));
 
-					done = true;
+					hitBlock = true;
 				}
 
 				//solid blocks are handled different
@@ -268,38 +317,21 @@ public class BulletEntity extends AbstractFireballEntity {
 					if (isExplosive) explode(bb.getCenter().subtract(incPosition));
 					else onHitBlock(bb.getCenter());
 
-					done = true;
+					hitBlock = true;
 				}
 
-				if (done) {
-					this.remove();
+				if (hitBlock) {
+					lastPos = bb.getCenter(); //may need to subtract
 					break;
 				}
 			}
 		}
-
-		//because the sniper cannot have a projectile ignore invulnerability anyway, this is safe to do.
-		if (shouldCollateral) {
-			for (Entity entity : entities) {
-				if (entity instanceof LivingEntity) {
-					entityHitProcess(entity);
-				}
-			}
-		}
-		else if (!entities.isEmpty()){
-			//only process the last entity in the list, which is the closest to the previous position.
-			Entity next = entities.iterator().next();
-			entityHitProcess(next);
-		}
 	}
 
+	//cannot guarantee this fires on the client side
 	protected void onHitBlock(Vector3d pos) {
 		//make a spherical poof and a sound
 		this.level.playSound(null, pos.x, pos.y, pos.z, ModSounds.impact, SoundCategory.VOICE, 0.25f, (random.nextFloat() * 0.5f) + 0.75f);
-
-		Vector3d motionDiv = this.getDeltaMovement().normalize().multiply(new Vector3d(0.1, 0.1, 0.1)).reverse();
-
-		if (this.level.isClientSide) level.addParticle(ParticleTypes.POOF, true, pos.x, pos.y, pos.z, motionDiv.x, motionDiv.y, motionDiv.z);
 
 		BlockPos blockPositionToMine = new BlockPos(pos);
 
