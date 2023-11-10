@@ -80,6 +80,9 @@ public class ClientPacketHandler {
         bullet.lavaMode = packet.readByte();
         bullet.clip = packet.readBoolean();
         bullet.hero = packet.readBoolean();
+        bullet.hitEntity = packet.readBoolean();
+        bullet.hitBlock = packet.readBoolean();
+        bullet.lastPos = new Vector3d(packet.readDouble(), packet.readDouble(), packet.readDouble());
 
         mc.level.putNonPlayerEntity(entityID, bullet);
         entity.lerpMotion(velocity.x, velocity.y, velocity.z);

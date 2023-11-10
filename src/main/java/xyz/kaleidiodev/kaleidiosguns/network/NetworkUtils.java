@@ -43,9 +43,7 @@ public class NetworkUtils {
             buffer.writeByte(bullet.lavaMode);
             buffer.writeBoolean(bullet.clip);
             buffer.writeBoolean(bullet.hero);
-            buffer.writeLong(bullet.actualTick);
-            buffer.writeLong(bullet.ticksOnFire);
-            buffer.writeBoolean(bullet.pollRemove);
+            buffer.writeBoolean(bullet.hitEntity);
             buffer.writeBoolean(bullet.hitBlock);
             buffer.writeDouble(bullet.lastPos.x);
             buffer.writeDouble(bullet.lastPos.y);

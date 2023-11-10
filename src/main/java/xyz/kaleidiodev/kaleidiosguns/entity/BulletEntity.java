@@ -84,6 +84,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	public double heroStep;
 	public Vector3d lastPos = new Vector3d(0, 0, 0);
 	public boolean hitBlock;
+	public boolean hitEntity;
 	public Set<Entity> entitiesThisTick = new HashSet<>();
 	public boolean pollRemove;
 
@@ -178,7 +179,7 @@ public class BulletEntity extends AbstractFireballEntity {
 					}
 				}
 			}
-		} else if (!entityHitHistory.isEmpty()) {
+		} else if (hitEntity) {
 			//only process the last entity in the list, which is the closest to the previous position.
 			if (!this.level.isClientSide) {
 				Entity next = entityHitHistory.iterator().next();
@@ -199,7 +200,7 @@ public class BulletEntity extends AbstractFireballEntity {
 			pollRemove = true;
 		}
 
-		if (this.level.isClientSide && (this.actualTick > 0) && !pollRemove) {
+		if (this.level.isClientSide && (this.actualTick > 1) && !pollRemove) {
 			//summon the particles in the center of the projectile instead of above it.
 			//disable emitters when underwater, as otherwise it looks messy to have two emitters (bubble emitter happens elsewhere)
 			if (this.isUnderWater()) {
@@ -214,7 +215,6 @@ public class BulletEntity extends AbstractFireballEntity {
 	}
 
 	//for any hit types that aren't vanilla, such as vex carbine's through blocks check since it can be unpredictable, or a sniper's collateral
-	//TODO: fire this on client side immediately before tick.
 	public void traceHits() {
 		//put some code here for the manual raytrace
 		//the raytrace needs to be from current position to delta from last known position
@@ -271,6 +271,7 @@ public class BulletEntity extends AbstractFireballEntity {
 
 				if (!shouldCollateral) {
 					lastPos = bb.getCenter(); //may need to subtract
+					hitEntity = true;
 					break;
 				}
 			}

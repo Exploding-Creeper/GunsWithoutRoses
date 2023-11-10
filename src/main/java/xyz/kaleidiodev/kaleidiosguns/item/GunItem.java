@@ -449,9 +449,9 @@ public class GunItem extends Item {
 
 		gun.setTag(nbt);
 
-		world.addFreshEntity(shot);
-
 		shot.traceHits();
+
+		world.addFreshEntity(shot);
 	}
 
 	public ItemStack getOtherHand(PlayerEntity player) {
