@@ -82,7 +82,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	public PotionApplyMode applyMode;
 	public int lingeringTime;
 	public double heroStep;
-	public Vector3d lastPos;
+	public Vector3d lastPos = new Vector3d(0, 0, 0);
 	public boolean hitBlock;
 	public Set<Entity> entitiesThisTick = new HashSet<>();
 	public boolean pollRemove;
@@ -130,7 +130,7 @@ public class BulletEntity extends AbstractFireballEntity {
 		Entity entity = this.getOwner();
 		if (this.removed) return;
 		if (entity != null) if (entity.removed) {
-			pollRemove = true;
+			this.remove();
 			return;
 		}
 
@@ -171,52 +171,51 @@ public class BulletEntity extends AbstractFireballEntity {
 
 		//because the sniper cannot have a projectile ignore invulnerability anyway, this is safe to do.
 		if (shouldCollateral) {
-			for (Entity currentEntity : entitiesThisTick) {
-				if (currentEntity instanceof LivingEntity) {
-					entityHitProcess(currentEntity);
+			if (!this.level.isClientSide) {
+				for (Entity currentEntity : entitiesThisTick) {
+					if (currentEntity instanceof LivingEntity) {
+						entityHitProcess(currentEntity);
+					}
 				}
 			}
-		}
-		else if (!entityHitHistory.isEmpty()){
+		} else if (!entityHitHistory.isEmpty()) {
 			//only process the last entity in the list, which is the closest to the previous position.
-			Entity next = entityHitHistory.iterator().next();
-			entityHitProcess(next);
+			if (!this.level.isClientSide) {
+				Entity next = entityHitHistory.iterator().next();
+				entityHitProcess(next);
+			}
 			this.setPos(lastPos.x, lastPos.y, lastPos.z);
 			pollRemove = true;
 		}
 
+		//should not be set if we hit an entity!
 		if (hitBlock) {
 			this.setPos(lastPos.x, lastPos.y, lastPos.z);
+			if (this.level.isClientSide) {
+				Vector3d motionDiv = this.getDeltaMovement().normalize().multiply(new Vector3d(0.25, 0.25, 0.25)).reverse();
+
+				level.addParticle(ParticleTypes.POOF, true, lastPos.x, lastPos.y, lastPos.z, motionDiv.x, motionDiv.y, motionDiv.z);
+			}
 			pollRemove = true;
 		}
 
-		//SYNC POLL REMOVE HERE
-
-		if (!pollRemove && this.level.isClientSide && (this.actualTick > 1)) {
+		if (this.level.isClientSide && (this.actualTick > 0) && !pollRemove) {
 			//summon the particles in the center of the projectile instead of above it.
 			//disable emitters when underwater, as otherwise it looks messy to have two emitters (bubble emitter happens elsewhere)
 			if (this.isUnderWater()) {
 				this.level.addParticle(ParticleTypes.BUBBLE, true, this.getBoundingBox().getCenter().x, this.getBoundingBox().getCenter().y, this.getBoundingBox().getCenter().z, 0, 0, 0);
-			}
-			else if (hitBlock) {
-				if (this.level.isClientSide()) {
-					Vector3d motionDiv = this.getDeltaMovement().normalize().multiply(new Vector3d(0.25, 0.25, 0.25)).reverse();
-
-					level.addParticle(ParticleTypes.POOF, true, lastPos.x, lastPos.y, lastPos.z, motionDiv.x, motionDiv.y, motionDiv.z);
-				}
 			}
 			else {
 				this.level.addParticle(this.getTrailParticle(), true, this.getBoundingBox().getCenter().x, this.getBoundingBox().getCenter().y, this.getBoundingBox().getCenter().z, 0.0D, 0.0D, 0.0D);
 			}
 		}
 
-		this.traceHits();
+		if (!pollRemove) this.traceHits();
 	}
 
 	//for any hit types that aren't vanilla, such as vex carbine's through blocks check since it can be unpredictable, or a sniper's collateral
+	//TODO: fire this on client side immediately before tick.
 	public void traceHits() {
-		if (level.isClientSide) return;
-
 		//put some code here for the manual raytrace
 		//the raytrace needs to be from current position to delta from last known position
 		entitiesThisTick.clear();
@@ -331,7 +330,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	//cannot guarantee this fires on the client side
 	protected void onHitBlock(Vector3d pos) {
 		//make a spherical poof and a sound
-		this.level.playSound(null, pos.x, pos.y, pos.z, ModSounds.impact, SoundCategory.VOICE, 0.25f, (random.nextFloat() * 0.5f) + 0.75f);
+		if (!this.level.isClientSide) this.level.playSound(null, pos.x, pos.y, pos.z, ModSounds.impact, SoundCategory.VOICE, 0.25f, (random.nextFloat() * 0.5f) + 0.75f);
 
 		BlockPos blockPositionToMine = new BlockPos(pos);
 

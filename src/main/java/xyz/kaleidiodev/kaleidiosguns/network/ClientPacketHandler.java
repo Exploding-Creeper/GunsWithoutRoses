@@ -80,14 +80,13 @@ public class ClientPacketHandler {
         bullet.lavaMode = packet.readByte();
         bullet.clip = packet.readBoolean();
         bullet.hero = packet.readBoolean();
-        bullet.actualTick = packet.readLong();
-        bullet.ticksOnFire = packet.readLong();
 
         mc.level.putNonPlayerEntity(entityID, bullet);
         entity.lerpMotion(velocity.x, velocity.y, velocity.z);
     }
 
     private void entityVelocityPacket(PacketBuffer packet, Minecraft mc) {
+        //sync actualTick, ticksOnFire, pollRemove, hitBlock, lastPos here
         if (mc.level == null) {
             return;
         }

@@ -45,6 +45,11 @@ public class NetworkUtils {
             buffer.writeBoolean(bullet.hero);
             buffer.writeLong(bullet.actualTick);
             buffer.writeLong(bullet.ticksOnFire);
+            buffer.writeBoolean(bullet.pollRemove);
+            buffer.writeBoolean(bullet.hitBlock);
+            buffer.writeDouble(bullet.lastPos.x);
+            buffer.writeDouble(bullet.lastPos.y);
+            buffer.writeDouble(bullet.lastPos.z);
         }
 
         return NetworkDirection.PLAY_TO_CLIENT.buildPacket(Pair.of(buffer, 10), KaleidiosGuns.rl("custom_channel")).getThis();
