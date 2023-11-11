@@ -84,7 +84,7 @@
 	"tooltip.kaleidiosguns.defender": "Increases fire rate if standing near any Tile Entity§r",
 	"tooltip.kaleidiosguns.sensitive": "Accuracy decreases if shot in midair or whilst not crouching§r",
 	"tooltip.kaleidiosguns.explosive": "Explosive projectiles, requires non-flint ammo§r",
-	"tooltip.kaleidiosguns.shatter": "Can break stone into gravel, etcetera.",
+	"tooltip.kaleidiosguns.shatter": "Gives a 'flinch' of weakness.",
 	"tooltip.kaleidiosguns.juggle": "High vertical knockback to juggle enemies§r",
 	"tooltip.kaleidiosguns.doors": "Can breach doors, windows and break parkour blocks§r",
 	"tooltip.kaleidiosguns.lava": "Absorb lava to increase damage and other lava-like interactions§r",
