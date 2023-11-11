@@ -16,7 +16,7 @@ import xyz.kaleidiodev.kaleidiosguns.item.GunItem;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = KaleidiosGuns.MODID)
 public class ModEnchantments {
 
-	public static Enchantment impact, bullseye, sleightOfHand, preserving, accelerator, division, passionForBlood, cowboy, silenced, cleanShot, signalBoost, torpedo, tracer;
+	public static Enchantment impact, bullseye, sleightOfHand, preserving, accelerator, division, passionForBlood, cowboy, silenced, cleanShot, signalBoost, torpedo, tracer, calibur;
 	public static final EnchantmentType TYPE_GUN = EnchantmentType.create("GWR_GUN", (item) -> item instanceof GunItem);
 
 	@SubscribeEvent
@@ -43,6 +43,7 @@ public class ModEnchantments {
 
 		//curses
 		tracer = initEnchant(reg, new GunCurseEnchantment(Enchantment.Rarity.RARE, 1, 7, 14, 30, TYPE_GUN), "tracer_ammo");
+		calibur = initEnchant(reg, new GunCurseEnchantment(Enchantment.Rarity.UNCOMMON, 5, 5, 10, 20, TYPE_GUN), "calibur");
 	}
 
 	public static Enchantment initEnchant(IForgeRegistry<Enchantment> reg, Enchantment enchantment, String name) {

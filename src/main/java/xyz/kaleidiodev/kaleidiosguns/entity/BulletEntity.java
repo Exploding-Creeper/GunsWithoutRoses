@@ -203,11 +203,13 @@ public class BulletEntity extends AbstractFireballEntity {
 		if (this.level.isClientSide && (this.actualTick > 1) && !pollRemove) {
 			//summon the particles in the center of the projectile instead of above it.
 			//disable emitters when underwater, as otherwise it looks messy to have two emitters (bubble emitter happens elsewhere)
+			Vector3d position = this.getBoundingBox().getCenter();
+
 			if (this.isUnderWater()) {
-				this.level.addParticle(ParticleTypes.BUBBLE, true, this.getBoundingBox().getCenter().x, this.getBoundingBox().getCenter().y, this.getBoundingBox().getCenter().z, 0, 0, 0);
+				this.level.addParticle(ParticleTypes.BUBBLE, true, position.x, position.y, position.z, 0, 0, 0);
 			}
 			else {
-				this.level.addParticle(this.getTrailParticle(), true, this.getBoundingBox().getCenter().x, this.getBoundingBox().getCenter().y, this.getBoundingBox().getCenter().z, 0.0D, 0.0D, 0.0D);
+				this.level.addParticle(this.getTrailParticle(), true, position.x, position.y, position.z, 0, 0, 0);
 			}
 		}
 

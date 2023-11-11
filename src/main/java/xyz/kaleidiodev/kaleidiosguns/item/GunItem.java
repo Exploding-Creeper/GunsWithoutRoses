@@ -136,6 +136,7 @@ public class GunItem extends Item {
 		ammo = mergeStacks(player, gun);
 		//don't use if trying to use flint bullets on launcher
 		if (this.isExplosive && (ammo.getItem() == ModItems.flintBullet)) return ActionResult.fail(gun);
+		if (!caliburCheck(EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.calibur, gun), ammo.getItem())) return ActionResult.fail(gun);
 
 		//don't fire if redstone block is not nearby
 		if (this.isRedstone) {
@@ -143,6 +144,16 @@ public class GunItem extends Item {
 			else return ActionResult.fail(gun);
 		}
 		else return handleWeapon(world, player, gun, hand, ammo);
+	}
+
+	protected boolean caliburCheck(int level, Item item) {
+		if (level == 0) return true;
+		if ((item == ModItems.flintBullet) && (level == 1)) return true;
+		if ((item == ModItems.ironBullet) && (level == 2)) return true;
+		if ((item == ModItems.blazeBullet) && (level == 3)) return true;
+		if ((item == ModItems.hungerBullet) && (level == 4)) return true;
+		if ((item == ModItems.xpBullet) && (level == 5)) return true;
+		return false;
 	}
 
 	public ItemStack mergeStacks(PlayerEntity player, ItemStack gun) {
@@ -1039,6 +1050,18 @@ public class GunItem extends Item {
 			//Chance to not consume ammo
 			double inverseChanceFree = getInverseChanceFreeShot(stack, null);
 			if (inverseChanceFree < 1) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.gun.chance_free" + (isChanceFreeShotModified(stack) ? ".modified" : ""), (int)((1 - inverseChanceFree) * 100)));
+
+			int calibur = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.calibur, stack);
+			if (calibur > 0) {
+				String result = "tooltip.kaleidiosguns.calibur";
+				if (calibur == 1) result += ".flint";
+				if (calibur == 2) result += ".iron";
+				if (calibur == 3) result += ".blaze";
+				if (calibur == 4) result += ".hunger";
+				if (calibur == 5) result += ".xp";
+
+				tooltip.add(new TranslationTextComponent(result));
+			}
 
 
 			if (KGConfig.showWeaponDetails.get()) {

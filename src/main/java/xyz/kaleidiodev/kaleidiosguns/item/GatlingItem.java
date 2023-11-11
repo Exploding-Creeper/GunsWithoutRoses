@@ -44,9 +44,17 @@ public class GatlingItem extends GunItem {
 			return ActionResult.fail(gun);
 		}
 		else {
+			ItemStack ammo;
+			//"Oh yeah I will use the vanilla method so that quivers can do their thing"
+			//guess what the quivers suck
+			ammo = mergeStacks(player, gun);
+			//don't use if trying to use flint bullets on launcher
+			if (this.isExplosive && (ammo.getItem() == ModItems.flintBullet)) return ActionResult.fail(gun);
+			if (!caliburCheck(EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.calibur, gun), ammo.getItem())) return ActionResult.fail(gun);
+
 			player.startUsingItem(hand);
 			if (this.isFirstShot && !world.isClientSide){
-				fireGatling(world, player, gun, 0, mergeStacks(player, gun));
+				fireGatling(world, player, gun, 0, ammo);
 			}
 			return ActionResult.consume(gun);
 		}

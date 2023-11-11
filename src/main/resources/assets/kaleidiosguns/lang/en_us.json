@@ -99,6 +99,11 @@
 	"tooltip.kaleidiosguns.gravity": "Shots fall due to gravity§r",
 	"tooltip.kaleidiosguns.potion": "Consumes an offhand potion to apply effects§r",
 	"tooltip.kaleidiosguns.interact": "Interacts with right-clickable blocks",
+	"tooltip.kaleidiosguns.calibur.flint": "§dOnly accepts flint ammo",
+	"tooltip.kaleidiosguns.calibur.iron": "§dOnly accepts iron ammo",
+	"tooltip.kaleidiosguns.calibur.blaze": "§dOnly accepts blaze ammo",
+	"tooltip.kaleidiosguns.calibur.hunger": "§dOnly accepts hunger ammo",
+	"tooltip.kaleidiosguns.calibur.xp": "§dOnly accepts cleric ammo",
 
 	"tooltip.kaleidiosguns.blaze_bullet": "Sets entities on fire§r",
 	"tooltip.kaleidiosguns.hunger_bullet": "Uses hunger as ammo§r",
@@ -139,6 +144,8 @@
 	"enchantment.kaleidiosguns.torpedo.desc": "Bullets don't decrease speed underwater",
 	"enchantment.kaleidiosguns.tracer_ammo": "Curse of Tracer Ammo",
 	"enchantment.kaleidiosguns.tracer_ammo.desc": "You, the bullet, and hit target glow, but the damage is very little",
+	"enchantment.kaleidiosguns.calibur": "Curse of Calibur",
+	"enchantment.kaleidiosguns.description": "Every level specifies which bullet type this weapon will only accept, starting from flint to cleric cartridge",
 
 	"entity.kaleidiosguns.bullet": "Bullet",
 
