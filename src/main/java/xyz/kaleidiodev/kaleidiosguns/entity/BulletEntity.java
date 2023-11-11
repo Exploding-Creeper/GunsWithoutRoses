@@ -67,7 +67,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	public boolean isClean;
 	public boolean isCorrupted;
 	public boolean shouldBreakDoors;
-	public boolean shouldShatterBlocks;
+	public boolean shouldFlinch;
 	public boolean healsFriendlies;
 	public boolean juggle;
 	public byte lavaMode; //bit 0 is player is on fire, bit 1 is enemy is on fire, bit 2 is is active, bit 3 is lava absorb
@@ -394,10 +394,6 @@ public class BulletEntity extends AbstractFireballEntity {
 						level.setBlock(blockPositionToMine.above(1), Blocks.FIRE.defaultBlockState(), 3);
 					}
 				}
-			}
-
-			if (shouldShatterBlocks) {
-
 			}
 
 			if (shouldBreakDoors && actualTick <= 2) {

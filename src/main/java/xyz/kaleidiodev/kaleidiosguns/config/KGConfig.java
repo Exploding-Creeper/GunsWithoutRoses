@@ -185,6 +185,8 @@ public class KGConfig {
     public static ForgeConfigSpec.IntValue ironCarbineCost;
     public static ForgeConfigSpec.DoubleValue ironCarbineReplacementInaccuracy;
     public static ForgeConfigSpec.DoubleValue ironCarbineMovementInaccuracy;
+    public static ForgeConfigSpec.IntValue ironCarbineFlinchEffect;
+    public static ForgeConfigSpec.IntValue ironCarbineFlinchTicks;
 
     public static ForgeConfigSpec.DoubleValue goldVexDamageMultiplier;
     public static ForgeConfigSpec.IntValue goldVexFireDelay;
@@ -299,7 +301,6 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue lavaSmgLavaMultiplier;
     public static ForgeConfigSpec.IntValue lavaSmgLavaBonusCount;
     public static ForgeConfigSpec.IntValue lavaSmgCost;
-    public static ForgeConfigSpec.BooleanValue lavaSmgCatchFire;
 
     public static ForgeConfigSpec.DoubleValue defenderRifleDamageMultiplier;
     public static ForgeConfigSpec.IntValue defenderRifleFireDelay;
@@ -902,6 +903,12 @@ public class KGConfig {
         ironCarbineReplacementInaccuracy = builder
                 .comment("Configure the inaccuracy addition whilst using one hand with Carbines")
                 .defineInRange("ironCarbineReplacementInaccuracy", 1.5D, 0D, 40D);
+        ironCarbineFlinchEffect = builder
+                .comment("Configure the level of Weakness a carbine gives")
+                .defineInRange("ironCarbineFlinchEffect", 2, 0, 10);
+        ironCarbineFlinchTicks = builder
+                .comment("Configure the amount of ticks of Weakness a carbine gives")
+                .defineInRange("ironCarbineFlinchTicks", 10, 0, 10);
         builder.pop();
 
         builder.push("ver burst carbine");

@@ -79,6 +79,12 @@ public interface IBullet {
 			}
 		}
 
+		if ((projectile.shouldFlinch) && (target instanceof LivingEntity)) {
+			LivingEntity livingTarget = (LivingEntity) target;
+
+			livingTarget.addEffect(new EffectInstance(Effects.WEAKNESS, KGConfig.ironCarbineFlinchTicks.get(), KGConfig.ironCarbineFlinchEffect.get()));
+		}
+
 		//revenge shots should multiply their damage.
 		if (projectile.wasRevenge) newDamage *= KGConfig.emeraldBlessedBlessingMultiplier.get();
 
