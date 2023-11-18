@@ -684,7 +684,7 @@ public class KGConfig {
                 .defineInRange("heroShotgunFireDelay", 20, 0, 72000);
         heroShotgunEnchantability = builder
                 .comment("Configure the Enchantability for Hero Wave Shotguns")
-                .defineInRange("heroShotgunEnchantability", 10, 0, 30);
+                .defineInRange("heroShotgunEnchantability", 18, 0, 30);
         heroShotgunDurability = builder
                 .comment("Configure the Durability for Hero Wave Shotguns")
                 .defineInRange("heroShotgunDurability", 240, 0, 32767);
@@ -1002,7 +1002,7 @@ public class KGConfig {
                 .defineInRange("netheriteMinegunFireDelay", 3, 0, 72000);
         netheriteMinegunEnchantability = builder
                 .comment("Configure the Enchantability for Nethermaykr")
-                .defineInRange("netheriteMinegunEnchantability", 10, 0, 30);
+                .defineInRange("netheriteMinegunEnchantability", 15, 0, 30);
         netheriteMinegunDurability = builder
                 .comment("Configure the Durability for Nethermaykr")
                 .defineInRange("netheriteMinegunDurability",  660, 0, 32767);
@@ -1083,7 +1083,7 @@ public class KGConfig {
                 .defineInRange("diamondAssaultFireDelay", 3, 0, 72000);
         diamondAssaultEnchantability = builder
                 .comment("Configure the Enchantability for Assault Rifles")
-                .defineInRange("diamondAssaultEnchantability", 14, 0, 30);
+                .defineInRange("diamondAssaultEnchantability", 10, 0, 30);
         diamondAssaultDurability = builder
                 .comment("Configure the Durability for Assault Rifles")
                 .defineInRange("diamondAssaultDurability", 1714, 0, 32767);
@@ -1113,7 +1113,7 @@ public class KGConfig {
                 .defineInRange("lavaSmgFireDelay", 2, 0, 72000);
         lavaSmgEnchantability = builder
                 .comment("Configure the Enchantability for Lava Bound SMGs")
-                .defineInRange("lavaSmgEnchantability", 10, 0, 30);
+                .defineInRange("lavaSmgEnchantability", 15, 0, 30);
         lavaSmgDurability = builder
                 .comment("Configure the Durability for Lava Bound SMGs")
                 .defineInRange("lavaSmgDurability", 1528, 0, 32767);
@@ -1236,7 +1236,7 @@ public class KGConfig {
                 .defineInRange("potionCannonFireDelay", 24, 0, 72000);
         potionCannonEnchantability = builder
                 .comment("Configure the Enchantability for Potion Cannons")
-                .defineInRange("potionCannonEnchantability", 10, 0, 30);
+                .defineInRange("potionCannonEnchantability", 23, 0, 30);
         potionCannonDurability = builder
                 .comment("Configure the Durability for Potion Cannons")
                 .defineInRange("potionCannonDurability", 45, 0, 32767);
