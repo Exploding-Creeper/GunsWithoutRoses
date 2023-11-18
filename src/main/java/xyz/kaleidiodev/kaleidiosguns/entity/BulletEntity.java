@@ -161,12 +161,12 @@ public class BulletEntity extends AbstractFireballEntity {
 
 		if (this.isInWater()) {
 			//don't decrease inertia if the torpedo enchantment was on the gun
-			if (!this.isTorpedo) f = 0.5f;
+			if (!this.isTorpedo) vector3d.multiply(0.5, 0.5, 0.5);
 		}
 
-		if (!this.isNoGravity()) this.yPower = this.yPower - 0.0025;
+		if (!this.isNoGravity()) vector3d.subtract(0, vector3d.y - 0.0025, 0);
 
-		this.setDeltaMovement(vector3d.add(this.xPower, this.yPower, this.zPower).scale(f));
+		this.setDeltaMovement(vector3d);
 
 		this.setPos(this.getX() + vector3d.x, this.getY() + vector3d.y, this.getZ() + vector3d.z);
 
@@ -200,16 +200,29 @@ public class BulletEntity extends AbstractFireballEntity {
 			pollRemove = true;
 		}
 
-		if (this.level.isClientSide && (this.actualTick > 1) && !pollRemove) {
+		if (this.level.isClientSide && (actualTick > 1) && !pollRemove) {
 			//summon the particles in the center of the projectile instead of above it.
 			//disable emitters when underwater, as otherwise it looks messy to have two emitters (bubble emitter happens elsewhere)
-			Vector3d position = this.getBoundingBox().getCenter();
+
+			int divisor = KGConfig.particlesPerTick.get();
+
+			//if the particle count per tick is zero, disable trail particles entirely.
+			if (divisor == 0) return;
+
+			//interpolation is always ahead, we want to draw particles for the last tick travelled not the current.
+			Vector3d position = this.getBoundingBox().getCenter().subtract(this.getDeltaMovement());
+
+			Vector3d motionDiv = this.getDeltaMovement().multiply(new Vector3d(1D / (double)divisor, 1D / (double)divisor, 1D / (double)divisor));
 
 			if (this.isUnderWater()) {
-				this.level.addParticle(ParticleTypes.BUBBLE, true, position.x, position.y, position.z, 0, 0, 0);
+				for (int i = 0; i < KGConfig.particlesPerTick.get(); i++) {
+					this.level.addParticle(ParticleTypes.BUBBLE, true, position.x - (motionDiv.x * i), position.y - (motionDiv.x * i), position.z - (motionDiv.x * i), 0, 0, 0);
+				}
 			}
 			else {
-				this.level.addParticle(this.getTrailParticle(), true, position.x, position.y, position.z, 0, 0, 0);
+				for (int i = 0; i < KGConfig.particlesPerTick.get(); i++) {
+					this.level.addParticle(this.getTrailParticle(), true, position.x - (motionDiv.x * i), position.y - (motionDiv.x * i), position.z - (motionDiv.x * i), 0, 0, 0);
+				}
 			}
 		}
 

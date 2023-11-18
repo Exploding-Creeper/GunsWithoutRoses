@@ -7,6 +7,7 @@ public class KGConfig {
     public static ForgeConfigSpec spec;
 
     //mechanics
+    public static ForgeConfigSpec.IntValue particlesPerTick;
     public static ForgeConfigSpec.BooleanValue explosionsEnabled;
     public static ForgeConfigSpec.BooleanValue griefEnabled;
     public static ForgeConfigSpec.DoubleValue oneHandInaccuracyMultiplier;
@@ -369,6 +370,9 @@ public class KGConfig {
         builder.comment("Please note that the below options may effect the balance, as usually values cap at 100%.  higher values may not work as expected, or the curve of balance may flatten at the top.");
 
         builder.push("global");
+        particlesPerTick = builder
+                .comment("How many particles should a bullet trail emit per tick?  WARNING, PERFORMANCE BOTTLENECKS CAN OCCUR")
+                .defineInRange("particlesPerTick", 1, 0, 50);
         explosionsEnabled = builder
                 .comment("Should explosions destroy blocks?")
                 .define("explosionsEnabled", true);
