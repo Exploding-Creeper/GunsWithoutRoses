@@ -167,6 +167,8 @@ public class BulletEntity extends AbstractFireballEntity {
 
 		this.setDeltaMovement(vector3d);
 
+		Vector3d prevPos = this.position();
+
 		this.setPos(this.getX() + vector3d.x, this.getY() + vector3d.y, this.getZ() + vector3d.z);
 
 		//because the sniper cannot have a projectile ignore invulnerability anyway, this is safe to do.
@@ -199,7 +201,7 @@ public class BulletEntity extends AbstractFireballEntity {
 			pollRemove = true;
 		}
 
-		if (this.level.isClientSide && !pollRemove) {
+		if (this.level.isClientSide) {
 			//summon the particles in the center of the projectile instead of above it.
 			//disable emitters when underwater, as otherwise it looks messy to have two emitters (bubble emitter happens elsewhere)
 
@@ -210,12 +212,17 @@ public class BulletEntity extends AbstractFireballEntity {
 			//interpolation is always ahead, we want to draw particles for the last tick travelled not the current.
 			Vector3d position = this.getBoundingBox().getCenter().subtract(this.getDeltaMovement());
 			Vector3d motionDiv = this.getDeltaMovement().multiply(new Vector3d(1D / (double)divisor, 1D / (double)divisor, 1D / (double)divisor));
+			//delta of last tick to hit position is not always the projectile velocity
+			Vector3d motionDivHit = this.position().subtract(prevPos).multiply(new Vector3d(1D / (double)divisor, 1D / (double)divisor, 1D / (double)divisor));
 
+			//if we hit something we also need to immediately do a trace to it.
 			if (this.isUnderWater()) {
-				placeParticle(ParticleTypes.BUBBLE, position, motionDiv);
+				if (actualTick > 1) placeParticle(ParticleTypes.BUBBLE, position, motionDiv);
+				if (pollRemove) placeParticle(ParticleTypes.BUBBLE, this.getBoundingBox().getCenter(), motionDivHit);
 			}
 			else {
-				placeParticle(this.getTrailParticle(), position, motionDiv);
+				if (actualTick > 1) placeParticle(this.getTrailParticle(), position, motionDiv);
+				if (pollRemove) placeParticle(this.getTrailParticle(), this.getBoundingBox().getCenter(), motionDivHit);
 			}
 		}
 
