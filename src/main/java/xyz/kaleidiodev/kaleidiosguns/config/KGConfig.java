@@ -1245,7 +1245,7 @@ public class KGConfig {
                 .defineInRange("potionCannonInaccuracy", 0D, 0D, 90D);
         potionCannonProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for Potion Cannons")
-                .defineInRange("potionCannonProjectileSpeed", 1D, 0D, 64D);
+                .defineInRange("potionCannonProjectileSpeed", 1.5D, 0D, 64D);
         potionCannonSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Potion Cannons")
                 .defineInRange("potionCannonSwitchSpeed", 0.6D, 0D, 5D);

@@ -5,12 +5,10 @@ import net.minecraft.block.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.monster.EndermanEntity;
 import net.minecraft.entity.passive.TameableEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractFireballEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
-import net.minecraft.particles.BasicParticleType;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.*;
@@ -201,7 +199,7 @@ public class BulletEntity extends AbstractFireballEntity {
 			pollRemove = true;
 		}
 
-		if (this.level.isClientSide && (actualTick > 1) && !pollRemove) {
+		if (this.level.isClientSide && !pollRemove) {
 			//summon the particles in the center of the projectile instead of above it.
 			//disable emitters when underwater, as otherwise it looks messy to have two emitters (bubble emitter happens elsewhere)
 
@@ -228,9 +226,11 @@ public class BulletEntity extends AbstractFireballEntity {
 		Vector3d prevPos = position;
 		for (int i = 0; i < KGConfig.particlesPerTick.get(); i++) {
 			Vector3d maths = position.subtract(motionDiv.multiply(i, i, i));
-
 			if (maths.subtract(prevPos).length() > 0.5) {
 				prevPos = maths;
+
+				if (origin.subtract(maths).length() < 5) continue;
+
 				this.level.addParticle(particle, true, maths.x, maths.y, maths.z, 0, 0, 0);
 			}
 		}
