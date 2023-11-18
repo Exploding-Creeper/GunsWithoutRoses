@@ -10,6 +10,7 @@ import net.minecraft.entity.projectile.AbstractFireballEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
+import net.minecraft.particles.BasicParticleType;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.*;
@@ -205,30 +206,34 @@ public class BulletEntity extends AbstractFireballEntity {
 			//disable emitters when underwater, as otherwise it looks messy to have two emitters (bubble emitter happens elsewhere)
 
 			int divisor = KGConfig.particlesPerTick.get();
-
 			//if the particle count per tick is zero, disable trail particles entirely.
 			if (divisor == 0) return;
 
 			//interpolation is always ahead, we want to draw particles for the last tick travelled not the current.
 			Vector3d position = this.getBoundingBox().getCenter().subtract(this.getDeltaMovement());
-
 			Vector3d motionDiv = this.getDeltaMovement().multiply(new Vector3d(1D / (double)divisor, 1D / (double)divisor, 1D / (double)divisor));
 
 			if (this.isUnderWater()) {
-				for (int i = 0; i < KGConfig.particlesPerTick.get(); i++) {
-					Vector3d maths = position.subtract(motionDiv.multiply(i, i, i));
-					this.level.addParticle(ParticleTypes.BUBBLE, true, maths.x, maths.y, maths.z, 0, 0, 0);
-				}
+				placeParticle(ParticleTypes.BUBBLE, position, motionDiv);
 			}
 			else {
-				for (int i = 0; i < KGConfig.particlesPerTick.get(); i++) {
-					Vector3d maths = position.subtract(motionDiv.multiply(i, i, i));
-					this.level.addParticle(this.getTrailParticle(), true, maths.x, maths.y, maths.z, 0, 0, 0);
-				}
+				placeParticle(this.getTrailParticle(), position, motionDiv);
 			}
 		}
 
 		if (!pollRemove) this.traceHits();
+	}
+
+	private void placeParticle(IParticleData particle, Vector3d position, Vector3d motionDiv) {
+		Vector3d prevPos = position;
+		for (int i = 0; i < KGConfig.particlesPerTick.get(); i++) {
+			Vector3d maths = position.subtract(motionDiv.multiply(i, i, i));
+
+			if (maths.subtract(prevPos).length() > 0.5) {
+				prevPos = maths;
+				this.level.addParticle(particle, true, maths.x, maths.y, maths.z, 0, 0, 0);
+			}
+		}
 	}
 
 	//for any hit types that aren't vanilla, such as vex carbine's through blocks check since it can be unpredictable, or a sniper's collateral
