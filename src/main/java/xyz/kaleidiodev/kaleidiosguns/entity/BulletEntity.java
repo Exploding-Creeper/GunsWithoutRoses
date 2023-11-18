@@ -156,16 +156,16 @@ public class BulletEntity extends AbstractFireballEntity {
 		this.checkInsideBlocks();
 		ProjectileHelper.rotateTowardsMovement(this, 20.0F);
 
-		//add support for torpedo enchantment
-		float f = this.getInertia();
 		Vector3d vector3d = this.getDeltaMovement();
 
 		if (this.isInWater()) {
 			//don't decrease inertia if the torpedo enchantment was on the gun
-			if (!this.isTorpedo) vector3d.multiply(0.5, 0.5, 0.5);
+			if (!this.isTorpedo) vector3d = vector3d.multiply(0.5, 0.5, 0.5);
 		}
 
-		if (!this.isNoGravity()) vector3d.subtract(0, vector3d.y - 0.0025, 0);
+		if (!this.isNoGravity()) {
+			vector3d = vector3d.subtract(0, 0.05, 0);
+		}
 
 		this.setDeltaMovement(vector3d);
 
