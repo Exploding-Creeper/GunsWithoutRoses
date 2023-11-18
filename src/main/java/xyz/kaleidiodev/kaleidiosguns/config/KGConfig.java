@@ -372,7 +372,7 @@ public class KGConfig {
         builder.push("global");
         particlesPerTick = builder
                 .comment("How many particles should a bullet trail emit per tick?  WARNING, PERFORMANCE BOTTLENECKS CAN OCCUR")
-                .defineInRange("particlesPerTick", 1, 0, 50);
+                .defineInRange("particlesPerTick", 5, 0, 50);
         explosionsEnabled = builder
                 .comment("Should explosions destroy blocks?")
                 .define("explosionsEnabled", true);

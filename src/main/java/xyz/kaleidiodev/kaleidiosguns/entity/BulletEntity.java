@@ -216,12 +216,14 @@ public class BulletEntity extends AbstractFireballEntity {
 
 			if (this.isUnderWater()) {
 				for (int i = 0; i < KGConfig.particlesPerTick.get(); i++) {
-					this.level.addParticle(ParticleTypes.BUBBLE, true, position.x - (motionDiv.x * i), position.y - (motionDiv.x * i), position.z - (motionDiv.x * i), 0, 0, 0);
+					Vector3d maths = position.subtract(motionDiv.multiply(i, i, i));
+					this.level.addParticle(ParticleTypes.BUBBLE, true, maths.x, maths.y, maths.z, 0, 0, 0);
 				}
 			}
 			else {
 				for (int i = 0; i < KGConfig.particlesPerTick.get(); i++) {
-					this.level.addParticle(this.getTrailParticle(), true, position.x - (motionDiv.x * i), position.y - (motionDiv.x * i), position.z - (motionDiv.x * i), 0, 0, 0);
+					Vector3d maths = position.subtract(motionDiv.multiply(i, i, i));
+					this.level.addParticle(this.getTrailParticle(), true, maths.x, maths.y, maths.z, 0, 0, 0);
 				}
 			}
 		}
