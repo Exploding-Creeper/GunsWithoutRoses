@@ -459,7 +459,7 @@ public class KGConfig {
                 .defineInRange("diamondRevolverFireDelay", 36, 0, 72000);
         diamondRevolverEnchantability = builder
                 .comment("Configure the Enchantability for Revolvers")
-                .defineInRange("diamondRevolverEnchantability", 9, 0, 30);
+                .defineInRange("diamondRevolverEnchantability", 1, 0, 30);
         diamondRevolverDurability = builder
                 .comment("Configure the Durability for Revolvers")
                 .defineInRange("diamondRevolverDurability", 706, 0, 32767);
