@@ -86,6 +86,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	public boolean hitEntity;
 	public Set<Entity> entitiesThisTick = new HashSet<>();
 	public boolean pollRemove;
+	public boolean didNoDamage;
 
 	protected Set<Entity> entityHitHistory = new HashSet<>();
 	public Set<Entity> headshotHistory = new HashSet<>();
@@ -177,6 +178,8 @@ public class BulletEntity extends AbstractFireballEntity {
 				for (Entity currentEntity : entitiesThisTick) {
 					if (currentEntity instanceof LivingEntity) {
 						entityHitProcess(currentEntity);
+						//stop collateral for the first entity in the list to have a shield
+						if (didNoDamage) break;
 					}
 				}
 			}
@@ -496,6 +499,12 @@ public class BulletEntity extends AbstractFireballEntity {
 		}
 
 		boolean damaged = victim.hurt((new IndirectEntityDamageSource("arrow", this, shooter)).setProjectile(), (float) bullet.modifyDamage(damage, this, victim, shooter, level));
+
+		if (victim instanceof LivingEntity) {
+			if (healthOfVictim == ((LivingEntity)victim).getHealth()) {
+				didNoDamage = true;
+			}
+		}
 
 		if (isClean) victim.setDeltaMovement(previousDelta);
 		else if (damaged && victim instanceof LivingEntity) {
