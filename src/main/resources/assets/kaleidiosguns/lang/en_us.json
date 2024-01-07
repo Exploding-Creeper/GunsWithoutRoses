@@ -145,7 +145,7 @@
 	"enchantment.kaleidiosguns.tracer_ammo": "Curse of Tracer Ammo",
 	"enchantment.kaleidiosguns.tracer_ammo.desc": "You, the bullet, and hit target glow, but the damage is very little",
 	"enchantment.kaleidiosguns.calibur": "Curse of Calibur",
-	"enchantment.kaleidiosguns.description": "Every level specifies which bullet type this weapon will only accept, starting from flint to cleric cartridge",
+	"enchantment.kaleidiosguns.calibur.desc": "Every level specifies which bullet type this weapon will only accept, starting from flint to cleric cartridge",
 
 	"entity.kaleidiosguns.bullet": "Bullet",
 
