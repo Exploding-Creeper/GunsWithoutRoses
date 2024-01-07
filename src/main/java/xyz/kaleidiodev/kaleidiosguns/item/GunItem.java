@@ -347,8 +347,7 @@ public class GunItem extends Item {
 			ShotgunItem thisGun = (ShotgunItem)gun.getItem();
 			shot.setDamage(someDamage * ((double)thisGun.getBaseBulletCount() / (double)thisGun.getBulletCount(gun, player)));
 		}
-
-		if (!player.getMainHandItem().isEmpty() && !player.getOffhandItem().isEmpty() && twoHandBonus) shot.setDamage(someDamage * KGConfig.goldShowmanTwoHandedUse.get());
+		else if (!player.getMainHandItem().isEmpty() && !player.getOffhandItem().isEmpty() && twoHandBonus) shot.setDamage(someDamage * KGConfig.goldShowmanTwoHandedUse.get());
 		else shot.setDamage(someDamage);
 
 		shot.wasRevenge = (this.shouldRevenge && (player.getHealth() < (player.getMaxHealth() * KGConfig.emeraldBlessedHealthMinimumRatio.get())));
