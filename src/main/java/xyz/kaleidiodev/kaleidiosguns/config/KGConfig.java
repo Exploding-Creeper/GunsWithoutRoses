@@ -554,7 +554,7 @@ public class KGConfig {
                 .comment("Configure the Projectile Speed for Showman's Glocks")
                 .defineInRange("goldShowmanProjectileSpeed", 7D, 0D, 64D);
         goldShowmanTwoHandedUse = builder
-                .comment("Configure the bonus for two handed use on Showman's Glocks")
+                .comment("Configure the bonus for using a Showman Glock with one hand open")
                 .defineInRange("goldShowmanTwoHandedUse", 1.4D, 0.1D, 10.0D);
         goldShowmanSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for Showman's Glocks")

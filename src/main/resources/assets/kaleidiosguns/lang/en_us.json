@@ -68,7 +68,7 @@
 	"tooltip.kaleidiosguns.vampire_shotgun": "Adds another projectile per entity close-by§r",
 	"tooltip.kaleidiosguns.gatling.hold": "Slows user while firing§r",
 	"tooltip.kaleidiosguns.minegun": "Can mine blocks tiered by bullet damage§r",
-	"tooltip.kaleidiosguns.showman_glock": "Increases damage if both hands are full§r",
+	"tooltip.kaleidiosguns.showman_glock": "Increases damage if one hand is empty§r",
 	"tooltip.kaleidiosguns.revolver": "Stabilizes spread with patience§r",
 	"tooltip.kaleidiosguns.double_barrel": "Shoot multiple times before reloading§r",
 	"tooltip.kaleidiosguns.collateral": "Bullets fly through enemies§r",
