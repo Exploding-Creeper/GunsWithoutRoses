@@ -387,6 +387,7 @@ public class GunItem extends Item {
 		shot.shootsLights = this.isShadow;
 		shot.juggle = this.isJuggler;
 		shot.interactsWithBlocks = this.interactsWithBlocks;
+		shot.silenced = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.silenced, gun) == 1;
 
 		shot.hero = false;
 		if (isHero) {
