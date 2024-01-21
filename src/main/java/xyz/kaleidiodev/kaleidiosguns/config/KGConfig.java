@@ -96,18 +96,18 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue diamondBoomstickMeleeDamage;
     public static ForgeConfigSpec.IntValue diamondBoomstickCost;
 
-    public static ForgeConfigSpec.DoubleValue shotgunDamageMultiplier;
-    public static ForgeConfigSpec.IntValue shotgunFireDelay;
-    public static ForgeConfigSpec.IntValue shotgunEnchantability;
-    public static ForgeConfigSpec.IntValue shotgunDurability;
-    public static ForgeConfigSpec.DoubleValue shotgunInaccuracy;
-    public static ForgeConfigSpec.IntValue shotgunBulletCount;
-    public static ForgeConfigSpec.DoubleValue shotgunProjectileSpeed;
-    public static ForgeConfigSpec.DoubleValue shotgunSwitchSpeed;
-    public static ForgeConfigSpec.DoubleValue shotgunMeleeDamage;
-    public static ForgeConfigSpec.IntValue shotgunCost;
-    public static ForgeConfigSpec.DoubleValue shotgunMinimumSpeed;
-    public static ForgeConfigSpec.DoubleValue shotgunMaximumSpeed;
+    public static ForgeConfigSpec.DoubleValue blunderbussDamageMultiplier;
+    public static ForgeConfigSpec.IntValue blunderbussFireDelay;
+    public static ForgeConfigSpec.IntValue blunderbussEnchantability;
+    public static ForgeConfigSpec.IntValue blunderbussDurability;
+    public static ForgeConfigSpec.DoubleValue blunderbussInaccuracy;
+    public static ForgeConfigSpec.IntValue blunderbussBulletCount;
+    public static ForgeConfigSpec.DoubleValue blunderbussProjectileSpeed;
+    public static ForgeConfigSpec.DoubleValue blunderbussSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue blunderbussMeleeDamage;
+    public static ForgeConfigSpec.IntValue blunderbussCost;
+    public static ForgeConfigSpec.DoubleValue blunderbussMinimumSpeed;
+    public static ForgeConfigSpec.DoubleValue blunderbussMaximumSpeed;
 
     public static ForgeConfigSpec.DoubleValue goldDoubleShotgunDamageMultiplier;
     public static ForgeConfigSpec.IntValue goldDoubleShotgunFireDelay;
@@ -636,43 +636,43 @@ public class KGConfig {
                 .defineInRange("diamondBoomstickCost", 6, 0, 64);
         builder.pop();
 
-        builder.push("spreadgun");
-        shotgunDamageMultiplier = builder
-                .comment("Define the Damage multiplier for Shotguns")
-                .defineInRange("shotgunDamageMultiplier", 0.2D, 0.1D, 5D);
-        shotgunFireDelay = builder
-                .comment("Configure the Fire delay for Shotguns")
-                .defineInRange("shotgunFireDelay", 20, 0, 72000);
-        shotgunEnchantability = builder
-                .comment("Configure the Enchantability for Shotguns")
-                .defineInRange("shotgunEnchantability", 5, 0, 30);
-        shotgunDurability = builder
-                .comment("Configure the Durability for Shotguns")
-                .defineInRange("shotgunDurability", 600, 0, 32767);
-        shotgunInaccuracy = builder
-                .comment("Configure the Inaccuracy for Shotguns")
-                .defineInRange("shotgunInaccuracy", 8D, 0D, 90D);
-        shotgunBulletCount = builder
-                .comment("Configure the amount of Bullets at once for Shotguns")
-                .defineInRange("shotgunBulletCount", 10, 0, 50);
-        shotgunProjectileSpeed = builder
-                .comment("Configure the Projectile Speed for Shotguns")
-                .defineInRange("shotgunProjectileSpeed", 6D, 0D, 64D);
-        shotgunSwitchSpeed = builder
-                .comment("Configure the Weapon Switch Speed for Shotguns")
-                .defineInRange("shotgunSwitchSpeed", 0.9D, 0D, 5D);
-        shotgunMeleeDamage = builder
-                .comment("Configure the Melee Damage for Shotguns")
-                .defineInRange("shotgunMeleeDamage", 4D, 0D, 40D);
-        shotgunCost = builder
-                .comment("Ammo cost to fire Shotguns")
-                .defineInRange("shotgunCost", 8, 0, 64);
-        shotgunMinimumSpeed = builder
-                .comment("Configure the Minimum Speed for projectiles shot from Shotguns")
-                .defineInRange("shotgunMinimumSpeed", 0.5D, 0.1D, 10D);
-        shotgunMaximumSpeed = builder
-                .comment("Configure the Maximum Speed for projectiles shot from Shotguns")
-                .defineInRange("shotgunMaximumSpeed", 2.0D, 0.1D, 10D);
+        builder.push("blunderbuss");
+        blunderbussDamageMultiplier = builder
+                .comment("Define the Damage multiplier for Blunderbusses")
+                .defineInRange("blunderbussDamageMultiplier", 0.2D, 0.1D, 5D);
+        blunderbussFireDelay = builder
+                .comment("Configure the Fire delay for Blunderbusses")
+                .defineInRange("blunderbussFireDelay", 20, 0, 72000);
+        blunderbussEnchantability = builder
+                .comment("Configure the Enchantability for Blunderbusses")
+                .defineInRange("blunderbussEnchantability", 5, 0, 30);
+        blunderbussDurability = builder
+                .comment("Configure the Durability for Blunderbusses")
+                .defineInRange("blunderbussDurability", 600, 0, 32767);
+        blunderbussInaccuracy = builder
+                .comment("Configure the Inaccuracy for Blunderbusses")
+                .defineInRange("blunderbussInaccuracy", 8D, 0D, 90D);
+        blunderbussBulletCount = builder
+                .comment("Configure the amount of Bullets at once for Blunderbusses")
+                .defineInRange("blunderbussBulletCount", 10, 0, 50);
+        blunderbussProjectileSpeed = builder
+                .comment("Configure the Projectile Speed for Blunderbusses")
+                .defineInRange("blunderbussProjectileSpeed", 6D, 0D, 64D);
+        blunderbussSwitchSpeed = builder
+                .comment("Configure the Weapon Switch Speed for Blunderbusses")
+                .defineInRange("blunderbussSwitchSpeed", 0.9D, 0D, 5D);
+        blunderbussMeleeDamage = builder
+                .comment("Configure the Melee Damage for Blunderbusses")
+                .defineInRange("blunderbussMeleeDamage", 4D, 0D, 40D);
+        blunderbussCost = builder
+                .comment("Ammo cost to fire Blunderbusses")
+                .defineInRange("blunderbussCost", 8, 0, 64);
+        blunderbussMinimumSpeed = builder
+                .comment("Configure the Minimum Speed for projectiles shot from Blunderbusses")
+                .defineInRange("blunderbussMinimumSpeed", 0.5D, 0.1D, 10D);
+        blunderbussMaximumSpeed = builder
+                .comment("Configure the Maximum Speed for projectiles shot from Blunderbusses")
+                .defineInRange("blunderbussMaximumSpeed", 2.0D, 0.1D, 10D);
         builder.pop();
 
         builder.push("hero wave shotgun");

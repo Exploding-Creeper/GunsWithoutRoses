@@ -205,7 +205,7 @@ public class BulletEntity extends AbstractFireballEntity {
 			pollRemove = true;
 		}
 
-		if (this.level.isClientSide && !silenced)) {
+		if (this.level.isClientSide && !silenced) {
 			//summon the particles in the center of the projectile instead of above it.
 			//disable emitters when underwater, as otherwise it looks messy to have two emitters (bubble emitter happens elsewhere)
 

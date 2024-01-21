@@ -70,7 +70,7 @@ public class ShotgunItem extends GunItem {
 	@Override
 	public double getProjectileSpeed(ItemStack stack, @Nullable PlayerEntity player) {
 		if (this.isSpread) {
-			return super.baseSpeed(stack, null) * (KGConfig.shotgunMinimumSpeed.get() + (Math.random() * (KGConfig.shotgunMaximumSpeed.get() - KGConfig.shotgunMinimumSpeed.get())));
+			return super.baseSpeed(stack, null) * (KGConfig.blunderbussMinimumSpeed.get() + (Math.random() * (KGConfig.blunderbussMaximumSpeed.get() - KGConfig.blunderbussMinimumSpeed.get())));
 		} else return super.baseSpeed(stack, null);
 	}
 
