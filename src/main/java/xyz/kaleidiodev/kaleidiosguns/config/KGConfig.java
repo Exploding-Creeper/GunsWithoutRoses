@@ -85,16 +85,16 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue emeraldBlessedMeleeDamage;
     public static ForgeConfigSpec.IntValue emeraldBlessedCost;
 
-    public static ForgeConfigSpec.DoubleValue diamondBoomstickDamageMultiplier;
-    public static ForgeConfigSpec.IntValue diamondBoomstickFireDelay;
-    public static ForgeConfigSpec.IntValue diamondBoomstickEnchantability;
-    public static ForgeConfigSpec.IntValue diamondBoomstickDurability;
-    public static ForgeConfigSpec.DoubleValue diamondBoomstickInaccuracy;
-    public static ForgeConfigSpec.IntValue diamondBoomstickBulletCount;
-    public static ForgeConfigSpec.DoubleValue diamondBoomstickProjectileSpeed;
-    public static ForgeConfigSpec.DoubleValue diamondBoomstickSwitchSpeed;
-    public static ForgeConfigSpec.DoubleValue diamondBoomstickMeleeDamage;
-    public static ForgeConfigSpec.IntValue diamondBoomstickCost;
+    public static ForgeConfigSpec.DoubleValue diamondShotgunDamageMultiplier;
+    public static ForgeConfigSpec.IntValue diamondShotgunFireDelay;
+    public static ForgeConfigSpec.IntValue diamondShotgunEnchantability;
+    public static ForgeConfigSpec.IntValue diamondShotgunDurability;
+    public static ForgeConfigSpec.DoubleValue diamondShotgunInaccuracy;
+    public static ForgeConfigSpec.IntValue diamondShotgunBulletCount;
+    public static ForgeConfigSpec.DoubleValue diamondShotgunProjectileSpeed;
+    public static ForgeConfigSpec.DoubleValue diamondShotgunSwitchSpeed;
+    public static ForgeConfigSpec.DoubleValue diamondShotgunMeleeDamage;
+    public static ForgeConfigSpec.IntValue diamondShotgunCost;
 
     public static ForgeConfigSpec.DoubleValue blunderbussDamageMultiplier;
     public static ForgeConfigSpec.IntValue blunderbussFireDelay;
@@ -604,36 +604,36 @@ public class KGConfig {
         builder.pop();
 
         builder.push("shotgun");
-        diamondBoomstickDamageMultiplier = builder
-                .comment("Define the Damage multiplier for Boom Sticks")
-                .defineInRange("diamondBoomstickDamageMultiplier", 0.6D, 0.1D, 5D);
-        diamondBoomstickFireDelay = builder
-                .comment("Configure the Fire delay for Boom Sticks")
-                .defineInRange("diamondBoomstickFireDelay", 16, 0, 72000);
-        diamondBoomstickEnchantability = builder
-                .comment("Configure the Enchantability for Boom Sticks")
-                .defineInRange("diamondBoomstickEnchantability", 1, 0, 30);
-        diamondBoomstickDurability = builder
-                .comment("Configure the Durability for Boom Sticks")
-                .defineInRange("diamondBoomstickDurability", 400, 0, 32767);
-        diamondBoomstickInaccuracy = builder
-                .comment("Configure the Inaccuracy for Boom Sticks")
-                .defineInRange("diamondBoomstickInaccuracy", 4D, 0D, 90D);
-        diamondBoomstickBulletCount = builder
-                .comment("Configure the amount of Bullets at once for Boom Sticks")
-                .defineInRange("diamondBoomstickBulletCount", 5, 0, 50);
-        diamondBoomstickProjectileSpeed = builder
-                .comment("Configure the Projectile Speed for Boom Sticks")
-                .defineInRange("diamondBoomstickProjectileSpeed", 7D, 0D, 64D);
-        diamondBoomstickSwitchSpeed = builder
-                .comment("Configure the Weapon Switch Speed for Boom Sticks")
-                .defineInRange("diamondBoomstickSwitchSpeed", 0.9D, 0D, 5D);
-        diamondBoomstickMeleeDamage = builder
-                .comment("Configure the Melee Damage for Boom Sticks")
-                .defineInRange("diamondBoomstickMeleeDamage", 4D, 0D, 40D);
-        diamondBoomstickCost = builder
-                .comment("Ammo cost to fire Boom Sticks")
-                .defineInRange("diamondBoomstickCost", 6, 0, 64);
+        diamondShotgunDamageMultiplier = builder
+                .comment("Define the Damage multiplier for Shotguns")
+                .defineInRange("diamondShotgunDamageMultiplier", 0.6D, 0.1D, 5D);
+        diamondShotgunFireDelay = builder
+                .comment("Configure the Fire delay for Shotguns")
+                .defineInRange("diamondShotgunFireDelay", 16, 0, 72000);
+        diamondShotgunEnchantability = builder
+                .comment("Configure the Enchantability for Shotguns")
+                .defineInRange("diamondShotgunEnchantability", 1, 0, 30);
+        diamondShotgunDurability = builder
+                .comment("Configure the Durability for Shotguns")
+                .defineInRange("diamondShotgunDurability", 400, 0, 32767);
+        diamondShotgunInaccuracy = builder
+                .comment("Configure the Inaccuracy for Shotguns")
+                .defineInRange("diamondShotgunInaccuracy", 4D, 0D, 90D);
+        diamondShotgunBulletCount = builder
+                .comment("Configure the amount of Bullets at once for Shotguns")
+                .defineInRange("diamondShotgunBulletCount", 5, 0, 50);
+        diamondShotgunProjectileSpeed = builder
+                .comment("Configure the Projectile Speed for Shotguns")
+                .defineInRange("diamondShotgunProjectileSpeed", 7D, 0D, 64D);
+        diamondShotgunSwitchSpeed = builder
+                .comment("Configure the Weapon Switch Speed for Shotguns")
+                .defineInRange("diamondShotgunSwitchSpeed", 0.9D, 0D, 5D);
+        diamondShotgunMeleeDamage = builder
+                .comment("Configure the Melee Damage for Shotguns")
+                .defineInRange("diamondShotgunMeleeDamage", 4D, 0D, 40D);
+        diamondShotgunCost = builder
+                .comment("Ammo cost to fire Shotguns")
+                .defineInRange("diamondShotgunCost", 6, 0, 64);
         builder.pop();
 
         builder.push("blunderbuss");
