@@ -300,6 +300,20 @@ public class GunItem extends Item {
 				}
 
 				player.getCooldowns().addCooldown(this, getActualFireDelay(gun, player));
+
+				//force both hands to cooldown.
+				if (player.getMainHandItem().getItem() == this) {
+					if (player.getOffhandItem().getItem() instanceof GunItem) {
+						player.getCooldowns().addCooldown(player.getOffhandItem().getItem(), getActualFireDelay(gun, player) + 1);
+					}
+				}
+				//don't bother if two of the same weapon.
+				else if (player.getOffhandItem().getItem() != this) {
+					if (player.getOffhandItem().getItem() instanceof GunItem) {
+						player.getCooldowns().addCooldown(player.getMainHandItem().getItem(), getActualFireDelay(gun, player) + 1);
+					}
+				}
+
 				mergeStacks(player, gun);
 			}
 
