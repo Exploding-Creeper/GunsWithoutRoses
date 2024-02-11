@@ -1097,6 +1097,7 @@ public class GunItem extends Item {
 				if (breachDoors) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.doors"));
 				if (isCorruption) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.corruption"));
 				if (isWither) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.wither"));
+				if (this.getItem() == ModItems.doubleBarrelShotgun) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.knockback"));
 				if (this.getItem() == ModItems.plasmaGatling) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.plasma"));
 			}
 
