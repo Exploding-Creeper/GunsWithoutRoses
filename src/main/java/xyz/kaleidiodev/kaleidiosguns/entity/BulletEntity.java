@@ -633,6 +633,9 @@ public class BulletEntity extends AbstractFireballEntity {
 		if (knockbackStrength != 0) compound.putDouble("knockback", knockbackStrength);
 		compound.putBoolean("clip", clip);
 		compound.putByte("lava", lavaMode);
+		compound.putDouble("originX", origin.x);
+		compound.putDouble("originY", origin.y);
+		compound.putDouble("originZ", origin.z);
 	}
 
 	@Override
@@ -649,6 +652,7 @@ public class BulletEntity extends AbstractFireballEntity {
 		knockbackStrength = compound.getDouble("knockback");
 		clip = compound.getBoolean("clip");
 		lavaMode = compound.getByte("lava");
+		origin = new Vector3d(compound.getDouble("originX"), compound.getDouble("originY"), compound.getDouble("originZ"));
 	}
 
 	public void setDamage(double damage) {
