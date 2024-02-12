@@ -88,7 +88,7 @@ public interface IBullet {
 		//revenge shots should multiply their damage.
 		if (projectile.wasRevenge) newDamage *= KGConfig.emeraldBlessedBlessingMultiplier.get();
 
-		if (projectile.hero) newDamage *= KGConfig.heroShotgunEffectMultiplier.get();
+		//if (projectile.hero) newDamage *= KGConfig.heroShotgunEffectMultiplier.get();
 
 		if (projectile.headshotHistory.contains(target)) {
 			double actualHeadshot = KGConfig.headshotMultiplierMaximum.get();

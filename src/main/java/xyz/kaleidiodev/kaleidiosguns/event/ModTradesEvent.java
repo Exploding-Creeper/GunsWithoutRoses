@@ -18,13 +18,13 @@ import java.util.List;
 public class ModTradesEvent {
     @SubscribeEvent
     public static void addCustomTrades(VillagerTradesEvent event) {
-        if (event.getType() == VillagerProfession.FLETCHER) {
+        if (event.getType() == VillagerProfession.WEAPONSMITH) {
             Int2ObjectMap<List<VillagerTrades.ITrade>> trades = event.getTrades();
 
             trades.get(5).add((trader, rand) -> new MerchantOffer(new ItemStack(Items.EMERALD, 15), new ItemStack(ModItems.blessedPistol, 1), 1, 50, 0.3F));
         }
 
-        if (event.getType() == VillagerProfession.BUTCHER) {
+        if (event.getType() == VillagerProfession.FLETCHER) {
             Int2ObjectMap<List<VillagerTrades.ITrade>> trades = event.getTrades();
 
             trades.get(5).add((trader, rand) -> new MerchantOffer(new ItemStack(Items.EMERALD, 25), new ItemStack(ModItems.musketSniper, 1), 1, 50, 0.3F));
@@ -36,11 +36,11 @@ public class ModTradesEvent {
             trades.get(5).add((trader, rand) -> new MerchantOffer(new ItemStack(Items.EMERALD, 30), new ItemStack(ModItems.defenderRifle, 1), 1, 80, 0.3F));
         }
 
-        if (event.getType() == VillagerProfession.WEAPONSMITH) {
-            Int2ObjectMap<List<VillagerTrades.ITrade>> trades = event.getTrades();
+        //if (event.getType() == VillagerProfession.WEAPONSMITH) {
+        //    Int2ObjectMap<List<VillagerTrades.ITrade>> trades = event.getTrades();
 
-            trades.get(5).add((trader, rand) -> new MerchantOffer(new ItemStack(Items.EMERALD, 50), new ItemStack(ModItems.heroShotgun, 1), 1, 80, 0.3F));
-        }
+        //    trades.get(5).add((trader, rand) -> new MerchantOffer(new ItemStack(Items.EMERALD, 50), new ItemStack(ModItems.heroShotgun, 1), 1, 80, 0.3F));
+        //}
 
         if (event.getType() == VillagerProfession.CLERIC) {
             Int2ObjectMap<List<VillagerTrades.ITrade>> trades = event.getTrades();
