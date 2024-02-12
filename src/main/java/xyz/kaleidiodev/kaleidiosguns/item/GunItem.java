@@ -879,7 +879,7 @@ public class GunItem extends Item {
 		return this;
 	}
 
-	public GunItem setCanFlinch(boolean glass) {
+	public GunItem setCanFlinch(boolean flinch) {
 		this.canFlinch = glass;
 		return this;
 	}
