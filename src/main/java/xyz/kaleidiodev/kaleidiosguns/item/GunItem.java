@@ -396,7 +396,7 @@ public class GunItem extends Item {
 		shot.isTorpedo = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.torpedo, gun) == 1;
 		shot.shouldBreakDoors = this.breachDoors;
 		shot.shouldFlinch = this.canFlinch;
-		shot.healsFriendlies = this.isDefender;
+		//shot.healsFriendlies = this.isDefender;
 		shot.isMeleeBonus = this.meleeBonusCounter > 0;
 		shot.shootsLights = this.isShadow;
 		shot.juggle = this.isJuggler;
