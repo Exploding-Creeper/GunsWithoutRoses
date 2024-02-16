@@ -186,8 +186,6 @@ public class KGConfig {
     public static ForgeConfigSpec.IntValue ironCarbineCost;
     public static ForgeConfigSpec.DoubleValue ironCarbineReplacementInaccuracy;
     public static ForgeConfigSpec.DoubleValue ironCarbineMovementInaccuracy;
-    public static ForgeConfigSpec.IntValue ironCarbineFlinchEffect;
-    public static ForgeConfigSpec.IntValue ironCarbineFlinchTicks;
 
     public static ForgeConfigSpec.DoubleValue goldVexDamageMultiplier;
     public static ForgeConfigSpec.IntValue goldVexFireDelay;
@@ -288,6 +286,8 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue diamondAssaultSwitchSpeed;
     public static ForgeConfigSpec.DoubleValue diamondAssaultMeleeDamage;
     public static ForgeConfigSpec.IntValue diamondAssaultCost;
+    public static ForgeConfigSpec.IntValue diamondAssaultFlinchEffect;
+    public static ForgeConfigSpec.IntValue diamondAssaultFlinchTicks;
 
     public static ForgeConfigSpec.DoubleValue lavaSmgDamageMultiplier;
     public static ForgeConfigSpec.IntValue lavaSmgFireDelay;
@@ -907,12 +907,6 @@ public class KGConfig {
         ironCarbineReplacementInaccuracy = builder
                 .comment("Configure the inaccuracy addition whilst using one hand with Carbines")
                 .defineInRange("ironCarbineReplacementInaccuracy", 1.5D, 0D, 40D);
-        ironCarbineFlinchEffect = builder
-                .comment("Configure the level of Weakness a carbine gives")
-                .defineInRange("ironCarbineFlinchEffect", 2, 0, 10);
-        ironCarbineFlinchTicks = builder
-                .comment("Configure the amount of ticks of Weakness a carbine gives")
-                .defineInRange("ironCarbineFlinchTicks", 10, 0, 10);
         builder.pop();
 
         builder.push("ver burst carbine");
@@ -1102,6 +1096,12 @@ public class KGConfig {
         diamondAssaultCost = builder
                 .comment("Ammo cost to fire Assault Rifles")
                 .defineInRange("diamondAssaultCost", 1, 0, 64);
+        diamondAssaultFlinchEffect = builder
+                .comment("Configure the level of Weakness an Assault Rifle gives")
+                .defineInRange("ironCarbineFlinchEffect", 3, 0, 10);
+        diamondAssaultFlinchTicks = builder
+                .comment("Configure the amount of ticks of Weakness an Assault Rifle gives")
+                .defineInRange("ironCarbineFlinchTicks", 20, 0, 10);
         builder.pop();
 
         builder.push("lava bound smg");
