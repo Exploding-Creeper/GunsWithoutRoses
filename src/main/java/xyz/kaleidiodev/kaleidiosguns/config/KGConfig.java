@@ -1098,10 +1098,10 @@ public class KGConfig {
                 .defineInRange("diamondAssaultCost", 1, 0, 64);
         diamondAssaultFlinchEffect = builder
                 .comment("Configure the level of Weakness an Assault Rifle gives")
-                .defineInRange("ironCarbineFlinchEffect", 3, 0, 10);
+                .defineInRange("diamondAssaultFlinchEffect", 2, 0, 10);
         diamondAssaultFlinchTicks = builder
                 .comment("Configure the amount of ticks of Weakness an Assault Rifle gives")
-                .defineInRange("ironCarbineFlinchTicks", 20, 0, 10);
+                .defineInRange("diamondAssaultFlinchTicks", 20, 0, 10);
         builder.pop();
 
         builder.push("lava bound smg");
