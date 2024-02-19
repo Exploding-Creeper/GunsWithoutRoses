@@ -375,7 +375,7 @@ public class BulletEntity extends AbstractFireballEntity {
 
 				ItemStack newTool;
 
-				if (this.getDamage() > KGConfig.mineGunFifthLevel.get()) {
+				if (this.getDamage() >= KGConfig.mineGunFifthLevel.get()) {
 					newTool = new ItemStack(Items.DIAMOND_PICKAXE);
 					tryBreakBlock(blockPositionToMine, newTool);
 					newTool = new ItemStack(Items.DIAMOND_AXE);
@@ -385,7 +385,7 @@ public class BulletEntity extends AbstractFireballEntity {
 					newTool = new ItemStack(Items.SHEARS);
 					tryBreakBlock(blockPositionToMine, newTool);
 					breakWeakBlocks(blockPositionToMine);
-				} else if (this.getDamage() > KGConfig.mineGunFourthLevel.get()) {
+				} else if (this.getDamage() >= KGConfig.mineGunFourthLevel.get()) {
 					newTool = new ItemStack(Items.IRON_PICKAXE);
 					tryBreakBlock(blockPositionToMine, newTool);
 					newTool = new ItemStack(Items.IRON_AXE);
@@ -395,7 +395,7 @@ public class BulletEntity extends AbstractFireballEntity {
 					newTool = new ItemStack(Items.SHEARS);
 					tryBreakBlock(blockPositionToMine, newTool);
 					breakWeakBlocks(blockPositionToMine);
-				} else if (this.getDamage() > KGConfig.mineGunThirdLevel.get()) {
+				} else if (this.getDamage() >= KGConfig.mineGunThirdLevel.get()) {
 					newTool = new ItemStack(Items.STONE_PICKAXE);
 					tryBreakBlock(blockPositionToMine, newTool);
 					newTool = new ItemStack(Items.STONE_AXE);
@@ -403,7 +403,7 @@ public class BulletEntity extends AbstractFireballEntity {
 					newTool = new ItemStack(Items.STONE_SHOVEL);
 					tryBreakBlock(blockPositionToMine, newTool);
 					breakWeakBlocks(blockPositionToMine);
-				} else if (this.getDamage() > KGConfig.mineGunSecondLevel.get()) {
+				} else if (this.getDamage() >= KGConfig.mineGunSecondLevel.get()) {
 					newTool = new ItemStack(Items.WOODEN_PICKAXE);
 					tryBreakBlock(blockPositionToMine, newTool);
 					newTool = new ItemStack(Items.WOODEN_AXE);
