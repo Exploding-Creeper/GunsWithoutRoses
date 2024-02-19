@@ -489,7 +489,7 @@ public class KGConfig {
                 .defineInRange("diamondRevolverCost", 2, 0, 64);
         builder.pop();
 
-        builder.push("revolver");
+        builder.push("shadow magnum");
         shadowRevolverDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Shadow Magnums")
                 .defineInRange("shadowRevolverDamageModifier", 1.7D, 0.1D, 5D);
@@ -534,7 +534,7 @@ public class KGConfig {
                 .defineInRange("shadowRevolverCost", 2, 0, 64);
         builder.pop();
 
-        builder.push("skillshot pistol");
+        builder.push("showman glock");
         goldShowmanDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Showman's Glocks")
                 .defineInRange("goldShowmanDamageModifier", 1.0D, 0.1D, 5D);
@@ -909,7 +909,7 @@ public class KGConfig {
                 .defineInRange("ironCarbineReplacementInaccuracy", 1.5D, 0D, 40D);
         builder.pop();
 
-        builder.push("ver burst carbine");
+        builder.push("vex burst carbine");
         goldVexDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Vex Burst Carbines")
                 .defineInRange("goldVexDamageMultiplier", 0.6D, 0.5D, 5D);
@@ -987,7 +987,7 @@ public class KGConfig {
                 .defineInRange("diamondMinegunReplacementInaccuracy", 2D, 0D, 40D);
         builder.pop();
 
-        builder.push("corruption gun");
+        builder.push("nethermaykr");
         netheriteMinegunDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Nethermaykr")
                 .defineInRange("netheriteMinegunDamageMultiplier", 2D, 0.1D, 5D);
