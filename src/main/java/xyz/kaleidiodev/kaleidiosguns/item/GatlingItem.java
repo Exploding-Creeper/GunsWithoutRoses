@@ -90,7 +90,7 @@ public class GatlingItem extends GunItem {
 			if ((this.isRedstone) && (checkRedstoneLevel(world, player, gun) == -1)) player.stopUsingItem();
 
 			int used = getUseDuration(gun) - (ticks - 1);
-			int rateChange = (getFireDelay(gun, player) - ((isDefender && checkTileEntities(world, player)) ? KGConfig.defenderRifleDelayDelta.get() : 0));
+			int rateChange = (getFireDelay(gun, player) - ((isDefender && checkTileEntities(world, player)) ? KGConfig.lmgDefenderDelayDelta.get() : 0));
 			if (((used > 0 && (used % rateChange == 0)) || this.isFirstShot) && !world.isClientSide()) {
 				//"Oh yeah I will use the vanilla method so that quivers can do their thing"
 				//guess what the quivers suck
@@ -146,7 +146,7 @@ public class GatlingItem extends GunItem {
 	protected boolean checkTileEntities(World world, PlayerEntity player) {
 		BlockPos checkPos;
 		BlockPos closestPos = null;
-		int checkRadius = KGConfig.defenderRifleRange.get();
+		int checkRadius = KGConfig.lmgDefenderRange.get();
 		int distance = -1;
 
 		for (int x = player.blockPosition().getX() - checkRadius; x < player.blockPosition().getX() + checkRadius; x++) {
