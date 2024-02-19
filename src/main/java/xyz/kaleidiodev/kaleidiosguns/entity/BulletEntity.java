@@ -295,7 +295,7 @@ public class BulletEntity extends AbstractFireballEntity {
 
 					//if the raytrace is at or above the enemy's chin, it's a headshot
 					//the chin is a third of the height from the top of the entity
-					if ((bulletBBFloor > enemyChin) && (bulletBBFloor < enemyTop)) {
+					if ((bulletBBFloor > enemyChin) && (bulletBBFloor < enemyTop) && !isExplosive && !isPlasma && !shouldBreakBlock) {
 						if ((getOwner() != null) && (!this.level.isClientSide()) && !(victim instanceof EndermanEntity))
 							getOwner().level.playSound(null, bb.getCenter().x, bb.getCenter().y, bb.getCenter().z, SoundEvents.PLAYER_ATTACK_CRIT, SoundCategory.VOICE, 5.0f, 1.0f);
 						headshotHistory.add(victim);
