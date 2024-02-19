@@ -1182,7 +1182,7 @@ public class KGConfig {
         builder.push("lmg defender");
         lmgDefenderDamageMultiplier = builder
                 .comment("Define the Damage multiplier for LMG Defenders")
-                .defineInRange("defenderRifleDamageMultiplier", 0.7D, 0.1D, 5D);
+                .defineInRange("defenderRifleDamageMultiplier", 0.58D, 0.1D, 5D);
         lmgDefenderFireDelay = builder
                 .comment("Configure the Fire delay for LMG Defenders")
                 .defineInRange("defenderRifleFireDelay", 3, 0, 72000);
@@ -1191,7 +1191,7 @@ public class KGConfig {
                 .defineInRange("defenderRifleEnchantability", 9, 0, 30);
         lmgDefenderDurability = builder
                 .comment("Configure the Durability for LMG Defenders")
-                .defineInRange("defenderRifleDurability", 1104, 0, 32767);
+                .defineInRange("defenderRifleDurability", 1332, 0, 32767);
         lmgDefenderInaccuracy = builder
                 .comment("Configure the Inaccuracy for LMG Defenders")
                 .defineInRange("defenderRifleInaccuracy", 1.5D, 0D, 90D);
@@ -1212,7 +1212,7 @@ public class KGConfig {
                 .defineInRange("defenderRifleMeleeDamage", 2D, 0D, 40D);
         lmgDefenderCost = builder
                 .comment("Ammo cost to fire LMG Defenders")
-                .defineInRange("defenderRifleCost", 1, 0, 64);
+                .defineInRange("defenderRifleCost", 2, 0, 64);
         builder.pop();
 
         builder.push("potion cannon");
