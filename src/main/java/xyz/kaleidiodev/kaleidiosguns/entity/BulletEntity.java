@@ -520,14 +520,14 @@ public class BulletEntity extends AbstractFireballEntity {
 					livingTarget.push(vec.x, vec.y, vec.z);
 				}
 
-				if (this.shootingGun.getItem() instanceof GatlingItem) {
-					Vector3d vec = getDeltaMovement().multiply(1, 0, 1).normalize().scale(0.02);
-					livingTarget.push(vec.x, vec.y, vec.z);
+				//if (this.shootingGun.getItem() instanceof GatlingItem) {
+				//	Vector3d vec = getDeltaMovement().multiply(1, 0, 1).normalize().scale(0.02);
+				//	livingTarget.push(vec.x, vec.y, vec.z);
 
-					Vector3d newMovement = livingTarget.getDeltaMovement();
+				//	Vector3d newMovement = livingTarget.getDeltaMovement();
 					//this should cancel the vertical knockback done by vanilla's damage event by default
-					if (livingTarget.isOnGround()) livingTarget.setDeltaMovement(newMovement.x, 0, newMovement.z);
-				}
+				//	if (livingTarget.isOnGround()) livingTarget.setDeltaMovement(newMovement.x, 0, newMovement.z);
+				//}
 			}
 
 			//force an overwrite of vertical velocity if the gun can juggle
