@@ -110,7 +110,7 @@
 	},
 	"item.defender_rifle.shoot": {
 		"category": "item",
-		"subtitle": "subtitles.kaleidiosguns.item.defender_rifle.shoot",
+		"subtitle": "subtitles.kaleidiosguns.item.lmg_defender.shoot",
 		"sounds": [ "kaleidiosguns:lmg_defender" ]
 	},
 	"item.lava_smg.shoot": {
