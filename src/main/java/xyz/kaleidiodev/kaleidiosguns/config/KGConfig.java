@@ -1378,16 +1378,16 @@ public class KGConfig {
         builder.comment("Also note that the first level, which mines like a hand, is of any value not listed here.");
         mineGunSecondLevel = builder
                 .comment("Damage required to mine like a wooden tool")
-                .defineInRange("mineGunSecondLevel", 8D, 0.5D, 40D);
+                .defineInRange("mineGunSecondLevel", 10D, 0.5D, 40D);
         mineGunThirdLevel = builder
                 .comment("Damage required to mine like a stone tool")
-                .defineInRange("mineGunThirdLevel", 11D, 0.5D, 40D);
+                .defineInRange("mineGunThirdLevel", 12D, 0.5D, 40D);
         mineGunFourthLevel = builder
                 .comment("Damage required to mine like an iron tool")
                 .defineInRange("mineGunFourthLevel", 14D, 0.5D, 40D);
         mineGunFifthLevel = builder
                 .comment("Damage required to mine like a diamond tool")
-                .defineInRange("mineGunFifthLevel", 17D, 0.5D, 40D);
+                .defineInRange("mineGunFifthLevel", 16D, 0.5D, 40D);
         builder.pop();
 
         builder.push("preserving enchantment");
