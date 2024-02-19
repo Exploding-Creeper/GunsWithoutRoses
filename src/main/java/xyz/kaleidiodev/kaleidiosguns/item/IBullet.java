@@ -121,8 +121,6 @@ public interface IBullet {
 		//slag should give multipliers both if shooter or victim are on fire
 		if ((projectile.lavaMode & 0x04) != 0) {
 			if ((projectile.lavaMode & 0x08) != 0) newDamage *= KGConfig.lavaSmgLavaMultiplier.get();
-			if ((projectile.lavaMode & 0x02) != 0) newDamage *= KGConfig.lavaSmgOnFireMultiplier.get();
-			if ((projectile.lavaMode & 0x01) != 0) newDamage *= KGConfig.lavaSmgSelfOnFireMultiplier.get();
 		}
 
 		if (projectile.isMeleeBonus) newDamage *= KGConfig.emeraldMusketPostMeleeMultiplier.get();
