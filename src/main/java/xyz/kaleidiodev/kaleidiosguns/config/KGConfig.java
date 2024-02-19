@@ -1107,7 +1107,7 @@ public class KGConfig {
         builder.push("lava bound smg");
         lavaSmgDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Lava Bound SMGs")
-                .defineInRange("lavaSmgDamageMultiplier", 0.9D, 0.1D, 5D);
+                .defineInRange("lavaSmgDamageMultiplier", 0.6D, 0.1D, 5D);
         lavaSmgFireDelay = builder
                 .comment("Configure the Fire delay for Lava Bound SMGs")
                 .defineInRange("lavaSmgFireDelay", 2, 0, 72000);
