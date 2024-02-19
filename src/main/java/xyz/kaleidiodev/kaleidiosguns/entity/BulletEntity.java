@@ -469,7 +469,7 @@ public class BulletEntity extends AbstractFireballEntity {
 			}
 		} else healthOfVictim = 0.0f;
 
-		// if (shooter != null) {
+		if (shooter != null) {
 		//	if (healsFriendlies && (entity instanceof LivingEntity)) {
 		//		if ((entity.getClassification(true) == EntityClassification.CREATURE) ||
 		//				(entity.getClassification(true) == EntityClassification.WATER_CREATURE) ||
@@ -481,11 +481,11 @@ public class BulletEntity extends AbstractFireballEntity {
 		//		}
 		//		else giveDamage(shooter, entity, bullet);
 		//	}
-		//	else if (!checkIsSameTeam(shooter, entity)) giveDamage(shooter, entity, bullet);
-		//}
-		//else {
-		//	giveDamage(null, entity, bullet);
-		//}
+		    if (!checkIsSameTeam(shooter, entity)) giveDamage(shooter, entity, bullet);
+		}
+		else {
+			giveDamage(null, entity, bullet);
+		}
 	}
 
 	protected void giveDamage(Entity shooter, Entity victim, IBullet bullet) {
