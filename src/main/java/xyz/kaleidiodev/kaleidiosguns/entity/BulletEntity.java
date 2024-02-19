@@ -489,6 +489,9 @@ public class BulletEntity extends AbstractFireballEntity {
 	}
 
 	protected void giveDamage(Entity shooter, Entity victim, IBullet bullet) {
+		//no contact damage
+		if (isExplosive) return;
+
 		if (victim.isOnFire()) lavaMode += 0x02;
 		if (isOnFire()) victim.setSecondsOnFire(5);
 		int lastHurtResistant = victim.invulnerableTime;
