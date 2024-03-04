@@ -630,7 +630,7 @@ public class KGConfig {
                 .defineInRange("diamondShotgunMeleeDamage", 4D, 0D, 40D);
         diamondShotgunCost = builder
                 .comment("Ammo cost to fire Shotguns")
-                .defineInRange("diamondShotgunCost", 6, 0, 64);
+                .defineInRange("diamondShotgunCost", 10, 0, 64);
         builder.pop();
 
         builder.push("blunderbuss");
@@ -648,7 +648,7 @@ public class KGConfig {
                 .defineInRange("blunderbussDurability", 600, 0, 32767);
         blunderbussInaccuracy = builder
                 .comment("Configure the Inaccuracy for Blunderbusses")
-                .defineInRange("blunderbussInaccuracy", 5D, 0D, 90D);
+                .defineInRange("blunderbussInaccuracy", 8D, 0D, 90D);
         blunderbussBulletCount = builder
                 .comment("Configure the amount of Bullets at once for Blunderbusses")
                 .defineInRange("blunderbussBulletCount", 10, 0, 50);
@@ -663,7 +663,7 @@ public class KGConfig {
                 .defineInRange("blunderbussMeleeDamage", 4D, 0D, 40D);
         blunderbussCost = builder
                 .comment("Ammo cost to fire Blunderbusses")
-                .defineInRange("blunderbussCost", 8, 0, 64);
+                .defineInRange("blunderbussCost", 16, 0, 64);
         blunderbussMinimumSpeed = builder
                 .comment("Configure the Minimum Speed for projectiles shot from Blunderbusses")
                 .defineInRange("blunderbussMinimumSpeed", 0.5D, 0.1D, 10D);
@@ -744,7 +744,7 @@ public class KGConfig {
                 .defineInRange("goldDoubleShotgunMeleeDamage", 4D, 0D, 40D);
         goldDoubleShotgunCost = builder
                 .comment("Ammo cost to fire Double Barrel Shotguns")
-                .defineInRange("goldDoubleShotgunCost", 5, 0, 64);
+                .defineInRange("goldDoubleShotgunCost", 6, 0, 64);
         builder.pop();
 
         builder.push("vampire shotgun");
@@ -762,7 +762,7 @@ public class KGConfig {
                 .defineInRange("netheriteShotgunDurability", 598, 0, 32767);
         netheriteShotgunInaccuracy = builder
                 .comment("Configure the Inaccuracy for Vampire Shotguns")
-                .defineInRange("netheriteShotgunInaccuracy", 5D, 0D, 90D);
+                .defineInRange("netheriteShotgunInaccuracy", 6D, 0D, 90D);
         netheriteShotgunBulletCount = builder
                 .comment("Configure the amount of Bullets at once for Vampire Shotguns")
                 .defineInRange("netheriteShotgunBulletCount", 4, 0, 50);
@@ -789,7 +789,7 @@ public class KGConfig {
                 .defineInRange("netheriteShotgunMeleeDamage", 4D, 0D, 40D);
         netheriteShotgunCost = builder
                 .comment("Ammo cost to fire Vampire Shotguns")
-                .defineInRange("netheriteShotgunCost", 5, 0, 64);
+                .defineInRange("netheriteShotgunCost", 8, 0, 64);
         builder.pop();
 
         builder.push("sniper rifle");
@@ -861,7 +861,7 @@ public class KGConfig {
                 .defineInRange("emeraldMusketPostMeleeCount", 3, 1, 60);
         emeraldMusketCost = builder
                 .comment("Ammo cost to fire Muskets")
-                .defineInRange("emeraldMusketCost", 5, 0, 64);
+                .defineInRange("emeraldMusketCost", 7, 0, 64);
         emeraldMusketMovementInaccuracy = builder
                 .comment("Configure the inaccuracy addition whilst moving with Muskets")
                 .defineInRange("emeraldMusketMovementInaccuracy", 4D, 0D, 40D);
