@@ -14,4 +14,4 @@ Please instead submit pull requests for any fixes or compat code you may wish to
 
 You are also permitted explicitly *to port this gun mod to other games, via any means, including any design based assets.*
 
-For example, you may port this mod to become a Counter Strike Source mod.  But you are not permitted to make a new game in Unity engine from the ground up with all of this gun mod's weapon designs and their mechanics/behaviour.
+For example, you may port this mod to become a Counter Strike Source mod, but you are not permitted to make a new game in Unity engine from the ground up with all of this gun mod's weapon designs and their mechanics/behaviour.
