@@ -7,6 +7,7 @@ import net.minecraft.entity.monster.EndermanEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.projectile.AbstractFireballEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.particles.IParticleData;
@@ -22,6 +23,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.ToolType;
+import net.minecraftforge.common.extensions.IForgeItemStack;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.FakePlayer;
 import xyz.kaleidiodev.kaleidiosguns.config.KGConfig;
@@ -613,7 +616,14 @@ public class BulletEntity extends AbstractFireballEntity {
 	protected void tryBreakBlock(BlockPos blockPosToTest, ItemStack stack) {
 		//test if the tool tier found works
 		if (ForgeHooks.isToolEffective(this.level, blockPosToTest, stack)) {
-			breakBlock(blockPosToTest);
+			IForgeItemStack itemStackForge = (IForgeItemStack) stack;
+
+			boolean mineable = false;
+			BlockState targetBlock = level.getBlockState(blockPosToTest);
+
+			for (ToolType type : itemStackForge.getToolTypes()) if (itemStackForge.getHarvestLevel(type, null, level.getBlockState(blockPosToTest)) >= targetBlock.getHarvestLevel()) mineable = true;
+
+			if (mineable) breakBlock(blockPosToTest);
 		}
 	}
 
