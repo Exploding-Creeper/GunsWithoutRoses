@@ -682,7 +682,7 @@ public class GunItem extends Item {
 
 			//check weakness effect
 			if ((player.getEffect(Effects.WEAKNESS) != null) && !(stack.getItem() instanceof ShotgunItem)) {
-				if (nextInaccuracy == 0) nextInaccuracy += sniperReplacementAim;
+				if (nextInaccuracy == 0) nextInaccuracy += sniperReplacementAim * KGConfig.weaknessEffectInaccuracyMultiplier.get() * (player.getEffect(Effects.WEAKNESS).getAmplifier() + 1);
 				else nextInaccuracy *= KGConfig.weaknessEffectInaccuracyMultiplier.get() * (player.getEffect(Effects.WEAKNESS).getAmplifier() + 1);
 			}
 
