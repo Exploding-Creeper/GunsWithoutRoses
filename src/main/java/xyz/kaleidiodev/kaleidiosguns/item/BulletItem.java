@@ -52,7 +52,7 @@ public class BulletItem extends Item implements IBullet {
 
 	@Override
 	public void consume(ItemStack stack, PlayerEntity player, ItemStack gunItem) {
-		stack.shrink(costToUse(stack));
+		stack.shrink(costToUse(gunItem));
 
 		if (stack.isEmpty()) {
 			player.inventory.removeItem(stack);
