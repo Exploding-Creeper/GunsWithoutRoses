@@ -951,7 +951,7 @@ public class GunItem extends Item {
 	}
 
 	public int getCost(ItemStack stack) {
-		return Math.max(1, ammoCost - (int)(ammoCost * EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.sleightOfHand, stack) * KGConfig.sleightOfHandFireRateDecrease.get()));
+		return Math.max(1, ammoCost - (int)(ammoCost * ((EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.sleightOfHand, stack) * KGConfig.sleightOfHandFireRateDecrease.get()) + 1)));
 	}
 
 	/**

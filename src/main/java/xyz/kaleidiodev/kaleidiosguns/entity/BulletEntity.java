@@ -288,9 +288,6 @@ public class BulletEntity extends AbstractFireballEntity {
 				double bulletBBFloor = bb.getCenter().y - (bb.getYsize() / 2);
 
 				for (Entity victim : thisEntities) {
-					if ((victim.getBoundingBox().getYsize() / 2 < victim.getBoundingBox().getXsize()) || (victim.getBoundingBox().getYsize() / 2 < victim.getBoundingBox().getZsize()))
-						continue;
-
 					AxisAlignedBB tempBB = victim.getBoundingBox();
 					double enemyBoxHeight = (tempBB.getYsize() / 2);
 					double enemyTop = tempBB.getCenter().y + enemyBoxHeight;
