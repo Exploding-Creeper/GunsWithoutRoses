@@ -186,6 +186,7 @@ public class KGConfig {
     public static ForgeConfigSpec.IntValue ironCarbineCost;
     public static ForgeConfigSpec.DoubleValue ironCarbineReplacementInaccuracy;
     public static ForgeConfigSpec.DoubleValue ironCarbineMovementInaccuracy;
+    public static ForgeConfigSpec.DoubleValue ironCarbineArmorBonus;
 
     public static ForgeConfigSpec.DoubleValue goldVexDamageMultiplier;
     public static ForgeConfigSpec.IntValue goldVexFireDelay;
@@ -904,6 +905,9 @@ public class KGConfig {
         ironCarbineReplacementInaccuracy = builder
                 .comment("Configure the inaccuracy addition whilst using one hand with Carbines")
                 .defineInRange("ironCarbineReplacementInaccuracy", 1.5D, 0D, 40D);
+        ironCarbineArmorBonus = builder
+                .comment("Configure the amount of damage to tack on that is armor ignorant with Carbines")
+                .defineInRange("ironCarbineArmorBonus", 2D, 0.1D, 32767D);
         builder.pop();
 
         builder.push("vex burst carbine");

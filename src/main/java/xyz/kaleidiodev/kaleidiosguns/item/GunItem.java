@@ -93,6 +93,7 @@ public class GunItem extends Item {
 	protected boolean interactsWithBlocks;
 	protected float sniperReplacementAim = 0.0f;
 	protected float sniperMovementAim = 0.0f;
+	protected boolean armorBonus;
 
 	protected SoundEvent fireSound = ModSounds.gun;
 	protected SoundEvent reloadSound = ModSounds.double_shotgunReload;
@@ -402,6 +403,7 @@ public class GunItem extends Item {
 		shot.juggle = this.isJuggler;
 		shot.interactsWithBlocks = this.interactsWithBlocks;
 		shot.silenced = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.silenced, gun) == 1;
+		shot.armorBonus = armorBonus;
 
 		shot.hero = false;
 		if (isHero) {
@@ -954,6 +956,11 @@ public class GunItem extends Item {
 		return Math.max(1, ammoCost - (int)(ammoCost * EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.sleightOfHand, stack) * KGConfig.sleightOfHandFireRateDecrease.get()));
 	}
 
+	public GunItem setArmorBonus(boolean bonus) {
+		this.armorBonus = bonus;
+		return this;
+	}
+
 	/**
 	 *
 	 * @param barrelSwitch set the divider that divides the fire rate to denote how many ticks it takes to switch barrels
@@ -1098,6 +1105,7 @@ public class GunItem extends Item {
 				if (breachDoors) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.doors"));
 				if (isCorruption) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.corruption"));
 				if (isWither) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.wither"));
+				if (armorBonus) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.armor_bonus", KGConfig.ironCarbineArmorBonus.get()));
 				if (this.getItem() == ModItems.doubleBarrelShotgun) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.knockback"));
 				if (this.getItem() == ModItems.plasmaGatling) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.plasma"));
 			}

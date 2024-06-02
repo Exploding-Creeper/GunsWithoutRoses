@@ -100,6 +100,7 @@
 	"tooltip.kaleidiosguns.gravity": "Shots fall due to gravity§r",
 	"tooltip.kaleidiosguns.potion": "Consumes an offhand potion to apply effects§r",
 	"tooltip.kaleidiosguns.interact": "Interacts with right-clickable blocks",
+	"tooltip.kaleidiosguns.armor_bonus": "Adds %s extra armor-ignorant damage",
 	"tooltip.kaleidiosguns.calibur.flint": "§dOnly accepts flint ammo",
 	"tooltip.kaleidiosguns.calibur.iron": "§dOnly accepts iron ammo",
 	"tooltip.kaleidiosguns.calibur.blaze": "§dOnly accepts blaze ammo",

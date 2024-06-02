@@ -73,6 +73,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	public boolean isCorrupted;
 	public boolean shouldBreakDoors;
 	public boolean shouldFlinch;
+	public boolean armorBonus;
 	public boolean healsFriendlies;
 	public boolean juggle;
 	public byte lavaMode; //bit 0 is player is on fire, bit 1 is enemy is on fire, bit 2 is is active, bit 3 is lava absorb
@@ -504,6 +505,7 @@ public class BulletEntity extends AbstractFireballEntity {
 		}
 
 		boolean damaged = victim.hurt((new IndirectEntityDamageSource("arrow", this, shooter)).setProjectile(), (float) bullet.modifyDamage(damage, this, victim, shooter, level));
+		if (damaged && armorBonus) victim.hurt((new IndirectEntityDamageSource("arrow", this, shooter).bypassArmor()), KGConfig.ironCarbineArmorBonus.get().floatValue());
 
 		if (victim instanceof LivingEntity) {
 			if (healthOfVictim == ((LivingEntity)victim).getHealth()) {
