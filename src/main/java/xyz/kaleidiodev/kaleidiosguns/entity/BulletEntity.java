@@ -2,6 +2,7 @@ package xyz.kaleidiodev.kaleidiosguns.entity;
 
 import com.mojang.authlib.GameProfile;
 import net.minecraft.block.*;
+import net.minecraft.command.arguments.TeamArgument;
 import net.minecraft.entity.*;
 import net.minecraft.entity.monster.EndermanEntity;
 import net.minecraft.entity.passive.TameableEntity;
@@ -13,6 +14,8 @@ import net.minecraft.network.IPacket;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.*;
+import net.minecraft.scoreboard.ScorePlayerTeam;
+import net.minecraft.scoreboard.Team;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
@@ -554,7 +557,7 @@ public class BulletEntity extends AbstractFireballEntity {
 				return ((TameableEntity) victim).getOwner() == player;
 			}
 			if ((player.getTeam() == null) || (victim.getTeam() == null)) return false;
-			return player.getTeam() == victim.getTeam();
+			return (player.getTeam() == victim.getTeam()) && (!victim.getTeam().isAllowFriendlyFire());
 		}
 		return true; //assume same team if anything is null
 	}
