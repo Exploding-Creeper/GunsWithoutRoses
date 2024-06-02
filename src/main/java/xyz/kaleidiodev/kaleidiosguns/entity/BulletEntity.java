@@ -505,7 +505,7 @@ public class BulletEntity extends AbstractFireballEntity {
 		}
 
 		boolean damaged = victim.hurt((new IndirectEntityDamageSource("arrow", this, shooter)).setProjectile(), (float) bullet.modifyDamage(damage, this, victim, shooter, level));
-		if (damaged && armorBonus) victim.hurt((new IndirectEntityDamageSource("arrow", this, shooter).bypassArmor()), KGConfig.ironCarbineArmorBonus.get().floatValue());
+		if (damaged && armorBonus) victim.hurt((new IndirectEntityDamageSource("arrow", this, shooter).bypassArmor().setProjectile().setMagic()), KGConfig.ironCarbineArmorBonus.get().floatValue());
 
 		if (victim instanceof LivingEntity) {
 			if (healthOfVictim == ((LivingEntity)victim).getHealth()) {
