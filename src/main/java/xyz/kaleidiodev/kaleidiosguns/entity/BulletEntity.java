@@ -272,9 +272,10 @@ public class BulletEntity extends AbstractFireballEntity {
 
 			//don't bother adding entities to the list that are already there.
 			Set<Entity> thisEntities = new HashSet<>(this.level.getEntities(this, bb));
-			thisEntities.removeIf(entity -> checkIsSameTeam(getOwner(), entity));
-			thisEntities.remove(getOwner());
-			thisEntities.removeIf(entity -> !entity.isAlive());
+			thisEntities.removeIf(entity -> checkIsSameTeam(getOwner(), entity)
+					|| (entity == getOwner())
+					|| !entity.isAlive()
+					|| !canHitEntity(entity));
 
 			//don't process anything we've previously hit on this hit as well
 			thisEntities.removeAll(entityHitHistory);
