@@ -568,7 +568,7 @@ public class KGConfig {
                 .defineInRange("goldShowmanFlinchEffect", 2, 0, 10);
         goldShowmanFlinchTicks = builder
                 .comment("Configure the amount of ticks of Weakness an Showman Handgun gives")
-                .defineInRange("goldShowmanFlinchTicks", 20, 0, 10);
+                .defineInRange("goldShowmanFlinchTicks", 40, 0, 10);
         builder.pop();
 
         builder.push("blessed pistol");

@@ -1165,6 +1165,6 @@ public class GunItem extends Item {
 
 	@Override
 	public int getUseDuration(ItemStack pStack) {
-		return Math.max(getFireDelay(pStack, null) / 20, 10);
+		return Math.max(getFireDelay(pStack, null), 1);
 	}
 }
