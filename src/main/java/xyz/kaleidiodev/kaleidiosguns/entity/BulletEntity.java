@@ -320,7 +320,7 @@ public class BulletEntity extends AbstractFireballEntity {
 				BlockState someBlockState = this.level.getBlockState(someBlockPos);
 
 				BlockState targetBlock = level.getBlockState(someBlockPos);
-				targetBlock.onProjectileHit(level, targetBlock, new BlockRayTraceResult(bb.getCenter(), Direction.getNearest(this.getDeltaMovement().x, this.getDeltaMovement().y, this.getDeltaMovement().z), someBlockPos, false), this);
+				targetBlock.onProjectileHit(level, targetBlock, new BlockRayTraceResult(bb.getCenter(), Direction.getNearest(bb.getCenter().x, bb.getCenter().y, bb.getCenter().z), someBlockPos, false), this);
 
 				if (((this.lavaMode & 0x04) != 0) && (this.shootingGun != null)) {
 					if (someBlockState.getBlock() == Blocks.LAVA) {
@@ -347,7 +347,7 @@ public class BulletEntity extends AbstractFireballEntity {
 
 				if (interactsWithBlocks && this.level.getBlockCollisions(this, bb).findAny().isPresent()) {
 					FakePlayer fakePlayer = new FakePlayer((ServerWorld) level, new GameProfile(null, "[KaleidiosGunsFakePlayer]"));
-					someBlockState.use(this.level, fakePlayer, Hand.MAIN_HAND, new BlockRayTraceResult(bb.getCenter(), Direction.getNearest(this.getDeltaMovement().x, this.getDeltaMovement().y, this.getDeltaMovement().z), someBlockPos, true));
+					someBlockState.use(this.level, fakePlayer, Hand.MAIN_HAND, new BlockRayTraceResult(bb.getCenter(), Direction.getNearest(bb.getCenter().x, bb.getCenter().y, bb.getCenter().z), someBlockPos, true));
 
 					hitBlock = true;
 				}
