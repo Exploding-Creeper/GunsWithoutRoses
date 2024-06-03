@@ -504,8 +504,12 @@ public class BulletEntity extends AbstractFireballEntity {
 			healthOfVictim = ((LivingEntity)victim).getHealth();
 		}
 
+		//we need to trick minecraft into thinking the projectile is still in front of any shields.
+		Vector3d posCache = position();
+		setPos(lastPos.x, lastPos.y, lastPos.z);
 		boolean damaged = victim.hurt((new IndirectEntityDamageSource("arrow", this, shooter)).setProjectile(), (float) bullet.modifyDamage(damage, this, victim, shooter, level));
-		if (damaged && armorBonus) victim.hurt((new IndirectEntityDamageSource("arrow", this, shooter).bypassArmor().setProjectile().setMagic()), KGConfig.ironCarbineArmorBonus.get().floatValue());
+		if (damaged && armorBonus) victim.hurt((new IndirectEntityDamageSource("arrow", this, shooter).setProjectile().setMagic()), KGConfig.ironCarbineArmorBonus.get().floatValue());
+		setPos(posCache.x, posCache.y, posCache.z);
 
 		if (victim instanceof LivingEntity) {
 			if (healthOfVictim == ((LivingEntity)victim).getHealth()) {
