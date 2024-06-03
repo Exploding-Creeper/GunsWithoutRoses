@@ -542,7 +542,7 @@ public class KGConfig {
         goldShowmanEnchantability = builder
                 .comment("Configure the Enchantability for Showman's Handguns")
                 .defineInRange("goldShowmanEnchantability", 14, 0, 30);
-        goldShowmanDurability = builder
+         goldShowmanDurability = builder
                 .comment("Configure the Durability for Showman's Handguns")
                 .defineInRange("goldShowmanDurability", 409, 0, 32767);
         goldShowmanInaccuracy = builder
