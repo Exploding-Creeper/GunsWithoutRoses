@@ -82,7 +82,7 @@ public interface IBullet {
 		if ((projectile.shouldFlinch) && (target instanceof LivingEntity)) {
 			LivingEntity livingTarget = (LivingEntity) target;
 
-			livingTarget.addEffect(new EffectInstance(Effects.WEAKNESS, KGConfig.diamondAssaultFlinchTicks.get(), KGConfig.diamondAssaultFlinchEffect.get()));
+			livingTarget.addEffect(new EffectInstance(Effects.WEAKNESS, KGConfig.goldShowmanFlinchTicks.get(), KGConfig.goldShowmanFlinchEffect.get()));
 		}
 
 		//revenge shots should multiply their damage.

@@ -287,8 +287,8 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue diamondAssaultSwitchSpeed;
     public static ForgeConfigSpec.DoubleValue diamondAssaultMeleeDamage;
     public static ForgeConfigSpec.IntValue diamondAssaultCost;
-    public static ForgeConfigSpec.IntValue diamondAssaultFlinchEffect;
-    public static ForgeConfigSpec.IntValue diamondAssaultFlinchTicks;
+    public static ForgeConfigSpec.IntValue goldShowmanFlinchEffect;
+    public static ForgeConfigSpec.IntValue goldShowmanFlinchTicks;
 
     public static ForgeConfigSpec.DoubleValue lavaSmgDamageMultiplier;
     public static ForgeConfigSpec.IntValue lavaSmgFireDelay;
@@ -532,37 +532,43 @@ public class KGConfig {
                 .defineInRange("shadowRevolverCost", 2, 0, 64);
         builder.pop();
 
-        builder.push("showman glock");
+        builder.push("showman Handgun");
         goldShowmanDamageMultiplier = builder
-                .comment("Define the Damage multiplier for Showman's Glocks")
+                .comment("Define the Damage multiplier for Showman's Handguns")
                 .defineInRange("goldShowmanDamageModifier", 1.0D, 0.1D, 5D);
         goldShowmanFireDelay = builder
-                .comment("Configure the Fire delay for Showman's Glocks")
+                .comment("Configure the Fire delay for Showman's Handguns")
                 .defineInRange("goldShowmanFireDelay", 8, 0, 72000);
         goldShowmanEnchantability = builder
-                .comment("Configure the Enchantability for Showman's Glocks")
+                .comment("Configure the Enchantability for Showman's Handguns")
                 .defineInRange("goldShowmanEnchantability", 14, 0, 30);
         goldShowmanDurability = builder
-                .comment("Configure the Durability for Showman's Glocks")
+                .comment("Configure the Durability for Showman's Handguns")
                 .defineInRange("goldShowmanDurability", 409, 0, 32767);
         goldShowmanInaccuracy = builder
-                .comment("Configure the Inaccuracy for Showman's Glocks")
+                .comment("Configure the Inaccuracy for Showman's Handguns")
                 .defineInRange("goldShowmanInaccuracy", 1.4D, 0D, 90D);
         goldShowmanProjectileSpeed = builder
-                .comment("Configure the Projectile Speed for Showman's Glocks")
+                .comment("Configure the Projectile Speed for Showman's Handguns")
                 .defineInRange("goldShowmanProjectileSpeed", 7D, 0D, 64D);
         goldShowmanTwoHandedUse = builder
-                .comment("Configure the bonus for using a Showman Glock with one hand open")
+                .comment("Configure the bonus for using a Showman Handgun with one hand open")
                 .defineInRange("goldShowmanTwoHandedUse", 1.2D, 0.1D, 10.0D);
         goldShowmanSwitchSpeed = builder
-                .comment("Configure the Weapon Switch Speed for Showman's Glocks")
+                .comment("Configure the Weapon Switch Speed for Showman's Handguns")
                 .defineInRange("goldShowmanSwitchSpeed", 2.0D, 0D, 5D);
         goldShowmanMeleeDamage = builder
-                .comment("Configure the Melee Damage for Showman's Glocks")
+                .comment("Configure the Melee Damage for Showman's Handguns")
                 .defineInRange("goldShowmanMeleeDamage", 2D, 0D, 40D);
         goldShowmanCost = builder
-                .comment("Ammo cost to fire Showman's Glocks")
+                .comment("Ammo cost to fire Showman's Handguns")
                 .defineInRange("goldShowmanCost", 1, 0, 64);
+        goldShowmanFlinchEffect = builder
+                .comment("Configure the level of Weakness a Showman Handgun gives")
+                .defineInRange("goldShowmanFlinchEffect", 2, 0, 10);
+        goldShowmanFlinchTicks = builder
+                .comment("Configure the amount of ticks of Weakness an Showman Handgun gives")
+                .defineInRange("goldShowmanFlinchTicks", 20, 0, 10);
         builder.pop();
 
         builder.push("blessed pistol");
@@ -1097,12 +1103,6 @@ public class KGConfig {
         diamondAssaultCost = builder
                 .comment("Ammo cost to fire Assault Rifles")
                 .defineInRange("diamondAssaultCost", 2, 0, 64);
-        diamondAssaultFlinchEffect = builder
-                .comment("Configure the level of Weakness an Assault Rifle gives")
-                .defineInRange("diamondAssaultFlinchEffect", 2, 0, 10);
-        diamondAssaultFlinchTicks = builder
-                .comment("Configure the amount of ticks of Weakness an Assault Rifle gives")
-                .defineInRange("diamondAssaultFlinchTicks", 20, 0, 10);
         builder.pop();
 
         builder.push("lava bound smg");

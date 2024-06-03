@@ -70,8 +70,8 @@
 	},
 	"item.skill_shot.shoot": {
 		"category": "item",
-		"subtitle": "subtitles.kaleidiosguns.item.showman_glock.shoot",
-		"sounds": [ "kaleidiosguns:showman_glock" ]
+		"subtitle": "subtitles.kaleidiosguns.item.showman_handgun.shoot",
+		"sounds": [ "kaleidiosguns:showman_handgun" ]
 	},
 	"item.vampire_shotgun.shoot": {
 		"category": "item",
