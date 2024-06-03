@@ -319,6 +319,9 @@ public class BulletEntity extends AbstractFireballEntity {
 				BlockPos someBlockPos = new BlockPos(bb.getCenter());
 				BlockState someBlockState = this.level.getBlockState(someBlockPos);
 
+				BlockState targetBlock = level.getBlockState(someBlockPos);
+				targetBlock.onProjectileHit(level, targetBlock, new BlockRayTraceResult(bb.getCenter(), Direction.getNearest(bb.getCenter().x, bb.getCenter().y, bb.getCenter().z), someBlockPos, false), this);
+
 				if (((this.lavaMode & 0x04) != 0) && (this.shootingGun != null)) {
 					if (someBlockState.getBlock() == Blocks.LAVA) {
 						this.shootingGun.hadLava = KGConfig.lavaSmgLavaBonusCount.get();
@@ -372,9 +375,6 @@ public class BulletEntity extends AbstractFireballEntity {
 		if (!this.level.isClientSide) this.level.playSound(null, pos.x, pos.y, pos.z, ModSounds.impact, SoundCategory.VOICE, 0.25f, (random.nextFloat() * 0.5f) + 0.75f);
 
 		BlockPos blockPositionToMine = new BlockPos(pos);
-
-		BlockState targetBlock = level.getBlockState(blockPositionToMine);
-		targetBlock.onProjectileHit(level, targetBlock, new BlockRayTraceResult(pos, Direction.getNearest(pos.x, pos.y, pos.z), blockPositionToMine, false), this);
 
 		if (KGConfig.griefEnabled.get() && !level.isClientSide) {
 			if (shouldBreakBlock) {
