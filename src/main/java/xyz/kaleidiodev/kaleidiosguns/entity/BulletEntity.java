@@ -511,15 +511,15 @@ public class BulletEntity extends AbstractFireballEntity {
 		Vector3d posCache = position();
 		setPos(lastPos.x, lastPos.y, lastPos.z);
 		boolean damaged = victim.hurt((new IndirectEntityDamageSource("arrow", this, shooter)).setProjectile(), (float) bullet.modifyDamage(damage, this, victim, shooter, level));
+		if (damaged && armorBonus) {
+			victim.hurt((new IndirectEntityDamageSource("arrow", this, shooter).setMagic().setProjectile().bypassArmor()), KGConfig.ironCarbineArmorBonus.get().floatValue() + (healthOfVictim - ((LivingEntity)victim).getHealth()));
+		}
 
 		setPos(posCache.x, posCache.y, posCache.z);
 
 		if (victim instanceof LivingEntity) {
 			if (healthOfVictim == ((LivingEntity)victim).getHealth()) {
 				didNoDamage = true;
-			}
-			else if (damaged && armorBonus) {
-				victim.hurt((new IndirectEntityDamageSource("arrow", this, shooter).setMagic().setProjectile().bypassArmor()), KGConfig.ironCarbineArmorBonus.get().floatValue() + (healthOfVictim - ((LivingEntity)victim).getHealth()));
 			}
 		}
 
