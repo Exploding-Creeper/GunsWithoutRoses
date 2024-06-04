@@ -624,8 +624,11 @@ public class GunItem extends Item {
 		//increase time spend if two hands on a shotgun class
 		if ((player != null) && (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.cowboy, stack) == 0) && (stack.getItem() instanceof ShotgunItem)) {
 			//if both hands are full, because one is the gun and one is something else
-			if (!player.getMainHandItem().isEmpty() && !player.getOffhandItem().isEmpty()) {
+			if ((!player.getMainHandItem().isEmpty() && !player.getOffhandItem().isEmpty())) {
 				base *= KGConfig.oneHandShotgunRateMultiplier.get();
+			}
+			if (player.hasEffect(Effects.WEAKNESS)) {
+				base *= KGConfig.oneHandShotgunRateMultiplier.get() * (player.getEffect(Effects.WEAKNESS).getAmplifier() + 1);
 			}
 		}
 
