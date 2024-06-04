@@ -880,7 +880,7 @@ public class KGConfig {
         builder.push("carbine");
         ironCarbineDamageMultiplier = builder
                 .comment("Define the Damage multiplier for Carbines")
-                .defineInRange("ironCarbineDamageMultiplier", 1.2D, 0.5D, 5D);
+                .defineInRange("ironCarbineDamageMultiplier", 0.7D, 0.5D, 5D);
         ironCarbineFireDelay = builder
                 .comment("Configure the Fire delay for Carbines")
                 .defineInRange("ironCarbineFireDelay", 14, 0, 72000);
