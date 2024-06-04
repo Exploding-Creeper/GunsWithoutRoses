@@ -265,8 +265,6 @@ public class GunItem extends Item {
 
 			IBullet bulletItem = (IBullet) (ammo.getItem() instanceof IBullet ? ammo.getItem() : ModItems.flintBullet);
 
-			player.startUsingItem(hand);
-
 			if (!world.isClientSide) {
 				boolean bulletFree = player.abilities.instabuild || !shouldConsumeAmmo(gun, player);
 
@@ -317,6 +315,8 @@ public class GunItem extends Item {
 
 				mergeStacks(player, gun);
 			}
+
+			player.startUsingItem(hand);
 
 			return ActionResult.consume(gun);
 		}
