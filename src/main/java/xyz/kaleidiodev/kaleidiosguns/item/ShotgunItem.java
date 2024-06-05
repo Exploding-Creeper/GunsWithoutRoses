@@ -116,7 +116,7 @@ public class ShotgunItem extends GunItem {
 			return ((TameableEntity) victim).getOwner() == player;
 		}
 		if ((player.getTeam() == null) && (victim.getTeam() == null)) return false;
-		return player.getTeam() == victim.getTeam();
+		return (player.getTeam() == victim.getTeam()) && !player.getTeam().isAllowFriendlyFire();
 	}
 
 	protected boolean isProjectileCountModified(ItemStack stack) {

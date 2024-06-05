@@ -523,8 +523,6 @@ public class BulletEntity extends AbstractFireballEntity {
 			}
 		}
 
-
-
 		if (isClean) victim.setDeltaMovement(previousDelta);
 		else if (damaged && victim instanceof LivingEntity) {
 			LivingEntity livingTarget = (LivingEntity) victim;
