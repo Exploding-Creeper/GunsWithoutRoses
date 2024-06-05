@@ -237,6 +237,7 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue witherLauncherMeleeDamage;
     public static ForgeConfigSpec.IntValue witherLauncherCost;
     public static ForgeConfigSpec.DoubleValue witherLauncherReplacementInaccuracy;
+    public static ForgeConfigSpec.IntValue witherLauncherBurstSpeed;
 
     public static ForgeConfigSpec.DoubleValue diamondMinegunDamageMultiplier;
     public static ForgeConfigSpec.IntValue diamondMinegunFireDelay;
@@ -1325,6 +1326,9 @@ public class KGConfig {
         witherLauncherReplacementInaccuracy = builder
                 .comment("Configure the inaccuracy addition whilst using one hand with Wither Launchers")
                 .defineInRange("witherLauncherReplacementInaccuracy", 6D, 0D, 40D);
+        witherLauncherBurstSpeed = builder
+                .comment("How many ticks each shot in a burst takes for Wither Launchers")
+                .defineInRange("goldVexBurstSpeed", 5, 0, 64);
         builder.pop();
 
         builder.push("bullet_config");

@@ -94,6 +94,7 @@ public class GunItem extends Item {
 	protected float sniperReplacementAim = 0.0f;
 	protected float sniperMovementAim = 0.0f;
 	protected boolean armorBonus;
+	protected boolean witherHead;
 
 	protected SoundEvent fireSound = ModSounds.gun;
 	protected SoundEvent reloadSound = ModSounds.double_shotgunReload;
@@ -471,7 +472,20 @@ public class GunItem extends Item {
 		nbt.putInt("shotsBeforeStability", nbt.getInt("shotsBeforeStability") + 1);
 
 		int burstTimer = nbt.getInt("burstTimer");
-		if (burstTimer == 0) burstTimer = burstSpeed * burstAmount;
+		if (burstTimer == 0)
+		{
+			ItemStack offhand = getOtherHand(player);
+			if (witherHead && (offhand.getItem() == Items.WITHER_SKELETON_SKULL)) {
+				if (!player.abilities.instabuild) {
+					offhand.shrink(1);
+					if (offhand.isEmpty()) player.inventory.removeItem(offhand);
+				}
+				burstTimer = burstSpeed * burstAmount;
+			}
+			else if (!witherHead) {
+				burstTimer = burstSpeed * burstAmount;
+			}
+		}
 		nbt.putInt("burstTimer", burstTimer);
 
 		gun.setTag(nbt);
@@ -955,6 +969,11 @@ public class GunItem extends Item {
 		return this;
 	}
 
+	public GunItem setWitherHead(boolean head) {
+		this.witherHead = head;
+		return this;
+	}
+
 	public int getCost(ItemStack stack) {
 		return Math.max(1, ammoCost - (int)(ammoCost * EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.sleightOfHand, stack) * KGConfig.sleightOfHandFireRateDecrease.get()));
 	}
@@ -1107,15 +1126,16 @@ public class GunItem extends Item {
 				if (interactsWithBlocks) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.interact"));
 				if (breachDoors) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.doors"));
 				if (isCorruption) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.corruption"));
-				if (isWither) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.wither"));
 				if (armorBonus) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.armor_bonus", KGConfig.ironCarbineArmorBonus.get()));
 				if (this.getItem() == ModItems.doubleBarrelShotgun) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.knockback"));
 				if (this.getItem() == ModItems.plasmaGatling) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.plasma"));
+				if (witherHead) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.wither_head"));
 			}
 
 			if (KGConfig.showWeaponSecrets.get()) {
 				if (hasBlockMineAbility) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.minegun"));
 				if (isShadow) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.shadow_block"));
+				if (isWither) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.wither"));
 			}
 
 			if (KGConfig.showClassDetails.get()) {
