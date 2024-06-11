@@ -314,6 +314,7 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue lmgDefenderSwitchSpeed;
     public static ForgeConfigSpec.DoubleValue lmgDefenderMeleeDamage;
     public static ForgeConfigSpec.IntValue lmgDefenderCost;
+    public static ForgeConfigSpec.DoubleValue lmgDefenderHealChance;
 
     public static ForgeConfigSpec.DoubleValue goldPlasmaDamageMultiplier;
     public static ForgeConfigSpec.IntValue goldPlasmaFireDelay;
@@ -1187,37 +1188,40 @@ public class KGConfig {
         builder.push("lmg defender");
         lmgDefenderDamageMultiplier = builder
                 .comment("Define the Damage multiplier for LMG Defenders")
-                .defineInRange("defenderRifleDamageMultiplier", 0.58D, 0.1D, 5D);
+                .defineInRange("lmgDefenderDamageMultiplier", 0.58D, 0.1D, 5D);
         lmgDefenderFireDelay = builder
                 .comment("Configure the Fire delay for LMG Defenders")
-                .defineInRange("defenderRifleFireDelay", 3, 0, 72000);
+                .defineInRange("lmgDefenderFireDelay", 3, 0, 72000);
         lmgDefenderEnchantability = builder
                 .comment("Configure the Enchantability for LMG Defenders")
-                .defineInRange("defenderRifleEnchantability", 9, 0, 30);
+                .defineInRange("lmgDefenderEnchantability", 9, 0, 30);
         lmgDefenderDurability = builder
                 .comment("Configure the Durability for LMG Defenders")
-                .defineInRange("defenderRifleDurability", 1332, 0, 32767);
+                .defineInRange("lmgDefenderDurability", 1332, 0, 32767);
         lmgDefenderInaccuracy = builder
                 .comment("Configure the Inaccuracy for LMG Defenders")
-                .defineInRange("defenderRifleInaccuracy", 1.5D, 0D, 90D);
+                .defineInRange("lmgDefenderInaccuracy", 1.5D, 0D, 90D);
         lmgDefenderProjectileSpeed = builder
                 .comment("Configure the Projectile Speed for LMG Defenders")
-                .defineInRange("defenderRifleProjectileSpeed", 9D, 0D, 64D);
+                .defineInRange("lmgDefenderProjectileSpeed", 9D, 0D, 64D);
         lmgDefenderRange = builder
                 .comment("Configure the range for a Tile Entity for LMG Defenders.  WARNING, PERFORMANCE BOTTLENECKS CAN OCCUR")
-                .defineInRange("defenderRifleRange", 7, 0, 32);
+                .defineInRange("lmgDefenderRange", 7, 0, 32);
         lmgDefenderDelayDelta = builder
                 .comment("Configure the subtractor for Fire Rate when next to a Tile Entity for LMG Defenders")
-                .defineInRange("defenderRifleDelayDelta", 1, 0, 72000);
+                .defineInRange("lmgDefenderDelayDelta", 1, 0, 72000);
         lmgDefenderSwitchSpeed = builder
                 .comment("Configure the Weapon Switch Speed for LMG Defenders")
-                .defineInRange("defenderRifleSwitchSpeed", 1.2D, 0D, 5D);
+                .defineInRange("lmgDefenderSwitchSpeed", 1.2D, 0D, 5D);
         lmgDefenderMeleeDamage = builder
                 .comment("Configure the Melee Damage for LMG Defenders")
-                .defineInRange("defenderRifleMeleeDamage", 2D, 0D, 40D);
+                .defineInRange("lmgDefenderMeleeDamage", 2D, 0D, 40D);
         lmgDefenderCost = builder
                 .comment("Ammo cost to fire LMG Defenders")
-                .defineInRange("defenderRifleCost", 2, 0, 64);
+                .defineInRange("lmgDefenderCost", 2, 0, 64);
+        lmgDefenderHealChance = builder
+                .comment("Configure the chance for an LMG Defender to give the Instant Health effect to an entity")
+                .defineInRange("lmgDefenderMeleeDamage", 0.25D, 0D, 1D);
         builder.pop();
 
         builder.push("potion cannon");

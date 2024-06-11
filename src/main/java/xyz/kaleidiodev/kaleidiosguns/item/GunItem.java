@@ -398,7 +398,7 @@ public class GunItem extends Item {
 		shot.isTorpedo = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.torpedo, gun) == 1;
 		shot.shouldBreakDoors = this.breachDoors;
 		shot.shouldFlinch = this.canFlinch;
-		//shot.healsFriendlies = this.isDefender;
+		shot.healsFriendlies = this.isDefender;
 		shot.isMeleeBonus = this.meleeBonusCounter > 0;
 		shot.shootsLights = this.isShadow;
 		shot.juggle = this.isJuggler;
@@ -1113,7 +1113,6 @@ public class GunItem extends Item {
 				if (twoHandBonus) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.showman_handgun"));
 				if (shouldRevenge) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.blessed"));
 				if (isShadow) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.shadow"));
-				if (isDefender) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.defender"));
 				if (canFlinch) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.shatter"));
 				if (isJuggler) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.juggle"));
 				if (hasVoltage) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.voltage"));
@@ -1130,12 +1129,14 @@ public class GunItem extends Item {
 				if (this.getItem() == ModItems.doubleBarrelShotgun) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.knockback"));
 				if (this.getItem() == ModItems.plasmaGatling) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.plasma"));
 				if (witherHead) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.wither_head"));
+				if (isDefender) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.heals"));
 			}
 
 			if (KGConfig.showWeaponSecrets.get()) {
 				if (hasBlockMineAbility) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.minegun"));
 				if (isShadow) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.shadow_block"));
 				if (isWither) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.wither"));
+				if (isDefender) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.defender"));
 			}
 
 			if (KGConfig.showClassDetails.get()) {

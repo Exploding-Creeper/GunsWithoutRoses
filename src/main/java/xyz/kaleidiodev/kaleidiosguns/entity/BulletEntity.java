@@ -478,18 +478,18 @@ public class BulletEntity extends AbstractFireballEntity {
 		} else healthOfVictim = 0.0f;
 
 		if (shooter != null) {
-		//	if (healsFriendlies && (entity instanceof LivingEntity)) {
-		//		if ((entity.getClassification(true) == EntityClassification.CREATURE) ||
-		//				(entity.getClassification(true) == EntityClassification.WATER_CREATURE) ||
-		//				checkIsSameTeam(shooter, entity)) {
+			if (healsFriendlies && (entity instanceof LivingEntity)) {
+				if ((entity.getClassification(true) == EntityClassification.CREATURE) ||
+						(entity.getClassification(true) == EntityClassification.WATER_CREATURE) ||
+						((entity.getTeam() == shooter.getTeam()) && (shooter.getTeam() != null))) {
 					//heal by how much the bullet would end up as damage
-		//			LivingEntity target = (LivingEntity) entity;
-		//			target.heal((float)(bullet.modifyDamage(this.damage, this, target, shooter, this.level) * KGConfig.defenderRifleHealRatio.get()));
+					LivingEntity target = (LivingEntity) entity;
+					if ((Math.random() - KGConfig.lmgDefenderHealChance.get()) >= 0) target.addEffect(new EffectInstance(Effects.HEAL, 10, 0));
 					//add some particle and sound effect here.
-		//		}
-		//		else giveDamage(shooter, entity, bullet);
-		//	}
-		    if (!checkIsSameTeam(shooter, entity)) giveDamage(shooter, entity, bullet);
+				}
+				else giveDamage(shooter, entity, bullet);
+			}
+		    else if (!checkIsSameTeam(shooter, entity)) giveDamage(shooter, entity, bullet);
 		}
 		else {
 			giveDamage(null, entity, bullet);
