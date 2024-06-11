@@ -603,16 +603,18 @@ public class BulletEntity extends AbstractFireballEntity {
 		}
 
 		if (applyMode == PotionApplyMode.LINGER) {
+			AreaEffectCloudEntity areaEffectCloud = new AreaEffectCloudEntity(level, position.x, position.y, position.z);
+
+			areaEffectCloud.setDuration(lingeringTime);
+			areaEffectCloud.setRadius((float)newRadius * 2);
+			areaEffectCloud.setRadiusPerTick(-((float)newRadius / lingeringTime));
+			areaEffectCloud.setWaitTime(10);
+
 			for (EffectInstance effect : potionInstance) {
-				AreaEffectCloudEntity areaEffectCloud = new AreaEffectCloudEntity(level, position.x, position.y, position.z);
-
-				areaEffectCloud.setPotion(new Potion(effect));
-				areaEffectCloud.setDuration(lingeringTime);
-				areaEffectCloud.setRadius((float)newRadius);
-				areaEffectCloud.setRadiusPerTick(-((float)newRadius / lingeringTime));
-
-				level.addFreshEntity(areaEffectCloud);
+				areaEffectCloud.addEffect(effect);
 			}
+
+			level.addFreshEntity(areaEffectCloud);
 		}
 
 		remove();
