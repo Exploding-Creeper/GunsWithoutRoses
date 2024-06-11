@@ -184,11 +184,9 @@ public class BulletEntity extends AbstractFireballEntity {
 		if (shouldCollateral) {
 			if (!this.level.isClientSide) {
 				for (Entity currentEntity : entitiesThisTick) {
-					if (currentEntity instanceof LivingEntity) {
-						entityHitProcess(currentEntity);
-						//stop collateral for the first entity in the list to have a shield
-						if (didNoDamage) break;
-					}
+					entityHitProcess(currentEntity);
+					//stop collateral for the first entity in the list to have a shield
+					if (didNoDamage) break;
 				}
 			}
 		} else if (hitEntity) {
@@ -522,6 +520,7 @@ public class BulletEntity extends AbstractFireballEntity {
 				didNoDamage = true;
 			}
 		}
+		else didNoDamage = true;
 
 		if (isClean) victim.setDeltaMovement(previousDelta);
 		else if (damaged && victim instanceof LivingEntity) {
