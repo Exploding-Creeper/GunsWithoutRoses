@@ -288,6 +288,8 @@ public class KGConfig {
     public static ForgeConfigSpec.DoubleValue diamondAssaultSwitchSpeed;
     public static ForgeConfigSpec.DoubleValue diamondAssaultMeleeDamage;
     public static ForgeConfigSpec.IntValue diamondAssaultCost;
+    public static ForgeConfigSpec.IntValue diamondAssaultSlowTicks;
+    public static ForgeConfigSpec.DoubleValue diamondAssaultSlowChance;
     public static ForgeConfigSpec.IntValue goldShowmanFlinchEffect;
     public static ForgeConfigSpec.IntValue goldShowmanFlinchTicks;
 
@@ -1105,6 +1107,12 @@ public class KGConfig {
         diamondAssaultCost = builder
                 .comment("Ammo cost to fire Assault Rifles")
                 .defineInRange("diamondAssaultCost", 2, 0, 64);
+        diamondAssaultSlowTicks = builder
+                .comment("Configure the length mining fatigue for Assault Rifles")
+                .defineInRange("diamondAssaultSlowTicks", 60, 10, 72000);
+        diamondAssaultSlowChance = builder
+                .comment("Configure the chance for mining fatigue effect against Assault Rifles")
+                .defineInRange("diamondAssaultSlowChance", 0.25D, 0.05D, 1D);
         builder.pop();
 
         builder.push("lava bound smg");
@@ -1164,10 +1172,10 @@ public class KGConfig {
                 .defineInRange("goldPlasmaProjectileSpeed", 1.8D, 0D, 64D);
         goldPlasmaShieldAdditional = builder
                 .comment("Configure the chance for shields to be disabled against Plasma Rifles")
-                .defineInRange("goldPlasmaShieldAdditional", 0.33D, 0.01D, 1D);
+                .defineInRange("goldPlasmaShieldAdditional", 0.25D, 0.01D, 1D);
         goldPlasmaSlowChance = builder
                 .comment("Configure the chance for slowness effect against a target of Plasma Rifles")
-                .defineInRange("goldPlasmaSlowChance", 1.0D, 0.05D, 1D);
+                .defineInRange("goldPlasmaSlowChance", 0.25D, 0.05D, 1D);
         goldPlasmaSlowTicks = builder
                 .comment("Configure the length slowness effect lasts for from Plasma Rifles")
                 .defineInRange("goldPlasmaSlowTicks", 60, 10, 72000);

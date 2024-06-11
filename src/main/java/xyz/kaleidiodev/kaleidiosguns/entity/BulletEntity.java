@@ -95,6 +95,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	public boolean pollRemove;
 	public boolean didNoDamage;
 	public boolean silenced;
+	public boolean shouldSlow;
 
 	protected Set<Entity> entityHitHistory = new HashSet<>();
 	public Set<Entity> headshotHistory = new HashSet<>();

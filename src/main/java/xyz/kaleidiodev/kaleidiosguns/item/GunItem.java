@@ -95,6 +95,7 @@ public class GunItem extends Item {
 	protected float sniperMovementAim = 0.0f;
 	protected boolean armorBonus;
 	protected boolean witherHead;
+	protected boolean shouldSlow;
 
 	protected SoundEvent fireSound = ModSounds.gun;
 	protected SoundEvent reloadSound = ModSounds.double_shotgunReload;
@@ -404,7 +405,8 @@ public class GunItem extends Item {
 		shot.juggle = this.isJuggler;
 		shot.interactsWithBlocks = this.interactsWithBlocks;
 		shot.silenced = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.silenced, gun) == 1;
-		shot.armorBonus = armorBonus;
+		shot.armorBonus = this.armorBonus;
+		shot.shouldSlow = this.shouldSlow;
 
 		shot.hero = false;
 		if (isHero) {
@@ -974,6 +976,11 @@ public class GunItem extends Item {
 		return this;
 	}
 
+	public GunItem setShouldSlow(boolean slow) {
+		this.shouldSlow = slow;
+		return this;
+	}
+
 	public int getCost(ItemStack stack) {
 		return Math.max(1, ammoCost - (int)(ammoCost * EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.sleightOfHand, stack) * KGConfig.sleightOfHandFireRateDecrease.get()));
 	}
@@ -1130,6 +1137,7 @@ public class GunItem extends Item {
 				if (this.getItem() == ModItems.plasmaGatling) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.plasma"));
 				if (witherHead) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.wither_head"));
 				if (isDefender) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.heals"));
+				if (shouldSlow) tooltip.add(new TranslationTextComponent("tooltip.kaleidiosguns.slows"));
 			}
 
 			if (KGConfig.showWeaponSecrets.get()) {

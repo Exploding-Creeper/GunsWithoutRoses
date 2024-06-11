@@ -75,7 +75,13 @@ public interface IBullet {
 
 			if (Math.random() < KGConfig.goldPlasmaSlowChance.get()) {
 				livingTarget.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, KGConfig.goldPlasmaSlowTicks.get(), 2));
-				livingTarget.addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, KGConfig.goldPlasmaSlowTicks.get(), 2));
+
+			}
+		}
+
+		if (projectile.shouldSlow && (target instanceof LivingEntity)) {
+			if (Math.random() < KGConfig.diamondAssaultSlowChance.get()) {
+				((LivingEntity)target).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, KGConfig.diamondAssaultSlowTicks.get(), 2));
 			}
 		}
 
