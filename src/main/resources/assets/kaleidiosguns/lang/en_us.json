@@ -79,7 +79,7 @@
 	"tooltip.kaleidiosguns.plasma": "Can give slowness, mining fatigue, and disable shields§r",
 	"tooltip.kaleidiosguns.shadow": "Damage is higher when shot from the dark§r",
 	"tooltip.kaleidiosguns.shadow_block": "Destroys light emitting blocks§r",
-	"tooltip.kaleidiosguns.corruption": "Can replace a mined block with netherrack blocks§r",
+	"tooltip.kaleidiosguns.corruption": "Replaces blocks with nether equivalents§r",
 	"tooltip.kaleidiosguns.redstone": "A Redstone Block must be close-by to use this weapon§r",
 	"tooltip.kaleidiosguns.voltage": "Increases damage the closer you are to a Redstone Block§r",
 	"tooltip.kaleidiosguns.defender": "Increases fire rate if standing near any Tile Entity§r",
