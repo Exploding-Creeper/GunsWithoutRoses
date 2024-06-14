@@ -642,7 +642,7 @@ public class BulletEntity extends AbstractFireballEntity {
 	protected void breakBlock(BlockPos blockToBreak) {
 		//drop the block in a fixed chance
 		Random random = new Random();
-		if (mineChance - random.nextDouble() > 0) this.level.destroyBlock(blockToBreak, true);
+		if (mineChance - random.nextDouble() > 0) this.level.destroyBlock(blockToBreak, !isCorrupted);
 	}
 
 	@Override
