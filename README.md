@@ -1,17 +1,13 @@
 # Kaleidio's Guns
 
-Some source code is forked from Lykrast/Guns-Without-Roses with the intention of utilizing the source properly under the MIT License.
+MOST CODE HERE IS COPYRIGHT (C) 2024 First Dark Development, All Rights Reserved.
 
-It's a little hard to find any of his remaining code, and will probably be decimated in the future, but to satisfy the license.
+Some source code is forked from Lykrast/Guns-Without-Roses with the intention of utilizing the source properly under the MIT License.  Any lines found in Lykrast's fork that are also found here retain MIT license and retain Lykrast's Copyright notice (via git history on this repository), unless they have been modified beyond recognition.
 
-That code is Copyright Lykrast, but MIT Licensed, with permission.
-
-However, this mod has Copyright All Rights Reserved License, pulling Lykrast's code as a basis/template.
-
-Please do not fork this mod for use in Minecraft, nor redistribute this mod nor its binaries, nor create brand new games utilizing this mod's code, gun visual designs, nor weapon mechanics in their entirety (borrowing some is permitted).
+Please do not fork this mod for use in Minecraft, nor redistribute this mod nor its binaries, nor create brand new games utilizing this mod's code, its visual designs, nor weapon mechanics in their entirety (borrowing some is permitted).
 
 Please instead submit pull requests for any fixes or compat code you may wish to offer.
 
-You are also permitted explicitly *to port this gun mod to other games, via any means, including any design based assets.*
+You are also permitted explicitly *to port this gun mod to OTHER games that exclude Minecraft entirely, via any means, including any design based assets, as long as the result is ALSO A MOD upon that game and not added as an official feature of the title.*
 
 For example, you may port this mod to become a Counter Strike Source mod, but you are not permitted to make a new game in Unity engine from the ground up with all of this gun mod's weapon designs and their mechanics/behaviour.
