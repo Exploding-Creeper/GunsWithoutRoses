@@ -1,3 +1,9 @@
+This license is specifically to inherit the codebase of 
+Lykrast/Guns-Without-Roses as a base for forking on Github.  This license does
+not apply to the copyright within any code that has been written on top of
+the base since then.  For information on that, please refer to LICENSE.md,
+and README.md for any permissions given.
+
 MIT License
 
 Copyright (c) 2020 Lykrast
